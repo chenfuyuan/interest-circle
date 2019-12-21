@@ -11,6 +11,7 @@ import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
 import com.cfy.interest.dto.SmsResponse;
 import com.cfy.interest.service.vo.SendSmsMessage;
+import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +22,7 @@ import org.springframework.context.annotation.PropertySource;
 @PropertySource(value = "classpath:smsCode.properties",encoding = "utf-8")
 @ConfigurationProperties(prefix = "user.aliyun.smscode")
 @EnableConfigurationProperties
+@Data
 public class AliyunSmsProvider {
 
     private String accessId;
@@ -66,61 +68,5 @@ public class AliyunSmsProvider {
         } catch (ClientException e) {
             e.printStackTrace();
         }
-    }
-
-    public String getAccessId() {
-        return accessId;
-    }
-
-    public void setAccessId(String accessId) {
-        this.accessId = accessId;
-    }
-
-    public String getAccessSecret() {
-        return accessSecret;
-    }
-
-    public void setAccessSecret(String accessSecret) {
-        this.accessSecret = accessSecret;
-    }
-
-    public String getDomain() {
-        return domain;
-    }
-
-    public void setDomain(String domain) {
-        this.domain = domain;
-    }
-
-    public String getVersion() {
-        return version;
-    }
-
-    public void setVersion(String version) {
-        this.version = version;
-    }
-
-    public String getSignName() {
-        return signName;
-    }
-
-    public void setSignName(String signName) {
-        this.signName = signName;
-    }
-
-    public String getRegTemplateCode() {
-        return regTemplateCode;
-    }
-
-    public void setRegTemplateCode(String regTemplateCode) {
-        this.regTemplateCode = regTemplateCode;
-    }
-
-    public String getRegionId() {
-        return regionId;
-    }
-
-    public void setRegionId(String regionId) {
-        this.regionId = regionId;
     }
 }

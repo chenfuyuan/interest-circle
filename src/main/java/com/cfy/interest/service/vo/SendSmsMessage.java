@@ -1,8 +1,11 @@
 package com.cfy.interest.service.vo;
 
+import lombok.Data;
+
 /**
  * 用于发送短信的数据传递
  */
+@Data
 public class SendSmsMessage {
     //发送验证码得手机号
     private String phone;
@@ -13,45 +16,4 @@ public class SendSmsMessage {
     //是否成功
     private boolean success;
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getAuthCode() {
-        return authCode;
-    }
-
-    public void setAuthCode(String authCode) {
-        this.authCode = authCode;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
-
-    @Override
-    public String toString() {
-        return "SendSmsMessage{" +
-                "phone='" + phone + '\'' +
-                ", authCode='" + authCode + '\'' +
-                ", message='" + message + '\'' +
-                ", success=" + success +
-                '}';
-    }
 }
