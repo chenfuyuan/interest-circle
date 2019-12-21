@@ -25,13 +25,14 @@ public class SignUpController {
             //设置错误信息
             sendSmsMessage.setPhone(phone);
             sendSmsMessage.setMessage("该手机号已被注册");
+        }else {
+            //进行短信发送
+            sendSmsMessage = signUpService.sendSms(phone);//传递手机进行短信发送
         }
-        //进行短信发送
-        sendSmsMessage = signUpService.sendSms(phone);//传递手机进行短信发送
-
-
         return sendSmsMessage;
     }
+
+
 
 
 }

@@ -23,6 +23,10 @@ class InterestApplicationTests {
         System.out.println(isExist);
     }
 
+    @Test
+    public void testRedis() {
+        signUpService.sendSms("18059851006");
+    }
 
 
 }
