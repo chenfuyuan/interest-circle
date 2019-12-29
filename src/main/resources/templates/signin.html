@@ -1,5 +1,5 @@
 <!doctype html>
-<html  lang="en">
+<html  lang="en" xmlns:th="http://www.thymeleaf.org">
 
     <head>
         <!-- meta data -->
@@ -61,12 +61,12 @@
 							<div class="signin-form">
 								<form action="signin.html">
 									<div class="form-group">
-									    <label for="signin_form">email/电话</label>
-									    <input type="email" class="form-control" id="signin_form" placeholder="Email">
+									    <label for="username">电话</label>
+									    <input type="text" class="form-control" id="username" placeholder="username" th:value="${username}" >
 									</div><!--/.form-group -->
 									<div class="form-group">
-										<label for="signin_form">密码</label>
-									    <input type="password" class="form-control" id="signin_form" placeholder="Enter your password">
+										<label for="password">密码</label>
+									    <input type="password" class="form-control" id="password" placeholder="Enter your password">
 									</div><!--/.form-group -->
 								</form><!--/form -->
 							</div><!--/.signin-form -->
@@ -142,11 +142,11 @@
 		<!-- jquery.sticky.js -->
 		<script src="assets/js/jquery.sticky.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-		
-        
+
         <!--Custom JS-->
         <script src="assets/js/custom.js"></script>
 
+		<script src="js/signIn.js"></script>
     </body>
 	
 </html>

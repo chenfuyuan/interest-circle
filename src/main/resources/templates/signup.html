@@ -53,29 +53,29 @@
             <div class="signin-form">
                 <div class=" ">
                     <div class=" ">
-                        <form action="signin.html">
+                        <form action="signin.html" >
                             <div class="form-group">
-                                <label for="signin_form">用户名</label>
-                                <input type="text" class="form-control"  placeholder="用户名">
+                                <label for="text_name">用户名</label>
+                                <input type="text" class="form-control"  placeholder="用户名" id="text_name" name="name">
                             </div><!--/.form-group -->
 
                             <div class="form-group">
-                                <label for="signin_form">phone</label>
-                                <input type="text" class="form-control"  placeholder="phone" id="phone" name="phone">
+                                <label for="text_phone">phone</label>
+                                <input type="text" class="form-control"  placeholder="phone" id="text_phone" name="phone">
                             </div><!--/.form-group -->
                             <div class="form-group">
-                                <label for="signin_form">
-                                    <button type="button" class="btn btn-default" id = "authCode">验证码</button>
+                                <label for="text_authCode">
+                                    <button type="button" class="btn btn-default" id ="btn_authCode">验证码</button>
                                 </label>
-                                <input type="text" class="form-control"  placeholder="First name">
+                                <input type="text" class="form-control"  placeholder="First name" id="text_authCode" name="authCode">
                             </div><!--/.form-group -->
                             <div class="form-group">
-                                <label for="signin_form">密码</label>
-                                <input type="password" class="form-control" id="signin_form" placeholder="输入密码">
+                                <label for="text_password">密码</label>
+                                <input type="password" class="form-control" id="text_password" placeholder="输入密码" name="password">
                             </div><!--/.form-group -->
                             <div class="form-group">
-                                <label for="signin_form">确认密码</label>
-                                <input type="password" class="form-control" id="signin_form" placeholder="确认密码">
+                                <label for="text_confirm">确认密码</label>
+                                <input type="password" class="form-control" id="text_confirm" placeholder="确认密码">
                             </div><!--/.form-group -->
                         </form><!--/form -->
                     </div><!--/.col -->
@@ -85,7 +85,7 @@
 
             <div class="signin-footer">
                 <button type="button" class="btn signin_btn signin_btn_two" data-toggle="modal"
-                        data-target=".signin_modal">
+                        data-target=".signin_modal" id="btn_signUp">
                     注册
                 </button>
                 <p>
@@ -142,10 +142,7 @@
 <script src="assets/js/jquery.cookie.js"></script>
 
 <!--自定义js-->
-<script src="js/interestJs.js"></script>
-
-
-
+<script src="js/signUp.js"></script>
 </body>
 
 </html>

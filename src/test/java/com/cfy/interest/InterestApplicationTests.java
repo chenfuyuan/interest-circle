@@ -19,13 +19,19 @@ class InterestApplicationTests {
 
     @Test
     public void testUserMapper() {
-        boolean isExist = signUpService.PhoneIsExist("18059851006");
+        boolean isExist = signUpService.phoneIsExist("18059851006");
         System.out.println(isExist);
     }
 
     @Test
     public void testRedis() {
         signUpService.sendSms("18059851006");
+    }
+
+    @Test
+    public void testNameExist() {
+        System.out.println(signUpService.nameIsExist("chenfuyuan"));
+
     }
 
 
