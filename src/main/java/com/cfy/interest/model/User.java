@@ -15,6 +15,7 @@ public class User {
     private String phone;
     private String password;
     private String sex;
-    private long create_time;
-    private long update_time;
+    private String token;
+    private long createTime;
+    private long updateTime;
 }

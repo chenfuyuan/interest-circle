@@ -8,11 +8,13 @@ import com.cfy.interest.service.SignUpService;
 import com.cfy.interest.service.vo.SendSmsMessage;
 import com.cfy.interest.service.vo.SignUpVo;
 import com.cfy.interest.utils.AuthCodeRandom;
+import com.cfy.interest.utils.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.UUID;
 
 @Service
 public class SignUpServiceImpl implements SignUpService {
@@ -118,14 +120,14 @@ public class SignUpServiceImpl implements SignUpService {
     public boolean saveUser(SignUpVo signUpVo) {
         User user = new User();
         user.setName(signUpVo.getName());
-        user.setPassword(signUpVo.getPassword());
+        String md5Password = MD5Utils.MD5Encode(signUpVo.getPassword());
+        user.setPassword(md5Password);
         user.setPhone(signUpVo.getPhone());
-        Long nowTime = new Date().getTime();
-        user.setCreate_time(nowTime);
-        user.setUpdate_time(nowTime);
-
+        long nowTime = new Date().getTime();
+        user.setCreateTime(nowTime);
+        user.setUpdateTime(nowTime);
+        user.setToken(UUID.randomUUID().toString());
         userMapper.insert(user);
-
         return false;
     }
 }

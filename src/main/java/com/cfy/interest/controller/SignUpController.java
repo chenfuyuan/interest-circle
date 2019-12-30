@@ -5,16 +5,23 @@ import com.cfy.interest.service.vo.SendSmsMessage;
 import com.cfy.interest.service.vo.SignUpMessage;
 import com.cfy.interest.service.vo.SignUpVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@Controller
 public class SignUpController {
 
     @Autowired
     private SignUpService signUpService;
 
 
+    @GetMapping("/signUp")
+    public String signUp() {
+        return "signUp";
+    }
+
     @GetMapping("/authCode")
+    @ResponseBody
     public SendSmsMessage getAuthCode(@RequestParam String phone) {
         SendSmsMessage sendSmsMessage;
         boolean phoneIsExist = signUpService.phoneIsExist(phone);
@@ -31,6 +38,7 @@ public class SignUpController {
     }
 
     @PostMapping("/checkSignUp")
+    @ResponseBody
     public SignUpMessage signUp(@RequestBody SignUpVo signUpVo) {
         System.out.println(signUpVo);
         String phone = signUpVo.getPhone();
