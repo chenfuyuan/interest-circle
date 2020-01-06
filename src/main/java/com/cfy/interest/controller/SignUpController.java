@@ -14,7 +14,6 @@ public class SignUpController {
     @Autowired
     private SignUpService signUpService;
 
-
     @GetMapping("/signUp")
     public String signUp() {
         return "signUp";
@@ -34,6 +33,7 @@ public class SignUpController {
             //进行短信发送
             sendSmsMessage = signUpService.sendSms(phone);//传递手机进行短信发送
         }
+
         return sendSmsMessage;
     }
 
@@ -74,7 +74,6 @@ public class SignUpController {
             message.setSuccess(false);
             message.setMessage("验证码错误");
         }
-
 
         return message;
     }

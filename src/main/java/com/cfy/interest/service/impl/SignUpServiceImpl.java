@@ -49,11 +49,10 @@ public class SignUpServiceImpl implements SignUpService {
 //            redisTemplate.opsForValue().set(phone, authCode,5, TimeUnit.MINUTES);//将验证码存入缓存中,并设置过期时间为5分钟
             //用于测试 将验证码设置缓存为永久 方便测试
             redisTemplate.opsForValue().set(phone, authCode);
-
             System.out.println("将" + authCode + "加入缓存");
         }
 //        通过阿里云发送短信验证码
-//        sendSmsMessage.setAuthCode(authCode);
+        sendSmsMessage.setAuthCode(authCode);
 //        //调用将验证码和手机传递给阿里云短信进行短信发送
 //        aliyunSmsProvider.sendSms(sendSmsMessage);
 

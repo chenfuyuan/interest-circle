@@ -47,6 +47,7 @@ $(function () {
                 alert("手机号格式错误！")
                 return this;
             }
+
         }
         $.ajax({
             url: 'authCode',//服务器发送短信

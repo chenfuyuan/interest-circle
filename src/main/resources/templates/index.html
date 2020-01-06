@@ -34,9 +34,11 @@
                 <li class="dropdown" th:if="${session.user}!=null">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" th:text="${session.user.name}">我<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">创建圈子</a></li>
-                        <li><a href="#">消息中心</a></li>
                         <li><a href="#">个人资料</a></li>
+                        <li><a href="#">我的话题</a></li>
+                        <li><a href="#">我的收藏</a></li>
+                        <li><a href="#">我的通知</a></li>
+                        <li><a href="#">创建乌托邦</a></li>
                         <li><a href="#">退出登录</a></li>
                     </ul>
                 </li>

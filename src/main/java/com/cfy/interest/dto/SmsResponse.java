@@ -1,5 +1,6 @@
 package com.cfy.interest.dto;
 
+
 public class SmsResponse {
     private String message;
     private String requestId;

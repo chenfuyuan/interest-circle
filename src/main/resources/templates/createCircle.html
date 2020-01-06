@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>创建圈子</title>
+
+    <!--&lt;!&ndash;引入webuploader&ndash;&gt;-->
+    <!--<link rel="stylesheet" type="text/css" href="webuploader/webuploader.css">-->
+    <!--<script type="text/javascript" src="webuploader/webuploader.js"></script>-->
+</head>
+<body>
+    <section class="create-cricle">
+        <div class="page-header">
+            <h2 class="page-title">创建圈子</h2>
+            <p class="page-subtitle">为你的兴趣创建圈子</p>
+        </div>
+
+        <div class="circle-name-input">
+            <input type="text" placeholder="输入圈子名称">
+        </div>
+
+        <div class="avatar-box">
+            <img src="" alt="" class="avater-image">
+            <input type="file" />
+        </div>
+
+        <div class="select-city">
+            <select name="province" id="province" >
+                <option value="0">请选择省份</option>
+                <option th:each="province,provinceStat:${provinces}" th:value="${province.id}" th:text="${province.name}">省份</option>
+            </select>
+
+            <select name="city" id="city">
+                <option value="default">请选择城市</option>
+                </select>
+
+
+        </div>
+
+        <div class="page-footer">
+            <button><span>取消</span></button>
+            <button><span>创建</span></button>
+        </div>
+    </section>
+    <script type="application/javascript" src="js/jquery.min.js"></script>
+    <script type="application/javascript" src="js/createCircle.js"></script>
+
+
+</body>
+</html>
