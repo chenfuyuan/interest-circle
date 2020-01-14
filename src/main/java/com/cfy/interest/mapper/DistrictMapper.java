@@ -22,3 +22,4 @@ public interface DistrictMapper extends BaseMapper<District> {
     ))
     List<District> findCityByProvince(int parentid);
 }
+

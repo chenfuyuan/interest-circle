@@ -103,6 +103,12 @@ $(function () {
             alert("手机号格式错误！")
             return this;
         }
+        var password = $("#text_password").val();
+        var rpassword = $("#text_confirm").val();
+        if(password!=rpassword){
+            alert("两次输入密码不一致");
+            return this;
+        }
 
         var data = JSON.stringify(user);    //转化成json数据
         $.ajax({

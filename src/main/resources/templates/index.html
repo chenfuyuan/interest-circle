@@ -30,16 +30,17 @@
                 </div>
                 <button type="submit" class="btn btn-default">Submit</button>
             </form>
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right" id="header-user-menu">
                 <li class="dropdown" th:if="${session.user}!=null">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" th:text="${session.user.name}">我<span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false" th:text="${session.user.name}">我<span class="caret" id="user"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">个人资料</a></li>
                         <li><a href="#">我的话题</a></li>
                         <li><a href="#">我的收藏</a></li>
                         <li><a href="#">我的通知</a></li>
-                        <li><a href="#">创建乌托邦</a></li>
-                        <li><a href="#">退出登录</a></li>
+                        <li><a href="/createCircle">创建圈子</a></li>
+                        <li><a href="/logOut">退出登录</a></li>
                     </ul>
                 </li>
 
@@ -51,7 +52,8 @@
     </div><!-- /.container-fluid -->
 </nav>
 
-<script type="application/javascript" src="js/jquery"></script>
+<script type="application/javascript" src="js/jquery.min.js"></script>
 <script type="application/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+<script type="application/javascript" src="js/index.js"></script>
 </body>
 </html>

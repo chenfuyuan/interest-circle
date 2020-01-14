@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class IndexController {
@@ -35,5 +36,18 @@ public class IndexController {
             }
         }
         return "index";
+    }
+
+    @GetMapping("/logOut")
+    public String logOut(HttpServletRequest request, HttpServletResponse response) {
+        //移除session中的user
+        request.getSession().removeAttribute("user");
+        Cookie cookie = new Cookie("token",null);
+        cookie.setMaxAge(0);
+        cookie.setPath("/");
+        response.addCookie(cookie);
+
+        return "index";
+
     }
 }
