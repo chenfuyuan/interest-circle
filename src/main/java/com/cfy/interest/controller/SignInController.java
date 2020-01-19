@@ -27,6 +27,10 @@ public class SignInController {
     }
 
 
+    @RequestMapping("/authCodeSignIn")
+    public String authCodeSignIn() {
+        return "authCodeSignIn";
+    }
     @PostMapping("/checkSignIn")
     @ResponseBody
     public SignInMessage signIn(@RequestBody SignInVo signInVo, HttpServletResponse response, HttpServletRequest request) {

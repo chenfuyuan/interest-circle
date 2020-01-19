@@ -12,28 +12,25 @@
 		<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&amp;subset=devanagari,latin-ext" rel="stylesheet">
         
         <!-- title of site -->
-        <title>Sign in</title>
+        <title>登录</title>
 
-        <!-- For favicon png -->
-		<link rel="shortcut icon" type="image/icon" href="assets/logo/favicon.png"/>
-       
         <!--font-awesome.min.css-->
-        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/font-awesome.min.css">
 		
 		<!--animate.css-->
-        <link rel="stylesheet" href="assets/css/animate.css">
+        <link rel="stylesheet" href="css/animate.css">
 		
         <!--bootstrap.min.css-->
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 		
 		<!-- bootsnav -->
-		<link rel="stylesheet" href="assets/css/bootsnav.css" >	
+		<link rel="stylesheet" href="css/bootsnav.css" >
         
         <!--style.css-->
-        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="css/style.css">
         
         <!--responsive.css-->
-        <link rel="stylesheet" href="assets/css/responsive.css">
+        <link rel="stylesheet" href="css/responsive.css">
         
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -65,8 +62,11 @@
 									    <input type="text" class="form-control" id="text_phone" placeholder="username" name="phone" >
 									</div><!--/.form-group -->
 									<div class="form-group">
-										<label for="text_password">密码</label>
-									    <input type="password" class="form-control" id="text_password" placeholder="Enter your password" name="password">
+										<label for="text_password">
+											<span>密码</span>
+										</label>
+									    <input type="password" class="form-control" id="text_password"
+											   placeholder="输入你的密码" name="password">
 									</div><!--/.form-group -->
 								</form><!--/form -->
 							</div><!--/.signin-form -->
@@ -82,12 +82,12 @@
 											<label for="remember_password">
 												<span class="round-boarder">
 													<span class="round-boarder1"></span>
-												</span>remember password
+												</span>自动登录
 											</label>
 									</div><!--/.single-password-circle-->
 									<div class="single-forgot-password-circle text-right
 									">
-										<a href="signin.html">Forgot email or password</a>
+										<a href="authCodeSignIn">验证码登录</a>
 									</div><!--/.single-password-circle-->
 								</div><!--/.password-circle-->
 							</div><!--/.signin-password -->
@@ -127,23 +127,23 @@
 
 		 <!-- Include all js compiled plugins (below), or include individual files as needed -->
 
-		<script src="assets/js/jquery.js"></script>
+		<script src="js/jquery.js"></script>
         
         <!--modernizr.min.js-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 		
 		<!--bootstrap.min.js-->
-        <script src="assets/js/bootstrap.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
 		
 		<!-- bootsnav js -->
-		<script src="assets/js/bootsnav.js"></script>
+		<script src="js/bootsnav.js"></script>
 		
 		<!-- jquery.sticky.js -->
-		<script src="assets/js/jquery.sticky.js"></script>
+		<script src="js/jquery.sticky.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
 
         <!--Custom JS-->
-        <script src="assets/js/custom.js"></script>
+        <script src="js/custom.js"></script>
 
 		<script src="js/signIn.js"></script>
     </body>
