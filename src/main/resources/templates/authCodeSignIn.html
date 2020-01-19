@@ -58,21 +58,17 @@
                     <div class="signin-form">
                         <form action="signin.html">
                             <div class="form-group">
-                                <label for="text_phone">电话/用户名</label>
-                                <input type="text" class="form-control" id="text_phone" placeholder="username" name="phone" >
+                                <label for="text_phone">电话</label>
+                                <input type="text" class="form-control" id="text_phone" placeholder="phone"
+                                       name="phone">
                             </div><!--/.form-group -->
                             <div class="form-group">
-                                <label for="text_password">
-                                    <span>密码</span>
-                                    <button type="button" class="btn btn-default" id ="btn_authCode"
-                                            style="display:none">验证码
-                                    </button>
+                                <label for="text_authCode">
+                                    <button type="button" class="btn btn-default" id ="btn_authCode">验证码</button>
                                 </label>
-                                <input type="password" class="form-control" id="text_password"
-                                       placeholder="输入你的密码" name="password">
                                 <input type="text" class="form-control"  placeholder="请输入验证码"
                                        id="text_authCode"
-                                       name="authCode" style="display: none;"/>
+                                       name="authCode"/>
                             </div><!--/.form-group -->
                         </form><!--/form -->
                     </div><!--/.signin-form -->
@@ -141,6 +137,9 @@
 
 <!--Custom JS-->
 <script src="js/custom.js"></script>
+
+<!--jquery.cookie.js-->
+<script src="js/jquery.cookie.js"></script>
 
 <script src="js/authCodeSignIn.js"></script>
 </body>

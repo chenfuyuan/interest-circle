@@ -55,7 +55,11 @@ public class SignUpServiceImpl implements SignUpService {
 //        通过阿里云发送短信验证码
         sendSmsMessage.setAuthCode(authCode);
 //        //调用将验证码和手机传递给阿里云短信进行短信发送
-        aliyunSmsProvider.sendSms(sendSmsMessage);
+//        aliyunSmsProvider.sendSms(sendSmsMessage);
+
+        //模拟发送阿里云短信，记得注释删除
+        sendSmsMessage.setSuccess(true);
+        sendSmsMessage.setMessage("短信发送成功");
 
         return sendSmsMessage;
     }
@@ -128,6 +132,9 @@ public class SignUpServiceImpl implements SignUpService {
         user.setUpdateTime(nowTime);
         user.setToken(UUID.randomUUID().toString());
         userMapper.insert(user);
+
+        //注册成功，删除缓存中的验证码
+        redisTemplate.delete(signUpVo.getPhone());
         return false;
     }
 }
