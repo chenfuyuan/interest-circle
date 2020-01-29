@@ -1,6 +1,7 @@
 package com.cfy.interest.controller;
 
-import com.cfy.interest.model.District;
+import com.cfy.interest.model.City;
+import com.cfy.interest.model.Province;
 import com.cfy.interest.model.User;
 import com.cfy.interest.service.CreateCircleService;
 import javafx.scene.shape.Circle;
@@ -23,7 +24,10 @@ public class CreateCircleController {
      */
     @GetMapping("/createCircle")
     public String index(Model model) {
-        List<District> provinces = createCircleService.getProvinces();
+        List<Province> provinces = createCircleService.getProvinces();
+        for (Province province : provinces) {
+            System.out.println(province);
+        }
         model.addAttribute("provinces", provinces);
         return "createCircle";
     }
@@ -35,11 +39,11 @@ public class CreateCircleController {
      */
     @GetMapping("getCity/{id}")
     @ResponseBody
-    public List<District> getCity(@PathVariable("id")int id,Model model) {
+    public List<City> getCity(@PathVariable("id")int id, Model model) {
         if (id == 0) {
             return null;
         }
-        List<District> citys = createCircleService.getCityByProvincesId(id);
+        List<City> citys = createCircleService.getCityByProvincesId(id);
         return citys;
     }
 

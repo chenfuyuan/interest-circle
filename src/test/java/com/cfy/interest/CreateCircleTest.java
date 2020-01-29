@@ -2,8 +2,10 @@ package com.cfy.interest;
 
 import com.cfy.interest.mapper.CircleMapper;
 import com.cfy.interest.mapper.DistrictMapper;
+import com.cfy.interest.mapper.ProvinceMapper;
 import com.cfy.interest.model.Circle;
 import com.cfy.interest.model.District;
+import com.cfy.interest.model.Province;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -43,4 +45,15 @@ public class CreateCircleTest {
         Circle circle = circleMapper.findByName("aaa");
         System.out.println(circle);
     }
+
+    @Autowired
+    private ProvinceMapper provinceMapper;
+    @Test
+    public void testGetProvince() {
+        List<Province> provinces = provinceMapper.getProvinces();
+        for (Province province : provinces) {
+            System.out.println(province.getCitys());
+        }
+    }
+
 }

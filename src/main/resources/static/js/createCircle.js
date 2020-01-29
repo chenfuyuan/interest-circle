@@ -2,8 +2,6 @@ $(function () {
     $("#province").change(function () {
             //获取被选中的省份id
             var provinceValue = $(this).find("option:selected").val();
-
-
             if (provinceValue == 0) {
                 $("#city").html("");
                 $("#city").append("<option value='0'>请选择城市</option>");

@@ -6,18 +6,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName("district")
-public class District {
-    private String name;
+public class Province {
     private int id;
-
+    private String name;
     @TableField(exist = false)
-    private District parent;
-    private int parent_id;
+    private List<City> citys;
     private String code;
-    private int order_;
+    private int order;
 }
-

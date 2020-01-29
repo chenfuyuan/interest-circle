@@ -19,7 +19,6 @@ public interface DistrictMapper extends BaseMapper<District> {
             @Result(property = "parent",
                     column = "parent_id",
                     one = @One(select = "com.cfy.interest.mapper.DistrictMapper.selectById")
-    ))
+            ))
     List<District> findCityByProvince(int parentid);
 }
-
