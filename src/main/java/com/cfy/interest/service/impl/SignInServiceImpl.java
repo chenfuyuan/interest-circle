@@ -11,6 +11,8 @@ import com.cfy.interest.utils.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class SignInServiceImpl implements SignInService {
     @Autowired
@@ -37,6 +39,11 @@ public class SignInServiceImpl implements SignInService {
             message.setMessage("登录成功");
             message.setSuccess(true);
             message.setUser(user);
+
+            //修改登录状态
+            user.setToken(UUID.randomUUID().toString());
+            user.setState(1);
+            userMapper.updateById(user);
         } else {
             message.setMessage("用户名密码错误");
             message.setSuccess(false);

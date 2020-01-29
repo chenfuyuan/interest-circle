@@ -37,11 +37,14 @@ public class CreateCircleServiceImpl implements CreateCircleService {
         //从数据库中获取省份列表
         List<Province> provinces;
         //从redis中查询缓存
-        provinces = (List<Province>) redisTemplate.opsForList().index("provinces",0);
-        if (provinces == null) {
+        //查询出整个list
+        provinces = redisTemplate.opsForList().range("provinces",0,-1);
+
+        //如果为null或为空,查询数据库
+        if (provinces == null || provinces.size() == 0) {
             provinces = provinceMapper.getProvinces();
-            //添加入缓存
-            redisTemplate.opsForList().leftPush("provinces", provinces);
+            //添加入缓存，尾插法添加数据
+            redisTemplate.opsForList().rightPushAll("provinces", provinces);
             System.out.println("添加入缓存");
         }
 
@@ -51,10 +54,10 @@ public class CreateCircleServiceImpl implements CreateCircleService {
     @Override
     public List<City> getCityByProvincesId(int id) {
         List<City> cities;
-        List<Province> provinces = (List<Province>) redisTemplate.opsForList().index("provinces",0);
-        if (provinces != null) {
+        Province province = (Province) redisTemplate.opsForList().index("provinces", id-1);
+        if (province != null) {
             System.out.println("从redis中获取citys");
-            cities = provinces.get(id).getCitys();
+            cities = province.getCitys();
         }else{
             cities = cityMapper.findCityByProvince(id);
         }

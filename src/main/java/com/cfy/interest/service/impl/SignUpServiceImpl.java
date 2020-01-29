@@ -14,7 +14,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -130,7 +129,7 @@ public class SignUpServiceImpl implements SignUpService {
         long nowTime = new Date().getTime();
         user.setCreateTime(nowTime);
         user.setUpdateTime(nowTime);
-        user.setToken(UUID.randomUUID().toString());
+        user.setState(0);
         userMapper.insert(user);
 
         //注册成功，删除缓存中的验证码

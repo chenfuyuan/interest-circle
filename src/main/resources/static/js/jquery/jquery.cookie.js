@@ -8,10 +8,10 @@
 (function (factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD (Register as an anonymous module)
-        define(['jquery'], factory);
+        define(['static/js/jquery/jquery'], factory);
     } else if (typeof exports === 'object') {
         // Node/CommonJS
-        module.exports = factory(require('jquery'));
+        module.exports = factory(require('static/js/jquery/jquery'));
     } else {
         // Browser globals
         factory(jQuery);

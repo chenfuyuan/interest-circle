@@ -1,5 +1,5 @@
 $(function () {
-   - if ($.cookie("total") != undefined && $.cookie("total") != 'NaN' && $.cookie("total") != 'null') {//cookie存在倒计时
+   if ($.cookie("total") != undefined && $.cookie("total") != 'NaN' && $.cookie("total") != 'null') {//cookie存在倒计时
         timekeeping();
     } else {//cookie 没有倒计时
         console.log("未倒计时");

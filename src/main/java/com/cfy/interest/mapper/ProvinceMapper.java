@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ProvinceMapper extends BaseMapper<Province> {
 
-    @Select("select * from district where parent_id = 0")
+    @Select("select * from district where parent_id = 0 order by order_ asc")
     @Results(
             {
                     @Result(property = "id", column = "id"),
@@ -20,7 +20,7 @@ public interface ProvinceMapper extends BaseMapper<Province> {
             })
     public List<Province> getProvinces();
 
-    @Select("select * from district where id = #{id}")
+    @Select("select * from district where id = #{id} order by order_ asc")
     @Results(
             {
                     @Result(property = "id", column = "id"),

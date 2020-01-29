@@ -57,7 +57,6 @@ public class SignInByAuthCodeController {
             return signInMessage;
         }
 
-
         //记住密码
         if (signInByAuthCodeVo.isRememberPassword()) {
             //记住密码

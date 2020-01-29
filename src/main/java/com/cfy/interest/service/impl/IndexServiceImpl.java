@@ -14,14 +14,26 @@ public class IndexServiceImpl implements IndexService {
 
     /**
      * 通过token查找user，进行登录
+     *
      * @return
      */
     @Override
     public User signInByToken(String token) {
+        String[] split = token.split(":");
+        String id = split[0];
+        String user_token = split[1];
         QueryWrapper<User> wrapper = new QueryWrapper<>();
-        wrapper.eq("token",token);
+        wrapper.eq("id", id);
+        wrapper.eq("token", user_token);
+        wrapper.eq("state", 1);
         User user = userMapper.selectOne(wrapper);
         return user;
 
+    }
+
+    @Override
+    public void logOut(long id) {
+        //更改用户状态为未登录
+        userMapper.logOut(id);
     }
 }

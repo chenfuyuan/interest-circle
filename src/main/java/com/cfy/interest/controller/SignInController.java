@@ -33,13 +33,12 @@ public class SignInController {
     public SignInMessage signIn(@RequestBody SignInVo signInVo, HttpServletResponse response, HttpServletRequest request) {
         System.out.println(signInVo);
         SignInMessage message = signInService.checksignIn(signInVo);
-
         User user = message.getUser();
         //记住密码
         if (signInVo.isRememberPassword()) {
             //记住密码
             //将用户的token放入cookie
-            String token = user.getToken();
+            String token = user.getId()+":" + user.getToken();
             response.addCookie(new Cookie("token", token));
             message.setRememberPassword(true);
         }

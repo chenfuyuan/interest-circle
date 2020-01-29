@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -108,9 +109,12 @@ public class SignInByAuthCodeServiceImpl implements SignInByAuthCodeService {
             User user = userMapper.selectByPhone(phone);
             //4.填充登录信息
             message.setSuccess(true);
-            message.setMessage("登录成功");
-            message.setUser(user);
+            //修改登录状态
+            user.setToken(UUID.randomUUID().toString());
+            user.setState(1);
+            userMapper.updateById(user);
 
+            message.setUser(user);
             //登录成功，清除缓存中的验证码信息
             redisTemplate.delete(phone + "SignIn");
         } else {

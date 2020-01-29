@@ -6,4 +6,5 @@ public interface IndexService {
 
     User signInByToken(String token);
 
+    void logOut(long id);
 }
