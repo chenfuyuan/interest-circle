@@ -1,8 +1,7 @@
 package com.cfy.interest.service.impl;
 
 import com.cfy.interest.mapper.CircleMapper;
-import com.cfy.interest.mapper.CityMapper;
-import com.cfy.interest.mapper.ProvinceMapper;
+import com.cfy.interest.mapper.DistrictMapper;
 import com.cfy.interest.model.Circle;
 import com.cfy.interest.model.City;
 import com.cfy.interest.model.Province;
@@ -22,20 +21,19 @@ import java.util.List;
 @Slf4j
 public class CreateCircleServiceImpl implements CreateCircleService {
 
-    @Autowired
-    private ProvinceMapper provinceMapper;
 
     @Autowired
     private CircleMapper circleMapper;
 
-    @Autowired
-    private CityMapper cityMapper;
 
     @Autowired
     private RedisTemplate redisTemplate;
 
     @Autowired
     private AliyunOSSProvider aliyunOSSProvider;
+
+    @Autowired
+    private DistrictMapper districtMapper;
     /**
      * 获取省份列表
      *
@@ -51,7 +49,7 @@ public class CreateCircleServiceImpl implements CreateCircleService {
 
         //如果为null或为空,查询数据库
         if (provinces == null || provinces.size() == 0) {
-            provinces = provinceMapper.getProvinces();
+            provinces = districtMapper.getProvinces();
             //添加入缓存，尾插法添加数据
             redisTemplate.opsForList().rightPushAll("provinces", provinces);
             System.out.println("添加入缓存");
@@ -68,7 +66,7 @@ public class CreateCircleServiceImpl implements CreateCircleService {
             System.out.println("从redis中获取citys");
             cities = province.getCitys();
         }else{
-            cities = cityMapper.findCityByProvince(id);
+            cities = districtMapper.findCityByProvince(id);
         }
         return cities;
     }
@@ -86,7 +84,7 @@ public class CreateCircleServiceImpl implements CreateCircleService {
     public AjaxMessage createCircle(CreateCircleFormVo createCircleFormVo, long uid) {
         //上传图片到oss服务器上
         String filePath = uploadAvatar(createCircleFormVo.getAvatar());
-        
+
         return null;
     }
 
