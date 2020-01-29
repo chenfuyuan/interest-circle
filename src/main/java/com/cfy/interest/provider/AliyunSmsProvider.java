@@ -32,6 +32,7 @@ public class AliyunSmsProvider {
     private String signName;
     private String regTemplateCode;
     private String regionId;
+
     public void sendSms(SendSmsMessage sendSmsMessage) {
         System.out.println(signName);
         DefaultProfile profile = DefaultProfile.getProfile(regionId,accessId,accessSecret);

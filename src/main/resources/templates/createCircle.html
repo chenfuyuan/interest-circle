@@ -13,8 +13,6 @@
           integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
 
-
-
     <link rel="stylesheet" href="css/front_style.css">
 
     <!--&lt;!&ndash;引入webuploader&ndash;&gt;-->
@@ -22,40 +20,41 @@
     <!--<script type="text/javascript" src="webuploader/webuploader.js"></script>-->
 </head>
 <body>
-<section class="create-cricle">
+<section class="create-circle">
+    <form id ="create-circle-form" enctype="multipart/form-data" method="post">
+        <div class="page-header">
+            <h2 class="page-title">创建圈子</h2>
+            <p class="page-subtitle">为你的兴趣创建圈子</p>
+        </div>
 
-    <div class="page-header">
-        <h2 class="page-title">创建圈子</h2>
-        <p class="page-subtitle">为你的兴趣创建圈子</p>
-    </div>
+        <div class="circle-name-input">
+            <input type="text" placeholder="输入圈子名称" name="circleName">
+        </div>
 
-    <div class="circle-name-input">
-        <input type="text" placeholder="输入圈子名称">
-    </div>
+        <div class="avatar-box">
+            <span class="glyphicon   more-icon"></span>
+            <img alt="" class="avater-image" id="circle_img">
+            <input type="file" id="select_circle_img" alt="选择头像" name="avatar"/>
+        </div>
 
-    <div class="avatar-box">
-        <span class="glyphicon   more-icon"></span>
-        <img alt="" class="avater-image" id="circle_img">
-        <input type="file" id="select_circle_img" alt="选择头像"/>
-    </div>
+        <div class="select-city">
+            <select name="province" id="province">
+                <option value="0">请选择省份</option>
+                <option th:each="province,provinceStat:${provinces}" th:value="${province.id}"
+                        th:text="${province.name}">省份
+                </option>
+            </select>
 
-    <div class="select-city">
-        <select name="province" id="province">
-            <option value="0">请选择省份</option>
-            <option th:each="province,provinceStat:${provinces}" th:value="${province.id}"
-                    th:text="${province.name}">省份
-            </option>
-        </select>
+            <select name="city" id="city">
+                <option value="0">请选择城市</option>
+            </select>
+        </div>
 
-        <select name="city" id="city">
-            <option value="default">请选择城市</option>
-        </select>
-    </div>
-
-    <div class="page-footer">
-        <button class="btn more-btn wide-btn btn-default"><span>取消</span></button>
-        <button class="btn more-btn wide-btn btn-primary"><span>创建</span></button>
-    </div>
+        <div class="page-footer">
+            <button class="btn more-btn wide-btn btn-default"><span>取消</span></button>
+            <button class="btn more-btn wide-btn btn-primary" id="btn_create"><span>创建</span></button>
+        </div>
+    </form>
 </section>
 <script type="application/javascript" src="js/jquery/jquery.min.js"></script>
 <script type="application/javascript" src="js/createCircle.js"></script>

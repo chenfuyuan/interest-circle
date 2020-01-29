@@ -4,7 +4,9 @@ import com.cfy.interest.model.City;
 import com.cfy.interest.model.Province;
 import com.cfy.interest.model.User;
 import com.cfy.interest.service.CreateCircleService;
-import javafx.scene.shape.Circle;
+import com.cfy.interest.service.vo.AjaxMessage;
+import com.cfy.interest.service.vo.CreateCircleFormVo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
+@Slf4j
 public class CreateCircleController {
 
     @Autowired
@@ -47,14 +50,24 @@ public class CreateCircleController {
         return citys;
     }
 
-    @PostMapping("/create")
-    public String create(@RequestBody Circle circle, HttpServletRequest request){
+    @PostMapping("/createCircle")
+    @ResponseBody
+    public AjaxMessage create(CreateCircleFormVo createCircleFormVo, HttpServletRequest request){
+        log.info("createCircleFormVo = "+createCircleFormVo);
+
         //获取创建者id
         User user = (User) request.getSession().getAttribute("user");
-        System.out.println(user);
+        if (user == null) {
+            log.error("user=null");
+        }
+        AjaxMessage ajaxMessage =null;
 
-        return "/index";
+        ajaxMessage = createCircleService.createCircle(createCircleFormVo,user.getId());
+
+        return ajaxMessage;
     }
+
+
 
     
 

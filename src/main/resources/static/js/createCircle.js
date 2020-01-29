@@ -66,6 +66,27 @@ $(function () {
         }
         return url ;
     }
+    function checkCircleMessage() {
 
+    }
+
+    $("#btn_create").click(function () {
+
+        console.log("提交事件触发");
+        alert("提交事件触发");
+        $("#create-circle-form").ajaxSubmit(
+            {
+                url: "createCircle",
+                type:"post",
+                dataType:"json",
+                success:function (data) {
+                    alert("message = " + data.message);
+                },
+                cleanForm: false,
+                resetForm: false,
+            }
+        )
+        return false;
+    });
 
 })

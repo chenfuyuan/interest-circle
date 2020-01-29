@@ -6,6 +6,7 @@ import com.cfy.interest.mapper.ProvinceMapper;
 import com.cfy.interest.model.Circle;
 import com.cfy.interest.model.District;
 import com.cfy.interest.model.Province;
+import com.cfy.interest.provider.AliyunOSSProvider;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -54,6 +55,14 @@ public class CreateCircleTest {
         for (Province province : provinces) {
             System.out.println(province.getCitys());
         }
+    }
+
+    @Autowired
+    private AliyunOSSProvider provider;
+
+    @Test
+    public void testGetOssValue() {
+        System.out.println(provider.getAccessKeyId());
     }
 
 }

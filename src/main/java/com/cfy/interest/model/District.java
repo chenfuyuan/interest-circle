@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 public class District {
     private String name;
     private int id;
-
     @TableField(exist = false)
     private District parent;
     private int parent_id;

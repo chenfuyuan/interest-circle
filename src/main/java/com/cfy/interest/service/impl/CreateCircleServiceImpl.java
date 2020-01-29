@@ -6,14 +6,20 @@ import com.cfy.interest.mapper.ProvinceMapper;
 import com.cfy.interest.model.Circle;
 import com.cfy.interest.model.City;
 import com.cfy.interest.model.Province;
+import com.cfy.interest.provider.AliyunOSSProvider;
 import com.cfy.interest.service.CreateCircleService;
+import com.cfy.interest.service.vo.AjaxMessage;
+import com.cfy.interest.service.vo.CreateCircleFormVo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 @Service
+@Slf4j
 public class CreateCircleServiceImpl implements CreateCircleService {
 
     @Autowired
@@ -27,6 +33,9 @@ public class CreateCircleServiceImpl implements CreateCircleService {
 
     @Autowired
     private RedisTemplate redisTemplate;
+
+    @Autowired
+    private AliyunOSSProvider aliyunOSSProvider;
     /**
      * 获取省份列表
      *
@@ -71,6 +80,22 @@ public class CreateCircleServiceImpl implements CreateCircleService {
             return null;
         }
         return circleMapper.findByName(name);
+    }
+
+    @Override
+    public AjaxMessage createCircle(CreateCircleFormVo createCircleFormVo, long uid) {
+        //上传图片到oss服务器上
+        String filePath = uploadAvatar(createCircleFormVo.getAvatar());
+        
+        return null;
+    }
+
+
+    private String uploadAvatar(MultipartFile avatar)  {
+        aliyunOSSProvider.initOssClient();
+        String fileUrl = aliyunOSSProvider.uploadImg2Oss(avatar);
+        log.info("fileUrl = " + fileUrl);
+        return fileUrl;
     }
 
 
