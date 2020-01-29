@@ -4,47 +4,65 @@
     <meta charset="UTF-8">
     <title>创建圈子</title>
 
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+
+
+
+    <link rel="stylesheet" href="css/front_style.css">
+
     <!--&lt;!&ndash;引入webuploader&ndash;&gt;-->
     <!--<link rel="stylesheet" type="text/css" href="webuploader/webuploader.css">-->
     <!--<script type="text/javascript" src="webuploader/webuploader.js"></script>-->
 </head>
 <body>
-    <section class="create-cricle">
-        <div class="page-header">
-            <h2 class="page-title">创建圈子</h2>
-            <p class="page-subtitle">为你的兴趣创建圈子</p>
-        </div>
+<section class="create-cricle">
 
-        <div class="circle-name-input">
-            <input type="text" placeholder="输入圈子名称">
-        </div>
+    <div class="page-header">
+        <h2 class="page-title">创建圈子</h2>
+        <p class="page-subtitle">为你的兴趣创建圈子</p>
+    </div>
 
-        <div class="avatar-box">
-            <img src="" alt="" class="avater-image">
-            <input type="file" />
-        </div>
+    <div class="circle-name-input">
+        <input type="text" placeholder="输入圈子名称">
+    </div>
 
-        <div class="select-city">
-            <select name="province" id="province" >
-                <option value="0">请选择省份</option>
-                <option th:each="province,provinceStat:${provinces}" th:value="${province.id}" th:text="${province.name}">省份</option>
-            </select>
+    <div class="avatar-box">
+        <span class="glyphicon   more-icon"></span>
+        <img alt="" class="avater-image" id="circle_img">
+        <input type="file" id="select_circle_img" alt="选择头像"/>
+    </div>
 
-            <select name="city" id="city">
-                <option value="default">请选择城市</option>
-                </select>
+    <div class="select-city">
+        <select name="province" id="province">
+            <option value="0">请选择省份</option>
+            <option th:each="province,provinceStat:${provinces}" th:value="${province.id}"
+                    th:text="${province.name}">省份
+            </option>
+        </select>
 
+        <select name="city" id="city">
+            <option value="default">请选择城市</option>
+        </select>
+    </div>
 
-        </div>
+    <div class="page-footer">
+        <button class="btn more-btn wide-btn btn-default"><span>取消</span></button>
+        <button class="btn more-btn wide-btn btn-primary"><span>创建</span></button>
+    </div>
+</section>
+<script type="application/javascript" src="js/jquery.min.js"></script>
+<script type="application/javascript" src="js/createCircle.js"></script>
 
-        <div class="page-footer">
-            <button><span>取消</span></button>
-            <button><span>创建</span></button>
-        </div>
-    </section>
-    <script type="application/javascript" src="js/jquery.min.js"></script>
-    <script type="application/javascript" src="js/createCircle.js"></script>
-
-
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
 </body>
 </html>
