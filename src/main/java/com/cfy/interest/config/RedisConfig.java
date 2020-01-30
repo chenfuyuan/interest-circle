@@ -20,7 +20,7 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 public class RedisConfig extends CachingConfigurerSupport {
 
     /**
-     * 配置redis序列化方式 使用String序列化
+     * 配置redis序列化方式
      * @param redisConnectionFactory
      * @return
      */

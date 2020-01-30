@@ -4,10 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.cfy.interest.model.City;
 import com.cfy.interest.model.District;
 import com.cfy.interest.model.Province;
-import org.apache.ibatis.annotations.Many;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -23,21 +20,33 @@ public interface DistrictMapper extends BaseMapper<District> {
                     @Result(property = "citys",
                             column = "id",
                             javaType = List.class,
-                            many = @Many(select = "com.cfy.interest.mapper.CityMapper.findCityByProvince")
+                            many = @Many(select = "com.cfy.interest.mapper.DistrictMapper.findCityByProvince")
                     )
             })
     public List<Province> getProvinces();
 
-    @Select("select * from district where id = #{id} order by order_ asc")
+    @Select("select * from district where id = #{id}")
     @Results(
             {
                     @Result(property = "id", column = "id"),
                     @Result(property = "citys",
                             column = "id",
                             javaType = List.class,
-                            many = @Many(select = "com.cfy.interest.mapper.CityMapper.findCityByProvince")
+                            many = @Many(select = "com.cfy.interest.mapper.DistrictMapper.findCityByProvince")
                     )
             }
     )
-    public Province selectById(int id);
+    public Province selectProvinceById(int id);
+
+    @Select("select * from district where id = #{id}")
+    @Results(
+            {
+                    @Result(property = "parentId", column = "parent_id"),
+                    @Result(property = "parent",
+                            column = "parent_id",
+                            one = @One(select = "com.cfy.interest.mapper.DistrictMapper.selectById"))
+            }
+    )
+    public District selectById(int id);
+
 }

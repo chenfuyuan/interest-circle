@@ -15,7 +15,7 @@ $(function () {
                     dataType: 'json',
                 }).done(function (re) {
                     $("#city").html("")
-                    $("#city").append("<option value='0'>请选择城市</option>")
+                    $("#city").append("<option value='-1'>请选择城市</option>")
                     for (var i = 0; i < re.length; i++) {
                         $("#city").append("<option value='" + re[i].id + "'>" + re[i].name + "</option>")
                     }
@@ -31,7 +31,7 @@ $(function () {
         if(fileName !="jpg" && fileName!="jpeg" && fileName !="png" && fileName!="gif" && fileName !="bmp"){
             alert("您上传的不是图片请重新上传");
             $("#select_circle_img").val("");    //将上传文件设置为空
-            $("#circle_img").attr("src", "image/avatar.png");    //将头像设置为初始头像
+            $("#circle_img").attr("src", "");    //将头像设置为初始头像
             $("#circle_img").css("z-index","0");
             return false;
         }
@@ -40,7 +40,7 @@ $(function () {
         if (this.files[0].size>10*1024*1024){
             alert("图片不能大于10M");
             $("#select_circle_img").val("");    //将上传文件设置为空
-            $("#circle_img").attr("src", "image/avatar.png");    //将头像设置为初始头像
+            $("#circle_img").attr("src", "");    //将头像设置为初始头像
             $("#circle_img").css("z-index","0");
             return false;
         }
@@ -72,6 +72,19 @@ $(function () {
 
     $("#btn_create").click(function () {
 
+        var avatar = $("#select_circle_img").val();
+        var province = $("#province").val();
+        var city = $("#city").val();
+        if (avatar=="" || avatar ==null){
+            alert("头像未上传");
+            return false;
+        }
+
+        if (province == -1) {
+            alert("请选择省份");
+            return false;
+        }
+
         console.log("提交事件触发");
         alert("提交事件触发");
         $("#create-circle-form").ajaxSubmit(
@@ -80,7 +93,12 @@ $(function () {
                 type:"post",
                 dataType:"json",
                 success:function (data) {
-                    alert("message = " + data.message);
+                    if (data.success) {
+                        alert(data.message);
+                        window.location.href = "/";
+                    }else{
+                        alert(data.message);
+                    }
                 },
                 cleanForm: false,
                 resetForm: false,

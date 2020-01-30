@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class City {
     private String name;
     private int id;
-    private int parent_id;
+    private int parentId;
     private String code;
     private int order;
 }

@@ -6,19 +6,30 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName("circle")
-public class Circle {
+public class Circle implements Serializable {
+
     private int id;
     private String name;
-    private String avatar_path;
+    private String avatarPath;
+
     @TableField(exist = false)
     private District district;
-    private int number;
+
+    private int districtId;
+    private int userNum;
+    private int articleNum;
+
+    @TableField(exist = false)
     private User owner;
-    private long create_time;
-    private long update_time;
+    private long ownerId;
+
+    private long createTime;
+    private long updateTime;
     private int state;
 }

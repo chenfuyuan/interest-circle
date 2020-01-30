@@ -11,10 +11,12 @@ public interface CircleMapper extends BaseMapper<Circle> {
 
     @Select("select * from circle where name = #{name}")
     @Results({
+            @Result(property = "districtId",column = "district_id"),
             @Result(property = "district",
                     column = "district_id",
                     one = @One(select = "com.cfy.interest.mapper.DistrictMapper.selectById")
             ),
+            @Result(property = "ownerId",column = "owner_id"),
             @Result(property = "owner",
                     column = "owner_id",
                     one = @One(select = "com.cfy.interest.mapper.UserMapper.selectById")

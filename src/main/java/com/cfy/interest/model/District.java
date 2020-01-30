@@ -15,8 +15,8 @@ public class District {
     private int id;
     @TableField(exist = false)
     private District parent;
-    private int parent_id;
+    private int parentId;
     private String code;
-    private int order_;
+    private int order;
 }
 

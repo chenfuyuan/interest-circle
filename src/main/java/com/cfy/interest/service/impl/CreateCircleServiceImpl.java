@@ -3,6 +3,7 @@ package com.cfy.interest.service.impl;
 import com.cfy.interest.mapper.CircleMapper;
 import com.cfy.interest.mapper.DistrictMapper;
 import com.cfy.interest.model.Circle;
+import com.cfy.interest.model.CircleOperationMessage;
 import com.cfy.interest.model.City;
 import com.cfy.interest.model.Province;
 import com.cfy.interest.provider.AliyunOSSProvider;
@@ -15,6 +16,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -77,15 +79,66 @@ public class CreateCircleServiceImpl implements CreateCircleService {
         if (name == null || name.equals("")) {
             return null;
         }
-        return circleMapper.findByName(name);
+        Circle circle = circleMapper.findByName(name);
+        log.info("circle = "+circle);
+        return circle;
     }
 
     @Override
     public AjaxMessage createCircle(CreateCircleFormVo createCircleFormVo, long uid) {
+        AjaxMessage ajaxMessage = new AjaxMessage();
+        String name = createCircleFormVo.getCircleName();
+        int province = createCircleFormVo.getProvince();
+        int city = createCircleFormVo.getCity();
+        if (existCircle(name)!=null) {
+            ajaxMessage.setSuccess(false);
+            ajaxMessage.setMessage("圈子已存在");
+            return ajaxMessage;
+        }
+
         //上传图片到oss服务器上
         String filePath = uploadAvatar(createCircleFormVo.getAvatar());
+        if (filePath.equals("") || filePath == null) {
+            ajaxMessage.setMessage("图片上传失败");
+            ajaxMessage.setSuccess(false);
+        }
 
-        return null;
+        //填充数据
+        Circle circle = new Circle();
+        //填充所处地区
+        if (province == 0) {
+            circle.setDistrictId(0);
+        }else if (city == -1) {
+            circle.setDistrictId(province);
+        }else{
+            circle.setDistrictId(city);
+        }
+        circle.setName(name);
+        circle.setUserNum(1);
+        circle.setArticleNum(0);
+        circle.setState(0);
+        circle.setOwnerId(uid);
+        circle.setAvatarPath(filePath);
+        long nowTime = new Date().getTime();
+        circle.setCreateTime(nowTime);
+        circle.setUpdateTime(nowTime);
+        //操作数据库
+        //将创建的圈子信息插入数据库
+        int cid = circleMapper.insert(circle);
+        redisTemplate.opsForValue().set("circle:"+cid,circle);
+        circle.setId(cid);
+
+        //圈子操作记录
+        CircleOperationMessage circleOperationMessage = new CircleOperationMessage();
+        circleOperationMessage.setCId(cid);
+        circleOperationMessage.setUId(uid);
+        circleOperationMessage.setDatetime(nowTime);
+        circleOperationMessage.setMessage("创建圈子");
+        circleOperationMessage.setType(1);
+
+        ajaxMessage.setSuccess(true);
+        ajaxMessage.setMessage("圈子创建成功");
+        return ajaxMessage;
     }
 
 

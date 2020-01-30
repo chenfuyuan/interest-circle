@@ -39,14 +39,15 @@
 
         <div class="select-city">
             <select name="province" id="province">
-                <option value="0">请选择省份</option>
+                <option value="-1">请选择省份</option>
+                <option value="0">全国</option>
                 <option th:each="province,provinceStat:${provinces}" th:value="${province.id}"
                         th:text="${province.name}">省份
                 </option>
             </select>
 
             <select name="city" id="city">
-                <option value="0">请选择城市</option>
+                <option value="-1">请选择城市</option>
             </select>
         </div>
 

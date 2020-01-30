@@ -61,7 +61,6 @@ public class CreateCircleController {
             log.error("user=null");
         }
         AjaxMessage ajaxMessage =null;
-
         ajaxMessage = createCircleService.createCircle(createCircleFormVo,user.getId());
 
         return ajaxMessage;
