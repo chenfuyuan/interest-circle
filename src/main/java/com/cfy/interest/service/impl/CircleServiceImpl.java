@@ -1,13 +1,11 @@
 package com.cfy.interest.service.impl;
 
 import com.cfy.interest.mapper.CircleMapper;
+import com.cfy.interest.mapper.CircleOperationMessageMapper;
 import com.cfy.interest.mapper.DistrictMapper;
-import com.cfy.interest.model.Circle;
-import com.cfy.interest.model.CircleOperationMessage;
-import com.cfy.interest.model.City;
-import com.cfy.interest.model.Province;
+import com.cfy.interest.model.*;
 import com.cfy.interest.provider.AliyunOSSProvider;
-import com.cfy.interest.service.CreateCircleService;
+import com.cfy.interest.service.CircleService;
 import com.cfy.interest.service.vo.AjaxMessage;
 import com.cfy.interest.service.vo.CreateCircleFormVo;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +19,7 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class CreateCircleServiceImpl implements CreateCircleService {
+public class CircleServiceImpl implements CircleService {
 
 
     @Autowired
@@ -36,6 +34,10 @@ public class CreateCircleServiceImpl implements CreateCircleService {
 
     @Autowired
     private DistrictMapper districtMapper;
+
+    @Autowired
+    private CircleOperationMessageMapper circleOperationMessageMapper;
+
     /**
      * 获取省份列表
      *
@@ -47,7 +49,7 @@ public class CreateCircleServiceImpl implements CreateCircleService {
         List<Province> provinces;
         //从redis中查询缓存
         //查询出整个list
-        provinces = redisTemplate.opsForList().range("provinces",0,-1);
+        provinces = redisTemplate.opsForList().range("provinces", 0, -1);
 
         //如果为null或为空,查询数据库
         if (provinces == null || provinces.size() == 0) {
@@ -63,11 +65,11 @@ public class CreateCircleServiceImpl implements CreateCircleService {
     @Override
     public List<City> getCityByProvincesId(int id) {
         List<City> cities;
-        Province province = (Province) redisTemplate.opsForList().index("provinces", id-1);
+        Province province = (Province) redisTemplate.opsForList().index("provinces", id - 1);
         if (province != null) {
             System.out.println("从redis中获取citys");
             cities = province.getCitys();
-        }else{
+        } else {
             cities = districtMapper.findCityByProvince(id);
         }
         return cities;
@@ -80,7 +82,7 @@ public class CreateCircleServiceImpl implements CreateCircleService {
             return null;
         }
         Circle circle = circleMapper.findByName(name);
-        log.info("circle = "+circle);
+        log.info("circle = " + circle);
         return circle;
     }
 
@@ -90,7 +92,7 @@ public class CreateCircleServiceImpl implements CreateCircleService {
         String name = createCircleFormVo.getCircleName();
         int province = createCircleFormVo.getProvince();
         int city = createCircleFormVo.getCity();
-        if (existCircle(name)!=null) {
+        if (existCircle(name) != null) {
             ajaxMessage.setSuccess(false);
             ajaxMessage.setMessage("圈子已存在");
             return ajaxMessage;
@@ -108,9 +110,9 @@ public class CreateCircleServiceImpl implements CreateCircleService {
         //填充所处地区
         if (province == 0) {
             circle.setDistrictId(0);
-        }else if (city == -1) {
+        } else if (city == -1) {
             circle.setDistrictId(province);
-        }else{
+        } else {
             circle.setDistrictId(city);
         }
         circle.setName(name);
@@ -124,8 +126,9 @@ public class CreateCircleServiceImpl implements CreateCircleService {
         circle.setUpdateTime(nowTime);
         //操作数据库
         //将创建的圈子信息插入数据库
-        int cid = circleMapper.insert(circle);
-        redisTemplate.opsForValue().set("circle:"+cid,circle);
+        circleMapper.insert(circle);
+        int cid = circle.getId();
+        redisTemplate.opsForValue().set("circle:" + cid, circle);
         circle.setId(cid);
 
         //圈子操作记录
@@ -135,19 +138,38 @@ public class CreateCircleServiceImpl implements CreateCircleService {
         circleOperationMessage.setDatetime(nowTime);
         circleOperationMessage.setMessage("创建圈子");
         circleOperationMessage.setType(1);
-
+        circleOperationMessageMapper.insert(circleOperationMessage);
         ajaxMessage.setSuccess(true);
         ajaxMessage.setMessage("圈子创建成功");
         return ajaxMessage;
     }
 
+    @Override
+    public List<Circle> getAllCircle() {
+        return circleMapper.selectAll();
+    }
 
-    private String uploadAvatar(MultipartFile avatar)  {
+
+    private String uploadAvatar(MultipartFile avatar) {
         aliyunOSSProvider.initOssClient();
         String fileUrl = aliyunOSSProvider.uploadImg2Oss(avatar);
         log.info("fileUrl = " + fileUrl);
         return fileUrl;
     }
 
+    @Override
+    public District findDistrictById(Integer districtId) {
+        return districtMapper.selectById(districtId);
+    }
 
+    @Override
+    public List<Circle> getAllCircleByDistrict(Integer districtId) {
+
+        return circleMapper.selectAllByDistrict(districtId);
+    }
+
+    @Override
+    public AjaxMessage joinCircle(long userId, Integer cId) {
+        return null;
+    }
 }

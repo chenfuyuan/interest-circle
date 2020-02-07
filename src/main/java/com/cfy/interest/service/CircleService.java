@@ -2,13 +2,14 @@ package com.cfy.interest.service;
 
 import com.cfy.interest.model.Circle;
 import com.cfy.interest.model.City;
+import com.cfy.interest.model.District;
 import com.cfy.interest.model.Province;
 import com.cfy.interest.service.vo.AjaxMessage;
 import com.cfy.interest.service.vo.CreateCircleFormVo;
 
 import java.util.List;
 
-public interface CreateCircleService {
+public interface CircleService {
 
     /**
      * 从数据库中获取所有省份
@@ -36,4 +37,16 @@ public interface CreateCircleService {
      * @param id
      */
     AjaxMessage createCircle(CreateCircleFormVo createCircleFormVo, long id);
+
+    /**
+     * 获取全部圈子
+     * @return
+     */
+    List<Circle> getAllCircle();
+
+    District findDistrictById(Integer districtId);
+
+    List<Circle> getAllCircleByDistrict(Integer districtId);
+
+    AjaxMessage joinCircle(long userId, Integer cId);
 }

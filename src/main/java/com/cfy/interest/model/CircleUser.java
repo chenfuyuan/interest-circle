@@ -1,5 +1,6 @@
 package com.cfy.interest.model;
 
+
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -8,31 +9,19 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName("circle")
-public class Circle implements Serializable {
-
+@TableName("circle_user")
+public class CircleUser {
     @TableId(type= IdType.AUTO)
-    private int id;
-    private String name;
-    private String avatarPath;
+    private long id;
 
     @TableField(exist = false)
-    private District district;
-
-    private int districtId;
-    private int userNum;
-    private int articleNum;
+    private User user;
 
     @TableField(exist = false)
-    private User owner;
-    private long ownerId;
+    private Circle circle;
 
-    private long createTime;
-    private long updateTime;
-    private int state;
+    private int type;
 }
