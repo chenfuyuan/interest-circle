@@ -2,6 +2,7 @@ package com.cfy.interest.service.impl;
 
 import com.cfy.interest.mapper.CircleMapper;
 import com.cfy.interest.mapper.CircleOperationMessageMapper;
+import com.cfy.interest.mapper.CircleUserMapper;
 import com.cfy.interest.mapper.DistrictMapper;
 import com.cfy.interest.model.*;
 import com.cfy.interest.provider.AliyunOSSProvider;
@@ -38,6 +39,8 @@ public class CircleServiceImpl implements CircleService {
     @Autowired
     private CircleOperationMessageMapper circleOperationMessageMapper;
 
+    @Autowired
+    private CircleUserMapper circleUserMapper;
     /**
      * 获取省份列表
      *
@@ -131,6 +134,9 @@ public class CircleServiceImpl implements CircleService {
         redisTemplate.opsForValue().set("circle:" + cid, circle);
         circle.setId(cid);
 
+        CircleUser circleUser = CircleUser.build(uid, cid);
+        circleUser.setType(1);
+        circleUserMapper.insert(circleUser);
         //圈子操作记录
         CircleOperationMessage circleOperationMessage = new CircleOperationMessage();
         circleOperationMessage.setCId(cid);
@@ -145,8 +151,8 @@ public class CircleServiceImpl implements CircleService {
     }
 
     @Override
-    public List<Circle> getAllCircle() {
-        return circleMapper.selectAll();
+    public List<Circle> getAllCircle(long uid) {
+        return circleMapper.selectAll(uid);
     }
 
 
@@ -163,13 +169,27 @@ public class CircleServiceImpl implements CircleService {
     }
 
     @Override
-    public List<Circle> getAllCircleByDistrict(Integer districtId) {
+    public List<Circle> getAllCircleByDistrict(Integer districtId,long uid) {
 
-        return circleMapper.selectAllByDistrict(districtId);
+        return circleMapper.selectAllByDistrict(districtId,uid);
     }
 
     @Override
     public AjaxMessage joinCircle(long userId, Integer cId) {
-        return null;
+        CircleUser circleUser = new CircleUser().build(userId, cId);
+        circleUser.setType(2);
+        circleUserMapper.insert(circleUser);
+
+        CircleOperationMessage circleOperationMessage = new CircleOperationMessage().build(userId,cId);
+        circleOperationMessage.setMessage("加入圈子");
+        circleOperationMessage.setType(2);
+        circleOperationMessageMapper.insert(circleOperationMessage);
+
+        AjaxMessage ajaxMessage = new AjaxMessage();
+        ajaxMessage.setSuccess(true);
+        ajaxMessage.setMessage("加入成功");
+        return ajaxMessage;
     }
+
+
 }

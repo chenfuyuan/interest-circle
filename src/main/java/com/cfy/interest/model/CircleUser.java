@@ -9,6 +9,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,9 +21,27 @@ public class CircleUser {
 
     @TableField(exist = false)
     private User user;
+    private long uid;
 
     @TableField(exist = false)
     private Circle circle;
+    private int cid;
+
 
     private int type;
+
+    private long createTime;
+    private long updateTime;
+
+    public static CircleUser build(long uid,int cid) {
+        CircleUser circleUser = new CircleUser();
+        circleUser.setUid(uid);
+        circleUser.setCid(cid);
+
+        long nowDate = new Date().getTime();
+        circleUser.setUpdateTime(nowDate);
+        circleUser.setCreateTime(nowDate);
+        circleUser.setType(0);
+        return circleUser;
+    }
 }

@@ -8,7 +8,6 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -71,7 +70,7 @@ public class CircleController {
 
     @GetMapping("/querySearch")
     public String getCircleList(Model model,
-                                       @RequestParam(required = false,defaultValue="1",value="pageNum")Integer pageNum, @RequestParam(defaultValue = "2", value = "pageSize")Integer pageSize) {
+                                       @RequestParam(required = false,defaultValue="1",value="pageNum")Integer pageNum, @RequestParam(defaultValue = "2", value = "pageSize")Integer pageSize,HttpServletRequest request) {
         //为了程序的严谨性，判断非空：
         if(pageNum == null){
             pageNum = 1;   //设置默认当前页
@@ -84,11 +83,13 @@ public class CircleController {
         }
         log.info("当前页是："+pageNum+"显示条数是："+pageSize);
 
+        User user = (User) request.getSession().getAttribute("user");
+        long uid = user.getId();
         //1.引入分页插件,pageNum是第几页，pageSize是每页显示多少条,默认查询总数count
         PageHelper.startPage(pageNum,pageSize);
         //2.紧跟的查询就是一个分页查询-必须紧跟.后面的其他查询不会被分页，除非再次调用PageHelper.startPage
         try {
-            List<Circle> circles = circleService.getAllCircle();
+            List<Circle> circles = circleService.getAllCircle(uid);
             System.out.println("分页数据："+circles);
             //3.使用PageInfo包装查询后的结果,5是连续显示的条数,结果list类型是Page<E>
             PageInfo<Circle> pageInfo = new PageInfo<Circle>(circles,pageSize);
@@ -103,7 +104,8 @@ public class CircleController {
     @GetMapping("/querySearchByDId")
     public String getCircleList(Model model,Integer districtId,
                                 @RequestParam(required = false,defaultValue="1",value="pageNum")Integer pageNum,
-                                @RequestParam(defaultValue = "2", value = "pageSize")Integer pageSize) {
+                                @RequestParam(defaultValue = "2", value = "pageSize")Integer pageSize,
+                                HttpServletRequest request) {
         //为了程序的严谨性，判断非空：
         if(pageNum == null){
             pageNum = 1;   //设置默认当前页
@@ -119,7 +121,7 @@ public class CircleController {
         //处理省份信息
         log.info("districtId = "+districtId);
         if (districtId == null || districtId == 0) {
-            return getCircleList(model, pageNum, pageSize);
+            return getCircleList(model, pageNum, pageSize,request);
         }
 
         District district = circleService.findDistrictById(districtId);
@@ -130,12 +132,13 @@ public class CircleController {
             model.addAttribute("province", district);
         }
 
-
+        User user = (User) request.getSession().getAttribute("user");
+        long uid = user.getId();
         //1.引入分页插件,pageNum是第几页，pageSize是每页显示多少条,默认查询总数count
         PageHelper.startPage(pageNum,pageSize);
         //2.紧跟的查询就是一个分页查询-必须紧跟.后面的其他查询不会被分页，除非再次调用PageHelper.startPage
         try {
-            List<Circle> circles = circleService.getAllCircleByDistrict(districtId);
+            List<Circle> circles = circleService.getAllCircleByDistrict(districtId,uid);
             model.addAttribute("districtId",districtId);
             System.out.println("分页数据："+circles);
             //3.使用PageInfo包装查询后的结果,5是连续显示的条数,结果list类型是Page<E>
@@ -162,6 +165,8 @@ public class CircleController {
 
         //加入圈子
         AjaxMessage ajaxMessage = circleService.joinCircle(userId,cId);
+
+        return ajaxMessage;
     }
 
 }

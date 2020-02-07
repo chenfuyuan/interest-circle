@@ -13,55 +13,57 @@ public interface CircleMapper extends BaseMapper<Circle> {
 
     @Select("select * from circle where name = #{name}")
     @Results({
-            @Result(property = "districtId",column = "district_id"),
+            @Result(property = "districtId", column = "district_id"),
             @Result(property = "district",
                     column = "district_id",
                     one = @One(select = "com.cfy.interest.mapper.DistrictMapper.selectById")
             ),
-            @Result(property = "ownerId",column = "owner_id"),
+            @Result(property = "ownerId", column = "owner_id"),
             @Result(property = "owner",
                     column = "owner_id",
                     one = @One(select = "com.cfy.interest.mapper.UserMapper.selectById")
             )
-            })
+    })
     Circle findByName(String name);
 
 
     /**
      * 查询所有圈子
+     *
      * @return
      */
-    @Select("select * from circle where state !=-1")
+    @Select("select * from circle where state !=-1 and id not in (select cid from circle_user where uid = #{uid})")
     @Results({
-            @Result(property = "districtId",column = "district_id"),
+            @Result(property = "districtId", column = "district_id"),
             @Result(property = "district",
                     column = "district_id",
                     one = @One(select = "com.cfy.interest.mapper.DistrictMapper.selectById")
             ),
-            @Result(property = "ownerId",column = "owner_id"),
+            @Result(property = "ownerId", column = "owner_id"),
             @Result(property = "owner",
                     column = "owner_id",
                     one = @One(select = "com.cfy.interest.mapper.UserMapper.selectById")
             )
     })
-    List<Circle> selectAll();
+    List<Circle> selectAll(long uid);
 
 
-    @Select("select * from circle where state != -1 and (district_id = #{districtId} or district_id in (" +
+    @Select("select * from circle where state != -1 and id not in (select cid from circle_user where uid = #{uid}) " +
+            "and(district_id = #{districtId} or district_id in (" +
             "select id from district where parent_id = #{districtId}))")
     @Results({
-            @Result(property = "districtId",column = "district_id"),
+            @Result(property = "districtId", column = "district_id"),
             @Result(property = "district",
                     column = "district_id",
                     one = @One(select = "com.cfy.interest.mapper.DistrictMapper.selectById")
             ),
-            @Result(property = "ownerId",column = "owner_id"),
+            @Result(property = "ownerId", column = "owner_id"),
             @Result(property = "owner",
                     column = "owner_id",
                     one = @One(select = "com.cfy.interest.mapper.UserMapper.selectById")
             )
     })
-    List<Circle> selectAllByDistrict(Integer districtId);
+    List<Circle> selectAllByDistrict(Integer districtId, long uid);
 
 
 }

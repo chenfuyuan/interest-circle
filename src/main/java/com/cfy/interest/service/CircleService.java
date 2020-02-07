@@ -42,11 +42,11 @@ public interface CircleService {
      * 获取全部圈子
      * @return
      */
-    List<Circle> getAllCircle();
+    List<Circle> getAllCircle(long uid);
 
     District findDistrictById(Integer districtId);
 
-    List<Circle> getAllCircleByDistrict(Integer districtId);
+    List<Circle> getAllCircleByDistrict(Integer districtId,long uid);
 
     AjaxMessage joinCircle(long userId, Integer cId);
 }

@@ -157,7 +157,10 @@ $(function () {
             type: 'get',
             dataType: 'json'
         }).done(function (re) {
-
+            alert(re.message);
+            if (re.success) {
+                window.location.reload();
+            }
         })
 
     });

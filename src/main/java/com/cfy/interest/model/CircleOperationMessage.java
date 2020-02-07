@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 /**
  * 操作圈子信息记录
  */
@@ -28,5 +30,13 @@ public class CircleOperationMessage {
     @TableField(exist = false)
     private User user;
     private int type;
+
+    public CircleOperationMessage build(long uId,int cId) {
+        CircleOperationMessage circleOperationMessage = new CircleOperationMessage();
+        circleOperationMessage.setUId(uId);
+        circleOperationMessage.setCId(cId);
+        circleOperationMessage.setDatetime(new Date().getTime());
+        return circleOperationMessage;
+    }
 
 }
