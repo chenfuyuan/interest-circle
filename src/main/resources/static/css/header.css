@@ -1,0 +1,227 @@
+/*index start*/
+.circle-header{
+    position: fixed;
+    top: 0;
+    z-index: 101;
+    width: 100%;
+    height: 60px;
+    font-size: 14px;
+    line-height: 60px;
+    font-weight: 500;
+    color: #fff;
+    background-image: linear-gradient(90deg, #5072FF 4%, #4E98F5 100%) !important;
+    border-bottom: 1px solid #ededed;
+
+    transition: all .2s ease;
+}
+
+.circle-header .more-container {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+
+.more-container {
+    margin-left: auto;
+    margin-right: auto;
+    width: 1092px;
+}
+
+.circle-header .more-container .left{
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+}
+
+.left {
+    float: left;
+}
+
+.circle-header .more-container .left .nav-title {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    line-height: 20px;
+    padding: 20px 0;
+}
+
+.circle-header .more-container .left .header-nav-item {
+    float: left;
+    min-width: 60px;
+    margin-right: 12px;
+    cursor: pointer;
+}
+
+.header-nav-item.nav-title {
+    color: #fff;
+}
+
+.circle-header .more-container .left .header-nav-item i {
+    font-size: 18px;
+    margin-right: 8px;
+}
+
+[class*=" more-icon-"], [class^=more-icon-] {
+    speak: none;
+    font-style: normal;
+    font-weight: 400;
+    font-feature-settings: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+section {
+    height: 100%;
+}
+
+.circle-header .more-container .right {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.right {
+    float: right;
+}
+
+.circle-header .header-nav-search {
+    color: #9b9b9b;
+    margin-right: 18px;
+}
+
+.more-input-box {
+    font-size: 14px;
+}
+
+.more-input-box {
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    font-weight: 400;
+}
+.more-input-box .more-input-prefix-icon {
+    left: 6px;
+}
+
+.more-input-box .more-input-prefix-icon, .more-input-box .more-input-suffix-icon {
+    width: 14px;
+    height: 14px;
+    line-height: 14px;
+    margin-right: -20px;
+    cursor: pointer;
+}
+
+.more-input-box .more-input {
+    box-sizing: border-box;
+    width: 230px;
+    border-radius: 4px;
+    border: 1px solid #e6e6e6;
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+    color: #4a4a4a;
+}
+
+input {
+    outline: none;
+}
+
+
+.more-input-box .more-input {
+    background: #f5f5f5;
+    border: none;
+    border-radius: 100px;
+}
+
+.more-input-box .more-input {
+
+    height: 30px;
+    padding-left:26px;
+    padding-right: 30px;
+}
+
+.circle-header .header-nav-user span:first-of-type {
+    display: inline-block;
+}
+
+.more-dropdown-box {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+}
+
+.circle-header .user-img {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid #fff;
+    cursor: pointer;
+    vertical-align: middle;
+    line-height: 0;
+}
+
+.user-img {
+    background: transparent;
+    border: none;
+    outline: none;
+}
+
+.more-dropdown-menu {
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ededed;
+    box-shadow: 0 4px 12px rgba(0,0,0,.04);
+    top: 100%;
+    padding: 10px 0;
+    border-radius: 4px;
+}
+
+.header-user-menu .more-dropdown-item{
+    padding: 0;
+}
+
+.more-dropdown-item {
+    position: relative;
+    z-index: 2;
+    padding: 0 20px 0 16px;
+    line-height: 34px;
+    white-space: nowrap;
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+    font-size: 14px;
+    text-align: left;
+    color: #333;
+    cursor: pointer;
+}
+
+.header-user-menu .more-dropdown-item a, .header-user-menu .more-dropdown-item p {
+    display: block;
+    padding: 0 20px 0 16px;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+    word-break: break-all;
+    outline: none;
+}
+
+.header-user-menu .more-dropdown-item.user-menu-item-logout{
+    padding-left: 16px;
+}
+
+element.style {
+    position: fixed;
+    top: 60px;
+    left: 1428px;
+    transform-origin: center top;
+    z-index: 9;
+}
+/*index end*/

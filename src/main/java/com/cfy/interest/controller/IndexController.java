@@ -43,6 +43,11 @@ public class IndexController {
                 }
             }
         }
+
+        if (user == null) {
+            return "signin";
+        }
+        log.info(user.toString());
         return "index";
     }
 
@@ -57,6 +62,12 @@ public class IndexController {
         cookie.setPath("/");
         response.addCookie(cookie);
         indexService.logOut(user.getId());
-        return "index";
+        return "signin";
+    }
+
+
+    @GetMapping("/testIndex")
+    public String testIndex() {
+        return "testIndex";
     }
 }

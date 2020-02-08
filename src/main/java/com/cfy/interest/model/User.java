@@ -19,4 +19,5 @@ public class User {
     private long createTime;
     private long updateTime;
     private int state;
+    private String avatarPath;
 }

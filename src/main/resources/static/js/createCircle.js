@@ -107,4 +107,9 @@ $(function () {
         return false;
     });
 
+    $("#btn_cancel").click(function () {
+        window.location.href = "/";
+
+    });
+
 })
