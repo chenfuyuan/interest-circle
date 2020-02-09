@@ -8,27 +8,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
 
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
 
     <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
-    <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap-theme.min.css">
+
+    <!--jquery form表单工具类-->
+    <script type="application/javascript" src="/static/js/jquery/jquery.form.js"></script>
 
     <!--引入自己的css-->
-    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="/static/css/header.css">
 
+    <link rel="stylesheet" href="/static/css/cssinit.css">
     <!--引入的样式-->
     <link rel="stylesheet" type="text/css" th:each="cssPath,status:${#strings.setSplit(cssPaths,',')}"
-          th:href="@{${cssPath}}"/>
+          th:href="@{'/static/'+${cssPath}}"/>
 
-    <script type="application/javascript" src="js/jquery/jquery.min.js"></script>
+    <script type="application/javascript" src="/static/js/jquery/jquery.min.js"></script>
 
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
 
     <!--引入jquery表单插件-->
-    <script type="application/javascript" src="js/jquery/jquery.form.js"></script>
+    <script type="application/javascript" src="/static/js/jquery/jquery.form.js"></script>
 
-    <script type="application/javascript" src="js/headerNav.js"></script>
+    <script type="application/javascript" src="/static/js/headerNav.js"></script>
 
 </head>
 
@@ -40,12 +44,12 @@
             <div class="header-nav-item nav-title">
                 <i class="more-icon-home glyphicon glyphicon-home">
                 </i>
-                <span><a href="/">主页</a></span>
+                <span><a href="/" class="a_white">主页</a></span>
             </div>
             <div class="header-nav-item nav-title">
                 <i class="more-icon-home glyphicon glyphicon-th-list">
                 </i>
-                <span><a href="querySearch">查看圈子</a></span>
+                <span><a href="/circle/querySearch" class="a_white">查看圈子</a></span>
             </div>
         </div>
         <div class="right">
@@ -64,7 +68,7 @@ glyphicon glyphicon-search">
                             th:if="${session.user.avatarPath}"
                             th:src="@{'https://chenfuyuan.oss-cn-shenzhen.aliyuncs.com/interest-circle/'+${session.user.avatarPath}}"
                          class="user-img">
-                    <img th:unless="${session.user.avatarPath}" src="image/avatar.png" class="user-img">
+                    <img th:unless="${session.user.avatarPath}" src="/static/image/avatar.png" class="user-img">
                     <div></div>
                 </span>
             </div>
@@ -74,13 +78,15 @@ glyphicon glyphicon-search">
     <div id="header-user-menu" class="more-dropdown-menu header-user-menu"
          style="transform-origin: center top; z-index: 9; position: fixed; top: 60px; left: 1436px; display: none;">
         <div class="more-dropdown-item-list">
-            <div  class="more-dropdown-item"><a  href="#" class="">个人资料</a>
+            <div  class="more-dropdown-item"><a  href="/user/info" class="">个人资料</a>
             </div>
             <div  class="more-dropdown-item"><a  href="#" class="">我的话题</a>
             </div>
             <div  class="more-dropdown-item"><a  href="#" class="">我的收藏</a></div>
             <div  class="more-dropdown-item user-menu-item-setting"><p >我的通知</p></div>
-            <div  class="more-dropdown-item user-menu-item-setting"><a href="createCircle" class="">创建圈子</a></div>
+            <div
+                    class="more-dropdown-item user-menu-item-setting"><a href="/circle/create" class="">创建圈子
+            </a></div>
             <div  class="more-dropdown-item user-menu-item-setting"><a href="logOut">退出登录</a></div>
         </div>
         <div x-arrow="" class="popper__arrow" style="left: 48.5px;"></div>

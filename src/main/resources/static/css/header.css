@@ -224,4 +224,8 @@ element.style {
     transform-origin: center top;
     z-index: 9;
 }
+
+.a_white,.a_white:focus,.a_white:visited {
+    color: white;
+}
 /*index end*/

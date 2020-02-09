@@ -16,10 +16,10 @@ public class SignUpController {
 
     @GetMapping("/signUp")
     public String signUp() {
-        return "signUp";
+        return "signup";
     }
 
-    @GetMapping("/authCode")
+    @GetMapping("/signUp/authCode/send")
     @ResponseBody
     public SendSmsMessage getAuthCode(@RequestParam String phone) {
         SendSmsMessage sendSmsMessage;
@@ -37,7 +37,7 @@ public class SignUpController {
         return sendSmsMessage;
     }
 
-    @PostMapping("/checkSignUp")
+    @PostMapping("/signUp/check")
     @ResponseBody
     public SignUpMessage signUp(@RequestBody SignUpVo signUpVo) {
         System.out.println(signUpVo);

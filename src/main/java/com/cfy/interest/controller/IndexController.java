@@ -22,32 +22,6 @@ public class IndexController {
 
     @GetMapping("/")
     public String index(HttpServletRequest request) {
-        User user = (User) request.getSession().getAttribute("user");
-        if (user == null) {
-            Cookie[] cookies = request.getCookies();
-            //遍历cookies
-            if (cookies == null) {
-                return "index";
-            }
-            for (Cookie cookie : cookies) {
-                //找到名为token的cookie
-                if (cookie.getName().equals("token")) {
-                    String token = cookie.getValue();
-                    System.out.println(token);
-                    //查找用户
-                    user = indexService.signInByToken(token);
-                    System.out.println(user);
-                    if (user != null) {
-                        request.getSession().setAttribute("user", user);
-                    }
-                }
-            }
-        }
-
-        if (user == null) {
-            return "signin";
-        }
-        log.info(user.toString());
         return "index";
     }
 
@@ -65,9 +39,4 @@ public class IndexController {
         return "signin";
     }
 
-
-    @GetMapping("/testIndex")
-    public String testIndex() {
-        return "testIndex";
-    }
 }

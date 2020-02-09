@@ -49,7 +49,7 @@ $(function () {
                 }
         }
         $.ajax({
-            url: 'authCode',//服务器发送短信
+            url: '/signUp/authCode/send',//服务器发送短信
             contentType: "application/json",
             type: 'GET',
             dataType: 'json',
@@ -111,7 +111,7 @@ $(function () {
 
         var data = JSON.stringify(user);    //转化成json数据
         $.ajax({
-            url: 'checkSignUp',//服务器发送短信
+            url: '/signUp/check',//服务器发送短信
             contentType: "application/json",
             type: 'post',
             dataType: 'json',
@@ -121,7 +121,7 @@ $(function () {
                 //进行注册成功跳转
                 alert("注册成功");
                 $.cookie("total", total, {expires: -1});
-                window.location.href = "signin?username"+re.phone;
+                window.location.href = "signIn?username"+re.phone;
                 return;
             } else {
                 alert(re.message);

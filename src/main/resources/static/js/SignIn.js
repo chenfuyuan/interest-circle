@@ -17,7 +17,7 @@ $(function () {
         console.log(signInVo);
         $.ajax(
             {
-                url: 'checkSignIn',
+                url: '/signIn/check',
                 contentType: "application/json",
                 type: 'post',
                 dataType: 'json',

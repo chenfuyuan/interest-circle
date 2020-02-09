@@ -19,7 +19,7 @@ public class SignInByAuthCodeController {
     @Autowired
     private SignInByAuthCodeService service;
 
-    @RequestMapping("/authCodeSignIn")
+    @RequestMapping("/signIn/authCode")
     public String authCodeSignIn() {
         return "authCodeSignIn";
     }
@@ -29,7 +29,7 @@ public class SignInByAuthCodeController {
      * @param phone
      * @return
      */
-    @GetMapping("/sendSignInAuthCode")
+    @GetMapping("/signIn/authCode/send")
     @ResponseBody
     public SendSmsMessage sendSignInAuthCode(@RequestParam String phone) {
         SendSmsMessage sendSmsMessage;
@@ -48,7 +48,7 @@ public class SignInByAuthCodeController {
         return sendSmsMessage;
     }
 
-    @PostMapping("/signInByAuthCode")
+    @PostMapping("/signIn/authCode/check")
     @ResponseBody
     public SignInMessage signInByAuthCode(@RequestBody SignInByAuthCodeVo signInByAuthCodeVo, HttpServletResponse response, HttpServletRequest request) {
         SignInMessage signInMessage = service.signInByAuthCode(signInByAuthCodeVo);
@@ -56,20 +56,15 @@ public class SignInByAuthCodeController {
         if (user == null) {
             return signInMessage;
         }
-
         //记住密码
         if (signInByAuthCodeVo.isRememberPassword()) {
             //记住密码
             //将用户的token放入cookie
             String token = user.getToken();
-            response.addCookie(new Cookie("token", token));
+            response.addCookie(new Cookie("/token", token));
             signInMessage.setRememberPassword(true);
         }
-
         request.getSession().setAttribute("user",user);
-
-
-
 
         return signInMessage;
     }

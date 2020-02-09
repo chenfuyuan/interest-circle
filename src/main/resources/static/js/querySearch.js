@@ -7,7 +7,7 @@ $(function () {
     console.log("从后台请求省份数据");
     $.ajax(
         {
-            url: 'getProvinces',
+            url: '/get/provinces',
             contentType: "application/json",
             type: 'get',
             dataType: 'json'
@@ -132,15 +132,15 @@ $(function () {
         console.log("选择的城市" + checkCityId);
 
         if (checkProvinceId == 0) {
-            window.location.href = "querySearch";
+            window.location.href = "/circle/querySearch";
             return;
         } else {
             if (checkCityId == 0) {
                 alert("未选择城市，直接根据省份跳转，省份=" + checkProvinceId);
-                window.location.href = "querySearchByDId?districtId="+checkProvinceId;
+                window.location.href = "/circle/querySearchByDId?districtId="+checkProvinceId;
             } else {
                 alert("选择城市 = " + checkCityId);
-                window.location.href = "querySearchByDId?districtId="+checkCityId;
+                window.location.href = "/circle/querySearchByDId?districtId="+checkCityId;
             }
         }
 
@@ -152,7 +152,7 @@ $(function () {
         console.log("要加入的圈子是" + circleId);
 
         $.ajax({
-            url: "joinCircle/" + circleId,
+            url: "/circle/join/" + circleId,
             contentType: "application/json",
             type: 'get',
             dataType: 'json'

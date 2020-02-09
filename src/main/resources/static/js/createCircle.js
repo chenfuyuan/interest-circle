@@ -9,7 +9,7 @@ $(function () {
             }
             $.ajax(
                 {
-                    url: 'getCity/' + provinceValue,
+                    url: '/get/city/' + provinceValue,
                     contentType: "application/json",
                     type: 'get',
                     dataType: 'json',
@@ -89,7 +89,7 @@ $(function () {
         alert("提交事件触发");
         $("#create-circle-form").ajaxSubmit(
             {
-                url: "createCircle",
+                url: "/circle/create/check",
                 type:"post",
                 dataType:"json",
                 success:function (data) {

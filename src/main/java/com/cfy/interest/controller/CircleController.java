@@ -27,7 +27,7 @@ public class CircleController {
      *
      * @return
      */
-    @GetMapping("/createCircle")
+    @GetMapping("/circle/create")
     public String index(Model model) {
         List<Province> provinces = circleService.getProvinces();
 
@@ -41,7 +41,7 @@ public class CircleController {
      * @param id
      * @return
      */
-    @GetMapping("getCity/{id}")
+    @GetMapping("get/city/{id}")
     @ResponseBody
     public List<City> getCity(@PathVariable("id") int id, Model model) {
         if (id == 0) {
@@ -51,7 +51,7 @@ public class CircleController {
         return citys;
     }
 
-    @PostMapping("/createCircle")
+    @PostMapping("/circle/create/check")
     @ResponseBody
     public AjaxMessage create(CreateCircleFormVo createCircleFormVo, HttpServletRequest request) {
         log.info("createCircleFormVo = " + createCircleFormVo);
@@ -68,7 +68,7 @@ public class CircleController {
     }
 
 
-    @GetMapping("/querySearch")
+    @GetMapping("/circle/querySearch")
     public String getCircleList(Model model,
                                        @RequestParam(required = false,defaultValue="1",value="pageNum")Integer pageNum, @RequestParam(defaultValue = "2", value = "pageSize")Integer pageSize,HttpServletRequest request) {
         //为了程序的严谨性，判断非空：
@@ -101,7 +101,7 @@ public class CircleController {
         return "querySearch";
     }
 
-    @GetMapping("/querySearchByDId")
+    @GetMapping("/circle/querySearchByDId")
     public String getCircleList(Model model,Integer districtId,
                                 @RequestParam(required = false,defaultValue="1",value="pageNum")Integer pageNum,
                                 @RequestParam(defaultValue = "2", value = "pageSize")Integer pageSize,
@@ -153,7 +153,7 @@ public class CircleController {
         return "querySearch";
     }
 
-    @GetMapping("joinCircle/{cId}")
+    @GetMapping("circle/join/{cId}")
     @ResponseBody
     public AjaxMessage joinCircle(@PathVariable("cId") Integer cId,HttpServletRequest request) {
         if (cId == null || cId == 0) {

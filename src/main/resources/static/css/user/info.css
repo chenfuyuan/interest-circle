@@ -1,0 +1,239 @@
+.el-container .el-main {
+    height: 100%;
+}
+
+.global-user-page {
+    min-height: calc(100% - 60px);
+}
+.content {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    width: 1092px;
+    margin: 0 auto;
+    padding-top: 72px;
+}
+
+.left-side {
+    position: fixed;
+    width: 263px;
+    border-radius: 2px;
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,.04);
+}
+
+.content .main-content-user {
+    width: 810px;
+    margin-left: 276px;
+    min-height: 500px;
+    border-radius: 4px;
+}
+
+.left-side .nav-item.nuxt-link-active {
+    color: #cd0906;
+    font-weight: 500;
+}
+
+.left-side .nav-item{
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-left: 16px;
+    border-bottom: 1px solid #f4f4f4;
+    font-size: 16px;
+    line-height: 56px;
+    font-weight: 400;
+    color: #767676;
+    cursor: pointer;
+}
+
+.left-side .nav-item .nav-icon {
+    float: left;
+    width: 26px;
+}
+
+.left-side .nav-item .nav-icon i {
+    font-size: 16px;
+}
+
+.left-side .nav-item .right-icon {
+    display: none;
+    margin-right: 12px;
+    font-weight: 500;
+}
+.left-side .nav-item.nuxt-link-active .right-icon {
+    display: inline;
+}
+
+.global-user-info {
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,.04);
+}
+
+.global-user-info .section-header {
+    padding-left: 36px;
+    font-size: 16px;
+    line-height: 60px;
+    font-weight: 700;
+    border-bottom: 1px solid #f4f4f4;
+    color: #4a4a4a;
+}
+
+.global-user-info .section-body {
+    padding: 36px;
+    border-bottom: 1px solid #f4f4f4;
+}
+
+.global-user-info .info-item {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.global-user-info .info-item .item-left {
+    width: 72px;
+    flex-shrink: 0;
+    color: #767676;
+    font-size: 16px;
+    line-height: 48px;
+    font-weight: 500;
+}
+
+.global-user-info .info-item .item-right {
+    -webkit-box-flex: 1;
+    flex: 1;
+    position: relative;
+}
+
+.global-user-info .avatar-img {
+    width: 48px;
+    height: 48px;
+    margin-right: 24px;
+    border-radius: 50%;
+    vertical-align: middle;
+    background-color: #ccc;
+}
+
+.global-user-info .avatar-input {
+    width: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 100px;
+    opacity: 0;
+    cursor: pointer;
+    visibility: hidden;
+}
+
+.global-user-info .avatar-btn .more-btn {
+    height: 36px;
+    padding: 0;
+    border-width: 1px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #858585;
+}
+.more-btn {
+    border: 1.5px solid #ededed;
+    color: #333;
+    border-radius: 100px;
+    background: #fff;
+    height: 34px;
+}
+
+.global-user-info .avatar-btn {
+    position: relative;
+    width: 84px;
+    overflow: hidden;
+}
+
+
+.global-user-info .info-item .item-right .right-content {
+    text-align: right;
+    color: #9b9b9b;
+    font-size: 16px;
+}
+
+.global-user-info .user-nickname-input.more-input-box .more-input {
+    height: 48px;
+    border-color: #e6e6e6;
+}
+
+.global-user-info .info-item .item-right .more-input-box .more-input {
+    padding-right: 60px;
+}
+
+.more-input-box .more-input {
+    width: 100%;
+}
+
+.more-input-box {
+    width: 100%;
+    font-size: 16px;
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    font-weight: 400;
+}
+
+
+.global-user-info .info-item .item-right .length-tip {
+    position: absolute;
+    top: 0;
+    right: 15px;
+    line-height: 48px;
+    color: #858585;
+    font-size: 14px;
+}
+
+.more-input-box .more-input {
+    background: white;
+    border: 1px solid;
+    border-radius: 0;
+}
+
+.global-user-info .info-item .item-right .text-btn {
+    padding: 0;
+    font-size: 16px;
+    margin-left: 16px;
+    font-weight: 500;
+    color: #ff3049;
+    border: none;
+
+}
+
+body, html {
+    height: 100%;
+}
+
+.global-user-info .section-footer {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+    -webkit-box-align: center;
+    align-items: center;
+    height: 73px;
+}
+
+#btn-save {
+    padding-right: 36px;
+    font-size: 16px;
+    margin-left: 16px;
+    font-weight: 500;
+    color: #ff3049;
+    border: none;
+    outline: none;
+}
+
+button {
+    outline: none;
+}

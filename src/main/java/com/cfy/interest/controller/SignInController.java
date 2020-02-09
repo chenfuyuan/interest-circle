@@ -21,14 +21,14 @@ public class SignInController {
     @Autowired
     private SignInService signInService;
 
-    @RequestMapping("/signin")
+    @RequestMapping("/signIn")
     public String signIn() {
         return "signin";
     }
 
 
 
-    @PostMapping("/checkSignIn")
+    @PostMapping("/signIn/check")
     @ResponseBody
     public SignInMessage signIn(@RequestBody SignInVo signInVo, HttpServletResponse response, HttpServletRequest request) {
         System.out.println(signInVo);
@@ -39,7 +39,9 @@ public class SignInController {
             //记住密码
             //将用户的token放入cookie
             String token = user.getId()+":" + user.getToken();
-            response.addCookie(new Cookie("token", token));
+            Cookie cookie = new Cookie("token", token);
+            cookie.setPath("/");
+            response.addCookie(cookie);
             message.setRememberPassword(true);
         }
 

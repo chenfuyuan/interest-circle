@@ -17,7 +17,7 @@ public class DistrictController {
     @Autowired
     private DistrictService districtService;
 
-    @GetMapping("/getProvinces")
+    @GetMapping("/get/provinces")
     @ResponseBody
     public List<Province> getProvinces() {
         List<Province> provinces = districtService.getProvinces();

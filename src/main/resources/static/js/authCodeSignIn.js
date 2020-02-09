@@ -48,7 +48,7 @@ $(function () {
         }
         //与后台进行ajax
         $.ajax({
-            url: 'sendSignInAuthCode',
+            url: '/signIn/authCode/send',
             contentType: 'application/json',
             type: 'GET',
             dataType: 'json',
@@ -90,7 +90,7 @@ $(function () {
         console.log(signInVo);
         $.ajax(
             {
-                url: 'signInByAuthCode',
+                url: '/signIn/authCode/check',
                 contentType: "application/json",
                 type: 'post',
                 dataType: 'json',

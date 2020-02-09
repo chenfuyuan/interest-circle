@@ -1,10 +1,92 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head >
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<head th:replace="circle_header::head('个人资料','css/user/info.css')">
 
+</head>
+
+<body>
+<section class="el-container" style="background-color: rgb(245, 245, 245);">
+    <div th:replace="circle_header::header"></div>
+    <main class="el-main">
+        <div class="global-user-page">
+            <div class="content">
+                <ul class="left-side">
+                    <li class="nav-item nuxt-link-exact-active nuxt-link-active">
+                        <div class="nav-left">
+                            <span class="nav-icon"><i class="more-icon-myProfile glyphicon glyphicon-user"></i></span>
+                            <span>个人资料</span>
+                        </div>
+                        <i class="more-icon-right-arrow right-icon glyphicon glyphicon-chevron-right"></i>
+                    </li>
+                    <li class="nav-item">
+                        <div class="nav-left">
+                            <span class="nav-icon"><i class="more-icon-myPosts glyphicon glyphicon-file"></i></span>
+                            <span>我的话题</span>
+                        </div>
+                        <i class="more-icon-right-arrow right-icon"></i>
+                    </li>
+                    <li class="nav-item">
+                        <div class="nav-left">
+                            <span class="nav-icon"><i class="more-icon-myStar glyphicon glyphicon-star"></i></span>
+                            <span>我的收藏</span>
+                        </div>
+                        <i class="more-icon-right-arrow right-icon"></i>
+                    </li>
+                </ul>
+                <div class="main-content-user">
+                    <div class="global-user-info"><h2 class="section-header">个人资料</h2>
+                        <div class="section-body">
+                            <div class="info-item">
+                                <div class="item-left">头像</div>
+                                <div class="item-right">
+                                    <img th:if="${session.user.avatarPath}" th:src="@{'https://chenfuyuan.oss-cn-shenzhen.aliyuncs.com/interest-circle/'+${session.user.avatarPath}}" class="avatar-img">
+                                    <img th:unless="${session.user.avatarPath}"
+                                         src="/static/image/avatar.png" class="avatar-img">
+
+                                    <input accept="image/jpg, image/png, image/jpeg, image/bmp" type="file" class="avatar-input">
+                                    <button class="more-btn avatar-btn"><!----><span>
+          更改头像
+        </span></button>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <div class="item-left">昵称</div>
+                                <div class="item-right">
+                                    <span class="more-input-box user-nickname-input"><!---->
+                                    <!---->
+                                        <input th:value="${session.user.name}" type="text" placeholder=""
+                                               autocomplete="off"
+                                               maxlength="2147480"
+                                               tabindex="-1" class="more-input">
+                                        <div><!----></div>
+                                    </span>
+                                    <span class="length-tip">2/32</span>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <div class="item-left">ID</div>
+                                <div class="item-right">
+                                    <div class="right-content" th:text="${session.user.id}">908496</div>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <div class="item-left">密码</div>
+                                <div class="item-right">
+                                    <div class="right-content">
+                                        <button class="more-btn text-btn"><!----><span>修改</span></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="section-footer">
+                            <button class="more-btn text-btn btn-save" id="btn-save"><!----><span>保存</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</section>
 </body>
 </html>
