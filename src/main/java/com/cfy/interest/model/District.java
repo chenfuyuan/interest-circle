@@ -1,6 +1,8 @@
 package com.cfy.interest.model;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,8 +13,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @TableName("district")
 public class District {
-    private String name;
+
+    @TableId(type= IdType.AUTO)
     private int id;
+
+    private String name;
     @TableField(exist = false)
     private District parent;
     private int parentId;

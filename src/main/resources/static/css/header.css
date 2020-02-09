@@ -228,4 +228,17 @@ element.style {
 .a_white,.a_white:focus,.a_white:visited {
     color: white;
 }
+
+
+#input-search {
+    height: 30px;
+    padding-left: 26px;
+    padding-right: 30px;
+    width: 100%;
+    background: #f5f5f5;
+    border: none;
+    border-radius: 100px;
+    font-size: 14px;
+
+}
 /*index end*/

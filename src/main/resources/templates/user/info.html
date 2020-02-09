@@ -33,60 +33,77 @@
                         <i class="more-icon-right-arrow right-icon"></i>
                     </li>
                 </ul>
-                <div class="main-content-user">
-                    <div class="global-user-info"><h2 class="section-header">个人资料</h2>
-                        <div class="section-body">
-                            <div class="info-item">
-                                <div class="item-left">头像</div>
-                                <div class="item-right">
-                                    <img th:if="${session.user.avatarPath}" th:src="@{'https://chenfuyuan.oss-cn-shenzhen.aliyuncs.com/interest-circle/'+${session.user.avatarPath}}" class="avatar-img">
-                                    <img th:unless="${session.user.avatarPath}"
-                                         src="/static/image/avatar.png" class="avatar-img">
 
-                                    <input accept="image/jpg, image/png, image/jpeg, image/bmp" type="file" class="avatar-input">
-                                    <button class="more-btn avatar-btn"><!----><span>
+                <div class="main-content-user">
+                    <form id="user-info" enctype="multipart/form-data" method="post">
+                        <div class="global-user-info">
+                            <h2 class="section-header">个人资料</h2>
+                            <div class="section-body">
+                                <div class="info-item">
+                                    <div class="item-left">头像</div>
+                                    <div class="item-right">
+                                        <img th:if="${session.user.avatarPath}"
+                                             th:src="@{${session.user.avatarPath}}"
+                                             class="avatar-img" id="img-avatar">
+                                        <img th:unless="${session.user.avatarPath}" src="/static/image/avatar.png" class="avatar-img" id="img-avatar">
+
+                                        <input accept="image/jpg, image/png, image/jpeg, image/bmp"
+                                               type="file" class="avatar-input" id="input-avatar" name="avatar">
+                                        <button type="button" class="more-btn avatar-btn" id="btn-avatar"><!----><span>
           更改头像
         </span></button>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="info-item">
-                                <div class="item-left">昵称</div>
-                                <div class="item-right">
+                                <div class="info-item">
+                                    <div class="item-left">昵称</div>
+                                    <div class="item-right">
                                     <span class="more-input-box user-nickname-input"><!---->
-                                    <!---->
-                                        <input th:value="${session.user.name}" type="text" placeholder=""
+                                        <!---->
+                                        <input id="userName"
+                                               name="userName"
+                                               th:value="${session.user.name}" type="text" placeholder=""
                                                autocomplete="off"
-                                               maxlength="2147480"
+                                               maxlength="32"
                                                tabindex="-1" class="more-input">
                                         <div><!----></div>
                                     </span>
-                                    <span class="length-tip">2/32</span>
-                                </div>
-                            </div>
-                            <div class="info-item">
-                                <div class="item-left">ID</div>
-                                <div class="item-right">
-                                    <div class="right-content" th:text="${session.user.id}">908496</div>
-                                </div>
-                            </div>
-                            <div class="info-item">
-                                <div class="item-left">密码</div>
-                                <div class="item-right">
-                                    <div class="right-content">
-                                        <button class="more-btn text-btn"><!----><span>修改</span></button>
+                                        <span class="length-tip" th:text="${#strings.length(session.user.name)}+'/32'">0/32
+                                    </span>
                                     </div>
                                 </div>
-                            </div>
+                                <div class="info-item">
+                                    <div class="item-left">ID</div>
+                                    <div class="item-right">
+                                        <div class="right-content" th:text="${session.user.id}">908496</div>
+                                    </div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="item-left">密码</div>
+                                    <div class="item-right">
+                                        <div class="right-content">
+                                            <button type="button" class="more-btn text-btn"
+                                                    id="btn-changePassword"><!---->
+                                                <span>修改</span></button>
+                                        </div>
+                                    </div>
+                                </div>
 
+                            </div>
+                            <div class="section-footer">
+                                <button type="submit" class="more-btn text-btn btn-save "
+                                        disabled ="disabled"id="btn-save" style="color:#9b9b9b"><!---->
+                                    <span >
+                                    保存</span>
+                                </button>
+                            </div>
                         </div>
-                        <div class="section-footer">
-                            <button class="more-btn text-btn btn-save" id="btn-save"><!----><span>保存</span></button>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
     </main>
 </section>
+
+<script type="application/javascript" src="/static/js/user/info.js"></script>
 </body>
 </html>

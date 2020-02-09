@@ -68,7 +68,7 @@
                     <div class="contentpile-content-wrapper-item-info">
                         <div class="left-content">
                             <img class="contentpile-circle-avatar-image"
-                                 th:src="@{'https://chenfuyuan.oss-cn-shenzhen.aliyuncs.com/interest-circle/'+${circle.avatarPath}}"
+                                 th:src="@{${circle.avatarPath}}"
                                  alt="圈子头像">
                             <div class="contentpile-circle-info">
                                 <h3 class="contentpile-circle-name" th:text="${circle.name}">圈子标题</h3>

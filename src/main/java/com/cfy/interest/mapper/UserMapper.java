@@ -13,4 +13,7 @@ public interface UserMapper extends BaseMapper<User> {
 
     @Update("update user set state = 0 where id = #{id}")
     public void logOut(long id);
+
+    @Select("select * from user where name = #{name} and id !=#{uid}")
+    public User selectByName(String name,long uid);
 }

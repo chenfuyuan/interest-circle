@@ -1,4 +1,5 @@
 $(function () {
+    //获取城市
     $("#province").change(function () {
             //获取被选中的省份id
             var provinceValue = $(this).find("option:selected").val();
@@ -24,6 +25,7 @@ $(function () {
         }
     );
 
+    //更换图片
     $("#select_circle_img").change(function () {
         console.log("选择图片");
         var name = this.value;
@@ -50,11 +52,12 @@ $(function () {
         circle_img.css("z-index","3");
     })
 
+    //选择图片
     $("#circle_img").click(function () {
         $("#select_circle_img").click();
     });
 
-
+    //获取选中图片url
     function getObjectURL(file) {
         var url = null ;
         if (window.createObjectURL!=undefined) { // basic
@@ -70,8 +73,8 @@ $(function () {
 
     }
 
+    //检验并提交
     $("#btn_create").click(function () {
-
         var avatar = $("#select_circle_img").val();
         var province = $("#province").val();
         var city = $("#city").val();

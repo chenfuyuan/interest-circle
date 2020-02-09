@@ -13,8 +13,6 @@
     <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
     <link rel="stylesheet" href="/static/bootstrap/css/bootstrap-theme.min.css">
 
-    <!--jquery form表单工具类-->
-    <script type="application/javascript" src="/static/js/jquery/jquery.form.js"></script>
 
     <!--引入自己的css-->
     <link rel="stylesheet" href="/static/css/header.css">
@@ -59,14 +57,14 @@ glyphicon glyphicon-search">
 
               </span>
                <input type="text" placeholder="搜索圈子"
-                      maxlength="2147480" class="more-input">
+                      maxlength="2147480" class="more-input " id="input-search">
                <div></div>
            </span>
             <div class="header-nav-user">
                 <span class="more-dropdown-box user-dropdown" id="user-img">
                     <img
                             th:if="${session.user.avatarPath}"
-                            th:src="@{'https://chenfuyuan.oss-cn-shenzhen.aliyuncs.com/interest-circle/'+${session.user.avatarPath}}"
+                            th:src="@{${session.user.avatarPath}}"
                          class="user-img">
                     <img th:unless="${session.user.avatarPath}" src="/static/image/avatar.png" class="user-img">
                     <div></div>

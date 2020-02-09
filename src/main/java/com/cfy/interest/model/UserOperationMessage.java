@@ -8,19 +8,26 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName("district")
-public class Province {
-    @TableId(type= IdType.AUTO)
+@TableName("user_operation_message")
+public class UserOperationMessage {
+    @TableId(type = IdType.AUTO)
     private int id;
-    private String name;
+
     @TableField(exist = false)
-    private List<City> citys;
-    private String code;
-    private int order;
+    private User user;
+
+    private long uid;
+
+    private String message;
+
+    private long datetime;
+
+    private int type;
+
+    public static final int CREATE = 1;
+    public static final int UPDATE = 2;
+    public static final int CHANGEPASSWORD = 3;
 }

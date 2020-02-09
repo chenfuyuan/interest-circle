@@ -83,7 +83,8 @@ public class AliyunOSSProvider {
         try {
             InputStream inputStream = file.getInputStream();
             this.uploadFile2OSS(inputStream, name);
-            return name;
+            String fileUrl = bucketUrl + "/" + objectName   + name;
+            return fileUrl;
         } catch (Exception e) {
             throw new RuntimeException("图片上传失败");
         }
