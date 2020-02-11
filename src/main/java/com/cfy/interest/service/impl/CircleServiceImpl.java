@@ -180,6 +180,7 @@ public class CircleServiceImpl implements CircleService {
         circleUser.setType(2);
         circleUserMapper.insert(circleUser);
 
+
         CircleOperationMessage circleOperationMessage = new CircleOperationMessage().build(userId,cId);
         circleOperationMessage.setMessage("加入圈子");
         circleOperationMessage.setType(2);
@@ -191,5 +192,13 @@ public class CircleServiceImpl implements CircleService {
         return ajaxMessage;
     }
 
+    @Override
+    public List<UserOwnCircle> selectUserOwn(long uid) {
+        return circleUserMapper.selectByUid(uid);
+    }
 
+    @Override
+    public List<User> selectCircleUserByCid(int cid) {
+        return circleUserMapper.selectCircleUserByCid(cid);
+    }
 }

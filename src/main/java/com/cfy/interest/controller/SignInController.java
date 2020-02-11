@@ -35,6 +35,9 @@ public class SignInController {
         SignInMessage message = signInService.checksignIn(signInVo);
         User user = message.getUser();
         //记住密码
+        if (user == null) {
+            return message;
+        }
         if (signInVo.isRememberPassword()) {
             //记住密码
             //将用户的token放入cookie

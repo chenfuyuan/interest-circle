@@ -70,7 +70,8 @@ public class CircleController {
 
     @GetMapping("/circle/querySearch")
     public String getCircleList(Model model,
-                                       @RequestParam(required = false,defaultValue="1",value="pageNum")Integer pageNum, @RequestParam(defaultValue = "2", value = "pageSize")Integer pageSize,HttpServletRequest request) {
+                                       @RequestParam(required = false,defaultValue="1",value="pageNum")Integer
+                                               pageNum, @RequestParam(defaultValue = "2", value = "pageSize")Integer pageSize,HttpServletRequest request) {
         //为了程序的严谨性，判断非空：
         if(pageNum == null){
             pageNum = 1;   //设置默认当前页
@@ -84,6 +85,7 @@ public class CircleController {
         log.info("当前页是："+pageNum+"显示条数是："+pageSize);
 
         User user = (User) request.getSession().getAttribute("user");
+
         long uid = user.getId();
         //1.引入分页插件,pageNum是第几页，pageSize是每页显示多少条,默认查询总数count
         PageHelper.startPage(pageNum,pageSize);

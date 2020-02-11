@@ -1,0 +1,198 @@
+body,html {
+    height: 100%;
+}
+.circle-content {
+    height: 100%;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    padding-top: 60px;
+    background-color:#f5f5f5;
+}
+
+
+.circle-home {
+    width: 1092px;
+    margin-top: 12px;
+}
+
+.circle-home-main {
+    width: 1092px;
+}
+
+.circle-home .left-content {
+    z-index: 11;
+    width: 264px;
+    overflow-y: auto;
+    float: left;
+    margin-right: 12px;
+}
+
+.clear-fix:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.circle-info-card {
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.05);
+}
+
+.card-header .circle-bg {
+    height: 128px;
+    background-size: cover;
+    background-color: #ccc;
+    background-position: 50%;
+    border: 2px solid #fff;
+    border-radius: 2px;
+}
+
+.card-header .circle-info {
+    display: -webkit-box;
+    display: flex;
+    padding-left: 16px;
+    margin-top: -43px;
+}
+
+.card-header .circle-info .circle-avatar {
+    flex-shrink: 0;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background-color: #ccc;
+    border: 3px solid #fff;
+    vertical-align: text-bottom;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 8px 16px rgba(0,0,0,.08);
+}
+
+.card-header .circle-info .circle-avatar img {
+    width: 100%;
+    height: 100%;
+}
+
+.card-header .circle-info .circle-name {
+    font-size: 19px;
+    line-height: 26px;
+    font-weight: 700;
+    padding: 1px 16px 0 8px;
+    margin-top: 47px;
+    word-break: break-word;
+    cursor: pointer;
+}
+
+.card-header .circle-info .circle-name h1 {
+    font-size: 19px;
+}
+
+.card-content {
+    padding: 0 16px;
+}
+
+.card-content .circle-users {
+    margin: 13px 0 12px;
+}
+
+.card-content .circle-users .user-list .user-avatar:first-of-type {
+    margin-left: 0;
+}
+
+.card-content .circle-users .user-list .user-avatar {
+    position: relative;
+    float: left;
+    width: 23px;
+    height: 23px;
+    border-radius: 50%;
+    margin-left: -8px;
+    border: 2px solid #fff;
+    background-color: #ccc;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.card-content .circle-users .user-list .user-avatar img {
+    width: 100%;
+    height: 100%;
+}
+
+
+.card-content .circle-users .users-count {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    float: left;
+    margin-left: 8px;
+    font-size: 12px;
+    line-height: 27px;
+    font-weight: 500;
+    color: #9b9b9b;
+}
+
+.card-content .circle-users .users-count .dot {
+    display: inline-block;
+    width: 3px;
+    height: 3px;
+    margin: -2px 8px 0 0;
+    background-color: #d8d8d8;
+    border-radius: 50%;
+    vertical-align: 2px;
+}
+
+.card-content .circle-description {
+    max-height: 300px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    line-height: 22px;
+    font-weight: 400;
+    color: #4a4a4a;
+    white-space: pre-line;
+    overflow-y: auto;
+}
+
+.card-content .circle-description blockquote, .card-content .circle-description h1, .card-content .circle-description h2, .card-content .circle-description li, .card-content .circle-description ol, .card-content .circle-description p, .card-content .circle-description ul {
+    font-size: 13px;
+    color: #4a4a4a;
+}
+
+.card-footer {
+    padding: 0 13px 24px;
+    min-height: 20px;
+}
+
+.card-footer .text-btn {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.card-footer .text-btn span {
+    margin-right: 4px;
+    color: #767676;
+}
+
+[class*=" more-icon-"], [class^=more-icon-] {
+    speak: none;
+    font-style: normal;
+    font-weight: 400;
+    font-feature-settings: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.circle-description h1,.circle-description h2 {
+    font-weight: bold;
+}

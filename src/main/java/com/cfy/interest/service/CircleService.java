@@ -1,9 +1,6 @@
 package com.cfy.interest.service;
 
-import com.cfy.interest.model.Circle;
-import com.cfy.interest.model.City;
-import com.cfy.interest.model.District;
-import com.cfy.interest.model.Province;
+import com.cfy.interest.model.*;
 import com.cfy.interest.service.vo.AjaxMessage;
 import com.cfy.interest.service.vo.CreateCircleFormVo;
 
@@ -49,4 +46,8 @@ public interface CircleService {
     List<Circle> getAllCircleByDistrict(Integer districtId,long uid);
 
     AjaxMessage joinCircle(long userId, Integer cId);
+
+    List<UserOwnCircle> selectUserOwn(long uid);
+
+    List<User> selectCircleUserByCid(int cid);
 }

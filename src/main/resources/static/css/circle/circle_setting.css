@@ -1,0 +1,292 @@
+.more-modal-box {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2000;
+}
+
+.more-modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+
+.more-dialog {
+    position: relative;
+    width: 588px;
+    box-shadow: 0 2px 22px rgba(0,0,0,.2);
+}
+
+.more-dialog {
+    background: #fff;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.more-dialog .more-dialog-head {
+    position: relative;
+    height: 60px;
+    border-bottom: 1px solid #ededed;
+    background-color: #fafafa;
+}
+
+.more-dialog .more-dialog-head .more-dialog-head-title {
+    padding-left: 36px;
+    padding-right: 36px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #333;
+    font-size: 16px;
+    line-height: 60px;
+    font-weight: 700;
+}
+
+.more-dialog .more-dialog-head .more-dialog-icon-close {
+    position: absolute;
+    right: 24px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    font-size: 14px;
+    color: #4a4a4a;
+    cursor: pointer;
+}
+
+.circle-settings .content, .zone-setting {
+    padding-left: 36px;
+    max-height: 600px;
+    overflow: auto;
+}
+
+.circle-settings .content .section-block:last-of-type, .zone-setting .section-block:last-of-type {
+    border-bottom: none;
+}
+
+.circle-settings .content .section-block, .zone-setting .section-block {
+    padding: 12px 0;
+    border-bottom: 1px solid #ededed;
+}
+
+.circle-settings .content .setting-item, .zone-setting .setting-item {
+    display: -webkit-box;
+    display: flex;
+    height: 46px;
+    padding-right: 24px;
+    font-size: 14px;
+    line-height: 46px;
+    font-weight: 400;
+    color: #333;
+}
+
+.circle-settings .content .setting-item .current-state, .zone-setting .setting-item .current-state {
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    text-align: right;
+    color: #9b9b9b;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.circle-settings .content .setting-item .setting-text-btn, .zone-setting .setting-item .setting-text-btn {
+    padding: 0;
+    font-size: 14px;
+    margin-left: 16px;
+    font-weight: 500;
+    color: #43788F;
+    height: 48px;
+    border: transparent;
+    background-color: transparent;
+    display: inline-block;
+    position: relative;
+    box-sizing: border-box;
+    white-space: nowrap;
+    text-align: center;
+    cursor: pointer;
+}
+
+.more-modal-backdrop, .more-modal-wrap {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.6);
+}
+
+.more-modal-backdrop {
+    position: absolute;
+}
+
+.more-dialog[data-size=sm] {
+    position: absolute;
+    width: 540px;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+}
+
+.report-reason-box{
+    min-height: 422px;
+    padding: 0 16px 0 36px;
+}
+
+.report-reason-box .report-reason-title{
+    padding: 24px 0 0;
+    color: #979797;
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 500;
+}
+
+.report-reason-box .report-reason-item {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    margin-top: 24px;
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 400;
+    height: 22px;
+    color: #333;
+    margin-bottom: 0px;
+}
+
+.more-radio-container {
+    display: inline-block;
+    position: relative;
+    font-size: 0;
+    line-height: 20px;
+}
+
+.more-radio-container .more-radio {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    margin-right: 25px;
+    cursor: pointer;
+}
+
+.more-dialog .more-dialog-footer {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+    -webkit-box-align: center;
+    align-items: center;
+    height: 72px;
+    background-color: #fafafa;
+    border-top: 1px solid #f1f1f1;
+}
+
+.more-dialog .more-dialog-footer .more-btn {
+    padding: 0;
+    margin-right: 36px;
+    font-weight: 700;
+    border: transparent;
+    background-color: transparent;
+}
+
+.more-btn {
+    color: #333;
+    height: 48px;
+    font-size: 16px;
+}
+
+.sidebar-img, .sidebar-wrap {
+    position: fixed;
+    top: 72px;
+    left: 0;
+}
+
+.sidebar-img {
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+}
+
+.sidebar-wrap {
+    bottom: 0;
+    width: 84px;
+    background-color: #fff;
+    border-radius: 0 2px 2px 0;
+    z-index: 12;
+}
+
+.sidebar-wrap .sidebar-hide {
+    display: -webkit-box;
+    display: flex;
+    width: 100%;
+    height: 100px;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    border-bottom: 1px solid hsla(0,0%,59.2%,.14);
+    cursor: pointer;
+}
+
+.sidebar-wrap .sidebar-hide .sidebar-arr {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+}
+
+.sidebar-wrap .sidebar-content {
+    position: absolute;
+    top: 100px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding-bottom: 20px;
+    overflow-y: auto;
+}
+
+.sidebar-wrap .sidebar-content .mycircle-wrap .mycircle {
+    display: block;
+    width: 48px;
+    height: 48px;
+    margin: 22px auto 0;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.sidebar-wrap .sidebar-content .mycircle-wrap .isCheck {
+    position: absolute;
+    top: 0;
+    left: -8px;
+    width: 16px;
+    height: 48px;
+    background-color: #9faeba;
+    border-radius: 10px;
+}
+
+.sidebar-wrap .sidebar-content .mycircle-wrap {
+    position: relative;
+}
+
+.section-body .alert-message {
+    padding: 48px 0;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.section-body {
+    margin: 0 auto;
+    max-width: 336px;
+}

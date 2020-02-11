@@ -27,5 +27,14 @@ public class CircleTest {
         log.info(circle.toString());
     }
 
+    @Test
+    public void testResults() {
+        log.info(circleMapper.selectById(12).toString());
+    }
 
+
+    @Test
+    public void testJoinMember() {
+        circleMapper.joinMember(12);
+    }
 }

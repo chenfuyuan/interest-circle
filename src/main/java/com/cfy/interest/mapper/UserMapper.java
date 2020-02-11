@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Update;
 
 
 public interface UserMapper extends BaseMapper<User> {
+    
 
     @Select("select * from user where phone = #{phone}")
     public User selectByPhone(String phone);
@@ -15,5 +16,6 @@ public interface UserMapper extends BaseMapper<User> {
     public void logOut(long id);
 
     @Select("select * from user where name = #{name} and id !=#{uid}")
-    public User selectByName(String name,long uid);
+    public User selectByName(String name, long uid);
+
 }
