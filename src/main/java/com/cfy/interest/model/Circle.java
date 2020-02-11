@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
@@ -32,7 +33,12 @@ public class Circle implements Serializable {
     private User owner;
     private long ownerId;
 
-    private long createTime;
-    private long updateTime;
+    private Date createTime;
+    private Date updateTime;
     private int state;
+
+    //背景图片
+    private String bgdPath;
+    //介绍
+    private String introduce;
 }

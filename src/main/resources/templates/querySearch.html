@@ -3,7 +3,10 @@
 <head th:replace="circle_header::head('查看圈子','css/front_style.css')">
 </head>
 <body>
-<div class="ic-container">
+
+<section>
+    <div th:replace="circle_header::header"></div>
+    <div class="ic-container">
     <div id="search" class="query-search">
         <div class="query-search-border">
             <div class="querty-search-border-item">
@@ -149,6 +152,7 @@
     </div>
 
 </div>
+</section>
 
 
 <script type="application/javascript" src="/static/js/jquery/jquery.min.js"></script>

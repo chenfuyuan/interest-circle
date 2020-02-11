@@ -114,16 +114,12 @@
         </div>
         <div class="sidebar-content">
             <scroll-view status="normal" class="more-scroll-view">
-                <div class="mycircle-wrap"><img
-                        src="https://data.quanziapp.com/space/icon/2e17809ddcc3422f8bdf462a00b8473c.png?x-oss-process=image/resize,limit_0,m_fill,h_48,w_48"
-                        title="学霸成长实验室" class="mycircle">
-                    <p class="isCheck"></p> <!----> <!----> <!----></div>
-                <div class="mycircle-wrap"><img
-                        src="https://data.quanziapp.com/space/icon/v1_8_0/2.png?x-oss-process=image/resize,limit_0,m_fill,h_48,w_48"
-                        title="陈福源的乌托邦" class="mycircle"> <!----> <!----> <!----> <!----></div>
-                <div class="mycircle-wrap"><img
-                        src="https://data.quanziapp.com/space/icon/v1_8_0/4.png?x-oss-process=image/resize,limit_0,m_fill,h_48,w_48"
-                        title="学霸养成" class="mycircle"> <!----> <!----> <!----> <!----></div>
+                <div th:if="${userOwnCircles}" class="mycircle-wrap circle-item"
+                     th:each="userOwnCircle,stat:${userOwnCircles}"
+                     th:attr="data-order=${stat.count}">
+                    <img th:src="@{${userOwnCircle.circle.avatarPath}}" th:attr="title=${userOwnCircle.circle.name}" class="mycircle">
+                    <p th:if="${stat.count}==${pageNum}" class="isCheck"></p> <!----> <!----> <!---->
+                </div>
                 <div></div>
             </scroll-view>
         </div>

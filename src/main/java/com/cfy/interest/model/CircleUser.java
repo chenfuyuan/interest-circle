@@ -30,8 +30,8 @@ public class CircleUser {
 
     private int type;
 
-    private long createTime;
-    private long updateTime;
+    private Date createTime;
+    private Date updateTime;
 
     public static CircleUser build(long uid,int cid) {
         CircleUser circleUser = new CircleUser();
@@ -39,8 +39,6 @@ public class CircleUser {
         circleUser.setCid(cid);
 
         long nowDate = new Date().getTime();
-        circleUser.setUpdateTime(nowDate);
-        circleUser.setCreateTime(nowDate);
         circleUser.setType(0);
         return circleUser;
     }

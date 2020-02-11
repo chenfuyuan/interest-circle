@@ -26,7 +26,7 @@ public class CircleOperationMessage {
     @TableField(exist = false)
     private Circle circle;
 
-    private long datetime;
+    private Date datetime;
     private String message;
     private long uId;
 
@@ -38,7 +38,6 @@ public class CircleOperationMessage {
         CircleOperationMessage circleOperationMessage = new CircleOperationMessage();
         circleOperationMessage.setUId(uId);
         circleOperationMessage.setCId(cId);
-        circleOperationMessage.setDatetime(new Date().getTime());
         return circleOperationMessage;
     }
 

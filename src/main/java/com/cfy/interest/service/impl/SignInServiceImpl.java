@@ -42,7 +42,6 @@ public class SignInServiceImpl implements SignInService {
             message.setMessage("登录成功");
             message.setSuccess(true);
             message.setUser(user);
-
             //修改登录状态
             user.setToken(UUID.randomUUID().toString());
             user.setState(1);
@@ -55,11 +54,6 @@ public class SignInServiceImpl implements SignInService {
         return message;
     }
 
-    @Override
-    public boolean rememberPassword(SignInMessage signInMessage) {
-        User user = signInMessage.getUser();
 
-        return false;
-    }
 
 }

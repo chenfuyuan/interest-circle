@@ -125,8 +125,7 @@ public class CircleServiceImpl implements CircleService {
         circle.setOwnerId(uid);
         circle.setAvatarPath(filePath);
         long nowTime = new Date().getTime();
-        circle.setCreateTime(nowTime);
-        circle.setUpdateTime(nowTime);
+
         //操作数据库
         //将创建的圈子信息插入数据库
         circleMapper.insert(circle);
@@ -137,11 +136,11 @@ public class CircleServiceImpl implements CircleService {
         CircleUser circleUser = CircleUser.build(uid, cid);
         circleUser.setType(1);
         circleUserMapper.insert(circleUser);
+
         //圈子操作记录
         CircleOperationMessage circleOperationMessage = new CircleOperationMessage();
         circleOperationMessage.setCId(cid);
         circleOperationMessage.setUId(uid);
-        circleOperationMessage.setDatetime(nowTime);
         circleOperationMessage.setMessage("创建圈子");
         circleOperationMessage.setType(1);
         circleOperationMessageMapper.insert(circleOperationMessage);

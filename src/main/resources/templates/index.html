@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="circle_header::head('首页','css/index.css ,css/circle/circle_setting.css')">
 
+    <script src="../static/js/circle/circle_model.js"></script>
 </head>
 
 <body>
@@ -15,8 +16,7 @@
                         <div class="theme-color-container circle-info-card"
                              th:with="circle=${userOwnCircles[pageNum-1].circle}">
                             <header class="card-header">
-                                <div class="circle-bg"
-                                     style="background-image:url(https://data.quanziapp.com/space/bg_image/92E6B60A-151B-4B9E-A48F-9AB49F652E8F?x-oss-process=image/resize,limit_0,m_fill,h_131,w_288);"></div>
+                                <div class="circle-bg" th:attr="style='background-image:url('+${circle.bgdPath}+')'"></div>
                                 <div class="circle-info">
                                     <div class="circle-avatar">
                                         <!--圈子头像图片-->
@@ -30,8 +30,7 @@
                                     <!--                                圈子成员头像-->
                                     <div class="user-list clear-fix">
                                         <div class="user-avatar" th:each="user,stat:${circleMember}">
-                                            <img th:src="@{${user.avatarPath}}"
-                                                alt="">
+                                            <img th:src="@{${user.avatarPath}}" alt="">
                                         </div>
 
                                         <p class="users-count">
@@ -42,10 +41,9 @@
                                 </div>
                                 <div>
                                     <!--                                圈子简介-->
-                                    <div class="circle-description">
-                                        <h1 class="center-text">学霸成长实验室</h1>
-                                        <h2 class="center-text">助力成长学霸</h2>
-                                        <p class="left-text">我们将在这里将围绕学习和成长分享学霸们的经验方法通过备考心理学、学习方法、思考思维、知识点梳理、解题套路等维度，让你和学霸一样思考，培养和学霸一样的学习习惯，以及掌握学霸们拥有的知识体系框架</p></div>
+                                    <div class="circle-description" th:if="${circle.introduce}">
+                                        <p th:text="${circle.introduce}" class="left-text">
+                                            我们将在这里将围绕学习和成长分享学霸们的经验方法通过备考心理学、学习方法、思考思维、知识点梳理、解题套路等维度，让你和学霸一样思考，培养和学霸一样的学习习惯，以及掌握学霸们拥有的知识体系框架</p></div>
                                 </div>
                             </div>
                             <div class="card-footer">
@@ -79,6 +77,7 @@
 <div th:replace="include/circle_model::quit"></div>
 <!--引入js-->
 <script type="application/javascript" src="/static/js/index.js"></script>
+<script type="application/javascript" src="/static/js/circle/circle_model_show.js"></script>
 <script type="application/javascript" src="/static/js/circle/circle_model.js"></script>
 </body>
 

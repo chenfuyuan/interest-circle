@@ -60,8 +60,10 @@ public class SignInByAuthCodeController {
         if (signInByAuthCodeVo.isRememberPassword()) {
             //记住密码
             //将用户的token放入cookie
-            String token = user.getToken();
-            response.addCookie(new Cookie("/token", token));
+            String token = user.getId()+":" + user.getToken();
+            Cookie cookie = new Cookie("token", token);
+            cookie.setPath("/");
+            response.addCookie(cookie);
             signInMessage.setRememberPassword(true);
         }
         request.getSession().setAttribute("user",user);

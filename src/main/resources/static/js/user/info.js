@@ -23,7 +23,6 @@ $(function () {
     $("#input-avatar").change(function () {
         $("#btn-save").css("color","#ff3049");
         $("#btn-save").attr("disabled",false);
-
         console.log("选择图片");
         var name = this.value;
         var fileName = name.substring(name.lastIndexOf(".") + 1).toLowerCase();
@@ -94,6 +93,8 @@ $(function () {
                     var btn_save = $("#btn-save");
                     btn_save.css("color","#9b9b9b");
                     btn_save.attr("disabled",true);
+                    initialUserName = name;
+                    console.log("按钮变成不可点击");
                 },
                 cleanForm: false,
                 resetForm: false,

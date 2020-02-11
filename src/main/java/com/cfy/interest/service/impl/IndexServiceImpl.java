@@ -20,6 +20,9 @@ public class IndexServiceImpl implements IndexService {
     @Override
     public User signInByToken(String token) {
         String[] split = token.split(":");
+        if (split.length != 2) {
+            return null;
+        }
         String id = split[0];
         String user_token = split[1];
         QueryWrapper<User> wrapper = new QueryWrapper<>();

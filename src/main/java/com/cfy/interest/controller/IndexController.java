@@ -28,11 +28,11 @@ public class IndexController {
     private CircleService circleService;
 
     @GetMapping("/")
-    public String index(HttpServletRequest request, Model model) {
-        return index(request, 1, model);
+    public String index(HttpServletRequest request, Model model,HttpServletResponse response) {
+        return index(request, 1, model,response);
     }
     @GetMapping("/{pageNum}")
-    public String index(HttpServletRequest request, @PathVariable(required = false,name="pageNum") Integer pageNum, Model model) {
+    public String index(HttpServletRequest request, @PathVariable(required = false,name="pageNum") Integer pageNum, Model model,HttpServletResponse response) {
         log.info("访问首页");
         int pageSize = 1;
         if(pageNum == null){
@@ -48,8 +48,20 @@ public class IndexController {
         //获取用户参与的圈子
         List<UserOwnCircle> userOwnCircles = circleService.selectUserOwn(uid);
         //将用户选择的圈子和用户圈子列表传递到前台
+
+        //如果还未加入圈子，跳转到加入圈子界面
+        if(userOwnCircles.isEmpty()){
+            return "redirect:/circle/querySearch";
+        }
+
+        if (userOwnCircles.size() < pageNum) {
+            pageNum = userOwnCircles.size();
+        }
         model.addAttribute("pageNum", pageNum);
         model.addAttribute("userOwnCircles", userOwnCircles);
+
+
+
 
         //获取选中圈子的前4个成员，根据职务顺序取得
         int cid = userOwnCircles.get(pageNum-1).getCid();

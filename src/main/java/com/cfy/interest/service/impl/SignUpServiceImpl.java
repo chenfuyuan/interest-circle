@@ -2,7 +2,9 @@ package com.cfy.interest.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.cfy.interest.mapper.UserMapper;
+import com.cfy.interest.mapper.UserOperationMessageMapper;
 import com.cfy.interest.model.User;
+import com.cfy.interest.model.UserOperationMessage;
 import com.cfy.interest.provider.AliyunSmsProvider;
 import com.cfy.interest.service.SignUpService;
 import com.cfy.interest.service.vo.SendSmsMessage;
@@ -14,6 +16,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -28,6 +31,9 @@ public class SignUpServiceImpl implements SignUpService {
 
     @Autowired
     private RedisTemplate<Object, Object> redisTemplate;
+
+    @Autowired
+    private UserOperationMessageMapper userOperationMessageMapper;
 
     @Override
     public SendSmsMessage sendSms(String phone) {
@@ -127,13 +133,20 @@ public class SignUpServiceImpl implements SignUpService {
         user.setPassword(md5Password);
         user.setPhone(signUpVo.getPhone());
         long nowTime = new Date().getTime();
-        user.setCreateTime(nowTime);
-        user.setUpdateTime(nowTime);
         user.setState(0);
+        user.setToken(UUID.randomUUID().toString());
         userMapper.insert(user);
 
         //注册成功，删除缓存中的验证码
         redisTemplate.delete(signUpVo.getPhone());
-        return false;
+
+        //保存注册日志
+        UserOperationMessage userOperationMessage = new UserOperationMessage();
+        userOperationMessage.setType(1);
+        userOperationMessage.setUid(user.getId());
+        userOperationMessage.setMessage("注册账号");
+
+        userOperationMessageMapper.insert(userOperationMessage);
+        return true;
     }
 }

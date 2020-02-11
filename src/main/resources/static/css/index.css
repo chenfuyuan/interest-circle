@@ -146,14 +146,15 @@ body,html {
 }
 
 .card-content .circle-description {
-    max-height: 300px;
+    overflow: hidden;
+    width: 100%;
+    word-break: break-all;
+    max-height: 110px;
     margin-bottom: 10px;
     font-size: 13px;
     line-height: 22px;
     font-weight: 400;
     color: #4a4a4a;
-    white-space: pre-line;
-    overflow-y: auto;
 }
 
 .card-content .circle-description blockquote, .card-content .circle-description h1, .card-content .circle-description h2, .card-content .circle-description li, .card-content .circle-description ol, .card-content .circle-description p, .card-content .circle-description ul {

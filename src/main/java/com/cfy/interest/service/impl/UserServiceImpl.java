@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -52,7 +53,6 @@ public class UserServiceImpl implements UserService {
                 return ajaxMessage;
             }
         }
-        user.setUpdateTime(nowDate);
         user.setAvatarPath(filePath);
         user.setName(userInfoVo.getUserName());
 
@@ -61,7 +61,6 @@ public class UserServiceImpl implements UserService {
         //写入操作日志
 
         UserOperationMessage userOperationMessage = new UserOperationMessage();
-        userOperationMessage.setDatetime(nowDate);
         userOperationMessage.setMessage("更改用户信息 ");
         userOperationMessage.setUid(user.getId());
         userOperationMessage.setType(UserOperationMessage.UPDATE);
@@ -164,16 +163,17 @@ public class UserServiceImpl implements UserService {
 
         //给密码进行md5加密
         String md5Password = MD5Utils.MD5Encode(changePasswordVo.getPassword());
+        //设置新的token
+        String newToken = UUID.randomUUID().toString();
         user.setPassword(md5Password);
         //修改密码
-        user.setUpdateTime(nowDate);
+        user.setToken(newToken);
         userMapper.updateById(user);
 
         log.info("修改密码成功");
         //记录日志
         UserOperationMessage operationMessage = new UserOperationMessage();
         operationMessage.setUid(user.getId());
-        operationMessage.setDatetime(nowDate);
         operationMessage.setMessage("更改密码");
         operationMessage.setType(UserOperationMessage.CHANGEPASSWORD);
 

@@ -7,6 +7,4 @@ public interface SignInService {
 
     SignInMessage checksignIn(SignInVo signInVo);
 
-    boolean rememberPassword(SignInMessage signInMessage);
-
 }
