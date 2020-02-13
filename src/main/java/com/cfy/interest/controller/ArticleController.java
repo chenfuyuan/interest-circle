@@ -1,10 +1,12 @@
 package com.cfy.interest.controller;
 
+import com.cfy.interest.model.User;
 import com.cfy.interest.service.ArticleService;
 import com.cfy.interest.service.vo.ArticleUploadImageVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,7 +20,8 @@ public class ArticleController {
     private ArticleService articleService;
 
     @GetMapping("/article/editor")
-    public String index() {
+    public String index(Model model,@RequestParam(name="cid")Integer cid) {
+        model.addAttribute("cid", cid);
         return "article/editor";
     }
 
@@ -45,10 +48,17 @@ public class ArticleController {
 
     @PostMapping("/article/publish")
     @ResponseBody
-    public void publish(@RequestParam(name="article") String article, HttpServletRequest request) {
+    public void publish(@RequestParam(name="article") String article,@RequestParam(name="cid")Integer cid,
+                        HttpServletRequest request) {
         log.info("article = "+article);
+        log.info("cid=" + cid);
+
+        //获取User
+        User user = (User) request.getSession().getAttribute("user");
+        long uid = user.getId();
 
 
+        articleService.publish(uid, cid, article);
     }
 
 }

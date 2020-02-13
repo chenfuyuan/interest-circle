@@ -34,8 +34,8 @@ $(function () {
 
     $("#btn-publish").click(function () {
         var artilce =  editor.txt.html();
-
-        $.post("/article/publish",{article: artilce},function () {
+        var cid = $(this).data("cid");
+        $.post("/article/publish",{article: artilce,cid:cid},function () {
             window.location.href = "/";
         });
     });

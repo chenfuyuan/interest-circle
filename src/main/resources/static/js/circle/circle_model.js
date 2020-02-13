@@ -37,4 +37,8 @@ $(function () {
         console.log("report = " + report);
 
     });
+
+    $("#edit-entry").click(function () {
+        window.location.href = "/article/editor?cid="+cid;
+    });
 });
