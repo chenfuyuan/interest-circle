@@ -241,4 +241,21 @@ element.style {
     font-size: 14px;
 
 }
+
+.circle-content {
+    height: 100%;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    padding-top: 60px;
+    background-color:#f5f5f5;
+}
+
+body,html {
+    height: 100%;
+}
+
 /*index end*/

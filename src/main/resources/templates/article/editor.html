@@ -7,11 +7,16 @@
 <body>
 <section>
     <div th:replace="circle_header::header"></div>
-    <div class="editor-box">
-        <h1>发布帖子</h1>
-        <div id="editor" class="editor">
-            <p>发布帖子</p>
+    <div class="circle-content">
+        <div class="editor-box">
+            <div class="editor">
+                <div class="toolbar" id="toolbar"></div>
+                <div style="margin-top:20px"></div>
+                <div class="text" id="text"></div>
+            </div>
+            <button class="btn btn-default" type="submit" id="btn-publish">发布</button>
         </div>
+
     </div>
 </section>
 

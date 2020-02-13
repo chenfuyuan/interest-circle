@@ -82,10 +82,14 @@ public class AliyunOSSProvider {
         log.info("name = " + name);
         try {
             InputStream inputStream = file.getInputStream();
+            log.info("inputStream = " + inputStream);
             this.uploadFile2OSS(inputStream, name);
-            String fileUrl = bucketUrl + "/" + objectName   + name;
+            log.info("上传成功");
+            String fileUrl = bucketUrl + "/" + objectName + name;
             return fileUrl;
         } catch (Exception e) {
+            e.printStackTrace();
+            log.info("错误为 e: " + e);
             throw new RuntimeException("图片上传失败");
         }
     }
@@ -113,19 +117,26 @@ public class AliyunOSSProvider {
      */
     public String uploadFile2OSS(InputStream instream, String fileName) {
         String ret = "";
+        log.info("instream = "+ instream);
         try {
+            log.info("开始上传图片");
             //创建上传Object的Metadata
             ObjectMetadata objectMetadata = new ObjectMetadata();
+            log.info("创建MetaData对象");
             objectMetadata.setContentLength(instream.available());
+
             objectMetadata.setCacheControl("no-cache");
             objectMetadata.setHeader("Pragma", "no-cache");
             objectMetadata.setContentType(getcontentType(fileName.substring(fileName.lastIndexOf("."))));
             objectMetadata.setContentDisposition("inline;filename=" + fileName);
+
+            log.info("设置完成MetaData,开始上传");
             //上传文件
             PutObjectResult putResult = ossClient.putObject(bucketName, objectName + fileName, instream, objectMetadata);
+            log.info("上传成功");
             ret = putResult.getETag();
         } catch (IOException e) {
-            log.error(e.getMessage(), e);
+            log.info("错误为"+e.getMessage());
         } finally {
             try {
                 if (instream != null) {

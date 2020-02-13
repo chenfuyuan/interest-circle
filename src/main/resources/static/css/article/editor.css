@@ -1,0 +1,19 @@
+.toolbar {
+    border: 1px solid #ccc;
+    background-color: white;
+}
+.text {
+    border: 1px solid #ccc;
+    height: 400px;
+    background-color: white;
+}
+
+.editor {
+    margin-top: 10px;
+}
+
+#btn-publish {
+    float: right;
+    margin-top: 10px;
+    margin-right: 10px;
+}
