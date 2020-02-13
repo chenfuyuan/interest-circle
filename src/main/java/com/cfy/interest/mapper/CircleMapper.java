@@ -47,4 +47,7 @@ public interface CircleMapper extends BaseMapper<Circle> {
 
     @Update("update circle set user_num = user_num + 1 where id = #{id}")
     void joinMember(int id);
+
+    @Update("update circle set user_num=user_num -1 where id = #{id}")
+    void quitMember(int id);
 }

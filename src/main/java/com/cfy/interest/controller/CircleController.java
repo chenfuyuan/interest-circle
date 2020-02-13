@@ -171,4 +171,13 @@ public class CircleController {
         return ajaxMessage;
     }
 
+    @GetMapping("/circle/quit/{id}")
+    public String quitCircle(@PathVariable("id") Integer id, HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user");
+        long uid = user.getId();
+        circleService.quit(uid, id);
+        return "redirect:/";
+    }
+
+
 }

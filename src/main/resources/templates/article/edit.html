@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="circle_header::head('首页','/css/article/editor.css')">
+
+</head>
+
+<body>
+<section>
+    <div th:replace="circle_header::header"></div>
+    <div class="editor-box">
+        <h1>发布帖子</h1>
+        <div id="editor" class="editor">
+            <p>发布帖子</p>
+        </div>
+    </div>
+</section>
+
+<!--wangEditor富文本-->
+<script type="application/javascript" src="/static/wangEditor/js/wangEditor.min.js"></script>
+<script type="application/javascript" src="/static/js/article/editor.js"></script>
+</body>
+</html>

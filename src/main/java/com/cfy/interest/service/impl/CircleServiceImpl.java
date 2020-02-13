@@ -13,6 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
@@ -20,6 +22,7 @@ import java.util.List;
 
 @Service
 @Slf4j
+@Transactional(readOnly = true)
 public class CircleServiceImpl implements CircleService {
 
 
@@ -89,6 +92,7 @@ public class CircleServiceImpl implements CircleService {
         return circle;
     }
 
+    @Transactional(propagation = Propagation.REQUIRED,readOnly = false)
     @Override
     public AjaxMessage createCircle(CreateCircleFormVo createCircleFormVo, long uid) {
         AjaxMessage ajaxMessage = new AjaxMessage();
@@ -167,12 +171,14 @@ public class CircleServiceImpl implements CircleService {
         return districtMapper.selectById(districtId);
     }
 
+
+
     @Override
     public List<Circle> getAllCircleByDistrict(Integer districtId,long uid) {
-
         return circleMapper.selectAllByDistrict(districtId,uid);
     }
 
+    @Transactional(propagation = Propagation.REQUIRED,readOnly = false)
     @Override
     public AjaxMessage joinCircle(long userId, Integer cId) {
         CircleUser circleUser = new CircleUser().build(userId, cId);
@@ -185,6 +191,7 @@ public class CircleServiceImpl implements CircleService {
         circleOperationMessage.setType(2);
         circleOperationMessageMapper.insert(circleOperationMessage);
 
+        circleMapper.joinMember(cId);
         AjaxMessage ajaxMessage = new AjaxMessage();
         ajaxMessage.setSuccess(true);
         ajaxMessage.setMessage("加入成功");
@@ -200,4 +207,27 @@ public class CircleServiceImpl implements CircleService {
     public List<User> selectCircleUserByCid(int cid) {
         return circleUserMapper.selectCircleUserByCid(cid);
     }
+
+
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+    @Override
+    public void quit(long uid, Integer cid) {
+        //操作circle_user数据库退出圈子
+        circleUserMapper.quit(uid, cid);
+        log.info("已退出");
+
+
+        //记录日志
+        CircleOperationMessage circleOperationMessage = new CircleOperationMessage().build(uid, cid);
+        circleOperationMessage.setType(3);
+        circleOperationMessage.setMessage("退出圈子");
+        circleOperationMessageMapper.insert(circleOperationMessage);
+        log.info("日志已记录");
+        //圈子的成员数-1
+        circleMapper.quitMember(cid);
+    }
+
+
+
 }
+

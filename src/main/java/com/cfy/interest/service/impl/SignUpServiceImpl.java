@@ -14,6 +14,8 @@ import com.cfy.interest.utils.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.UUID;
@@ -101,6 +103,7 @@ public class SignUpServiceImpl implements SignUpService {
     }
 
 
+
     @Override
     public boolean checkAuthCode(String phone, String authCode) {
         //从缓存中获取验证码
@@ -120,11 +123,13 @@ public class SignUpServiceImpl implements SignUpService {
         return false;
     }
 
+
     /**
      * 保存数据库
      * @param signUpVo
      * @return
      */
+    @Transactional(propagation = Propagation.REQUIRED,readOnly = false)
     @Override
     public boolean saveUser(SignUpVo signUpVo) {
         User user = new User();

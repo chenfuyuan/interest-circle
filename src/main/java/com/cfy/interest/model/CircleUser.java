@@ -32,14 +32,14 @@ public class CircleUser {
 
     private Date createTime;
     private Date updateTime;
+    private int state;
 
     public static CircleUser build(long uid,int cid) {
         CircleUser circleUser = new CircleUser();
         circleUser.setUid(uid);
         circleUser.setCid(cid);
-
-        long nowDate = new Date().getTime();
         circleUser.setType(0);
+        circleUser.setState(1);
         return circleUser;
     }
 }

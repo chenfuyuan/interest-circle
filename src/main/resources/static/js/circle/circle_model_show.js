@@ -30,10 +30,6 @@ $(function () {
         $("#circle-quit-model").hide();
     });
 
-    //点击退出弹框的确定退出按钮进行圈子的退出
-    $("#btn-quit-confirm").click(function () {
-
-    });
 
     //点击圈子列表按钮，显示圈子列表
     $("#btn-circle-menu").click(function () {

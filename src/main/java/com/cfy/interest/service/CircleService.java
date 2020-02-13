@@ -50,4 +50,8 @@ public interface CircleService {
     List<UserOwnCircle> selectUserOwn(long uid);
 
     List<User> selectCircleUserByCid(int cid);
+
+    void quit(long uid, Integer id);
+
+
 }

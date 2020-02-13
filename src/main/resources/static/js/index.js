@@ -3,5 +3,9 @@ $(function () {
         $("#btn-circle-setting").click(function () {
             $("#circle-setting-model").show();
         });
+
+    $("#edit-entry").click(function () {
+        window.location.href = "/article/editor";
+    });
     }
 );

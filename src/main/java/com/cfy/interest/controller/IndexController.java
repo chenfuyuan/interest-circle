@@ -87,4 +87,9 @@ public class IndexController {
         return "signin";
     }
 
+    @GetMapping
+    public String error() {
+        return "error";
+    }
+
 }

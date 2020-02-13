@@ -1,10 +1,15 @@
 $(function () {
+
     if ($.cookie("total") != undefined && $.cookie("total") != 'NaN' && $.cookie("total") != 'null') {//cookie存在倒计时
         timekeeping();
     } else {//cookie 没有倒计时
         console.log("未倒计时");
         $('#btn_authCode').attr("disabled", false);
     }
+
+
+
+
 
     function timekeeping() {
         //把按钮设置为不可以点击
@@ -83,14 +88,22 @@ $(function () {
         }).done(function (re) {
             if (re.success) {
                 //进行注册成功跳转
-                alert("修改成功");
+                alert("修改成功，请重新登录");
                 //清除cookie
                 $.cookie("total", total, {expires: -1});
-                window.location.href = "/user/info";
+                window.location.href = "/logOut";
                 return;
             } else {
                 alert(re.message);
             }
         });
     });
+
+
+    //自动发送短信
+    console.log($("#btn_authCode").attr("disabled"));
+    if (!$("#btn_authCode").attr("disabled")) {
+        console.log("自动发送短信");
+        $("#btn_authCode").click();
+    }
 })

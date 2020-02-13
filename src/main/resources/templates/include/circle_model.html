@@ -45,59 +45,78 @@
             <div  class="section-body">
                 <div  class="report-reason-box"><p  class="report-reason-title">
                     请选择举报理由</p>
-                    <label  class="report-reason-item"><span
-                    >暴恐涉政</span> <label  data-theme="default" class="more-radio-container"><span
-                            class="more-radio-fake"><span class="more-radio-fake-inner"></span>
-                    </span> <input type="radio" name="flag" class="more-radio" value="10">
-                        <span class="more-radio-label"> </span></label></label><label
-                            class="report-reason-item"><span
-                    >色情内容</span> <label  data-theme="default"
-                                         class="more-radio-container"><span
-                            class="more-radio-fake"><span class="more-radio-fake-inner"></span></span> <input type="radio"
-                                                                                                              name="flag"
-                                                                                                              class="more-radio"
-                                                                                                              value="20">
-                        <span class="more-radio-label"> </span></label></label><label
-                            class="report-reason-item"><span
-                    >违法犯罪</span> <label  data-theme="default"
-                                         class="more-radio-container"><span
-                            class="more-radio-fake"><span class="more-radio-fake-inner"></span></span> <input type="radio"
-                                                                                                              name="flag"
-                                                                                                              class="more-radio"
-                                                                                                              value="30">
-                        <span class="more-radio-label"> </span></label></label><label
-                            class="report-reason-item"><span
-                    >谣言垃圾</span> <label  data-theme="default"
-                                         class="more-radio-container"><span
-                            class="more-radio-fake"><span class="more-radio-fake-inner"></span></span> <input type="radio"
-                                                                                                              name="flag"
-                                                                                                              class="more-radio"
-                                                                                                              value="40">
-                        <span class="more-radio-label"> </span></label></label><label
-                            class="report-reason-item"><span
-                    >抄袭侵权</span> <label  data-theme="default"
-                                         class="more-radio-container"><span
-                            class="more-radio-fake"><span class="more-radio-fake-inner"></span></span> <input type="radio"
-                                                                                                              name="flag"
-                                                                                                              class="more-radio"
-                                                                                                              value="50">
-                        <span class="more-radio-label"> </span></label></label><label
-                            class="report-reason-item"><span
-                    >其他</span> <label  data-theme="default"
-                                       class="more-radio-container"><span
-                            class="more-radio-fake"><span class="more-radio-fake-inner"></span></span> <input type="radio"
-                                                                                                              name="flag"
-                                                                                                              class="more-radio"
-                                                                                                              value="60">
-                        <span class="more-radio-label"> </span></label></label></div>
+                    <label  class="report-reason-item">
+                        <span>暴恐涉政</span>
+                        <label  data-theme="default" class="more-radio-container">
+                            <span class="more-radio-fake">
+                                <span class="more-radio-fake-inner"></span>
+                            </span>
+                            <input type="radio" name="flag" class="more-radio" value="1">
+                            <span class="more-radio-label"> </span>
+                        </label>
+                    </label>
+                    <label class="report-reason-item">
+                        <span>色情内容</span>
+                        <label  data-theme="default" class="more-radio-container">
+                            <span class="more-radio-fake">
+                                <span class="more-radio-fake-inner"></span>
+                            </span>
+                            <input type="radio" name="flag" class="more-radio" value="2">
+                            <span class="more-radio-label"> </span>
+                        </label>
+                    </label>
+                    <label class="report-reason-item">
+                        <span>违法犯罪</span>
+                        <label  data-theme="default" class="more-radio-container">
+                            <span class="more-radio-fake">
+                                <span class="more-radio-fake-inner"></span>
+                            </span>
+                            <input type="radio" name="flag" class="more-radio" value="3">
+                            <span class="more-radio-label"> </span>
+                        </label>
+                    </label>
+                    <label class="report-reason-item">
+                        <span>谣言垃圾</span>
+                        <label  data-theme="default" class="more-radio-container">
+                            <span class="more-radio-fake">
+                                <span class="more-radio-fake-inner"></span>
+                            </span>
+                            <input type="radio" name="flag" class="more-radio" value="4">
+                            <span class="more-radio-label"> </span>
+                        </label>
+                    </label>
+                    <label class="report-reason-item">
+                        <span>抄袭侵权</span>
+                        <label  data-theme="default" class="more-radio-container">
+                            <span class="more-radio-fake">
+                                <span class="more-radio-fake-inner"></span>
+                            </span>
+                            <input type="radio" name="flag" class="more-radio" value="5">
+                        <span class="more-radio-label"></span>
+                        </label>
+                    </label>
+                    <label class="report-reason-item">
+                        <span>其他</span>
+                        <label  data-theme="default" class="more-radio-container">
+                            <span class="more-radio-fake">
+                                <span class="more-radio-fake-inner"></span>
+                            </span>
+                            <input type="radio" name="flag" class="more-radio" value="6">
+                        <span class="more-radio-label"></span>
+                        </label>
+                    </label>
+                </div>
             </div>
             <div data-flex="true" data-align="center" data-justify="end" data-flow="row"
                  class="more-row more-dialog-footer">
                 <button data-type="default" data-size="default" data-theme="text"
                         class="more-btn no-theme-color more-dialog-cancel-btn" id="btn-report-cancel"><!---->
-                    <span>取消</span></button>
-                <button data-type="danger" data-size="default" data-theme="text" disabled="disabled"
-                        class="more-btn more-dialog-confirm-btn"><!----><span><span class="">提交</span></span></button>
+                    <span>取消</span>
+                </button>
+                <button data-type="danger" data-size="default" data-theme="text"
+                        id="btn-report-confirm"class="more-btn more-dialog-confirm-btn"><!---->
+                    <span>提交</span>
+                </button>
             </div>
         </div>
     </div>
@@ -128,11 +147,11 @@
 
 
 <!--退出-->
-<div th:fragment="quit" id="circle-quit-model" data-size="sm" class="more-dialog" style="z-index: 2015;display: none">
+<div th:fragment="quit" id="circle-quit-model" data-size="sm" class="more-dialog" style="z-index: 2015;display: none" th:with="circle=${userOwnCircles[pageNum-1].circle}">
     <div class="more-dialog-head"><h5 class="more-dialog-head-title">退出乌托邦</h5><span
             class="more-icon-close more-dialog-icon-close"></span></div>
     <div  class="section-body">
-        <div  class="alert-message"><i  class="more-icon-alert"></i>确定退出 学霸成长实验室 吗？
+        <div  class="alert-message" th:text="'确定退出 '+${circle.name}+' 吗？'"><i  class="more-icon-alert"></i>
         </div>
     </div>
     <div data-flex="true" data-align="center" data-justify="end" data-flow="row" class="more-row more-dialog-footer">
@@ -140,7 +159,7 @@
                 class="more-btn no-theme-color more-dialog-cancel-btn" id="btn-quit-cancel"><!---->
             <span>取消</span></button>
         <button data-type="danger" data-size="default" data-theme="text" class="more-btn more-dialog-confirm-btn"
-                id="btn-quit-confirm">
+                id="btn-quit-confirm" th:attr="data-cid=${circle.id}">
             <!----><span><span class="">确认退出</span></span></button>
     </div>
 </div>
