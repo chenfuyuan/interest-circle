@@ -351,3 +351,365 @@ body,html {
     cursor: pointer;
 }
 
+
+
+/*topic top start*/
+.topic-top {
+    width: 540px;
+    max-height: 128px;
+    box-sizing: border-box;
+    padding: 12px;
+    margin: 12px 0;
+    background-color: #fff;
+    box-shadow: 0 1px 2px rgba(0,0,0,.04);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.topic-top .header {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    margin-bottom: 4px;
+}
+
+.topic-top .header .left{
+    font-size: 14px;
+}
+
+.topic-top .header .left img {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+    vertical-align: middle;
+}
+
+.topic-top .header .left .text {
+    display: inline-block;
+    color: #ffc105;
+    line-height: 14px;
+    font-weight: 600;
+    vertical-align: middle;
+}
+
+.topic-top .header .right {
+    font-size: 13px;
+    color: #858585;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.topic-top .header .right .text {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+.topic-top .header .right img {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    vertical-align: middle;
+}
+
+.topic-top .topic-top-each.unread {
+    margin-left: 12px;
+}
+
+
+.topic-top .topic-top-each {
+    font-size: 14px;
+    line-height: 16px;
+    height: 14px;
+    padding: 8px 0;
+    color: #333;
+    position: relative;
+    cursor: pointer;
+}
+
+.topic-top .topic-top-each .topic-read {
+    width: 4px;
+    height: 4px;
+    background: #ff0458;
+    border-radius: 50%;
+    position: absolute;
+    border: 1px solid #fff;
+    top: 12px;
+    left: -12px;
+}
+
+.topic-top .notice-content {
+    width: 100%;
+    height: 1em;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.labelTopUtil {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    height: 42px;
+    box-sizing: border-box;
+    border-radius: 2px;
+    background: #fff;
+    padding: 5px 17px;
+    box-shadow: 0 1px 2px rgba(0,0,0,.04);
+}
+
+.labelTopUtil .dynamic.active, .labelTopUtil .essence.active, .labelTopUtil .order.active {
+    color: #333;
+}
+
+.labelTopUtil .dynamic {
+    margin-right: 20px;
+}
+
+.labelTopUtil .dynamic, .labelTopUtil .essence, .labelTopUtil .order {
+    display: inline-block;
+    line-height: 32px;
+    font-weight: 500;
+    font-size: 14px;
+    color: #9b9a9a;
+    cursor: pointer;
+}
+
+.more-dropdown-box {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+}
+
+.user-img {
+    background: transparent;
+    border: none;
+    outline: none;
+}
+
+.labelTopUtil .orderImg {
+    vertical-align: middle;
+}
+
+.labelTopUtil .order {
+    font-size: 13px;
+}
+
+.label-util-dropdown-menu {
+    border-radius: 6px!important;
+    padding: 0;
+}
+
+.more-dropdown-menu {
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ededed;
+    box-shadow: 0 4px 12px rgba(0,0,0,.04);
+    top: 100%;
+    padding: 10px 0;
+    border-radius: 4px;
+}
+
+.label-util-dropdown-menu .more-dropdown-item-list .more-dropdown-item {
+    color: #858585;
+    font-size: 13px;
+    padding: 0 13px 0 16px;
+    line-height: 37px !important;
+    border-bottom: 1px solid #f4f4f4;
+    position: relative;
+    z-index: 2;
+}
+
+.label-util-dropdown-menu .more-dropdown-item-list .more-dropdown-item .check-icon {
+    display: inline-block;
+    width: 10px;
+    height: 7px;
+    margin-left: 26px;
+}
+
+
+.post-list-item {
+    display: block;
+    padding-top: 14px;
+    margin-bottom: 12px;
+    background-color: #fff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .04);
+    border-radius: 2px;
+    position: relative;
+    max-height: 400px;
+    overflow: hidden;
+    cursor: pointer;
+
+}
+
+.post-list-item .user-info, .post-list-item .user-info .left-side {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.post-list-item .user-info {
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    padding: 6px 18px;
+    height: 36px;
+    margin-bottom: 6px;
+}
+
+.post-list-item .user-info .left-side {
+    font-weight: 500;
+}
+
+.post-list-item .user-info, .post-list-item .user-info .left-side {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.post-list-item .user-info .left-side .user-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-right: 8px;
+}
+
+.user-avatar .avatar-head {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #ccc;
+    cursor: pointer;
+}
+
+.user-avatar .admin {
+    background: #ffba2a;
+}
+
+.user-avatar .more-icon-crown {
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    width: 28px;
+    height: 28px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    font-size: 18px;
+    color: #fff;
+    text-align: center;
+    line-height: 28px;
+    -webkit-transform: scale(.5);
+    transform: scale(.5);
+}
+
+.post-list-item .user-info .left-side .user-name {
+    margin-bottom: 8px;
+    line-height: 16px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.post-list-item .user-info .left-side .user-name .iconWrap {
+    position: relative;
+    display: inline-block;
+    width: 46px;
+    height: 16px;
+    margin-left: 7px;
+}
+
+.post-list-item .user-info .left-side .user-name .iconWrap .text {
+    position: absolute;
+    top: 0;
+    left: 15px;
+    font-size: 11px;
+    color: #fff;
+}
+
+.post-list-item .user-info .left-side .post-time {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 12px;
+    color: #9b9b9b;
+}
+
+.more-dropdown-box {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+}
+
+.user-img {
+    background: transparent;
+    border: none;
+    outline: none;
+}
+
+.post-list-item .user-info .right-side .option-icon {
+    padding: 10px;
+    font-size: 13px;
+    color: #9b9b9b;
+}
+
+.post-list-item .topic-text {
+    padding: 0 18px;
+    font-weight: 400;
+    font-size: 15px;
+    color: #333;
+    line-height: 25px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+
+.reactions {
+    height: 36px;
+    padding: 0 18px 10px;
+    font-size: 14px;
+    line-height: 36px;
+    font-weight: 500;
+    color: #9b9b9b;
+}
+
+.reactions .icon-btn {
+    color: #767676;
+    cursor: pointer;
+}
+
+.reactions .comments {
+    margin-left: 21px;
+}
+
+.reactions .views-count {
+    float: right;
+    font-size: 13px;
+    font-weight: 700;
+    opacity: .6;
+}
+
+.left-side p {
+    margin: 0;
+
+}
+
+.more-scroll-view .more-scroll-view-status {
+    padding: 10px 0;
+    margin: 0 auto;
+    text-align: center;
+    color: #9b9b9b;
+    font-size: 13px;
+    line-height: 30px;
+    font-weight: 500;
+    background-color: #fff;
+    border-radius: 2px;
+}
+
+/*topic top end */

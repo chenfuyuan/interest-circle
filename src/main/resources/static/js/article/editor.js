@@ -33,9 +33,40 @@ $(function () {
 
 
     $("#btn-publish").click(function () {
-        var artilce =  editor.txt.html();
+        var artilce = editor.txt.html();
         var cid = $(this).data("cid");
-        $.post("/article/publish",{article: artilce,cid:cid},function () {
+        var title = $("#input-editor-title").val();
+
+        if (artilce == "<p><br></p>") {
+            alert("请输入帖子内容");
+            return;
+        }
+
+        if (title == "" || title == undefined || title == null) {
+            alert("请输入帖子标题");
+            return
+        }
+
+
+        var data = new Object();
+        data["content"] = artilce;
+        data["cid"] = cid;
+        data["title"] = title;
+
+        //封装成json对象
+        var editorArticleVo = JSON.stringify(data);
+
+
+        $.ajax({
+            url: '/article/publish',
+            contentType: "application/json",
+            type: 'post',
+            dataType: 'json',
+            data: editorArticleVo,
+            success: function () {
+                window.location.href = "/";
+            }
+        }).fail(function () {
             window.location.href = "/";
         });
     });

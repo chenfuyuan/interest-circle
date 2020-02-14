@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="circle_header::head('首页','css/index.css ,css/circle/circle_setting.css')">
-
-    <script src="../static/js/circle/circle_model.js"></script>
 </head>
 
 <body>
 <section>
     <div th:replace="circle_header::header"></div>
+    <div id="uid" th:attr="data-uid=${session.user.id},data-identity=${userOwnCircles[pageNum-1].type}"></div>
     <div class="circle-content">
         <div class="circle-home w-e-clear-fix">
             <div class="left-content">
@@ -16,7 +15,8 @@
                         <div class="theme-color-container circle-info-card"
                              th:with="circle=${userOwnCircles[pageNum-1].circle}">
                             <header class="card-header">
-                                <div class="circle-bg" th:attr="style='background-image:url('+${circle.bgdPath}+')'"></div>
+                                <div class="circle-bg"
+                                     th:attr="style='background-image:url('+${circle.bgdPath}+')'"></div>
                                 <div class="circle-info">
                                     <div class="circle-avatar">
                                         <!--圈子头像图片-->
@@ -43,13 +43,14 @@
                                     <!--                                圈子简介-->
                                     <div class="circle-description" th:if="${circle.introduce}">
                                         <p th:text="${circle.introduce}" class="left-text">
-                                            我们将在这里将围绕学习和成长分享学霸们的经验方法通过备考心理学、学习方法、思考思维、知识点梳理、解题套路等维度，让你和学霸一样思考，培养和学霸一样的学习习惯，以及掌握学霸们拥有的知识体系框架</p></div>
+                                            我们将在这里将围绕学习和成长分享学霸们的经验方法通过备考心理学、学习方法、思考思维、知识点梳理、解题套路等维度，让你和学霸一样思考，培养和学霸一样的学习习惯，以及掌握学霸们拥有的知识体系框架</p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="card-footer">
                                 <div class="joined-footer">
                                     <div>
-                                        <span id="btn-circle-setting"class="text-btn" href="#"><span
+                                        <span id="btn-circle-setting" class="text-btn" href="#"><span
                                                 class="more-icon-setting text-btn-icon glyphicon glyphicon-cog"
                                         ></span>
                                             圈子设置</span>
@@ -60,36 +61,7 @@
                         </div> <!----> <!----></div>
                     <div data-v-b270548c=""></div> <!----></div>
             </div>
-            <div class="main-content">
-                <div class="content-block">
-                    <!--                    圈子搜索-->
-                    <div class="content-block search-block">
-                        <div class="search-container">
-                            <span class="more-input-box"><!----> <!---->
-                                <input type="text" placeholder="搜索圈子内话题或标签" maxlength="2147480" class="more-input"
-                                       style="border:none;padding-right:100px;">
-                                <div>
-                                    <span class="more-input-suffix-icon more-icon-search glyphicon glyphicon-search"></span>
-                                </div>
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="content-block edit-entry" id="edit-entry">
-                        <div class="edit-entry-box"><p class="placeholder">
-                            有什么新消息分享给大家吧！</p>
-                            <div>
-                                <span class="more-icon-photo glyphicon glyphicon-picture"></span>
-                                <span class="more-icon-file glyphicon glyphicon-file"></span>
-                            </div> <!----></div>
-                        <!--                    动态、精华选择 -->
-                        <div class="content-block"></div>
-                        <!--                    帖子内容    -->
-
-                        <div class="content-block"></div>
-                    </div>
-                </div>
-            </div>
+            <div th:replace="article/index-article::main-content"></div>
         </div>
     </div>
 </section>
@@ -108,6 +80,7 @@
 <script type="application/javascript" src="/static/js/index.js"></script>
 <script type="application/javascript" src="/static/js/circle/circle_model_show.js"></script>
 <script type="application/javascript" src="/static/js/circle/circle_model.js"></script>
+<script type="application/javascript" src="/static/js/article/index_article.js"></script>
 </body>
 
 </html>

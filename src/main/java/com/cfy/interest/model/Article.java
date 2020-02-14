@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author chenfuyuan
@@ -30,10 +30,16 @@ public class Article implements Serializable {
     @TableId(type = IdType.AUTO)
     private int id;
 
+    private String title;
+
     private String content;
 
+    @TableField(exist = false)
+    private User user;
     private Long uid;
 
+    @TableField(exist = false)
+    private Circle circle;
     private Integer cid;
 
     private Integer type;
@@ -67,7 +73,8 @@ public class Article implements Serializable {
      */
     private Integer starNum;
 
-    public Article(long uid, int cid, String content) {
+    public Article(long uid, int cid, String content, String title) {
+        this.title = title;
         this.uid = uid;
         this.cid = cid;
         this.content = content;

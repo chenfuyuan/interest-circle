@@ -1,5 +1,5 @@
 $(function () {
-    cid = $("#btn-quit-confirm").data("cid");
+
     $(".circle-item").click(function () {
         var item = $(this);
         var order = item.data("order");

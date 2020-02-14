@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="circle_header::head('首页','')">
+
+</head>
+
+<body>
+<section>
+
+    <div th:fragment="main-content" class="main-content">
+        <div class="content-block">
+            <!--                    圈子搜索-->
+            <div class="content-block search-block">
+                <div class="search-container">
+                            <span class="more-input-box"><!----> <!---->
+                                <input type="text" placeholder="搜索圈子内话题或标签" maxlength="2147480" class="more-input"
+                                       style="border:none;padding-right:100px;">
+                                <div>
+                                    <span class="more-input-suffix-icon more-icon-search glyphicon glyphicon-search"></span>
+                                </div>
+                            </span>
+                </div>
+            </div>
+
+            <!--发帖栏-->
+            <div class="content-block edit-entry" id="edit-entry">
+                <div class="edit-entry-box"><p class="placeholder">
+                    有什么新消息分享给大家吧！</p>
+                    <div>
+                        <span class="more-icon-photo glyphicon glyphicon-picture"></span>
+                    </div> <!----></div>
+                <!--                    动态、精华选择 -->
+                <div class="content-block"></div>
+                <!--                    帖子内容    -->
+
+                <div class="content-block"></div>
+            </div>
+
+            <!--置顶栏-->
+            <div class="topic-top">
+                <div class="header">
+                            <span class="left">
+                                <img src="/static/image/topic-top.svg" alt="">
+                                <span class="text">置顶</span>
+                            </span>
+                    <span class="right">
+                                <span id="sticky-num"class="text">查看全部 1</span>
+                                <img src="/static/image/dayu.svg" alt="">
+                            </span>
+                </div>
+                <!--<div class="topic-top-each unread">-->
+                    <!--<div class="topic-read"></div>-->
+                    <!--<div class="notice-content">asfasfaf</div> &lt;!&ndash;&ndash;&gt; &lt;!&ndash;&ndash;&gt;-->
+                <!--</div>-->
+            </div>
+
+            <!--全部-->
+            <div class="content-block">
+                <div>
+                    <div class="labelTopUtil">
+                        <div>
+                            <span class="dynamic active">动态</span>
+                            <span class="essence">精华</span>
+                        </div>
+                        <div class="right-side"><!---->
+                            <span class="more-dropdown-box more-dropdown">
+                                        <div class="user-img">
+                                            <img src="/static/image/sort.svg" alt="" class="orderImg">
+                                            <span class="order">最新发布</span>
+                                        </div>
+                                        <div class="more-dropdown-menu label-util-dropdown-menu" style="display: none;">
+                                            <div class="more-dropdown-item-list">
+                                                <div class="more-dropdown-item">
+                                                    最新发布
+                                                    <img src="/static/image/checked.svg"
+                                                         class="check-icon">
+                                                </div>
+                                                <div class="more-dropdown-item">
+                                                    最新回复<!---->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--帖子信息-->
+            <div class="content-block">
+                <div class="post-flow-container more-scroll-view">
+                    <div class="post-lists">
+                        <a class="post-list-item"><!----> <!---->
+                            <div class="wrap"><!---->
+                                <div class="user-info">
+                                    <div class="left-side">
+                                        <div class="user-avatar">
+                                            <img src="https://data.quanziapp.com/avatar/5b1ec4f6129f424eb35e6ad93d5a5b87.jpeg?x-oss-process=image/resize,limit_0,m_fill,h_36,w_36"
+                                                 alt="" class="avatar-head">
+                                        </div>
+                                        <div>
+                                            <p class="user-name">
+                                                <span title="YY" class="">YY </span>
+                                                <!---->
+                                            </p>
+                                            <p class="post-time">昨天 12：00</p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="right-side">
+                                                <span class="more-dropdown-box more-dropdown">
+                                                    <div class="user-img">
+                                                        <i class="more-icon-option option-icon icon-btn glyphicon glyphicon-list"></i>
+                                                    </div>
+                                                </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="topic-text"><div style="left: 0px; position: static; width: 480px;"><p>12312</p></div></div> <!----> <!----> <!----> <!---->
+                                <div isopenwindow="true">
+                                    <div class="reactions">
+                                                <span class="likes">
+                                                    <i class="more-icon-appreciation icon-btn glyphicon glyphicon-thumbs-up"></i>
+                                                    <span class="">赞</span></span>
+                                        <span class="comments">
+                                                    <i class="more-icon-comment icon-btn glyphicon glyphicon-comment"></i>
+                                                    <span class="comments-count">评论</span>
+                                                </span>
+                                        <span class="views-count">
+                                                    <span>已读</span>
+                                                    <span>1</span>
+                                                </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div> <!----> <!---->
+                    <div class="more-scroll-view-status" style="display: none;"><span> · 已加载结束 · </span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

@@ -1,4 +1,10 @@
 /*index start*/
+
+body, html {
+    height: 100%;
+    width: 100%;
+    background-color: #f5f5f5;
+}
 .circle-header{
     position: fixed;
     top: 0;
