@@ -107,22 +107,23 @@
                     </a>
                 </li>
                 <li th:unless="${pageInfo.pageNum}==1" >
-                    <a th:href="@{'/querySearchByDId?districtId='+${districtId}+'&pageNum=1'}"
+                    <a th:href="@{'/circle/querySearchByDId?districtId='+${districtId}+'&pageNum=1'}"
                        aria-label="Previous" th:if="${province}">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
 
-                    <a th:href="@{'/querySearch?pageNum=1'}"
+                    <a th:href="@{'/circle/querySearch?pageNum=1'}"
                        aria-label="Previous" th:unless="${province}">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
 
                 <li th:each="nav:${pageInfo.navigatepageNums}">
-                    <a th:href="@{'/querySearchByDId?districtId='+${districtId}+'&pageNum='+${nav}}" th:text="${nav}"
+                    <a th:href="@{'/circle/querySearchByDId?districtId='+${districtId}+'&pageNum='+${nav}}"
+                       th:text="${nav}"
                        th:if="${nav != pageInfo.pageNum} and ${province} " data-a="1"></a>
 
-                    <a th:href="@{'/querySearch?pageNum='+${nav}}" th:text="${nav}"
+                    <a th:href="@{'/circle/querySearch?pageNum='+${nav}}" th:text="${nav}"
                        th:if="${nav != pageInfo.pageNum} and !${province} " data-a="2"></a>
 
                     <a href="#" th:text="${nav}" th:unless="${nav != pageInfo.pageNum}" data-a="3"
@@ -137,11 +138,12 @@
                     </a>
                 </li>
                 <li th:unless="${pageInfo.pageNum}==${pageInfo.pages}">
-                    <a th:href="@{'/querySearchByDId?districtId='+${districtId}+'&pageNum='+${pageInfo.pages}}" aria-label="Next" th:if="${province}">
+                    <a th:href="@{'/circle/querySearchByDId?districtId='+${districtId}+'&pageNum='+${pageInfo.pages}}"
+                       aria-label="Next" th:if="${province}">
 
                         <span aria-hidden="true">&raquo;</span>
                     </a>
-                    <a th:href="@{'/querySearch?pageNum='+${pageInfo.pages}}" aria-label="Next"
+                    <a th:href="@{'/circle/querySearch?pageNum='+${pageInfo.pages}}" aria-label="Next"
                        th:unless="${province}">
                         <span aria-hidden="true">&raquo;</span>
                     </a>

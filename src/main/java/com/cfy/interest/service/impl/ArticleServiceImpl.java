@@ -1,15 +1,11 @@
 package com.cfy.interest.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.cfy.interest.mapper.ArticleMapper;
-import com.cfy.interest.mapper.ArticleOperationMessageMapper;
-import com.cfy.interest.mapper.ArticleStickyMapper;
-import com.cfy.interest.mapper.CircleMapper;
-import com.cfy.interest.model.Article;
-import com.cfy.interest.model.ArticleOperationMessage;
-import com.cfy.interest.model.ArticleSticky;
+import com.cfy.interest.mapper.*;
+import com.cfy.interest.model.*;
 import com.cfy.interest.provider.AliyunOSSProvider;
 import com.cfy.interest.service.ArticleService;
+import com.cfy.interest.service.vo.AjaxMessage;
+import com.cfy.interest.service.vo.ArticleShow;
 import com.cfy.interest.service.vo.EditorArticleVo;
 import com.cfy.interest.service.vo.GetArticleVo;
 import lombok.extern.slf4j.Slf4j;
@@ -43,6 +39,12 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Autowired
     private RedisTemplate redisTemplate;
+
+    @Autowired
+    private ArticleLikeMapper articleLikeMapper;
+
+    @Autowired
+    private ArticleStarMapper articleStarMapper;
     @Override
     public List<String> uploadImages(MultipartFile[] files) {
 
@@ -70,8 +72,7 @@ public class ArticleServiceImpl implements ArticleService {
         ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage();
         articleOperationMessage.setAid(article.getId());
         articleOperationMessage.setUid(uid);
-        articleOperationMessage.setMessage("发布帖子");
-        articleOperationMessage.setType(1);
+        articleOperationMessage.setType(ArticleOperationMessage.CREATE);
 
         articleOperationMessageMapper.insert(articleOperationMessage);
 
@@ -92,23 +93,110 @@ public class ArticleServiceImpl implements ArticleService {
      * @return
      */
     @Override
-    public List<Article> getArticles(GetArticleVo getArticleVo) {
+    public List<ArticleShow> getArticles(GetArticleVo getArticleVo,long uid) {
         String type = getArticleVo.getType();
-        List<Article> articles = null;
-        QueryWrapper<Article> queryWrapper = new QueryWrapper<>();
+
         int cid = getArticleVo.getCid();
 
-
-        String sort = getArticleVo.getSort();
-
+        List<ArticleShow> articleShows;
         //设置帖子类型
         if (type.equals("essence")) {
             //设置查找帖子类型为精华贴
-            articles = articleMapper.findEssenceByCid(cid, sort);
+            articleShows = articleMapper.findEssenceByCid(cid);
         } else {
-            articles = articleMapper.findByCid(cid, sort);
+            articleShows = articleMapper.findByCid(cid);
         }
-        //根据查询规则查询数据
-        return articles;
+
+        for (ArticleShow articleShow : articleShows) {
+            //判断是否点赞
+            ArticleLike like = articleLikeMapper.isLike(uid, articleShow.getId());
+            articleShow.setLike(like!=null);
+            ArticleStar star = articleStarMapper.isStar(uid, articleShow.getId());
+            articleShow.setStar(star!=null);
+
+        }
+
+        return articleShows;
+    }
+
+    @Override
+    public int selectCountByCId(int cid) {
+        return articleMapper.selectCountByCid(cid);
+    }
+
+    /**
+     * @param uid
+     * @param aid
+     * @return
+     */
+    @Transactional
+    @Override
+    public AjaxMessage like(long uid, Integer aid) {
+        //判断数据库是否有该用户点赞的记录，有？直接更新状态码为1
+        int total = articleLikeMapper.like(aid, uid);
+
+        log.info("total = " + total);
+        //数据库无数据，插入新的点赞数据
+        if (total < 1) {
+            ArticleLike articleLike = new ArticleLike();
+            articleLike.setAid(aid);
+            articleLike.setUid(uid);
+            articleLike.setState(1);
+            articleLikeMapper.insert(articleLike);
+        }
+
+        //更新帖子的点赞数
+        articleMapper.like(aid);
+
+        //更新帖子操作日志
+        ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage();
+        articleOperationMessage.setType(ArticleOperationMessage.LIKE);
+        articleOperationMessage.setUid(uid);
+        articleOperationMessage.setAid(aid);
+        articleOperationMessageMapper.insert(articleOperationMessage);
+
+        AjaxMessage ajaxMessage = new AjaxMessage(true, "点赞成功");
+        //无，插入新的点赞数据
+        return ajaxMessage;
+    }
+
+
+    @Transactional
+    @Override
+    public AjaxMessage cancelLike(long uid, Integer aid) {
+        //减少帖子点赞人数
+        int total = articleMapper.cancelLike(aid);
+        if (total < 1) {
+            return new AjaxMessage(false, "取消点赞失败，帖子不存在");
+        }
+
+
+        //更新帖子点赞状态
+        articleLikeMapper.cancelLike(aid, uid);
+
+        //生成帖子操作日志
+        ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage();
+        articleOperationMessage.setAid(aid);
+        articleOperationMessage.setUid(uid);
+        articleOperationMessage.setType(ArticleOperationMessage.CANCELLIKE);
+        articleOperationMessageMapper.insert(articleOperationMessage);
+
+        return new AjaxMessage(true, "取消点赞成功");
+    }
+
+    /**
+     * 判断用户是否对该帖子点赞
+     * @param uid
+     * @param aid
+     * @return
+     */
+    @Override
+    public boolean isLike(long uid, Integer aid) {
+        ArticleLike like = articleLikeMapper.isLike(uid, aid);
+        if (like != null) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
