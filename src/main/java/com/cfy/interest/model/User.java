@@ -15,14 +15,14 @@ import java.util.Date;
 @TableName("user")
 public class User {
     @TableId(type= IdType.AUTO)
-    private long id;
+    private Long id;
     private String name;
     private String phone;
     private String password;
     private String token;
     private Date createTime;
     private Date updateTime;
-    private int state;
+    private Integer state;
     private String avatarPath;
 
 

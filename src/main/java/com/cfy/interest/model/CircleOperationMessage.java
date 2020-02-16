@@ -20,21 +20,21 @@ import java.util.Date;
 @TableName("circle_operation_message")
 public class CircleOperationMessage {
     @TableId(type= IdType.AUTO)
-    private long id;
-    private int cId;
+    private Long id;
+    private Integer cId;
 
     @TableField(exist = false)
     private Circle circle;
 
     private Date datetime;
     private String message;
-    private long uId;
+    private Long uId;
 
     @TableField(exist = false)
     private User user;
-    private int type;
+    private Integer type;
 
-    public CircleOperationMessage build(long uId,int cId) {
+    public CircleOperationMessage build(Long uId,Integer cId) {
         CircleOperationMessage circleOperationMessage = new CircleOperationMessage();
         circleOperationMessage.setUId(uId);
         circleOperationMessage.setCId(cId);

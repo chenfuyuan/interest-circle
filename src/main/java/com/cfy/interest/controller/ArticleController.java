@@ -1,6 +1,6 @@
 package com.cfy.interest.controller;
 
-import com.cfy.interest.model.ArticleSticky;
+import com.cfy.interest.model.Article;
 import com.cfy.interest.model.User;
 import com.cfy.interest.service.ArticleService;
 import com.cfy.interest.service.vo.*;
@@ -65,20 +65,20 @@ public class ArticleController {
 
     @GetMapping("/article/sticky/get")
     @ResponseBody
-    public List<ArticleSticky> getSticky(@RequestParam("cid") Integer cid) {
-        List<ArticleSticky> stickys = articleService.getStickys(cid);
+    public List<Article> getSticky(@RequestParam("cid") Integer cid) {
+        List<Article> stickys = articleService.getStickys(cid);
         return stickys;
     }
 
     @PostMapping("article/get")
     @ResponseBody
-    public PageInfo<ArticleShow> getArticles(@RequestBody GetArticleVo getArticleVo,HttpServletRequest request) {
+    public PageInfo<ArticleShow> getArticles(@RequestBody GetArticleVo getArticleVo, HttpServletRequest request) {
 
         User user = (User) request.getSession().getAttribute("user");
         long uid = user.getId();
         //分页查询
         Integer pageNum = getArticleVo.getPageNum();
-        Integer pageSize = 5;
+        Integer pageSize = 4;
         log.info("pageNum ==" + pageNum);
         int count = articleService.selectCountByCId(getArticleVo.getCid());
         if (count == 0 || (pageNum - 1) * pageSize >= count) {
@@ -88,7 +88,7 @@ public class ArticleController {
         //分页查询
         PageHelper.startPage(pageNum, pageSize, sort + " desc");
         try {
-            List<ArticleShow> articles = articleService.getArticles(getArticleVo,uid);
+            List<ArticleShow> articles = articleService.getArticles(getArticleVo, uid);
             log.info(articles.get(0).toString());
             PageInfo<ArticleShow> pageInfo = new PageInfo<ArticleShow>(articles, pageSize);
             log.info("list = " + pageInfo);
@@ -106,7 +106,7 @@ public class ArticleController {
     public AjaxMessage like(@PathVariable("aid") Integer aid, HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
         if (aid > 0) {
-            AjaxMessage ajaxMessage = new AjaxMessage(false,"点赞的帖子不存在");
+            AjaxMessage ajaxMessage = new AjaxMessage(false, "点赞的帖子不存在");
         }
         long uid = user.getId();
         //点赞操作
@@ -121,7 +121,7 @@ public class ArticleController {
     public AjaxMessage cancelLike(@PathVariable("aid") Integer aid, HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
         if (aid > 0) {
-            AjaxMessage ajaxMessage = new AjaxMessage(false,"取消点赞的帖子不存在");
+            AjaxMessage ajaxMessage = new AjaxMessage(false, "取消点赞的帖子不存在");
         }
         long uid = user.getId();
         //点赞操作
@@ -130,13 +130,75 @@ public class ArticleController {
         return ajaxMessage;
     }
 
-    @GetMapping("/article/like/checked/{aid}")
+    @GetMapping("/article/sticky/{aid}")
     @ResponseBody
-    public boolean isLike(@PathVariable("aid") Integer aid,HttpServletRequest request) {
+    public Article sticky(@PathVariable("aid") Integer aid,
+                          HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
         long uid = user.getId();
+        Article article = articleService.sticky(uid, aid);
+        return article;
+    }
 
-        boolean isLike = articleService.isLike(uid, aid);
-        return isLike;
+    @GetMapping("/article/essence/{aid}")
+    @ResponseBody
+    public AjaxMessage essence(@PathVariable("aid") Integer aid, HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user");
+        long uid = user.getId();
+        AjaxMessage ajaxMessage = articleService.essence(uid, aid);
+        return ajaxMessage;
+    }
+
+    @GetMapping("/article/sticky/cancel/{aid}")
+    @ResponseBody
+    public AjaxMessage cancelSticky(@PathVariable("aid") Integer aid, HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user");
+        long uid = user.getId();
+        AjaxMessage ajaxMessage = articleService.cancelSticky(uid, aid);
+        return ajaxMessage;
+    }
+
+    @GetMapping("/article/essence/cancel/{aid}")
+    @ResponseBody
+    public AjaxMessage cancelEssence(@PathVariable("aid") Integer aid, HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user");
+        long uid = user.getId();
+        AjaxMessage ajaxMessage = articleService.cancelEssence(uid, aid);
+        return ajaxMessage;
+    }
+
+    @GetMapping("/article/star/{aid}")
+    @ResponseBody
+    public AjaxMessage star(@PathVariable("aid") Integer aid, HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user");
+        long uid = user.getId();
+        AjaxMessage ajaxMessage = articleService.star(uid, aid);
+        return ajaxMessage;
+    }
+
+    @GetMapping("/article/star/cancel/{aid}")
+    @ResponseBody
+    public AjaxMessage cancelStar(@PathVariable("aid") Integer aid, HttpServletRequest request){
+        User user = (User) request.getSession().getAttribute("user");
+        long uid = user.getId();
+        AjaxMessage ajaxMessage = articleService.cancelStar(uid, aid);
+        return ajaxMessage;
+    }
+
+    @GetMapping("/article/delete/{aid}")
+    @ResponseBody
+    public AjaxMessage delete(@PathVariable("aid") Integer aid,@RequestParam("cid")Integer cid,
+                              HttpServletRequest request){
+        User user = (User) request.getSession().getAttribute("user");
+        Long uid = user.getId();
+        AjaxMessage ajaxMessage = null;
+        try {
+            ajaxMessage = articleService.delete(uid, aid,cid);
+        } catch (Exception e) {
+            log.info("");
+            e.printStackTrace();
+            return new AjaxMessage(false, e.getMessage());
+        }
+        return ajaxMessage;
     }
 }

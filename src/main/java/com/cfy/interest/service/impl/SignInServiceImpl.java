@@ -44,7 +44,6 @@ public class SignInServiceImpl implements SignInService {
             message.setUser(user);
             //修改登录状态
             user.setToken(UUID.randomUUID().toString());
-            user.setState(1);
             userMapper.updateById(user);
         } else {
             message.setMessage("用户名密码错误");

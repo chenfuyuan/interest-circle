@@ -16,20 +16,20 @@ import java.util.Date;
 @TableName("user_operation_message")
 public class UserOperationMessage {
     @TableId(type = IdType.AUTO)
-    private int id;
+    private Integer id;
 
     @TableField(exist = false)
     private User user;
 
-    private long uid;
+    private Long uid;
 
     private String message;
 
     private Date datetime;
 
-    private int type;
+    private Integer type;
 
-    public static final int CREATE = 1;
-    public static final int UPDATE = 2;
-    public static final int CHANGEPASSWORD = 3;
+    public static final Integer CREATE = 1;
+    public static final Integer UPDATE = 2;
+    public static final Integer CHANGEPASSWORD = 3;
 }

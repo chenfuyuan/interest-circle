@@ -11,10 +11,14 @@ public interface ArticleLikeMapper extends BaseMapper<ArticleLike> {
     public int like(Integer aid, Long uid);
 
     @Update("update article_like set state = 0 where aid = #{aid} and uid = #{uid} and state = 1")
-    public int cancelLike(Integer aid, Long uid);
+    int cancelLike(Integer aid, Long uid);
 
-    @Select("select * from article_like where uid = #{uid} and aid=#{aid} and state = 1")
-    ArticleLike isLike(long uid, Integer aid);
+    @Select("select count(0) from article_like where uid = #{uid} and aid=#{aid} and state = 1")
+    int isLike(long uid, Integer aid);
+
+    @Update("update article_like set state = 0 where aid = #{aid} and state = 1")
+    int cancelLikeByAid(Integer aid);
+
 
 
 }

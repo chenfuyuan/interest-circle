@@ -130,7 +130,7 @@
 }
 
 .more-dialog[data-size=sm] {
-    position: absolute;
+    position: fixed;
     width: 540px;
     left: 50%;
     top: 50%;

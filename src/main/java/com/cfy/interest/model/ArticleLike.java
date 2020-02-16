@@ -14,11 +14,11 @@ public class ArticleLike {
     private Integer id;
 
     private Long uid;
-    private int aid;
+    private Integer aid;
 
     private Date CreateTime;
 
     private Date UpdateTime;
 
-    private int state;
+    private Integer state;
 }

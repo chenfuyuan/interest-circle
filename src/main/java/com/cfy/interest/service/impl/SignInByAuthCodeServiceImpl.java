@@ -111,7 +111,7 @@ public class SignInByAuthCodeServiceImpl implements SignInByAuthCodeService {
             message.setSuccess(true);
             //修改登录状态
             user.setToken(UUID.randomUUID().toString());
-            user.setState(1);
+
             userMapper.updateById(user);
 
             message.setUser(user);

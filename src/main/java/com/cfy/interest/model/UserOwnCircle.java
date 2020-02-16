@@ -14,12 +14,12 @@ import lombok.NoArgsConstructor;
 @TableName("circle_user")
 public class UserOwnCircle {
     @TableId(type = IdType.AUTO)
-    private int id;
+    private Integer id;
 
     @TableField(exist = false)
     private Circle circle;
 
-    private int cid;
+    private Integer cid;
 
-    private int type;
+    private Integer type;
 }

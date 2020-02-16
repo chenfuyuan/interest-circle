@@ -12,30 +12,30 @@ import java.util.Date;
 @TableName("circle_report")
 public class CircleReport {
     @TableId(type = IdType.AUTO)
-    private long id;
+    private Long id;
     @TableField(exist = false)
     private User user;
-    private long uid;
+    private Long uid;
 
     @TableField(exist = false)
     private Circle circle;
-    private int cid;
+    private Integer cid;
 
-    private int type;
+    private Integer type;
     @TableField(exist = false)
     private String reportMessage;
 
     private Date createTime;
     private Date dealTime;
 
-    private int state;
+    private Integer state;
 
-    public void setType(int type) {
+    public void setType(Integer type) {
         this.type = type;
         setReportMessage(type);
     }
 
-    private void setReportMessage(int type) {
+    private void setReportMessage(Integer type) {
         switch (type) {
             case 1:
                 reportMessage = "暴恐涉政";

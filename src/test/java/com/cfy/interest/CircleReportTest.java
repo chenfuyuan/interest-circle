@@ -17,16 +17,7 @@ public class CircleReportTest {
 
     @Test
     public void testInsert() {
-        CircleReport circleReport = new CircleReport();
-        circleReport.setUid(4);
-        circleReport.setCid(19);
-        circleReport.setType(3);
-        circleReport.setState(1);
-        log.info("message = " + circleReport.getReportMessage());
 
-        circleReportMapper.insert(circleReport);
-
-        log.info(circleReport.toString());
 
     }
 

@@ -29,13 +29,15 @@ public class ArticleOperationMessage implements Serializable {
     public static final int STAR = 6;
     public static final int CANCELSTAR = 7;
     public static final int COMMENT = 8;
-
+    public static final int CANCELSTICKY = 9;
+    public static final int CANCELESSENCE = 10;
+    public static final int DELETE = 11;
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 
 
     @TableId(type = IdType.AUTO)
-    private int id;
+    private Integer id;
     private Long uid;
 
     private Integer aid;
@@ -46,6 +48,11 @@ public class ArticleOperationMessage implements Serializable {
 
     private LocalDateTime createTime;
 
+    public ArticleOperationMessage (Long uid,Integer aid,Integer type) {
+        this.uid = uid;
+        this.aid = aid;
+        setType(type);
+    }
     public void setType(Integer type) {
         this.type = type;
         switch (type) {
@@ -71,6 +78,15 @@ public class ArticleOperationMessage implements Serializable {
                 break;
             case COMMENT:
                 setMessage("评论帖子");
+                break;
+            case CANCELSTICKY:
+                setMessage("取消置顶帖子");
+                break;
+            case CANCELESSENCE:
+                setMessage("取消加精帖子");
+                break;
+            case DELETE:
+                setMessage("删除帖子");
                 break;
         }
     }

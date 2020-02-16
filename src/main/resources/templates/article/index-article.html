@@ -37,14 +37,14 @@
             </div>
 
             <!--置顶栏-->
-            <div class="topic-top">
+            <div class="topic-top" style="display: none">
                 <div class="header">
                             <span class="left">
                                 <img src="/static/image/topic-top.svg" alt="">
                                 <span class="text">置顶</span>
                             </span>
                     <span class="right">
-                                <span id="sticky-num"class="text">查看全部 1</span>
+                                <span class="text">查看全部 <span id="sticky-num">1</span></span>
                                 <img src="/static/image/dayu.svg" alt="">
                             </span>
                 </div>
@@ -92,6 +92,25 @@
                     <div class="post-lists">
                     </div>
                     <div id="end"class="more-scroll-view-status" style="display: none;"><span> · 已加载结束 · </span></div>
+                </div>
+            </div>
+
+            <!--删除帖子-->
+            <div th:fragment="delete" id="article-delete-model" data-size="sm" class="more-dialog"
+                 style="z-index: 2015;display: none">
+                <div class="more-dialog-head"><h5 class="more-dialog-head-title">删除帖子</h5><span
+                        class="more-icon-close more-dialog-icon-close"></span></div>
+                <div  class="section-body">
+                    <div  class="alert-message" th:text="'确定删除吗？'"><i  class="more-icon-alert"></i>
+                    </div>
+                </div>
+                <div data-flex="true" data-align="center" data-justify="end" data-flow="row" class="more-row more-dialog-footer">
+                    <button data-type="default" data-size="default" data-theme="text"
+                            class="more-btn no-theme-color more-dialog-cancel-btn" id="btn-delete-cancel"><!---->
+                        <span>取消</span></button>
+                    <button data-type="danger" data-size="default" data-theme="text" class="more-btn more-dialog-confirm-btn"
+                            id="btn-delete-confirm">
+                        <!----><span><span class="">确认删除</span></span></button>
                 </div>
             </div>
         </div>

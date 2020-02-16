@@ -1,6 +1,6 @@
 package com.cfy.interest.service;
 
-import com.cfy.interest.model.ArticleSticky;
+import com.cfy.interest.model.Article;
 import com.cfy.interest.service.vo.AjaxMessage;
 import com.cfy.interest.service.vo.ArticleShow;
 import com.cfy.interest.service.vo.EditorArticleVo;
@@ -12,7 +12,7 @@ import java.util.List;
 public interface ArticleService {
     List<String> uploadImages(MultipartFile[] files);
 
-    List<ArticleSticky> getStickys(int cid);
+    List<Article> getStickys(int cid);
 
     void publish(long uid, EditorArticleVo editorArticleVo);
 
@@ -25,4 +25,20 @@ public interface ArticleService {
     AjaxMessage cancelLike(long uid, Integer aid);
 
     boolean isLike(long uid, Integer aid);
+
+    Article sticky(long uid, Integer aid);
+
+    AjaxMessage essence(long uid, Integer aid);
+
+    AjaxMessage cancelSticky(long uid, Integer aid);
+
+    AjaxMessage cancelEssence(long uid, Integer aid);
+
+    AjaxMessage star(long uid, Integer aid);
+
+    AjaxMessage cancelStar(long uid, Integer aid);
+
+    AjaxMessage delete(Long uid, Integer aid, Integer cid) throws Exception;
+
+
 }

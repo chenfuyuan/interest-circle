@@ -17,10 +17,10 @@ import java.util.List;
 @TableName("district")
 public class Province {
     @TableId(type= IdType.AUTO)
-    private int id;
+    private Integer id;
     private String name;
     @TableField(exist = false)
     private List<City> citys;
     private String code;
-    private int order;
+    private Integer order;
 }

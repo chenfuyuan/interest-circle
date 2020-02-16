@@ -34,7 +34,7 @@ public class IndexController {
     @GetMapping("/{pageNum}")
     public String index(HttpServletRequest request, @PathVariable(required = false,name="pageNum") Integer pageNum, Model model,HttpServletResponse response) {
         log.info("访问首页");
-        int pageSize = 1;
+        int pageSize = 4;
         if(pageNum == null){
             pageNum = 1;   //设置默认当前页
         }
@@ -59,8 +59,6 @@ public class IndexController {
         }
         model.addAttribute("pageNum", pageNum);
         model.addAttribute("userOwnCircles", userOwnCircles);
-
-
 
 
         //获取选中圈子的前4个成员，根据职务顺序取得

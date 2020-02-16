@@ -29,28 +29,31 @@ public interface CircleMapper extends BaseMapper<Circle> {
      *
      * @return
      */
-    @Select("select * from circle where state !=-1 and id not in (select cid from circle_user where uid = #{uid})")
+    @Select("select * from circle where state !=-1 and id not in (select cid from circle_user where uid = #{uid} and state!=0)")
     @ResultMap("circleMap")
     List<Circle> selectAll(long uid);
 
 
     @Select("select * from circle where state != -1 and id not in (select cid from circle_user where uid = #{uid}) " +
-            "and(district_id = #{districtId} or district_id in (" +
+            "and state != 0 and(district_id = #{districtId} or district_id in (" +
             "select id from district where parent_id = #{districtId}))")
     @ResultMap("circleMap")
     List<Circle> selectAllByDistrict(Integer districtId, long uid);
 
 
-    @Select("select * from circle where id = #{id}")
+    @Select("select * from circle where id = #{id} and state != 0")
     @ResultMap("circleMap")
     Circle selectById(Integer id);
 
-    @Update("update circle set user_num = user_num + 1 where id = #{id}")
+    @Update("update circle set user_num = user_num + 1 where id = #{id} and state !=0")
     void joinMember(int id);
 
-    @Update("update circle set user_num=user_num -1 where id = #{id}")
+    @Update("update circle set user_num=user_num -1 where id = #{id} and state !=0")
     void quitMember(int id);
 
-    @Update("update circle set article_num = article_num +1 where id = #{id}")
+    @Update("update circle set article_num = article_num +1 where id = #{id} and state !=0")
     void addArticle(int id);
+
+    @Update("update circle set article_num = article_num -1 where id = #{cid} and state !=0")
+    int deleteArticle(Integer cid);
 }

@@ -15,14 +15,14 @@ import lombok.NoArgsConstructor;
 public class District {
 
     @TableId(type= IdType.AUTO)
-    private int id;
+    private Integer id;
 
     private String name;
     @TableField(exist = false)
     private District parent;
-    private int parentId;
+    private Integer parentId;
     private String code;
-    private int order;
+    private Integer order;
 
     public String getName() {
         return name;
@@ -33,11 +33,11 @@ public class District {
         this.name = name;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -49,11 +49,11 @@ public class District {
         this.parent = parent;
     }
 
-    public int getParentId() {
+    public Integer getParentId() {
         return parentId;
     }
 
-    public void setParentId(int parentId) {
+    public void setParentId(Integer parentId) {
         this.parentId = parentId;
     }
 
@@ -65,11 +65,11 @@ public class District {
         this.code = code;
     }
 
-    public int getOrder() {
+    public Integer getOrder() {
         return order;
     }
 
-    public void setOrder(int order) {
+    public void setOrder(Integer order) {
         this.order = order;
     }
 }

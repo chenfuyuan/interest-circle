@@ -125,7 +125,7 @@ public class CircleServiceImpl implements CircleService {
         circle.setName(name);
         circle.setUserNum(1);
         circle.setArticleNum(0);
-        circle.setState(0);
+        circle.setState(1);
         circle.setOwnerId(uid);
         circle.setAvatarPath(filePath);
         long nowTime = new Date().getTime();
@@ -182,7 +182,7 @@ public class CircleServiceImpl implements CircleService {
     @Override
     public AjaxMessage joinCircle(long userId, Integer cId) {
         CircleUser circleUser = new CircleUser().build(userId, cId);
-        circleUser.setType(2);
+        circleUser.setType(3);
         circleUserMapper.insert(circleUser);
 
 

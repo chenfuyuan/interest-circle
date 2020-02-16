@@ -14,10 +14,10 @@ import lombok.NoArgsConstructor;
 @TableName("district")
 public class City {
     @TableId(type= IdType.AUTO)
-    private int id;
+    private Integer id;
     private String name;
 
-    private int parentId;
+    private Integer parentId;
     private String code;
-    private int order;
+    private Integer order;
 }

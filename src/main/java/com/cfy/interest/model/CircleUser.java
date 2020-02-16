@@ -17,28 +17,28 @@ import java.util.Date;
 @TableName("circle_user")
 public class CircleUser {
     @TableId(type= IdType.AUTO)
-    private long id;
+    private Long id;
 
     @TableField(exist = false)
     private User user;
-    private long uid;
+    private Long uid;
 
     @TableField(exist = false)
     private Circle circle;
-    private int cid;
+    private Integer cid;
 
 
-    private int type;
+    private Integer type;
 
     private Date createTime;
     private Date updateTime;
-    private int state;
+    private Integer state;
 
-    public static CircleUser build(long uid,int cid) {
+    public static CircleUser build(Long uid,Integer cid) {
         CircleUser circleUser = new CircleUser();
         circleUser.setUid(uid);
         circleUser.setCid(cid);
-        circleUser.setType(0);
+        circleUser.setType(3);
         circleUser.setState(1);
         return circleUser;
     }

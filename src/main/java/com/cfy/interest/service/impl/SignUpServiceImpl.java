@@ -138,7 +138,6 @@ public class SignUpServiceImpl implements SignUpService {
         user.setPassword(md5Password);
         user.setPhone(signUpVo.getPhone());
         long nowTime = new Date().getTime();
-        user.setState(0);
         user.setToken(UUID.randomUUID().toString());
         userMapper.insert(user);
 

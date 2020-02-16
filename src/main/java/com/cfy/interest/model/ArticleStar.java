@@ -13,13 +13,18 @@ import java.util.Date;
 public class ArticleStar {
 
     @TableId(type = IdType.AUTO)
-    private int id;
+    private Integer id;
 
-    private int uid;
-    private int aid;
+    private Long uid;
+    private Integer aid;
 
     private Date createTime;
     private Date updateTime;
 
-    private int state;
+    private Integer state;
+
+    public ArticleStar(Long uid,Integer aid) {
+        this.uid = uid;
+        this.aid = aid;
+    }
 }

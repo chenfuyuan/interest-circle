@@ -28,7 +28,7 @@ public class Article implements Serializable {
 
 
     @TableId(type = IdType.AUTO)
-    private int id;
+    private Integer id;
 
     private String title;
 
@@ -73,6 +73,8 @@ public class Article implements Serializable {
      */
     private Integer starNum;
 
+    private Integer sticky;
+
     public Article(long uid, int cid, String content, String title) {
         this.title = title;
         this.uid = uid;
@@ -84,6 +86,7 @@ public class Article implements Serializable {
         watchNum = 0;
         likeNum = 0;
         starNum = 0;
+        sticky = 0;
     }
 
 }

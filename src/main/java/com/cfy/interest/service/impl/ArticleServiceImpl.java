@@ -1,7 +1,10 @@
 package com.cfy.interest.service.impl;
 
 import com.cfy.interest.mapper.*;
-import com.cfy.interest.model.*;
+import com.cfy.interest.model.Article;
+import com.cfy.interest.model.ArticleLike;
+import com.cfy.interest.model.ArticleOperationMessage;
+import com.cfy.interest.model.ArticleStar;
 import com.cfy.interest.provider.AliyunOSSProvider;
 import com.cfy.interest.service.ArticleService;
 import com.cfy.interest.service.vo.AjaxMessage;
@@ -34,8 +37,7 @@ public class ArticleServiceImpl implements ArticleService {
     @Autowired
     private CircleMapper circleMapper;
 
-    @Autowired
-    private ArticleStickyMapper articleStickyMapper;
+
 
     @Autowired
     private RedisTemplate redisTemplate;
@@ -69,10 +71,7 @@ public class ArticleServiceImpl implements ArticleService {
         //插入帖子数据
         articleMapper.insert(article);
 
-        ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage();
-        articleOperationMessage.setAid(article.getId());
-        articleOperationMessage.setUid(uid);
-        articleOperationMessage.setType(ArticleOperationMessage.CREATE);
+        ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage(uid,article.getId(),ArticleOperationMessage.CREATE);
 
         articleOperationMessageMapper.insert(articleOperationMessage);
 
@@ -81,8 +80,8 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<ArticleSticky> getStickys(int cid) {
-        List<ArticleSticky> stickys = articleStickyMapper.findStickysByCid(cid);
+    public List<Article> getStickys(int cid) {
+        List<Article> stickys = articleMapper.findStickysByCid(cid);
         return stickys;
     }
 
@@ -109,10 +108,10 @@ public class ArticleServiceImpl implements ArticleService {
 
         for (ArticleShow articleShow : articleShows) {
             //判断是否点赞
-            ArticleLike like = articleLikeMapper.isLike(uid, articleShow.getId());
-            articleShow.setLike(like!=null);
-            ArticleStar star = articleStarMapper.isStar(uid, articleShow.getId());
-            articleShow.setStar(star!=null);
+            int likes = articleLikeMapper.isLike(uid, articleShow.getId());
+            articleShow.setLike(likes>0);
+            int stars = articleStarMapper.isStar(uid, articleShow.getId());
+            articleShow.setStar(stars>0);
 
         }
 
@@ -149,10 +148,7 @@ public class ArticleServiceImpl implements ArticleService {
         articleMapper.like(aid);
 
         //更新帖子操作日志
-        ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage();
-        articleOperationMessage.setType(ArticleOperationMessage.LIKE);
-        articleOperationMessage.setUid(uid);
-        articleOperationMessage.setAid(aid);
+        ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage(uid,aid,ArticleOperationMessage.LIKE);
         articleOperationMessageMapper.insert(articleOperationMessage);
 
         AjaxMessage ajaxMessage = new AjaxMessage(true, "点赞成功");
@@ -175,10 +171,7 @@ public class ArticleServiceImpl implements ArticleService {
         articleLikeMapper.cancelLike(aid, uid);
 
         //生成帖子操作日志
-        ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage();
-        articleOperationMessage.setAid(aid);
-        articleOperationMessage.setUid(uid);
-        articleOperationMessage.setType(ArticleOperationMessage.CANCELLIKE);
+        ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage(uid,aid,ArticleOperationMessage.CANCELLIKE);
         articleOperationMessageMapper.insert(articleOperationMessage);
 
         return new AjaxMessage(true, "取消点赞成功");
@@ -192,11 +185,149 @@ public class ArticleServiceImpl implements ArticleService {
      */
     @Override
     public boolean isLike(long uid, Integer aid) {
-        ArticleLike like = articleLikeMapper.isLike(uid, aid);
-        if (like != null) {
-            return true;
-        } else {
-            return false;
+        int like = articleLikeMapper.isLike(uid, aid);
+        return like>0;
+    }
+
+    @Transactional
+    @Override
+    public Article sticky(long uid, Integer aid) {
+        //更改为置顶状态
+        int changrow = articleMapper.stickyArticle(aid);
+        if (changrow < 1) {
+            return null;
         }
+        //记录操作记录
+        ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage(uid,aid,
+                ArticleOperationMessage.STICKY);
+        articleOperationMessageMapper.insert(articleOperationMessage);
+
+
+        return articleMapper.selectById(aid);
+    }
+
+    @Transactional
+    @Override
+    public AjaxMessage essence(long uid, Integer aid) {
+        int changrow = articleMapper.essenceByAid(aid);
+        if (changrow < 1) {
+            return new AjaxMessage(false, "加精失败，帖子不存在");
+        }
+
+        //日志
+        ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage(uid,aid,ArticleOperationMessage.ESSENCE);
+        articleOperationMessageMapper.insert(articleOperationMessage);
+
+        return new AjaxMessage(true, "加精成功");
+    }
+
+    @Override
+    public AjaxMessage cancelSticky(long uid, Integer aid) {
+        int changeRow = articleMapper.cancelSticky(aid);
+
+        if (changeRow < 1) {
+            return new AjaxMessage(false,"撤除置顶帖子失败");
+        }
+
+        //写日志
+        ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage(uid,aid,
+                ArticleOperationMessage.CANCELSTICKY);
+        articleOperationMessageMapper.insert(articleOperationMessage);
+        return new AjaxMessage(true, "撤销置顶帖子成功");
+    }
+
+    /**
+     * 取消加精
+     * @param uid
+     * @param aid
+     * @return
+     */
+    @Transactional
+    @Override
+    public AjaxMessage cancelEssence(long uid, Integer aid) {
+        int changeRow = articleMapper.cancelEssence(aid);
+
+        if (changeRow < 1) {
+            return new AjaxMessage(false,"取消加精帖子失败");
+        }
+
+        //写日志
+        ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage(uid,aid,
+                ArticleOperationMessage.CANCELESSENCE);
+        articleOperationMessageMapper.insert(articleOperationMessage);
+        return new AjaxMessage(true, "取消加精帖子成功");
+    }
+
+    @Transactional
+    @Override
+    public AjaxMessage star(long uid, Integer aid) {
+        //调整帖子的收藏数
+        int articleChangeRow = articleMapper.star(aid);
+        if (articleChangeRow < 1) {
+            return new AjaxMessage(false, "帖子不存在");
+        }
+
+        //查看数据库是否原来就有数据
+        int articleStarChangeRow = articleStarMapper.star(aid,uid);
+        //插入收藏记录
+        if (articleStarChangeRow < 1) {
+            ArticleStar articleStar = new ArticleStar(uid, aid);
+            articleStarMapper.insert(articleStar);
+        }
+
+        //日志
+        ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage(uid, aid, ArticleOperationMessage.STAR);
+        articleOperationMessageMapper.insert(articleOperationMessage);
+        return new AjaxMessage(true, "收藏成功");
+    }
+
+    /**
+     * 用户取消收藏
+     * @param uid
+     * @param aid
+     * @return
+     */
+    @Transactional
+    @Override
+    public AjaxMessage cancelStar(long uid, Integer aid) {
+        int articleChangeRow = articleMapper.cancelStar(aid);
+        if (articleChangeRow < 1) {
+            return new AjaxMessage(false, "帖子不存在");
+        }
+
+        int articleStarChangeRow = articleStarMapper.cancelStar(aid,uid);
+        if (articleStarChangeRow < 1) {
+            return new AjaxMessage(false, "您未收藏该贴子");
+        }
+
+        ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage(uid, aid, ArticleOperationMessage.CANCELSTAR);
+        articleOperationMessageMapper.insert(articleOperationMessage);
+        return new AjaxMessage(true, "取消收藏帖子成功");
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public AjaxMessage delete(Long uid, Integer aid,Integer cid) throws Exception{
+
+        int changeCircleRow = circleMapper.deleteArticle(cid);
+        if (changeCircleRow < 1) {
+            throw new Exception("该帖子所属的圈子不存在");
+        }
+
+        int changeArticleRow =  articleMapper.deleteById(aid,cid);
+        if (changeArticleRow < 1) {
+            throw new Exception("该帖子不存在");
+        }
+
+        //删除收藏，置顶,点赞等信息
+        articleStarMapper.cancelStarByAid(aid);
+        articleLikeMapper.cancelLikeByAid(aid);
+
+
+        ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage(uid, aid, ArticleOperationMessage.DELETE);
+        articleOperationMessageMapper.insert(articleOperationMessage);
+
+        return new AjaxMessage(true, "删除帖子成功");
+
     }
 }

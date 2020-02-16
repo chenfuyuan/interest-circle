@@ -39,4 +39,29 @@ public interface ArticleMapper extends BaseMapper<Article> {
 
     @Update("update article set like_num = like_num-1 where id =#{aid}")
     int cancelLike(Integer aid);
+
+    @Update("update article set sticky = 1 where id =#{aid} and state!=0")
+    int stickyArticle(Integer aid);
+
+    @Select("select * from article where sticky = 1 and state != 0 and cid=#{cid}")
+    @ResultMap("articleMap")
+    List<Article> findStickysByCid(int cid);
+
+    @Update("update article set type = 2 where state != 0 and id=#{aid}")
+    int essenceByAid(Integer aid);
+
+    @Update("update article set sticky = 0 where state !=0 and id=#{aid}")
+    int cancelSticky(Integer aid);
+
+    @Update("update article set type = 1 where state !=0 and id=#{aid}")
+    int cancelEssence(Integer aid);
+
+    @Update("update article set star_num = star_num +1 where state !=0 and id=#{aid}")
+    int star(Integer aid);
+
+    @Update("update article set star_num = star_num -1 where state != 0 and id=#{aid}")
+    int cancelStar(Integer aid);
+
+    @Update("update article set state = 0 where id = #{aid} and cid =#{cid}")
+    int deleteById(Integer aid,Integer cid);
 }

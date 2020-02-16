@@ -18,24 +18,24 @@ import java.util.Date;
 public class Circle implements Serializable {
 
     @TableId(type= IdType.AUTO)
-    private int id;
+    private Integer id;
     private String name;
     private String avatarPath;
 
     @TableField(exist = false)
     private District district;
 
-    private int districtId;
-    private int userNum;
-    private int articleNum;
+    private Integer districtId;
+    private Integer userNum;
+    private Integer articleNum;
 
     @TableField(exist = false)
     private User owner;
-    private long ownerId;
+    private Long ownerId;
 
     private Date createTime;
     private Date updateTime;
-    private int state;
+    private Integer state;
 
     //背景图片
     private String bgdPath;
