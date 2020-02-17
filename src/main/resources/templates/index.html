@@ -9,58 +9,7 @@
     <div id="uid" th:attr="data-uid=${session.user.id},data-identity=${userOwnCircles[pageNum-1].type}"></div>
     <div class="circle-content">
         <div class="circle-home w-e-clear-fix">
-            <div class="left-content">
-                <div>
-                    <div>
-                        <div class="theme-color-container circle-info-card"
-                             th:with="circle=${userOwnCircles[pageNum-1].circle}">
-                            <header class="card-header">
-                                <div class="circle-bg"
-                                     th:attr="style='background-image:url('+${circle.bgdPath}+')'"></div>
-                                <div class="circle-info">
-                                    <div class="circle-avatar">
-                                        <!--圈子头像图片-->
-                                        <img th:src="@{${circle.avatarPath}}" alt="">
-                                    </div>
-                                    <!--圈子标题-->
-                                    <span class="circle-name"><h1 th:text="${circle.name}">圈子名字</h1><!----></span></div>
-                            </header>
-                            <div class="card-content">
-                                <div class="circle-users">
-                                    <!--                                圈子成员头像-->
-                                    <div class="user-list clear-fix">
-                                        <div class="user-avatar" th:each="user,stat:${circleMember}">
-                                            <img th:src="@{${user.avatarPath}}" alt="">
-                                        </div>
-
-                                        <p class="users-count">
-                                            <span th:text="${circle.userNum}">
-                                                <span class="dot"></span>327</span> 个成员
-                                        </p>
-                                    </div>
-                                </div>
-                                <div>
-                                    <!--                                圈子简介-->
-                                    <div class="circle-description" th:if="${circle.introduce}">
-                                        <p th:text="${circle.introduce}" class="left-text">
-                                            我们将在这里将围绕学习和成长分享学霸们的经验方法通过备考心理学、学习方法、思考思维、知识点梳理、解题套路等维度，让你和学霸一样思考，培养和学霸一样的学习习惯，以及掌握学霸们拥有的知识体系框架</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-footer">
-                                <div class="joined-footer">
-                                    <div>
-                                        <span id="btn-circle-setting" class="text-btn" href="#"><span
-                                                class="more-icon-setting text-btn-icon glyphicon glyphicon-cog"
-                                        ></span>
-                                            圈子设置</span>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div> <!----> <!----></div>
-                    <div data-v-b270548c=""></div> <!----></div>
-            </div>
+            <div th:replace="include/circle_model::left-content"></div>
             <div th:replace="article/index-article::main-content"></div>
         </div>
     </div>
@@ -76,6 +25,10 @@
 
 <!--退出圈子弹窗-->
 <div th:replace="include/circle_model::quit"></div>
+
+<!--帖子举报弹窗-->
+<div th:replace="article/index-article::report"></div>
+
 <!--引入js-->
 <script type="application/javascript" src="/static/js/index.js"></script>
 <script type="application/javascript" src="/static/js/circle/circle_model_show.js"></script>

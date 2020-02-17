@@ -128,7 +128,7 @@ $(function () {
             }
 
             dropmenu += dropmenuEnd;
-
+            console.log(dropmenu);
             var str = "<div class='post-list-item' data-aid='" + aid + "'><div class='wrap' data-aid='" + aid + "'><div class='user-info'><div class='left-side'><div class='user-avatar'><img src='" + user.avatarPath + "' alt='' class='avatar-head'></div>" +
                 "<div><p class='user-name'><span class=''>" + user.name + "</span></p>" +
                 "<p class='post-time'>" + date + "</p></div></div><div>" +
@@ -197,11 +197,8 @@ $(function () {
         $(".article-operation-menu-btn").unbind("click");
         $(".article-operation-menu-btn").click(function () {
             $(this).siblings(".more-dropdown-menu").toggle();
-
             var list = $(this).parents(".post-list-item");
             list.siblings().find(".more-dropdown-menu").hide();
-
-
         });
         //各个操作
 
@@ -350,6 +347,7 @@ $(function () {
         $("#btn-delete-cancel").click(function () {
             $("#article-delete-model").hide();
         });
+
         $("#btn-delete-confirm").unbind("click");
         $("#btn-delete-confirm").click(function () {
             var aid = $(this).data("aid");
@@ -363,6 +361,8 @@ $(function () {
                     alert(re.message);
                 }
                 $(".more-dropdown-menu ").hide();
+                $("#article-delete-model").hide();
+
 
             })
         });
@@ -370,6 +370,47 @@ $(function () {
 
 
         //点击帖子举报项
+        $(".item-report").unbind("click");
+        $(".item-report").click(function () {
+            var reportBtn = $(this);
+            var aid = reportBtn.parents(".post-list-item").data("aid");
+            console.log("点击帖子举报按钮，举报的帖子为:" + aid);
+            //让举报栏显示
+            $("#article-report-model").show();
+            $("#btn-article-report-confirm").data("aid",aid);
+        });
+
+        $("#btn-article-report-cancel").unbind("click");
+        $("#btn-article-report-confirm").click(function () {
+            $("#article-report-model").hide();
+        });
+
+        $("#btn-article-report-confirm").unbind("click");
+        $("#btn-article-report-confirm").click(function () {
+            //获取aid
+            var aid = $(this).data("aid");
+            //获取单选框的
+            var report = $("#article-report-model input[name='article-flag']:checked").val();
+
+            if (report == null || report == undefined || report == "") {
+                alert("请选择举报理由");
+                return;
+            }
+
+            $.get("/article/report/"+aid+"?report="+report,function (re) {
+                alert(re.message);
+                $("#article-report-model").hide();
+            })
+
+        });
+
+
+        //帖子跳转
+        $(".topic-text").click(function () {
+            var aid = $(this).parents(".post-list-item").data("aid");
+            window.location.href = "/article/detail/" + aid + "?pageNum=" + pageNum;
+        });
+
     }
 
     //从后台获取帖子列表，并填充显示

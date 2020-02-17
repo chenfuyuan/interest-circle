@@ -1,7 +1,7 @@
 package com.cfy.interest;
 
 import com.cfy.interest.service.SignUpService;
-import com.cfy.interest.service.vo.SignUpVo;
+import com.cfy.interest.vo.SignUpVo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

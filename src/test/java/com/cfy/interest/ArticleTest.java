@@ -1,7 +1,7 @@
 package com.cfy.interest;
 
 import com.cfy.interest.mapper.ArticleMapper;
-import com.cfy.interest.service.vo.ArticleShow;
+import com.cfy.interest.vo.ArticleShow;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

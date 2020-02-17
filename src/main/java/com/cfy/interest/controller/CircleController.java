@@ -2,8 +2,8 @@ package com.cfy.interest.controller;
 
 import com.cfy.interest.model.*;
 import com.cfy.interest.service.CircleService;
-import com.cfy.interest.service.vo.AjaxMessage;
-import com.cfy.interest.service.vo.CreateCircleFormVo;
+import com.cfy.interest.vo.AjaxMessage;
+import com.cfy.interest.vo.CreateCircleFormVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;

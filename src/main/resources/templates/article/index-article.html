@@ -6,10 +6,9 @@
 
 <body>
 <section>
-
     <div th:fragment="main-content" class="main-content">
         <div class="content-block">
-            <!--                    圈子搜索-->
+            <!--圈子搜索-->
             <div class="content-block search-block">
                 <div class="search-container">
                             <span class="more-input-box"><!----> <!---->
@@ -116,5 +115,94 @@
         </div>
     </div>
 </section>
+
+
+<div th:fragment="report"  class="report-article more-modal-box" style="z-index: 2015; display: none"
+     id="article-report-model">
+    <div class="more-modal-backdrop"></div>
+    <div class="more-modal">
+        <div data-size="sm" class="more-dialog theme-color-container">
+            <div class="more-dialog-head"><h5 class="more-dialog-head-title">举报</h5><span
+                    class="more-icon-close more-dialog-icon-close glyphicon glyphicon-remove"
+                    id="btn-report-close"></span></div>
+            <div  class="section-body">
+                <div  class="report-reason-box"><p  class="report-reason-title">
+                    请选择举报理由</p>
+                    <label  class="report-reason-item">
+                        <span>暴恐涉政</span>
+                        <label  data-theme="default" class="more-radio-container">
+                            <span class="more-radio-fake">
+                                <span class="more-radio-fake-inner"></span>
+                            </span>
+                            <input type="radio" name="article-flag" class="more-radio article-report-radio" value="1">
+                            <span class="more-radio-label"> </span>
+                        </label>
+                    </label>
+                    <label class="report-reason-item">
+                        <span>色情内容</span>
+                        <label  data-theme="default" class="more-radio-container">
+                            <span class="more-radio-fake">
+                                <span class="more-radio-fake-inner"></span>
+                            </span>
+                            <input type="radio" name="article-flag" class="more-radio article-report-radio" value="2">
+                            <span class="more-radio-label"> </span>
+                        </label>
+                    </label>
+                    <label class="report-reason-item">
+                        <span>违法犯罪</span>
+                        <label  data-theme="default" class="more-radio-container">
+                            <span class="more-radio-fake">
+                                <span class="more-radio-fake-inner"></span>
+                            </span>
+                            <input type="radio" name="article-flag" class="more-radio article-report-radio" value="3">
+                            <span class="more-radio-label"> </span>
+                        </label>
+                    </label>
+                    <label class="report-reason-item">
+                        <span>谣言垃圾</span>
+                        <label  data-theme="default" class="more-radio-container">
+                            <span class="more-radio-fake">
+                                <span class="more-radio-fake-inner"></span>
+                            </span>
+                            <input type="radio" name="article-flag" class="more-radio article-report-radio" value="4">
+                            <span class="more-radio-label"> </span>
+                        </label>
+                    </label>
+                    <label class="report-reason-item">
+                        <span>抄袭侵权</span>
+                        <label  data-theme="default" class="more-radio-container">
+                            <span class="more-radio-fake">
+                                <span class="more-radio-fake-inner"></span>
+                            </span>
+                            <input type="radio" name="article-flag" class="more-radio article-report-radio" value="5">
+                            <span class="more-radio-label"></span>
+                        </label>
+                    </label>
+                    <label class="report-reason-item">
+                        <span>其他</span>
+                        <label  data-theme="default" class="more-radio-container">
+                            <span class="more-radio-fake">
+                                <span class="more-radio-fake-inner"></span>
+                            </span>
+                            <input type="radio" name="article-flag" class="more-radio article-report-radio" value="6">
+                            <span class="more-radio-label"></span>
+                        </label>
+                    </label>
+                </div>
+            </div>
+            <div data-flex="true" data-align="center" data-justify="end" data-flow="row"
+                 class="more-row more-dialog-footer">
+                <button data-type="default" data-size="default" data-theme="text"
+                        class="more-btn no-theme-color more-dialog-cancel-btn" id="btn-article-report-cancel"><!---->
+                    <span>取消</span>
+                </button>
+                <button data-type="danger" data-size="default" data-theme="text"
+                        id="btn-article-report-confirm"class="more-btn more-dialog-confirm-btn"><!---->
+                    <span>提交</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

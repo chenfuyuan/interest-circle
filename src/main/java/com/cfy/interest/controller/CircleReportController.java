@@ -4,7 +4,7 @@ package com.cfy.interest.controller;
 import com.cfy.interest.model.CircleReport;
 import com.cfy.interest.model.User;
 import com.cfy.interest.service.CircleReportService;
-import com.cfy.interest.service.vo.AjaxMessage;
+import com.cfy.interest.vo.AjaxMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

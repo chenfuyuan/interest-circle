@@ -7,10 +7,10 @@ import com.cfy.interest.model.ArticleOperationMessage;
 import com.cfy.interest.model.ArticleStar;
 import com.cfy.interest.provider.AliyunOSSProvider;
 import com.cfy.interest.service.ArticleService;
-import com.cfy.interest.service.vo.AjaxMessage;
-import com.cfy.interest.service.vo.ArticleShow;
-import com.cfy.interest.service.vo.EditorArticleVo;
-import com.cfy.interest.service.vo.GetArticleVo;
+import com.cfy.interest.vo.AjaxMessage;
+import com.cfy.interest.vo.ArticleShow;
+import com.cfy.interest.vo.EditorArticleVo;
+import com.cfy.interest.vo.GetArticleVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -329,5 +329,19 @@ public class ArticleServiceImpl implements ArticleService {
 
         return new AjaxMessage(true, "删除帖子成功");
 
+    }
+
+    @Override
+    public ArticleShow getArticle(Integer aid, int cid,Long uid) {
+        ArticleShow articleShow = articleMapper.selectShowById(aid);
+        if (cid != articleShow.getCid()) {
+            return null;
+        } else {
+            int likes = articleLikeMapper.isLike(uid, articleShow.getId());
+            articleShow.setLike(likes>0);
+            int stars = articleStarMapper.isStar(uid, articleShow.getId());
+            articleShow.setStar(stars>0);
+            return articleShow;
+        }
     }
 }

@@ -1,9 +1,9 @@
 package com.cfy.interest.service;
 
 
-import com.cfy.interest.service.vo.SendSmsMessage;
-import com.cfy.interest.service.vo.SignInByAuthCodeVo;
-import com.cfy.interest.service.vo.SignInMessage;
+import com.cfy.interest.vo.SendSmsMessage;
+import com.cfy.interest.vo.SignInByAuthCodeVo;
+import com.cfy.interest.vo.SignInMessage;
 
 public interface SignInByAuthCodeService {
 

@@ -1,7 +1,7 @@
 package com.cfy.interest.service;
 
-import com.cfy.interest.service.vo.SendSmsMessage;
-import com.cfy.interest.service.vo.SignUpVo;
+import com.cfy.interest.vo.SendSmsMessage;
+import com.cfy.interest.vo.SignUpVo;
 import org.springframework.stereotype.Service;
 
 @Service

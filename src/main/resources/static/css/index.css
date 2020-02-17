@@ -761,4 +761,8 @@ body,html {
     height: 100%;
     margin: 0 auto;
 }
+
+.main-content #article-delete-model {
+    position: fixed;
+}
 /*topic top end */

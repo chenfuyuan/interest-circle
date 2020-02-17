@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="circle_header::head('首页','css/index.css ,css/circle/circle_setting.css ,css/article/detail.css')">
+
+</head>
+
+<body>
+<section>
+    <div th:replace="circle_header::header"></div>
+    <div id="uid" th:attr="data-uid=${session.user.id},data-identity=${userOwnCircles[pageNum-1].type}"></div>
+    <div class="circle-content" th:with="identity=${userOwnCircles[pageNum-1].type}">
+        <div class="circle-home w-e-clear-fix">
+            <div th:replace="include/circle_model::left-content"></div>
+            <div class="main-content" th:attr="data-aid=${article.id}">
+                <div class="content-block">
+                    <div class="circle-post-container theme-color-container">
+                        <div class="circle-post-box">
+                            <header class="page-header clear-fix">
+                                <div class="left">
+                                    <div class="user-avatar">
+                                        <img th:src="@{${article.user.avatarPath}}" alt="" class="avatar-head">
+                                    </div>
+                                    <div>
+                                        <div class="user-name text-over" th:text="${article.user.name}">发帖人</div>
+                                        <div class="post-time" id="post-time" th:text="${articleTime}">发帖日期</div>
+                                    </div>
+                                </div>
+                                <div class="right">
+                                    <div class="right-side">
+                                        <span class="more-dropdown-box more-dropdown">
+                                            <div class="user-img">
+                                                <div class="article-operation-menu-btn">
+                                                    <i class="more-icon-option option-icon icon-btn glyphicon glyphicon-list"></i>
+                                                </div>
+                                                <div
+                                                        class='more-dropdown-menu topic-cell-dropdown-menu article-dropdown-menu'
+                                                        style='display: none'>
+                                                <div class='more-dropdown-item-list' th:attr="data-aid=${article.id}">
+                                                    <div th:if="${identity}==1 or ${identity}==2"
+                                                         class='more-dropdown-item item-sticky'>
+                                                        <div class='handle-icon-wrapper'>
+                                                            <img src='/static/image/adminSticky.svg'
+                                                                 class='handle-icon'>
+                                                        </div>
+                                                        <span th:if="${article.sticky}!=1">置顶</span>
+                                                        <span th:unless="${article.sticky}!=1">取消置顶</span>
+                                                    </div>
+
+                                                    <div th:if="${identity}==1 or ${identity}==2"
+                                                         class='more-dropdown-item item-essence'>
+
+                                                        <div class='handle-icon-wrapper'>
+                                                            <img src='/static/image/adminEssence.svg'
+                                                                 class='handle-icon'>
+                                                        </div>
+                                                        <span th:if="${article.type}==1">加精</span>
+                                                        <span th:if="${article.type}==2">取消加精</span>
+                                                    </div>
+
+                                                    <div th:if="${article.star}"
+                                                         class='more-dropdown-item item-star'>
+                                                        <div class='handle-icon-wrapper'>
+                                                            <img src='/static/image/articleStar.svg'
+                                                                 class='handle-icon'>
+                                                        </div>
+                                                        <span>取消收藏</span>
+                                                    </div>
+
+                                                    <div th:unless="${article.star}"
+                                                         class='more-dropdown-item item-star'>
+                                                        <div class='handle-icon-wrapper'>
+                                                            <img src='/static/image/articleNoStar.svg'
+                                                                 class='handle-icon'>
+                                                        </div>
+                                                        <span>收藏</span>
+                                                    </div>
+
+                                                    <div th:if="${article.user.id}==${session.user.id}"
+                                                         class='more-dropdown-item item-delete'>
+                                                        <div class='handle-icon-wrapper'>
+                                                            <img src='/static/image/articleDelete.svg'
+                                                                 class='handle-icon'>
+                                                        </div>
+                                                        <span>删除</span>
+                                                    </div>
+
+                                                    <div th:unless="${article.user.id}==${session.user.id}"
+                                                         class='more-dropdown-item item-report'>
+                                                        <div class='handle-icon-wrapper'>
+                                                            <img src='/static/image/articleReport.svg'
+                                                                 class='handle-icon'>
+                                                        </div>
+                                                        <span>举报</span>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            </div>
+
+                                        </span>
+                                    </div>
+                                </div>
+                            </header>
+                            <div class="page-content">
+                                <div class="topic-content">
+                                    <div>
+                                        <div class="topic-body topic-body-hashtml">
+                                            <h3 th:text="${article.title}">帖子标题</h3>
+                                            <div th:utext="${article.content}"></div>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div class="reactions">
+                                            <span class="likes">
+                                                <img th:if="${article.like}" src="/static/image/like.png"
+                                                     class="more-icon-appreciation icon-btn">
+                                                <img th:unless="${article.like}" src="/static/image/noLike.png"
+                                                     class="more-icon-appreciation icon-btn"/>
+                                                <span class="">
+                                                    赞
+                                                    <span class="likes-num" th:text="${article.likeNum}"></span>
+                                                </span>
+                                            </span>
+                                            <span class="comments"><i
+                                                    class="more-icon-comment icon-btn glyphicon glyphicon-comment"></i>
+                                                <span class="comments-count">
+                                                    评论
+                                                    <span class="comments-num" th:text="${article.commentNum}"></span>
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--评论信息-->
+                                <div>
+                                    <div class="reply-box reply"><!---->
+                                        <div class="post-flow-container more-scroll-view">
+                                            <div class="reply-detail-wrapper" style="min-height: 507px;">
+                                                <div class="reply-item parent-reply-item">
+                                                    <div class="user-avatar">
+                                                        <img src="/static/image/avatar.png"
+                                                            alt="" class="avatar-head">
+                                                    </div>
+                                                    <div class="reply-details">
+                                                        <div class="reply-header">
+                                                            <div><span class="user-name">YY</span> <span
+                                                                    class="topic-time">2月14日 23:14</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="reply-body">wfasfsafasfsafasfaf</div>
+                                                        <div class="reply-footer">
+                                                            <span class="text-btn">回复</span>
+                                                            <span class="seperater-line"></span>
+                                                            <span class="icon-btn more-icon-appreciation">
+                                                                <img class="like-img"
+                                                                     src="/static/image/noLike.png"
+                                                                     alt="">
+                                                                <span>赞</span>
+                                                            </span>
+                                                            <span class="seperater-line"></span>
+                                                            <span class="text-btn">删除</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div>
+                                                    <footer class="reply-footer page-footer post-page-footer">
+                                                        <div id="user-avatar" class="user-avatar">
+                                                            <img src="/static/image/avatar.png"
+                                                                alt="">
+                                                        </div>
+                                                        <div class="more-remind">
+                                                            <input id="replyText" class="more-remind-input"
+                                                            placeholder="评论"/>
+
+                                                        </div>
+                                                        <div class="reply-btn">
+                                                            <button class="more-btn" id="btn-send">发送</button>
+                                                        </div>
+                                                    </footer>
+                                                </div>
+                                            </div>
+                                            <div class="more-scroll-view-status"><span> · 已加载结束 · </span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--圈子设置弹窗-->
+<div th:replace="include/circle_model::setting"></div>
+<!--圈子举报弹窗-->
+<div th:replace="include/circle_model::report"></div>
+
+<!--圈子选择列表-->
+<div th:replace="include/circle_model::select"></div>
+
+<!--退出圈子弹窗-->
+<div th:replace="include/circle_model::quit"></div>
+
+<!--帖子举报弹窗-->
+<div th:replace="article/index-article::report"></div>
+<!--帖子删除弹窗-->
+<div th:replace="article/index-article::delete"></div>
+
+<script type="application/javascript" src="/static/js/index.js"></script>
+<script type="application/javascript" src="/static/js/circle/circle_model_show.js"></script>
+<script type="application/javascript" src="/static/js/circle/circle_model.js"></script>
+<script type="application/javascript" src="/static/js/article/detail.js"></script>
+<script type="application/javascript" src="/static/js/article/comment.js"></script>
+
+</body>
+</html>

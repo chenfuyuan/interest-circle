@@ -1,4 +1,4 @@
-package com.cfy.interest.service.vo;
+package com.cfy.interest.vo;
 
 import lombok.Data;
 

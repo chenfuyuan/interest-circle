@@ -3,13 +3,12 @@ package com.cfy.interest.controller;
 
 import com.cfy.interest.model.User;
 import com.cfy.interest.service.UserService;
-import com.cfy.interest.service.vo.AjaxMessage;
-import com.cfy.interest.service.vo.ChangePasswordVo;
-import com.cfy.interest.service.vo.SendSmsMessage;
-import com.cfy.interest.service.vo.UserInfoVo;
+import com.cfy.interest.vo.AjaxMessage;
+import com.cfy.interest.vo.ChangePasswordVo;
+import com.cfy.interest.vo.SendSmsMessage;
+import com.cfy.interest.vo.UserInfoVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;

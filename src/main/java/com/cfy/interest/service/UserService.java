@@ -1,10 +1,10 @@
 package com.cfy.interest.service;
 
 import com.cfy.interest.model.User;
-import com.cfy.interest.service.vo.AjaxMessage;
-import com.cfy.interest.service.vo.ChangePasswordVo;
-import com.cfy.interest.service.vo.SendSmsMessage;
-import com.cfy.interest.service.vo.UserInfoVo;
+import com.cfy.interest.vo.AjaxMessage;
+import com.cfy.interest.vo.ChangePasswordVo;
+import com.cfy.interest.vo.SendSmsMessage;
+import com.cfy.interest.vo.UserInfoVo;
 
 public interface UserService {
 

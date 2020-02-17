@@ -10,7 +10,7 @@ import com.aliyuncs.exceptions.ServerException;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
 import com.cfy.interest.dto.SmsResponse;
-import com.cfy.interest.service.vo.SendSmsMessage;
+import com.cfy.interest.vo.SendSmsMessage;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

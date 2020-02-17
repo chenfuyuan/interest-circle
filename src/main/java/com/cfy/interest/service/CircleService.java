@@ -1,8 +1,8 @@
 package com.cfy.interest.service;
 
 import com.cfy.interest.model.*;
-import com.cfy.interest.service.vo.AjaxMessage;
-import com.cfy.interest.service.vo.CreateCircleFormVo;
+import com.cfy.interest.vo.AjaxMessage;
+import com.cfy.interest.vo.CreateCircleFormVo;
 
 import java.util.List;
 

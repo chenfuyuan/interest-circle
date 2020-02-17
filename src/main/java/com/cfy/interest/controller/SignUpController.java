@@ -1,9 +1,9 @@
 package com.cfy.interest.controller;
 
 import com.cfy.interest.service.SignUpService;
-import com.cfy.interest.service.vo.SendSmsMessage;
-import com.cfy.interest.service.vo.SignUpMessage;
-import com.cfy.interest.service.vo.SignUpVo;
+import com.cfy.interest.vo.SendSmsMessage;
+import com.cfy.interest.vo.SignUpMessage;
+import com.cfy.interest.vo.SignUpVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;

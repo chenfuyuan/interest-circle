@@ -2,7 +2,7 @@ package com.cfy.interest.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.cfy.interest.model.Article;
-import com.cfy.interest.service.vo.ArticleShow;
+import com.cfy.interest.vo.ArticleShow;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -64,4 +64,12 @@ public interface ArticleMapper extends BaseMapper<Article> {
 
     @Update("update article set state = 0 where id = #{aid} and cid =#{cid}")
     int deleteById(Integer aid,Integer cid);
+
+    @Select("select * from article where state != 0 and id =#{aid}")
+    @ResultMap("articleMap")
+    ArticleShow selectShowById(Integer aid);
+
+    @Update("update article set comment_num = comment_num+1 where id = #{aid} and state != 0")
+    int comment(int aid);
+
 }

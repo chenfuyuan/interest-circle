@@ -16,7 +16,7 @@ $(function () {
 
     //举报圈子
     $("#btn-report-confirm").click(function () {
-        var report = $("input[name='flag']:checked").val();
+        var report = $("#circle-report-model input[name='flag']:checked").val();
         if (report == undefined || report == '' || report == null) {
             alert("请选择举报理由");
         } else {

@@ -1,7 +1,7 @@
 package com.cfy.interest.service;
 
-import com.cfy.interest.service.vo.SignInMessage;
-import com.cfy.interest.service.vo.SignInVo;
+import com.cfy.interest.vo.SignInMessage;
+import com.cfy.interest.vo.SignInVo;
 
 public interface SignInService {
 

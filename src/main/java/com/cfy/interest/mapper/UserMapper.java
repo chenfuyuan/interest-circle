@@ -12,8 +12,8 @@ public interface UserMapper extends BaseMapper<User> {
     @Select("select * from user where phone = #{phone}")
     public User selectByPhone(String phone);
 
-    @Update("update user set state = 0 where id = #{id}")
-    public void logOut(long id);
+    @Update("update user set token = #{token} where id = #{id}")
+    public void logOut(long id,String token);
 
     @Select("select * from user where name = #{name} and id !=#{uid}")
     public User selectByName(String name, long uid);

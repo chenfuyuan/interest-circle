@@ -1,10 +1,10 @@
 package com.cfy.interest.service;
 
 import com.cfy.interest.model.Article;
-import com.cfy.interest.service.vo.AjaxMessage;
-import com.cfy.interest.service.vo.ArticleShow;
-import com.cfy.interest.service.vo.EditorArticleVo;
-import com.cfy.interest.service.vo.GetArticleVo;
+import com.cfy.interest.vo.AjaxMessage;
+import com.cfy.interest.vo.ArticleShow;
+import com.cfy.interest.vo.EditorArticleVo;
+import com.cfy.interest.vo.GetArticleVo;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -41,4 +41,5 @@ public interface ArticleService {
     AjaxMessage delete(Long uid, Integer aid, Integer cid) throws Exception;
 
 
+    ArticleShow getArticle(Integer aid, int cid,Long uid);
 }

@@ -5,7 +5,7 @@ import com.cfy.interest.mapper.CircleReportMapper;
 import com.cfy.interest.model.CircleOperationMessage;
 import com.cfy.interest.model.CircleReport;
 import com.cfy.interest.service.CircleReportService;
-import com.cfy.interest.service.vo.AjaxMessage;
+import com.cfy.interest.vo.AjaxMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

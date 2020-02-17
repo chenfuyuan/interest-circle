@@ -2,7 +2,7 @@ package com.cfy.interest;
 
 import com.cfy.interest.mapper.UserMapper;
 import com.cfy.interest.service.SignInByAuthCodeService;
-import com.cfy.interest.service.vo.SignInByAuthCodeVo;
+import com.cfy.interest.vo.SignInByAuthCodeVo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

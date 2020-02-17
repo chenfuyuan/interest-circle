@@ -8,7 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <p>
@@ -44,9 +44,8 @@ public class Article implements Serializable {
 
     private Integer type;
 
-    private LocalDateTime createTime;
-
-    private LocalDateTime updateTime;
+    private Date createTime;
+    private Date updateTime;
 
     /**
      * 状态

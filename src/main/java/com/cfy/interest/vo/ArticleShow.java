@@ -1,4 +1,4 @@
-package com.cfy.interest.service.vo;
+package com.cfy.interest.vo;
 
 import com.cfy.interest.model.Article;
 import lombok.Data;
@@ -6,14 +6,14 @@ import lombok.Data;
 /**/
 @Data
 public class ArticleShow extends Article {
-    private boolean isLike;
-    private boolean isStar;
+    private boolean like;
+    private boolean star;
 
     @Override
     public String toString() {
         return super.toString()+"ArticleShow{" +
-                "isLike=" + isLike +
-                ", isStar=" + isStar +
+                "isLike=" + like +
+                ", isStar=" + star +
                 '}';
     }
 }

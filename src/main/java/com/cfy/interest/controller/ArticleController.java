@@ -2,8 +2,10 @@ package com.cfy.interest.controller;
 
 import com.cfy.interest.model.Article;
 import com.cfy.interest.model.User;
+import com.cfy.interest.model.UserOwnCircle;
 import com.cfy.interest.service.ArticleService;
-import com.cfy.interest.service.vo.*;
+import com.cfy.interest.service.CircleService;
+import com.cfy.interest.vo.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Controller
@@ -21,6 +24,9 @@ import java.util.List;
 public class ArticleController {
     @Autowired
     private ArticleService articleService;
+
+    @Autowired
+    private CircleService circleService;
 
     @GetMapping("/article/editor")
     public String index(Model model, @RequestParam(name = "cid") Integer cid) {
@@ -178,7 +184,7 @@ public class ArticleController {
 
     @GetMapping("/article/star/cancel/{aid}")
     @ResponseBody
-    public AjaxMessage cancelStar(@PathVariable("aid") Integer aid, HttpServletRequest request){
+    public AjaxMessage cancelStar(@PathVariable("aid") Integer aid, HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
         long uid = user.getId();
         AjaxMessage ajaxMessage = articleService.cancelStar(uid, aid);
@@ -187,13 +193,13 @@ public class ArticleController {
 
     @GetMapping("/article/delete/{aid}")
     @ResponseBody
-    public AjaxMessage delete(@PathVariable("aid") Integer aid,@RequestParam("cid")Integer cid,
-                              HttpServletRequest request){
+    public AjaxMessage delete(@PathVariable("aid") Integer aid, @RequestParam("cid") Integer cid,
+                              HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
         Long uid = user.getId();
         AjaxMessage ajaxMessage = null;
         try {
-            ajaxMessage = articleService.delete(uid, aid,cid);
+            ajaxMessage = articleService.delete(uid, aid, cid);
         } catch (Exception e) {
             log.info("");
             e.printStackTrace();
@@ -201,4 +207,57 @@ public class ArticleController {
         }
         return ajaxMessage;
     }
+
+
+    @GetMapping("/article/detail/{aid}")
+    public String detail(@PathVariable("aid") Integer aid, Model model, @RequestParam(name = "pageNum") Integer pageNum
+            , HttpServletRequest request) {
+        if(pageNum == null){
+            return "redirect:error";
+        }
+
+        User user = (User) request.getSession().getAttribute("user");
+        long uid = user.getId();
+
+        //获取用户参与的圈子
+        List<UserOwnCircle> userOwnCircles = circleService.selectUserOwn(uid);
+        //将用户选择的圈子和用户圈子列表传递到前台
+
+        //如果还未加入圈子，跳转到加入圈子界面
+        if(userOwnCircles.isEmpty()){
+            return "redirect:/circle/querySearch";
+        }
+
+        if (userOwnCircles.size() < pageNum) {
+            pageNum = userOwnCircles.size();
+        }
+        model.addAttribute("pageNum", pageNum);
+        model.addAttribute("userOwnCircles", userOwnCircles);
+
+
+        //获取选中圈子的前4个成员，根据职务顺序取得
+        int cid = userOwnCircles.get(pageNum-1).getCid();
+        log.info("选中的圈子id = " + cid);
+        List<User> userlist = circleService.selectCircleUserByCid(cid);
+        log.info("将在首页显示以下成员的头像 "+userlist);
+        log.info("多少个 " + userlist.size());
+        model.addAttribute("circleMember", userlist);
+
+
+        ArticleShow articleShow = articleService.getArticle(aid, cid,uid);
+        if (articleShow == null) {
+            return "/error";
+        }
+        model.addAttribute("article", articleShow);
+
+        log.info("articleShow = "+articleShow);
+        //格式化发帖时间
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String articleTimeStr = simpleDateFormat.format(articleShow.getCreateTime());
+
+
+        model.addAttribute("articleTime", articleTimeStr);
+        return "articleDetail";
+    }
+
 }

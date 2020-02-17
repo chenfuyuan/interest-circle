@@ -1,11 +1,10 @@
-package com.cfy.interest.service.vo;
+package com.cfy.interest.vo;
 
 import lombok.Data;
 
 @Data
-public class SignInVo {
+public class SignInByAuthCodeVo {
     private String phone;
-    private String password;
+    private String authCode;
     private boolean rememberPassword;
 }
-

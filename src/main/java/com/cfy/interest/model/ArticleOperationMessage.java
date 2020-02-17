@@ -32,6 +32,13 @@ public class ArticleOperationMessage implements Serializable {
     public static final int CANCELSTICKY = 9;
     public static final int CANCELESSENCE = 10;
     public static final int DELETE = 11;
+    public static final int REPORT = 12;
+    public static final int DEALREPORT = 13;
+    public static final int ACOMMENT = 14;
+    public static final int REPLY = 15;
+    public static final int DELETECOMMENT = 16;
+    public static final int DELETEREPLY = 17;
+
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 
@@ -87,6 +94,24 @@ public class ArticleOperationMessage implements Serializable {
                 break;
             case DELETE:
                 setMessage("删除帖子");
+                break;
+            case REPORT:
+                setMessage("举报帖子");
+                break;
+            case DEALREPORT:
+                setMessage("处理举报帖子");
+                break;
+            case ACOMMENT:
+                setMessage("评论帖子");
+                break;
+            case REPLY:
+                setMessage("回复评论");
+                break;
+            case DELETECOMMENT:
+                setMessage("删除评论");
+                break;
+            case DELETEREPLY:
+                setMessage("删除回复");
                 break;
         }
     }
