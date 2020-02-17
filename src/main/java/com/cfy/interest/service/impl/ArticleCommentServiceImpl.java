@@ -5,6 +5,7 @@ import com.cfy.interest.mapper.ArticleCommentMapper;
 import com.cfy.interest.mapper.ArticleMapper;
 import com.cfy.interest.mapper.ArticleOperationMessageMapper;
 import com.cfy.interest.model.ArticleComment;
+import com.cfy.interest.model.ArticleCommentShow;
 import com.cfy.interest.model.ArticleOperationMessage;
 import com.cfy.interest.service.ArticleCommentService;
 import com.cfy.interest.vo.AjaxMessage;
@@ -12,6 +13,8 @@ import com.cfy.interest.vo.CommentSaveVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class ArticleCommentServiceImpl implements ArticleCommentService {
@@ -39,7 +42,6 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
         articleComment.setAid(aid);
         articleComment.setUid(uid);
         articleComment.setContent(content);
-        articleComment.setRid(rid);
 
 
         articleCommentMapper.insert(articleComment);
@@ -61,4 +63,13 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
 
         return new AjaxMessage(true, "评论成功");
     }
+
+    @Override
+    public List<ArticleCommentShow> getComments(Integer aid, long uid) {
+        List<ArticleCommentShow> articleCommentShows = articleCommentMapper.selectByAid(aid);
+
+        return articleCommentShows;
+    }
+
+
 }

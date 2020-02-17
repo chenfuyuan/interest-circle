@@ -7,11 +7,10 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.util.Date;
-import java.util.List;
 
 @Data
-@TableName("article_comment")
-public class ArticleComment {
+@TableName("article_comment_reply")
+public class ArticleCommentReply {
 
     @TableId(type = IdType.AUTO)
     private Integer id;
@@ -21,12 +20,8 @@ public class ArticleComment {
     private Long uid;
 
     @TableField(exist = false)
-    private Article article;
-    private Integer aid;
-
-
-    @TableField(exist = false)
-    private List<ArticleCommentReply> replys;
+    private User replyUser;
+    private Long ruid;
 
 
     private String content;
@@ -35,7 +30,13 @@ public class ArticleComment {
     private Date updateTime;
 
 
+    @TableField(exist = false)
+    private ArticleComment articleComment;
+    private Integer acid;
     private Integer likeNum;
 
     private Integer state;
+
+
+    private Integer type;
 }

@@ -39,5 +39,32 @@ $(function () {
 
     });
 
+    function initComment() {
+        $.get("/article/comments/get/"+aid+"?pageNum=1",function (comments) {
+            console.log(comments);
+            //填充
+
+            var str = "<div class='reply-item parent-reply-item'><div class='user-avatar'>" +
+                "<img src='/static/image/avatar.png' alt='' class='avatar-head'>" +
+                "</div><div class='reply-details'><div class='reply-header'>" +
+                "                                                            <div><span class='user-name'>YY</span> <span class='topic-time'>2月14日 23:14</span>" +
+                "                                                            </div>" +
+                "                                                        </div>" +
+                "                                                        <div class='reply-body'>wfasfsafasfsafasfaf</div>" +
+                "                                                        <div class='reply-footer'>" +
+                "                                                            <span class='text-btn'>回复</span>" +
+                "                                                            <span class='seperater-line'></span>" +
+                "                                                            <span class='icon-btn more-icon-appreciation'>" +
+                "                                                                <img class='like-img' src='/static/image/noLike.png' alt=''>" +
+                "                                                                <span>赞</span>" +
+                "                                                            </span>" +
+                "                                                            <span class='seperater-line'></span>" +
+                "                                                            <span class='text-btn'>删除</span>" +
+                "                                                        </div>" +
+                "                                                    </div>" +
+                "                                                </div>"
+        })
+    }
+    initComment();
 
 });
