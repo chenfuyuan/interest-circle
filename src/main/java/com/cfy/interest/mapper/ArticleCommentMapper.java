@@ -20,6 +20,9 @@ public interface ArticleCommentMapper extends BaseMapper<ArticleComment> {
     })
     List<ArticleCommentShow> selectByAid(Integer aid);
 
+    @Update("update article_comment set reply_num = reply_num + 1 where id =#{acid} and state != 0")
+    int reply(Integer acid);
+
 
 
 }

@@ -136,11 +136,27 @@
                                 <div>
                                     <div class="reply-box reply"><!---->
                                         <div class="post-flow-container more-scroll-view">
+                                            <div>
+                                                <footer class="reply-footer page-footer post-page-footer">
+                                                    <div id="user-avatar" class="user-avatar">
+                                                        <img th:src="@{${session.user.avatarPath}}"
+                                                             alt="">
+                                                    </div>
+                                                    <div class="more-remind">
+                                                        <input id="replyText" class="more-remind-input"
+                                                               placeholder="评论"/>
+
+                                                    </div>
+                                                    <div class="reply-btn">
+                                                        <button class="more-btn" id="btn-send">发送</button>
+                                                    </div>
+                                                </footer>
+                                            </div>
                                             <div class="reply-detail-wrapper" style="min-height: 507px;">
                                                 <div class="reply-item parent-reply-item">
                                                     <div class="user-avatar">
                                                         <img src="/static/image/avatar.png"
-                                                            alt="" class="avatar-head">
+                                                             alt="" class="avatar-head">
                                                     </div>
                                                     <div class="reply-details">
                                                         <div class="reply-header">
@@ -164,22 +180,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div>
-                                                    <footer class="reply-footer page-footer post-page-footer">
-                                                        <div id="user-avatar" class="user-avatar">
-                                                            <img src="/static/image/avatar.png"
-                                                                alt="">
-                                                        </div>
-                                                        <div class="more-remind">
-                                                            <input id="replyText" class="more-remind-input"
-                                                            placeholder="评论"/>
 
-                                                        </div>
-                                                        <div class="reply-btn">
-                                                            <button class="more-btn" id="btn-send">发送</button>
-                                                        </div>
-                                                    </footer>
-                                                </div>
                                             </div>
                                             <div class="more-scroll-view-status"><span> · 已加载结束 · </span></div>
                                         </div>

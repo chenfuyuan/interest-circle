@@ -4,6 +4,7 @@ import com.cfy.interest.model.ArticleCommentShow;
 import com.cfy.interest.model.User;
 import com.cfy.interest.service.ArticleCommentService;
 import com.cfy.interest.vo.AjaxMessage;
+import com.cfy.interest.vo.ArticleCommentReplyVo;
 import com.cfy.interest.vo.CommentSaveVo;
 import com.github.pagehelper.PageHelper;
 import lombok.extern.slf4j.Slf4j;
@@ -49,7 +50,7 @@ public class ArticleCommentController {
         }
         User user = (User) request.getSession().getAttribute("user");
         long uid = user.getId();
-        PageHelper.startPage(pageNum, pageSize,"create_time asc");
+        PageHelper.startPage(pageNum, pageSize,"create_time desc");
         List<ArticleCommentShow> comments = null;
         try {
             comments = articleCommentService.getComments(aid, uid);
@@ -59,5 +60,21 @@ public class ArticleCommentController {
 
 
         return comments;
+    }
+
+    @PostMapping("/article/reply/save")
+    @ResponseBody
+    public AjaxMessage saveReply(@RequestBody ArticleCommentReplyVo articleCommentReplyVo,HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user");
+        long uid = user.getId();
+
+        try {
+            return articleCommentService.saveReply(articleCommentReplyVo,uid);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new AjaxMessage(false, e.getMessage());
+        }
+
+
     }
 }

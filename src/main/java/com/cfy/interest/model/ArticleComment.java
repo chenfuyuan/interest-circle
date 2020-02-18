@@ -38,4 +38,6 @@ public class ArticleComment {
     private Integer likeNum;
 
     private Integer state;
+
+    private Integer replyNum;
 }

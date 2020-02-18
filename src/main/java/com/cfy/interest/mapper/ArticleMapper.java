@@ -72,4 +72,6 @@ public interface ArticleMapper extends BaseMapper<Article> {
     @Update("update article set comment_num = comment_num+1 where id = #{aid} and state != 0")
     int comment(int aid);
 
+    @Update("update article set comment_num = comment_num+1 where id = #{aid} and state != 0")
+    int reply(Integer aid);
 }
