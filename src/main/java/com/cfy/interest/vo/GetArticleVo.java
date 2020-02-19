@@ -8,4 +8,5 @@ public class GetArticleVo {
     private String type;
     private int pageNum;
     private int cid;
+    private String search;
 }

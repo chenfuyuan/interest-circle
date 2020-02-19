@@ -27,9 +27,18 @@ public interface ArticleMapper extends BaseMapper<Article> {
     })
     public List<ArticleShow> findByCid(int cid);
 
+    @Select("select * from article where state!=0 and cid=#{cid} and (title like #{search} or content like #{search}) ")
+    @ResultMap("articleMap")
+    public List<ArticleShow> findSearchByCid(int cid,String search);
+
     @Select("select * from article where state!=0 and type = 2 and cid=#{cid}  ")
     @ResultMap("articleMap")
     public List<ArticleShow> findEssenceByCid(int cid);
+
+    @Select("select * from article where state!=0 and type = 2 and cid=#{cid} and (title like #{search or content " +
+            "like #{search}}) ")
+    @ResultMap("articleMap")
+    List<ArticleShow> findEssenceSearchByCid(int cid, String search);
 
     @Select("SELECT count(0) FROM article WHERE state != 0 AND cid = #{cid} ")
     public int selectCountByCid(int cid);
@@ -74,4 +83,12 @@ public interface ArticleMapper extends BaseMapper<Article> {
 
     @Update("update article set comment_num = comment_num+1 where id = #{aid} and state != 0")
     int reply(Integer aid);
+
+    @Update("update article set comment_num = comment_num - #{num} where id = #{aid} and state!=0")
+    int deleteComment(Integer aid, int num);
+
+    @Update("update article set comment_num = comment_num - 1 where id = #{aid} and state!=0")
+    int deleteReply(Integer aid);
+
+
 }

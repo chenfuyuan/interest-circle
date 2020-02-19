@@ -23,6 +23,16 @@ public interface ArticleCommentMapper extends BaseMapper<ArticleComment> {
     @Update("update article_comment set reply_num = reply_num + 1 where id =#{acid} and state != 0")
     int reply(Integer acid);
 
+    @Select("select * from article_comment where id = #{id} and state != 0")
+    @ResultMap("commentMap")
+    public ArticleComment selectById(Integer id);
 
+    @Select("select count(0) from article_comment where aid = #{aid} and state != 0")
+    int selectCountByAid(Integer aid);
 
+    @Update("update article_comment set state = 0 where id = #{acid}")
+    int deleteByAcId(Integer acid);
+
+    @Update("update article_comment set reply_num = reply_num -1 where id = #{acid} and state !=0")
+    int deleteReply(Integer acid);
 }

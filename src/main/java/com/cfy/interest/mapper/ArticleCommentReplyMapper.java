@@ -2,10 +2,7 @@ package com.cfy.interest.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.cfy.interest.model.ArticleCommentReply;
-import org.apache.ibatis.annotations.One;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -20,4 +17,15 @@ public interface ArticleCommentReplyMapper extends BaseMapper<ArticleCommentRepl
             @Result(property = "replyUser",column = "ruid",one=@One(select = "com.cfy.interest.mapper.UserMapper.selectById")),
     })
     List<ArticleCommentReply> selectReplys(int acid);
+
+
+    @Select("select * from article_comment_reply where id =#{id} and state!=0")
+    @ResultMap("replyMap")
+    ArticleCommentReply selectByAcId(Integer id);
+
+    @Update("update article_comment_reply set state = 0 where acid = #{acid}")
+    int deleteByAcid(Integer acid);
+
+    @Update("update article_comment_reply set state = 0 where id = #{rid}")
+    int deleteByRid(Integer rid);
 }

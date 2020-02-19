@@ -1,5 +1,7 @@
 $(function () {
-
+    var pageNum = 1;
+    var pageSize = 10;
+    menu = $(".reply-detail-wrapper");
     function addOnclickListener() {
         //回复按钮点击事件 将回复人姓名传递给输入框，并让输入框显示
         $(".btn-reply").unbind("onclick");
@@ -24,7 +26,7 @@ $(function () {
 
             var acid = thisBtn.data("acid");
             var ruid = thisBtn.data("ruid");
-
+            console.log("ruid = " + ruid);
             replyVo = new Object();
             replyVo["acid"] = acid;
             replyVo["ruid"] = ruid;
@@ -50,8 +52,8 @@ $(function () {
                 console.log("replyVo = " + replyVo);
                 var data = JSON.stringify(replyVo);
                 console.log("data = " + data);
-
-
+                var acid = replyVo["acid"];
+                console.log("acid = " + acid);
                 $.ajax({
                     url: "/article/reply/save",
                     contentType: "application/json",
@@ -59,12 +61,76 @@ $(function () {
                     dataType: 'json',
                     data:data,
                 }).done(function (re) {
-
+                    console.log("reply.id = "+re.id);
+                    console.log("开始填充回复条");
+                    var reply_item = $(".reply-item[data-acid='" + acid + "']");
+                    var replyMenu = reply_item.find(".child-reply-box");
+                    replyMenu.show();
+                    addReply(re, replyMenu);
+                    $(".child-reply-wrapper").hide();
                 });
             });
         });
 
+        $(".btn-delete").unbind("click");
+        $(".btn-delete").click(function () {
+            console.log("点击删除")
+            var thisBtn = $(this);
+            var deleteReplyVo = new Object();
+            var acid = thisBtn.data("acid");
+            deleteReplyVo["acid"] = acid;
+            deleteReplyVo["aid"] = aid;
+            if (thisBtn.hasClass("btn-delete-comment")) {
+                console.log("删除评论 = " + acid);
+                var data = JSON.stringify(deleteReplyVo);
+                $.ajax({
+                    url: "/article/comment/delete",
+                    contentType: "application/json",
+                    type: 'post',
+                    dataType: 'json',
+                    data: data
+                }).done(function (re) {
+                    if (re.success) {
+                        alert(re.message);
+                        $(".reply-item[data-acid='" + acid + "']").remove();
+                        total -= 1;
+                    } else {
+                        alert(re.message);
+                    }
+                });
+            } else if (thisBtn.hasClass("btn-reply-delete")) {
+                var rid = thisBtn.data("rid");
+                deleteReplyVo["rid"] = rid;
+                console.log("删除回复 = "+rid);
+                var data = JSON.stringify(deleteReplyVo);
+                console.log("deleteVo = " + data);
 
+                $.ajax({
+                    url: "/article/reply/delete",
+                    contentType: "application/json",
+                    type: "post",
+                    dataType: "json",
+                    data: data
+                }).done(function (re) {
+                    if (re.success) {
+                        alert(re.message);
+                        var replyItem = $(".child-reply-item[data-rid='" + rid + "']");
+                        var replyMenu = replyItem.parents(".child-reply-box");
+                        replyItem.remove();
+                        console.log("html = "+replyMenu.html());
+                        console.log("text = "+replyMenu.text());
+                        if (replyMenu.html() =="") {
+                            replyMenu.hide();
+                        }
+                    } else {
+                        alert(re.message);
+                    }
+
+                });
+
+            }
+
+        });
     }
 
     // 对Date的扩展，将 Date 转化为指定格式的String
@@ -98,18 +164,20 @@ $(function () {
         var replyTime = new Date(reply.createTime).Format("yyyy-MM-dd hh:mm:ss");
         var content = reply.content;
         var rid = reply.id;
-        var ruid = replyUser.id;
+        var ruid = user.id;
         var acid = reply.acid;
         var replysMenuItem = "<div class='reply-item child-reply-item' data-rid='"+rid+"'><div" +
             " class='user-avatar'><img" +
-            " src='"+user.avatarPath+"' alt='' class='avatar-head'></div><div class='reply-details'><div" +
-            " class='reply-header'><div><span class='user-name'>"+user.name+"</span><span class='topic-time'>"+replyTime+"</span></div></div> <div class='reply-body'><!----> <span>"+content+"</span></div> <!----> <div class='reply-footer'><span class='text-btn btn-reply btn-reply-reply' data-username='"+user.name+"' data-acid='"+acid+"' data-ruid='"+ruid+"'>回复</span> <b class='seperater-line'></b> <span class='text-btn btn-reply-delete btn-delete' data-rid='"+rid+"'>删除</span></div></div></div>";
+            " src='"+user.avatarPath+"' alt='' class='avatar-head'></div><div class='reply-details reply-d'><div" +
+            " class='reply-header'><div><span class='user-name'>"+user.name+"</span><span class='topic-time'>"+replyTime+"</span></div></div> <div class='reply-body'><!----> <span>"+content+"</span></div> <!----> <div class='reply-footer'><span class='text-btn btn-reply btn-reply-reply' data-username='"+user.name+"' data-acid='"+acid+"' data-ruid='"+ruid+"'>回复</span> <b class='seperater-line'></b> <span class='text-btn btn-reply-delete btn-delete' data-acid='"+acid+"' data-rid='"+rid+"'>删除</span></div></div></div>";
         replysMenu.append(replysMenuItem);
         if (type != 1) {
             replyName = replyUser.name;
             var replyBody = $(".reply-item[data-rid='" + rid + "'] .reply-body");
             replyBody.prepend("<span>回复<span class='user-name'>"+replyName+"</span> :</span>");
         }
+
+        addOnclickListener();
 
 
 
@@ -137,21 +205,23 @@ $(function () {
             "<!--<span class='icon-btn more-icon-appreciation'>" +
             "<img class='like-img' src='/static/image/noLike.png' alt=''>" +
             "<span>赞</span></span><span class='seperater-line'></span>-->" +
-            "<span class='text-btn btn-delete-comment btn-delete'>删除</span></div><div class='child-reply-box'" +
+            "<span class='text-btn btn-delete-comment btn-delete' data-acid='"+acid+"'>删除</span></div><div" +
+            " class='child-reply-box'" +
             " style='display:none'></div></div></div>" +
             "";
-        menu.append(item);
+        return item;
     }
 
-    function initComments() {
-        $.get("/article/comments/get/" + aid + "?pageNum=1", function (comments) {
-            console.log(comments);
+    function getComments() {
+        $.get("/article/comments/get/" + aid + "?pageNum="+pageNum, function (pageInfo) {
+            var comments = pageInfo.list;
+            total = pageInfo.total;
+            console.log("total = " + total);
             //填充
-            var menu = $(".reply-detail-wrapper");
-            menu.children(".reply-item").remove();
             for (var i = 0; i < comments.length; i++) {
                 var comment = comments[i];
-                addComment(comment, menu);
+                var item = addComment(comment, menu);
+                menu.append(item);
                 var replys = comment.replys;
                 var acid = comment.id;
                 var thisReplyItem = $(".reply-item[data-acid='" + acid + "']");
@@ -164,9 +234,13 @@ $(function () {
                     }
                 }
             }
-
             addOnclickListener();
         })
+    }
+
+    function initComments() {
+        menu.children(".reply-item").remove();
+        getComments();
     }
 
 
@@ -199,17 +273,39 @@ $(function () {
             type: 'post',
             dataType: 'json',
             data: commentSaveVo
-        }).done(function (re) {
-            if (!re.success) {
-                alert(re.message);
+        }).done(function (comment) {
+            if (comment != null) {
+                console.log(comment);
             }
-
-            alert(re.message);
             //填充评论栏
             console.log("开始填充评论栏");
-
-
+            var item = addComment(comment,menu);
+            menu.prepend(item);
+            addOnclickListener();
         });
 
     });
+
+
+    //判断浏览器是否在最底部
+    $(window).scroll(function(){
+        var h=$(document.body).height();//网页文档的高度
+        var c = $(document).scrollTop();//滚动条距离网页顶部的高度
+        var wh = $(window).height(); //页面可视化区域高度
+
+        if (Math.ceil(wh+c)>=h){
+            console.log("已经到达浏览器底部，获取新的评论");
+            pageNum = pageNum + 1;
+            if ((pageNum - 1) * pageSize >= total) {
+                $("#end").show();
+                return;
+            } else {
+                console.log("向后台请求数据");
+                getComments();
+            }
+
+
+        }
+    })
+
 });

@@ -13,6 +13,8 @@ import com.cfy.interest.service.ArticleCommentService;
 import com.cfy.interest.vo.AjaxMessage;
 import com.cfy.interest.vo.ArticleCommentReplyVo;
 import com.cfy.interest.vo.CommentSaveVo;
+import com.cfy.interest.vo.DeleteReplyVo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@Slf4j
 public class ArticleCommentServiceImpl implements ArticleCommentService {
 
 
@@ -37,7 +40,7 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
     private ArticleCommentReplyMapper articleCommentReplyMapper;
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public AjaxMessage saveComment(CommentSaveVo commentSaveVo, Long uid) throws Exception {
+    public ArticleComment saveComment(CommentSaveVo commentSaveVo, Long uid) throws Exception {
         int rid = commentSaveVo.getRid();
         int aid = commentSaveVo.getAid();
         String content = commentSaveVo.getContent();
@@ -49,7 +52,7 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
 
 
         articleCommentMapper.insert(articleComment);
-
+        articleComment = articleCommentMapper.selectById(articleComment.getId());
         //改变帖子评论数
         int changeRow = articleMapper.comment(aid);
         if (changeRow < 1) {
@@ -64,8 +67,7 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
         }
 
         articleOperationMessageMapper.insert(articleOperationMessage);
-
-        return new AjaxMessage(true, "评论成功");
+        return articleComment;
     }
 
     @Override
@@ -83,7 +85,7 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public AjaxMessage saveReply(ArticleCommentReplyVo articleCommentReplyVo, Long uid) throws Exception {
+    public ArticleCommentReply saveReply(ArticleCommentReplyVo articleCommentReplyVo, Long uid) throws Exception {
         ArticleCommentReply articleCommentReply = new ArticleCommentReply();
         Integer acid = articleCommentReplyVo.getAcid();
         Long ruid = articleCommentReplyVo.getRuid();
@@ -99,6 +101,7 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
 
         articleCommentReplyMapper.insert(articleCommentReply);
 
+        articleCommentReply = articleCommentReplyMapper.selectByAcId(articleCommentReply.getId());
         //更新评论回复数
         int changeRow = articleCommentMapper.reply(acid);
         if (changeRow < 1) {
@@ -114,9 +117,93 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
         ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage(uid, aid, ArticleOperationMessage.REPLY);
 
         articleOperationMessageMapper.insert(articleOperationMessage);
+        log.info("reply = " + articleCommentReply);
+
+        return articleCommentReply;
+    }
+
+    /**
+     * 查询帖子的总评论数
+     * @param aid
+     * @return
+     */
+    @Override
+    public int selectCountByAId(Integer aid) {
+        return articleCommentMapper.selectCountByAid(aid);
+    }
 
 
+    /**
+     * 删除评论
+     * @param deleteReplyVo
+     * @return
+     * @throws Exception
+     */
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public AjaxMessage deleteComment(DeleteReplyVo deleteReplyVo) throws Exception {
+        Long uid = deleteReplyVo.getUid();
+        Integer aid = deleteReplyVo.getAid();
+        Integer acid = deleteReplyVo.getAcid();
 
-        return new AjaxMessage(true, "回复成功");
+        //删除评论
+        int changeRow = articleCommentMapper.deleteByAcId(acid);
+
+        if (changeRow < 1) {
+            throw new Exception("该评论不存在");
+        }
+
+        //删除与评论相关的回复
+        int deleteNum = articleCommentReplyMapper.deleteByAcid(acid);
+
+        //更新帖子评论数据
+        changeRow = articleMapper.deleteComment(aid, deleteNum + 1);
+        if (changeRow < 1) {
+            throw new Exception("评论与帖子不匹配");
+        }
+
+
+        //记录日志
+        ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage(uid, aid, ArticleOperationMessage.DELETECOMMENT);
+        articleOperationMessageMapper.insert(articleOperationMessage);
+
+        return new AjaxMessage(true, "删除评论成功");
+    }
+
+
+    /**
+     * 删除评论回复
+     * @param deleteReplyVo
+     * @return
+     * @throws Exception
+     */
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public AjaxMessage deleteReply(DeleteReplyVo deleteReplyVo) throws Exception {
+        Long uid = deleteReplyVo.getUid();
+        Integer aid = deleteReplyVo.getAid();
+        Integer acid = deleteReplyVo.getAcid();
+        Integer rid = deleteReplyVo.getRid();
+
+        //删除回复
+        int changeRow = articleCommentReplyMapper.deleteByRid(rid);
+        if (changeRow != 1) {
+            throw new Exception("该回复不存在");
+        }
+
+        changeRow = articleCommentMapper.deleteReply(acid);
+        if (changeRow != 1) {
+            throw new Exception("评论id传入错误");
+        }
+
+        changeRow = articleMapper.deleteReply(aid);
+        if (changeRow != 1) {
+            throw new Exception("帖子id传入错误");
+        }
+
+        ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage(uid, aid, ArticleOperationMessage.DELETEREPLY);
+        articleOperationMessageMapper.insert(articleOperationMessage);
+
+        return new AjaxMessage(true, "删除帖子成功");
     }
 }

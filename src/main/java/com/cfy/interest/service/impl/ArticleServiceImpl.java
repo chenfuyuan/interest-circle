@@ -97,13 +97,34 @@ public class ArticleServiceImpl implements ArticleService {
 
         int cid = getArticleVo.getCid();
 
+        String search = getArticleVo.getSearch();
+
+
+
         List<ArticleShow> articleShows;
         //设置帖子类型
         if (type.equals("essence")) {
             //设置查找帖子类型为精华贴
-            articleShows = articleMapper.findEssenceByCid(cid);
+            if (search.equals("")) {
+                articleShows = articleMapper.findEssenceByCid(cid);
+            } else {
+                search = "%" + search + "%";
+                articleShows = articleMapper.findEssenceSearchByCid(cid, search);
+                log.info("搜索条件 = " +search);
+                log.info("搜集结果 = " + articleShows);
+            }
+
         } else {
-            articleShows = articleMapper.findByCid(cid);
+            if (search.equals("")) {
+                articleShows = articleMapper.findByCid(cid);
+            } else {
+                search = "%" + search + "%";
+                articleShows = articleMapper.findSearchByCid(cid, search);
+                log.info("搜索条件 = " +search);
+                log.info("搜集结果 = " + articleShows);
+            }
+
+
         }
 
         for (ArticleShow articleShow : articleShows) {

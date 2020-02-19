@@ -86,10 +86,7 @@ public class ArticleController {
         Integer pageNum = getArticleVo.getPageNum();
         Integer pageSize = 4;
         log.info("pageNum ==" + pageNum);
-        int count = articleService.selectCountByCId(getArticleVo.getCid());
-        if (count == 0 || (pageNum - 1) * pageSize >= count) {
-            return null;
-        }
+
         String sort = getArticleVo.getSort();
         //分页查询
         PageHelper.startPage(pageNum, pageSize, sort + " desc");
@@ -98,6 +95,10 @@ public class ArticleController {
             log.info(articles.get(0).toString());
             PageInfo<ArticleShow> pageInfo = new PageInfo<ArticleShow>(articles, pageSize);
             log.info("list = " + pageInfo);
+            long count = pageInfo.getTotal();
+            if (count == 0 || (pageNum - 1) * pageSize >= count) {
+                return null;
+            }
             return pageInfo;
         } finally {
             PageHelper.clearPage(); //清理 ThreadLocal 存储的分页参数,保证线程安全

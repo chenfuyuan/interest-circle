@@ -227,6 +227,11 @@ public class CircleServiceImpl implements CircleService {
         circleMapper.quitMember(cid);
     }
 
+    @Override
+    public List<Circle> getSearchCircle(long uid, String search) {
+        search = "%" + search + "%";
+        return circleMapper.getSearchCircle(uid,search);
+    }
 
 
 }

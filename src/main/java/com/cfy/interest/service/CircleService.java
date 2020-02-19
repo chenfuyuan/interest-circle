@@ -54,4 +54,5 @@ public interface CircleService {
     void quit(long uid, Integer id);
 
 
+    List<Circle> getSearchCircle(long uid, String search);
 }

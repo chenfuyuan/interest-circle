@@ -56,4 +56,11 @@ public interface CircleMapper extends BaseMapper<Circle> {
 
     @Update("update circle set article_num = article_num -1 where id = #{cid} and state !=0")
     int deleteArticle(Integer cid);
+
+    @Select("select * from circle where state !=-1 and name like #{search} and id not in (select cid from circle_user" +
+            " where " +
+            "uid = " +
+            "#{uid} and state!=0)")
+    @ResultMap("circleMap")
+    List<Circle> getSearchCircle(long uid, String search);
 }

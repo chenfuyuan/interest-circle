@@ -3,7 +3,7 @@ $(function () {
     sort = "create_time";
      type = "normal";
      pageNum = 1;
-
+    search = "";
 
     function initTopic() {
         //初始化置顶栏
@@ -420,6 +420,7 @@ $(function () {
         data["type"] = type;
         data["pageNum"] = pageNum;
         data["cid"] = cid;
+        data["search"] = search;
         var jsonData = JSON.stringify(data);    //转化成json数据
         $.ajax({
             url: '/article/get',//服务器发送短信
@@ -428,6 +429,7 @@ $(function () {
             dataType: 'json',
             data: jsonData,
         }).done(function (re) {
+            console.log("search = " + search);
             var articles = re.list;
             total = re.total;
             pageSize = re.pageSize;
@@ -463,8 +465,6 @@ $(function () {
 
         }
     })
-
-
 
 
     ///点击精华按钮
@@ -518,6 +518,17 @@ $(function () {
 
         //隐藏菜单
         $("#sort-menu").toggle();
+
+    });
+
+
+    $("#btn-article-saerch").click(function () {
+        //获取搜索内容
+        var inputVal = $("#input-aricle-search").val();
+        search = inputVal;
+        post_list.html("");
+        pageNum = 1;
+        getArticleList();
 
     });
 

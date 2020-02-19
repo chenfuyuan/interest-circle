@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="circle_header::head('查看圈子','css/front_style.css')">
+</head>
+<body>
+
+<section>
+    <div th:replace="circle_header::header"></div>
+    <div class="ic-container">
+
+
+        <div class="contentpile">
+            <ul id="listContent" class="contentpile-content">
+                <li class="contentpile-content-wrapper clearfix" th:each="circle,circleStat:${pageInfo.list}">
+                    <div class="contentpile-content-wrapper-item clearfix" >
+                        <div class="contentpile-content-wrapper-item-info">
+                            <div class="left-content">
+                                <img class="contentpile-circle-avatar-image"
+                                     th:src="@{${circle.avatarPath}}"
+                                     alt="圈子头像">
+                                <div class="contentpile-circle-info">
+                                    <h3 class="contentpile-circle-name" th:text="${circle.name}">圈子标题</h3>
+                                    <p class="contentpile-circle-user-number" th:text="${circle.district.name}">厦门 <em
+                                            class="vline" th:text="${circle.userNum}"></em> 10
+                                        人</p>
+                                </div>
+                            </div>
+                            <div class="right-content">
+                                <button type="button" class="btn btn-primary btn-join-circle"
+                                        th:attr="data-cid=${circle.id}">加入圈子
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+
+        <div class="page-nav no-margin-top">
+            <div class="page-text">
+                当前第 [[${pageInfo.pageNum}]]页,共 [[${pageInfo.pages}]] 页.一共 [[${pageInfo.total}]] 条记录
+            </div>
+
+
+
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <li th:if="${pageInfo.pageNum}==1" class="disabled">
+                        <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li th:unless="${pageInfo.pageNum}==1" >
+                        <a th:href="@{'/circle/search?pageNum=1'+'&search='+${search}}"
+                           aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+
+                    </li>
+
+                    <li th:each="nav:${pageInfo.navigatepageNums}">
+                        <a th:href="@{'/circle/search?pageNum='+${nav}+'&search='+${search}}" th:text="${nav}"
+                           th:if="${nav != pageInfo.pageNum}" ></a>
+
+                        <a href="#" th:text="${nav}" th:unless="${nav != pageInfo.pageNum}"
+                           class="now_page"></a>
+                    </li>
+
+
+
+                    <li th:if="${pageInfo.pageNum}==${pageInfo.pages}" class="disabled">
+                        <a href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                    <li th:unless="${pageInfo.pageNum}==${pageInfo.pages}">
+                        <a th:href="@{'/circle/search?pageNum='+${pageInfo.pages}+'&search='+${search}}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+        </div>
+
+    </div>
+</section>
+
+
+<script type="application/javascript" src="/static/js/jquery/jquery.min.js"></script>
+<script type="application/javascript" src="/static/js/createCircle.js"></script>
+
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+
+<!--引入jquery表单插件-->
+<script type="application/javascript" src="/static/js/jquery/jquery.form.js"></script>
+
+</body>
+</html>
