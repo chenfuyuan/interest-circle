@@ -20,23 +20,23 @@ public interface ArticleService {
 
     int selectCountByCId(int cid);
 
-    AjaxMessage like(long uid, Integer aid);
+    AjaxMessage like(long uid, Integer aid,Integer cid);
 
-    AjaxMessage cancelLike(long uid, Integer aid);
+    AjaxMessage cancelLike(long uid, Integer aid,Integer cid);
 
     boolean isLike(long uid, Integer aid);
 
-    Article sticky(long uid, Integer aid);
+    Article sticky(long uid, Integer aid,Integer cid);
 
-    AjaxMessage essence(long uid, Integer aid);
+    AjaxMessage essence(long uid, Integer aid,Integer cid);
 
-    AjaxMessage cancelSticky(long uid, Integer aid);
+    AjaxMessage cancelSticky(long uid, Integer aid,Integer cid);
 
-    AjaxMessage cancelEssence(long uid, Integer aid);
+    AjaxMessage cancelEssence(long uid, Integer aid,Integer cid);
 
-    AjaxMessage star(long uid, Integer aid);
+    AjaxMessage star(long uid, Integer aid,Integer cid);
 
-    AjaxMessage cancelStar(long uid, Integer aid);
+    AjaxMessage cancelStar(long uid, Integer aid,Integer cid);
 
     AjaxMessage delete(Long uid, Integer aid, Integer cid) throws Exception;
 

@@ -14,7 +14,7 @@ $(function () {
         var src = img_likes.attr("src");
         console.log("点击了点赞按钮,aid="+aid);
         if (src == "/static/image/noLike.png") {
-            $.get("/article/like/" + aid, function (re) {
+            $.get("/article/like/" + aid+"?cid="+cid, function (re) {
                 if (re.success) {
                     img_likes.attr("src", "/static/image/like.png");
                     var likes_num = img_likes.next().children(".likes-num");
@@ -26,7 +26,7 @@ $(function () {
 
             });
         }else if (src == "/static/image/like.png") {
-            $.get("/article/like/cancel/"+aid,function (re) {
+            $.get("/article/like/cancel/"+aid+"?cid="+cid,function (re) {
                 if(re.success){
                     img_likes.attr("src", "/static/image/noLike.png");
                     var likes_num = img_likes.next().children(".likes-num");
@@ -50,7 +50,7 @@ $(function () {
         var itemStickyStr = itemStickySpan.text();
         console.log("itemStickyStr=" + itemStickyStr);
         if (itemStickyStr == "置顶") {
-            $.get("/article/sticky/" + aid, function (sticky) {
+            $.get("/article/sticky/" + aid+"?cid="+cid, function (sticky) {
                 if (sticky == null || sticky == undefined) {
                     alert("置顶失败");
                 }
@@ -58,7 +58,7 @@ $(function () {
                 itemStickySpan.text("取消置顶");
             });
         } else {
-            $.get("/article/sticky/cancel/"+aid,function (re) {
+            $.get("/article/sticky/cancel/"+aid+"?cid="+cid,function (re) {
                 if (!re.success) {
                     alert(re.message);
                 }
@@ -81,7 +81,7 @@ $(function () {
 
         if(essenceSpanStr =="加精") {
             //加精
-            $.get("/article/essence/" + aid, function (re) {
+            $.get("/article/essence/" + aid+"?cid="+cid, function (re) {
                 if (re.success) {
                     alert("加精成功");
                     //更换span文字
@@ -92,7 +92,7 @@ $(function () {
             });
         }else if (essenceSpanStr == "取消加精") {
             //取消加精
-            $.get("/article/essence/cancel/"+aid,function (re) {
+            $.get("/article/essence/cancel/"+aid+"?cid="+cid,function (re) {
                 if (re.success) {
                     alert("取消加精成功");
                     //更换span文字
@@ -113,7 +113,7 @@ $(function () {
         var starImg = starBtn.find(".handle-icon");
         //判断是收藏还是取消收藏
         if (starItemStr == "收藏") {
-            $.get("/article/star/" + aid,function (re) {
+            $.get("/article/star/" + aid+"?cid="+cid,function (re) {
                 if (!re.success) {
                     alert(re.message);
                     return;
@@ -126,7 +126,7 @@ $(function () {
                 }
             });
         } else if (starItemStr == "取消收藏") {
-            $.get("/article/star/cancel/"+aid,function (re) {
+            $.get("/article/star/cancel/"+aid+"?cid="+cid,function (re) {
                 if (!re.success) {
                     alert(re.message);
                     return;

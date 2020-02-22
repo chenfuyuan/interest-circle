@@ -9,4 +9,5 @@ public class ArticleCommentReplyVo {
     private Integer type;
     private Integer aid;
     private String content;
+    private Integer cid;
 }

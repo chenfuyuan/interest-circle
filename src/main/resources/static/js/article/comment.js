@@ -49,6 +49,7 @@ $(function () {
                 var replyText = $("#reply-input").val();
                 replyVo["content"] = replyText;
                 replyVo["aid"] = aid;
+                replyVo["cid"] = cid;
                 console.log("replyVo = " + replyVo);
                 var data = JSON.stringify(replyVo);
                 console.log("data = " + data);
@@ -80,6 +81,7 @@ $(function () {
             var acid = thisBtn.data("acid");
             deleteReplyVo["acid"] = acid;
             deleteReplyVo["aid"] = aid;
+            deleteReplyVo["cid"] = cid;
             if (thisBtn.hasClass("btn-delete-comment")) {
                 console.log("删除评论 = " + acid);
                 var data = JSON.stringify(deleteReplyVo);
@@ -263,7 +265,7 @@ $(function () {
         data["content"] = replyText;
         data["rid"] = replyId;
         data["aid"] = aid;
-
+        data["cid"] = cid;
         var commentSaveVo = JSON.stringify(data);
         console.log("commentSaveVo = " + commentSaveVo);
         console.log("data = " + data);

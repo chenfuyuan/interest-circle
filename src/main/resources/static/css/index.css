@@ -765,4 +765,31 @@ body,html {
 .main-content #article-delete-model {
     position: fixed;
 }
+
+.admin-room-manage {
+    margin-top: 10px;
+    padding: 0 16px 0 13px;
+    height: 42px;
+    line-height: 42px;
+    background-color: #fff;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.admin-room-manage, .admin-room-manage .admin-room-manage-left {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.admin-room-manage .admin-room-manage-left img {
+    margin-right: 10px;
+}
+
+
 /*topic top end */

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="circle_header::head('首页','')">
+
+</head>
+
+<body>
+<section>
+    <div th:fragment="statistics" class="statistics-page">
+        <div class="title m-t-24">数据概览</div>
+        <div class="recent-two-days">
+            <div class="border-and-padding">
+                <div class="first-line">
+                    <div class="increase-container item flex-center"><!--圈子人数-->
+                        <div class="content">
+                            <p class="item-title">圈子成员数</p>
+                            <p class="yesterday">
+                                人数：
+                                <span class="data" th:text="${circle.userNum}">666</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="separate-line"></div>
+                    <div class="increase-container item flex-center"><!--帖子数-->
+                        <div class="content">
+                            <p class="item-title">帖子数</p>
+                            <p class="yesterday">
+                                数量：
+                                <span class="data" th:text="${circle.articleNum}">666</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="separate-line"></div>
+                    <div class="increase-container item flex-center">
+                        <!--新增成员-->
+                        <div class="content">
+                            <p class="item-title">新增成员</p>
+                            <p class="yesterday">
+                                昨日：
+                                <span class="data" th:text="${yesterdayData.join}">666</span>
+                            </p>
+                            <p class="today">
+                                今日：
+                                <span th:text="${todayData.join}">666</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="separate-line"></div>
+                    <!--互动成员-->
+                    <div class="active-container item flex-center">
+                        <div class="content">
+                            <p class="item-title">
+                                互动成员
+                            </p>
+                            <p class="yesterday">
+                                昨日：
+                                <span class="data" th:text="${yesterdayData.interact}">1</span>
+                            </p>
+                            <p class="today">
+                                今日：
+                                <span th:text="${todayData.interact}">1</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="separate-line"></div>
+                    <div class="increase-container item flex-center">
+                        <div class="content">
+                            <p class="item-title">
+                                新增话题
+                            </p>
+                            <p class="yesterday">
+                                昨日：
+                                <span class="data" th:text="${yesterdayData.newArticle}">4</span>
+                            </p>
+                            <p class="today">
+                                今日：
+                                <span th:text="${todayData.newArticle}">0</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="separate-line"></div>
+                    <div class="increase-container item flex-center">
+                        <div class="content">
+                            <p class="item-title">
+                                新增评论
+                            </p>
+                            <p class="yesterday">
+                                昨日：
+                                <span class="data" th:text="${yesterdayData.newComment}">4</span>
+                            </p>
+                            <p class="today">
+                                今日：
+                                <span th:text="${todayData.newComment}">0</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

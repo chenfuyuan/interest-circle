@@ -47,6 +47,8 @@ public class ArticleOperationMessage implements Serializable {
     private Integer id;
     private Long uid;
 
+    private Integer cid;
+
     private Integer aid;
 
     private String message;
@@ -55,10 +57,11 @@ public class ArticleOperationMessage implements Serializable {
 
     private LocalDateTime createTime;
 
-    public ArticleOperationMessage (Long uid,Integer aid,Integer type) {
+    public ArticleOperationMessage (Long uid,Integer aid,Integer type,Integer cid) {
         this.uid = uid;
         this.aid = aid;
         setType(type);
+        this.cid = cid;
     }
     public void setType(Integer type) {
         this.type = type;

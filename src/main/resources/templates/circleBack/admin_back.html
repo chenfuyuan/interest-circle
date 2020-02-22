@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="circle_header::head('圈子管理后台','css/circle/back.css')">
+
+</head>
+
+<body>
+<div class="app">
+    <div class="app-wrapper">
+        <div th:fragment="topHeader" class="topHeader">
+            <div class="topHeader-content">
+                <h2 class="logo">
+                    <span class="logWrapper">
+                        <img src="/static/image/back-icon.svg" width="20" height="20">
+                        <span class="title">圈子管理后台</span>
+                    </span>
+                    <img src="/static/image/shu.svg" width="1" height="16" alt="">
+                    <span class="circle-name" th:text="${circle.name}">XXX</span>
+                </h2>
+                <div class="util">
+                    <img src="/static/image/avatar.png" alt="">
+                    <span class="userName ellipsis" th:text="${session.user.name}" title="用户名">YY</span>
+                </div>
+            </div>
+        </div>
+        <div class="main-container">
+            <div th:fragment="sideNav" class="sideNav side-container" style="margin-left:405.5px">
+                <ul role="menubar" class="el-menu-vertical-demo el-menu">
+                    <div class="el-menu-ele defaultActive">
+                        <li role="menuitem" aria-haspopup="true" class="el-submenu hideArrow" style="display: block">
+                            <div class="el-submenu-title" style="padding-left: 20px;"><i
+                                    class="qz-home glyphicon glyphicon-home"></i><span>首页
+                            </span><i class="el-submenu__icon-arrow el-icon-arrow-down"></i></div>
+                        </li>
+                    </div>
+                    <div class="el-menu-ele">
+                        <li role="menuitem" aria-haspopup="true" class="el-submenu hideArrow" style="display: block;">
+                            <div class="el-submenu-title" style="padding-left: 20px;">
+                                <i class="qz-set glyphicon glyphicon-cog"></i>
+                                <span>设置</span>
+                            </div>
+                        </li>
+                    </div>
+                    <div class="el-menu-ele">
+                        <li role="menuitem" aria-haspopup="true" class="el-submenu hideArrow" style="display: block;">
+                            <div class="el-submenu-title" style="padding-left: 20px;">
+                                <i class="qz-permissions glyphicon glyphicon-lock"></i>
+                                <span>权限</span>
+                            </div>
+                        </li>
+                    </div>
+                </ul>
+            </div>
+            <div class="appMain content-container" style="height: calc(100vh + 538px + 0px);">
+                <div class="mainContent">
+                    <div th:if="${viewType}==1" th:replace="circleBack/statistics::statistics"></div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+</body>
+</html>

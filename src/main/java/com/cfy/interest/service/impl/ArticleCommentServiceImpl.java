@@ -44,7 +44,7 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
         int rid = commentSaveVo.getRid();
         int aid = commentSaveVo.getAid();
         String content = commentSaveVo.getContent();
-
+        int cid = commentSaveVo.getCid();
         ArticleComment articleComment = new ArticleComment();
         articleComment.setAid(aid);
         articleComment.setUid(uid);
@@ -61,9 +61,9 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
         ArticleOperationMessage articleOperationMessage = null;
         //写入日志
         if (rid != 0) {
-            articleOperationMessage = new ArticleOperationMessage(uid, aid, ArticleOperationMessage.REPLY);
+            articleOperationMessage = new ArticleOperationMessage(uid, aid, ArticleOperationMessage.REPLY,cid);
         } else {
-            articleOperationMessage = new ArticleOperationMessage(uid, aid, ArticleOperationMessage.ACOMMENT);
+            articleOperationMessage = new ArticleOperationMessage(uid, aid, ArticleOperationMessage.ACOMMENT,cid);
         }
 
         articleOperationMessageMapper.insert(articleOperationMessage);
@@ -92,7 +92,7 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
         String content = articleCommentReplyVo.getContent();
         Integer type = articleCommentReplyVo.getType();
         Integer aid = articleCommentReplyVo.getAid();
-
+        Integer cid = articleCommentReplyVo.getCid();
         articleCommentReply.setAcid(acid);
         articleCommentReply.setRuid(ruid);
         articleCommentReply.setContent(content);
@@ -114,7 +114,8 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
         }
 
         //插入日志
-        ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage(uid, aid, ArticleOperationMessage.REPLY);
+        ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage(uid, aid,
+                ArticleOperationMessage.REPLY,cid);
 
         articleOperationMessageMapper.insert(articleOperationMessage);
         log.info("reply = " + articleCommentReply);
@@ -145,7 +146,7 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
         Long uid = deleteReplyVo.getUid();
         Integer aid = deleteReplyVo.getAid();
         Integer acid = deleteReplyVo.getAcid();
-
+        Integer cid = deleteReplyVo.getCid();
         //删除评论
         int changeRow = articleCommentMapper.deleteByAcId(acid);
 
@@ -164,7 +165,8 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
 
 
         //记录日志
-        ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage(uid, aid, ArticleOperationMessage.DELETECOMMENT);
+        ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage(uid, aid,
+                ArticleOperationMessage.DELETECOMMENT,cid);
         articleOperationMessageMapper.insert(articleOperationMessage);
 
         return new AjaxMessage(true, "删除评论成功");
@@ -184,7 +186,7 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
         Integer aid = deleteReplyVo.getAid();
         Integer acid = deleteReplyVo.getAcid();
         Integer rid = deleteReplyVo.getRid();
-
+        Integer cid = deleteReplyVo.getCid();
         //删除回复
         int changeRow = articleCommentReplyMapper.deleteByRid(rid);
         if (changeRow != 1) {
@@ -201,7 +203,8 @@ public class ArticleCommentServiceImpl implements ArticleCommentService {
             throw new Exception("帖子id传入错误");
         }
 
-        ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage(uid, aid, ArticleOperationMessage.DELETEREPLY);
+        ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage(uid, aid,
+                ArticleOperationMessage.DELETEREPLY,cid);
         articleOperationMessageMapper.insert(articleOperationMessage);
 
         return new AjaxMessage(true, "删除帖子成功");

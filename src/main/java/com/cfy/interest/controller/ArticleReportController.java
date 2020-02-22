@@ -22,10 +22,10 @@ public class ArticleReportController {
     @GetMapping("/article/report/{aid}")
     @ResponseBody
     public AjaxMessage report(@PathVariable("aid") Integer aid, @RequestParam("report")Integer report,
-                              HttpServletRequest request) {
+                              HttpServletRequest request,@RequestParam("cid")Integer cid) {
         User user = (User) request.getSession().getAttribute("user");
         Long uid = user.getId();
-        AjaxMessage ajaxMessage = articleReportService.report(aid, report, uid);
+        AjaxMessage ajaxMessage = articleReportService.report(aid, report, uid,cid);
         return ajaxMessage;
     }
 

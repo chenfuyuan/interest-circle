@@ -8,4 +8,5 @@ public class DeleteReplyVo {
     private Integer acid;
     private Integer aid;
     private Integer rid;
+    private Integer cid;
 }

@@ -21,7 +21,7 @@ public class ArticleReortServiceImpl implements ArticleReportService {
 
     @Transactional
     @Override
-    public AjaxMessage report(Integer aid, Integer report, Long uid) {
+    public AjaxMessage report(Integer aid, Integer report, Long uid,Integer cid) {
         //判断是否已经举报
         ArticleReport result = articleReportMapper.selectByUidAndAid(uid, aid);
         if (result != null) {
@@ -31,7 +31,8 @@ public class ArticleReortServiceImpl implements ArticleReportService {
         ArticleReport articleReport = new ArticleReport(uid, aid, report);
         articleReportMapper.insert(articleReport);
 
-        ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage(uid,aid,ArticleOperationMessage.REPORT);
+        ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage(uid,aid,
+                ArticleOperationMessage.REPORT,cid);
         articleOperationMessage.setMessage(articleOperationMessage.getMessage()+":"+articleReport.getReportMessage());
         articleOperationMessageMapper.insert(articleOperationMessage);
 

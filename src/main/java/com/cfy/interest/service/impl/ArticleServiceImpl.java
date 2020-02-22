@@ -71,7 +71,8 @@ public class ArticleServiceImpl implements ArticleService {
         //插入帖子数据
         articleMapper.insert(article);
 
-        ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage(uid,article.getId(),ArticleOperationMessage.CREATE);
+        ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage(uid,article.getId(),
+                ArticleOperationMessage.CREATE,cid);
 
         articleOperationMessageMapper.insert(articleOperationMessage);
 
@@ -151,7 +152,7 @@ public class ArticleServiceImpl implements ArticleService {
      */
     @Transactional
     @Override
-    public AjaxMessage like(long uid, Integer aid) {
+    public AjaxMessage like(long uid, Integer aid,Integer cid) {
         //判断数据库是否有该用户点赞的记录，有？直接更新状态码为1
         int total = articleLikeMapper.like(aid, uid);
 
@@ -169,7 +170,8 @@ public class ArticleServiceImpl implements ArticleService {
         articleMapper.like(aid);
 
         //更新帖子操作日志
-        ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage(uid,aid,ArticleOperationMessage.LIKE);
+        ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage(uid,aid,
+                ArticleOperationMessage.LIKE,cid);
         articleOperationMessageMapper.insert(articleOperationMessage);
 
         AjaxMessage ajaxMessage = new AjaxMessage(true, "点赞成功");
@@ -180,7 +182,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Transactional
     @Override
-    public AjaxMessage cancelLike(long uid, Integer aid) {
+    public AjaxMessage cancelLike(long uid, Integer aid,Integer cid) {
         //减少帖子点赞人数
         int total = articleMapper.cancelLike(aid);
         if (total < 1) {
@@ -192,7 +194,8 @@ public class ArticleServiceImpl implements ArticleService {
         articleLikeMapper.cancelLike(aid, uid);
 
         //生成帖子操作日志
-        ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage(uid,aid,ArticleOperationMessage.CANCELLIKE);
+        ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage(uid,aid,
+                ArticleOperationMessage.CANCELLIKE,cid);
         articleOperationMessageMapper.insert(articleOperationMessage);
 
         return new AjaxMessage(true, "取消点赞成功");
@@ -212,7 +215,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Transactional
     @Override
-    public Article sticky(long uid, Integer aid) {
+    public Article sticky(long uid, Integer aid,Integer cid) {
         //更改为置顶状态
         int changrow = articleMapper.stickyArticle(aid);
         if (changrow < 1) {
@@ -220,7 +223,7 @@ public class ArticleServiceImpl implements ArticleService {
         }
         //记录操作记录
         ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage(uid,aid,
-                ArticleOperationMessage.STICKY);
+                ArticleOperationMessage.STICKY,cid);
         articleOperationMessageMapper.insert(articleOperationMessage);
 
 
@@ -229,21 +232,22 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Transactional
     @Override
-    public AjaxMessage essence(long uid, Integer aid) {
+    public AjaxMessage essence(long uid, Integer aid,Integer cid) {
         int changrow = articleMapper.essenceByAid(aid);
         if (changrow < 1) {
             return new AjaxMessage(false, "加精失败，帖子不存在");
         }
 
         //日志
-        ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage(uid,aid,ArticleOperationMessage.ESSENCE);
+        ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage(uid,aid,
+                ArticleOperationMessage.ESSENCE,cid);
         articleOperationMessageMapper.insert(articleOperationMessage);
 
         return new AjaxMessage(true, "加精成功");
     }
 
     @Override
-    public AjaxMessage cancelSticky(long uid, Integer aid) {
+    public AjaxMessage cancelSticky(long uid, Integer aid,Integer cid) {
         int changeRow = articleMapper.cancelSticky(aid);
 
         if (changeRow < 1) {
@@ -252,7 +256,7 @@ public class ArticleServiceImpl implements ArticleService {
 
         //写日志
         ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage(uid,aid,
-                ArticleOperationMessage.CANCELSTICKY);
+                ArticleOperationMessage.CANCELSTICKY,cid);
         articleOperationMessageMapper.insert(articleOperationMessage);
         return new AjaxMessage(true, "撤销置顶帖子成功");
     }
@@ -265,7 +269,7 @@ public class ArticleServiceImpl implements ArticleService {
      */
     @Transactional
     @Override
-    public AjaxMessage cancelEssence(long uid, Integer aid) {
+    public AjaxMessage cancelEssence(long uid, Integer aid,Integer cid) {
         int changeRow = articleMapper.cancelEssence(aid);
 
         if (changeRow < 1) {
@@ -274,14 +278,14 @@ public class ArticleServiceImpl implements ArticleService {
 
         //写日志
         ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage(uid,aid,
-                ArticleOperationMessage.CANCELESSENCE);
+                ArticleOperationMessage.CANCELESSENCE,cid);
         articleOperationMessageMapper.insert(articleOperationMessage);
         return new AjaxMessage(true, "取消加精帖子成功");
     }
 
     @Transactional
     @Override
-    public AjaxMessage star(long uid, Integer aid) {
+    public AjaxMessage star(long uid, Integer aid,Integer cid) {
         //调整帖子的收藏数
         int articleChangeRow = articleMapper.star(aid);
         if (articleChangeRow < 1) {
@@ -297,7 +301,8 @@ public class ArticleServiceImpl implements ArticleService {
         }
 
         //日志
-        ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage(uid, aid, ArticleOperationMessage.STAR);
+        ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage(uid, aid,
+                ArticleOperationMessage.STAR,cid);
         articleOperationMessageMapper.insert(articleOperationMessage);
         return new AjaxMessage(true, "收藏成功");
     }
@@ -310,7 +315,7 @@ public class ArticleServiceImpl implements ArticleService {
      */
     @Transactional
     @Override
-    public AjaxMessage cancelStar(long uid, Integer aid) {
+    public AjaxMessage cancelStar(long uid, Integer aid,Integer cid) {
         int articleChangeRow = articleMapper.cancelStar(aid);
         if (articleChangeRow < 1) {
             return new AjaxMessage(false, "帖子不存在");
@@ -321,7 +326,8 @@ public class ArticleServiceImpl implements ArticleService {
             return new AjaxMessage(false, "您未收藏该贴子");
         }
 
-        ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage(uid, aid, ArticleOperationMessage.CANCELSTAR);
+        ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage(uid, aid,
+                ArticleOperationMessage.CANCELSTAR,cid);
         articleOperationMessageMapper.insert(articleOperationMessage);
         return new AjaxMessage(true, "取消收藏帖子成功");
     }
@@ -345,7 +351,8 @@ public class ArticleServiceImpl implements ArticleService {
         articleLikeMapper.cancelLikeByAid(aid);
 
 
-        ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage(uid, aid, ArticleOperationMessage.DELETE);
+        ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage(uid, aid,
+                ArticleOperationMessage.DELETE,cid);
         articleOperationMessageMapper.insert(articleOperationMessage);
 
         return new AjaxMessage(true, "删除帖子成功");

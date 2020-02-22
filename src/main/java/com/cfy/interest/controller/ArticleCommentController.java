@@ -34,8 +34,9 @@ public class ArticleCommentController {
         User user = getUser(request);
         Long uid = user.getId();
         ArticleComment articleComment = null;
+
         try {
-            articleComment = articleCommentService.saveComment(commentSaveVo, uid);
+            articleComment = articleCommentService.saveComment(commentSaveVo,uid);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -108,7 +109,9 @@ public class ArticleCommentController {
     public AjaxMessage deleteReply(@RequestBody DeleteReplyVo deleteReplyVo, HttpServletRequest request) {
         log.info("deleteReplyVo = " + deleteReplyVo);
         User user = getUser(request);
+
         Long uid = user.getId();
+        deleteReplyVo.setUid(uid);
         try {
             return articleCommentService.deleteReply(deleteReplyVo);
 

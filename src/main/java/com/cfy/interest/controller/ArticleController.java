@@ -110,14 +110,15 @@ public class ArticleController {
 
     @GetMapping("/article/like/{aid}")
     @ResponseBody
-    public AjaxMessage like(@PathVariable("aid") Integer aid, HttpServletRequest request) {
+    public AjaxMessage like(@PathVariable("aid") Integer aid,@RequestParam("cid")Integer cid,
+                            HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
         if (aid > 0) {
             AjaxMessage ajaxMessage = new AjaxMessage(false, "点赞的帖子不存在");
         }
         long uid = user.getId();
         //点赞操作
-        AjaxMessage ajaxMessage = articleService.like(uid, aid);
+        AjaxMessage ajaxMessage = articleService.like(uid, aid,cid);
 
         return ajaxMessage;
     }
@@ -125,70 +126,76 @@ public class ArticleController {
 
     @GetMapping("/article/like/cancel/{aid}")
     @ResponseBody
-    public AjaxMessage cancelLike(@PathVariable("aid") Integer aid, HttpServletRequest request) {
+    public AjaxMessage cancelLike(@PathVariable("aid") Integer aid,@RequestParam("cid") Integer cid,
+            HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
         if (aid > 0) {
             AjaxMessage ajaxMessage = new AjaxMessage(false, "取消点赞的帖子不存在");
         }
         long uid = user.getId();
         //点赞操作
-        AjaxMessage ajaxMessage = articleService.cancelLike(uid, aid);
+        AjaxMessage ajaxMessage = articleService.cancelLike(uid, aid,cid);
 
         return ajaxMessage;
     }
 
     @GetMapping("/article/sticky/{aid}")
     @ResponseBody
-    public Article sticky(@PathVariable("aid") Integer aid,
+    public Article sticky(@PathVariable("aid") Integer aid,@RequestParam("cid")Integer cid,
                           HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
         long uid = user.getId();
-        Article article = articleService.sticky(uid, aid);
+        Article article = articleService.sticky(uid, aid,cid);
         return article;
     }
 
     @GetMapping("/article/essence/{aid}")
     @ResponseBody
-    public AjaxMessage essence(@PathVariable("aid") Integer aid, HttpServletRequest request) {
+    public AjaxMessage essence(@PathVariable("aid") Integer aid, HttpServletRequest request,
+                               @RequestParam("cid")Integer cid) {
         User user = (User) request.getSession().getAttribute("user");
         long uid = user.getId();
-        AjaxMessage ajaxMessage = articleService.essence(uid, aid);
+        AjaxMessage ajaxMessage = articleService.essence(uid, aid,cid);
         return ajaxMessage;
     }
 
     @GetMapping("/article/sticky/cancel/{aid}")
     @ResponseBody
-    public AjaxMessage cancelSticky(@PathVariable("aid") Integer aid, HttpServletRequest request) {
+    public AjaxMessage cancelSticky(@PathVariable("aid") Integer aid, HttpServletRequest request,
+                                    @RequestParam("cid")Integer cid) {
         User user = (User) request.getSession().getAttribute("user");
         long uid = user.getId();
-        AjaxMessage ajaxMessage = articleService.cancelSticky(uid, aid);
+        AjaxMessage ajaxMessage = articleService.cancelSticky(uid, aid,cid);
         return ajaxMessage;
     }
 
     @GetMapping("/article/essence/cancel/{aid}")
     @ResponseBody
-    public AjaxMessage cancelEssence(@PathVariable("aid") Integer aid, HttpServletRequest request) {
+    public AjaxMessage cancelEssence(@PathVariable("aid") Integer aid, HttpServletRequest request,
+                                     @RequestParam("cid")Integer cid) {
         User user = (User) request.getSession().getAttribute("user");
         long uid = user.getId();
-        AjaxMessage ajaxMessage = articleService.cancelEssence(uid, aid);
+        AjaxMessage ajaxMessage = articleService.cancelEssence(uid, aid,cid);
         return ajaxMessage;
     }
 
     @GetMapping("/article/star/{aid}")
     @ResponseBody
-    public AjaxMessage star(@PathVariable("aid") Integer aid, HttpServletRequest request) {
+    public AjaxMessage star(@PathVariable("aid") Integer aid, HttpServletRequest request,
+                            @RequestParam("cid") Integer cid) {
         User user = (User) request.getSession().getAttribute("user");
         long uid = user.getId();
-        AjaxMessage ajaxMessage = articleService.star(uid, aid);
+        AjaxMessage ajaxMessage = articleService.star(uid, aid,cid);
         return ajaxMessage;
     }
 
     @GetMapping("/article/star/cancel/{aid}")
     @ResponseBody
-    public AjaxMessage cancelStar(@PathVariable("aid") Integer aid, HttpServletRequest request) {
+    public AjaxMessage cancelStar(@PathVariable("aid") Integer aid, HttpServletRequest request,
+                                  @RequestParam("cid")Integer cid) {
         User user = (User) request.getSession().getAttribute("user");
         long uid = user.getId();
-        AjaxMessage ajaxMessage = articleService.cancelStar(uid, aid);
+        AjaxMessage ajaxMessage = articleService.cancelStar(uid, aid,cid);
         return ajaxMessage;
     }
 
