@@ -168,10 +168,16 @@ $(function () {
         var rid = reply.id;
         var ruid = user.id;
         var acid = reply.acid;
+        var isUser = user.id == uid;
+        console.log("user.id == uid -> " + isUser)
+        var deleteStr = "";
+        if (isUser) {
+            deleteStr = "<span class='text-btn btn-reply-delete btn-delete' data-acid='"+acid+"' data-rid='"+rid+"'>删除</span>";
+        }
         var replysMenuItem = "<div class='reply-item child-reply-item' data-rid='"+rid+"'><div" +
             " class='user-avatar'><img" +
             " src='"+user.avatarPath+"' alt='' class='avatar-head'></div><div class='reply-details reply-d'><div" +
-            " class='reply-header'><div><span class='user-name'>"+user.name+"</span><span class='topic-time'>"+replyTime+"</span></div></div> <div class='reply-body'><!----> <span>"+content+"</span></div> <!----> <div class='reply-footer'><span class='text-btn btn-reply btn-reply-reply' data-username='"+user.name+"' data-acid='"+acid+"' data-ruid='"+ruid+"'>回复</span> <b class='seperater-line'></b> <span class='text-btn btn-reply-delete btn-delete' data-acid='"+acid+"' data-rid='"+rid+"'>删除</span></div></div></div>";
+            " class='reply-header'><div><span class='user-name'>"+user.name+"</span><span class='topic-time'>"+replyTime+"</span></div></div> <div class='reply-body'><!----> <span>"+content+"</span></div> <!----> <div class='reply-footer'><span class='text-btn btn-reply btn-reply-reply' data-username='"+user.name+"' data-acid='"+acid+"' data-ruid='"+ruid+"'>回复</span> <b class='seperater-line'></b> "+deleteStr+"</div></div></div>";
         replysMenu.append(replysMenuItem);
         if (type != 1) {
             replyName = replyUser.name;
@@ -190,7 +196,11 @@ $(function () {
         var commentUser = comment.user;
         var content = comment.content;
         var replyNum = comment.replyNum;
-        var ruid = commentUser.id;
+        var ruid = comment.uid;
+        var deleteStr = "";
+        if (ruid == uid) {
+            deleteStr="<span class='text-btn btn-delete-comment btn-delete' data-acid='"+acid+"'>删除</span>";
+        }
         var commentDate = new Date(comment.createTime).Format("yyyy-MM-dd hh:mm:ss");
         var item = "<div class='reply-item parent-reply-item' data-acid='"+acid+"'>" +
             "<div class='user-avatar'>" +
@@ -207,7 +217,7 @@ $(function () {
             "<!--<span class='icon-btn more-icon-appreciation'>" +
             "<img class='like-img' src='/static/image/noLike.png' alt=''>" +
             "<span>赞</span></span><span class='seperater-line'></span>-->" +
-            "<span class='text-btn btn-delete-comment btn-delete' data-acid='"+acid+"'>删除</span></div><div" +
+            deleteStr+"</div><div" +
             " class='child-reply-box'" +
             " style='display:none'></div></div></div>" +
             "";
@@ -219,6 +229,11 @@ $(function () {
             var comments = pageInfo.list;
             total = pageInfo.total;
             console.log("total = " + total);
+            console.log("comments = " + comments);
+            if (comments == undefined) {
+                console.log("comments==null");
+                return;
+            }
             //填充
             for (var i = 0; i < comments.length; i++) {
                 var comment = comments[i];
@@ -283,6 +298,7 @@ $(function () {
             console.log("开始填充评论栏");
             var item = addComment(comment,menu);
             menu.prepend(item);
+            $("#replyText").val("");
             addOnclickListener();
         });
 

@@ -5,6 +5,7 @@ import com.cfy.interest.mapper.UserOperationMessageMapper;
 import com.cfy.interest.model.User;
 import com.cfy.interest.model.UserOperationMessage;
 import com.cfy.interest.provider.AliyunOSSProvider;
+import com.cfy.interest.provider.AliyunSmsProvider;
 import com.cfy.interest.service.UserService;
 import com.cfy.interest.vo.AjaxMessage;
 import com.cfy.interest.vo.ChangePasswordVo;
@@ -39,6 +40,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private RedisTemplate redisTemplate;
 
+    @Autowired
+    private AliyunSmsProvider aliyunSmsProvider;
     @Override
     public AjaxMessage update(User user, UserInfoVo userInfoVo) {
         AjaxMessage ajaxMessage = new AjaxMessage();
@@ -107,11 +110,11 @@ public class UserServiceImpl implements UserService {
 //        通过阿里云发送短信验证码
         sendSmsMessage.setAuthCode(authCode);
 //        //调用将验证码和手机传递给阿里云短信进行短信发送
-//        aliyunSmsProvider.sendSms(sendSmsMessage);
+        aliyunSmsProvider.sendSms(sendSmsMessage);
 
-        //模拟发送阿里云短信，记得注释删除
-        sendSmsMessage.setSuccess(true);
-        sendSmsMessage.setMessage("短信发送成功");
+//        //模拟发送阿里云短信，记得注释删除
+//        sendSmsMessage.setSuccess(true);
+//        sendSmsMessage.setMessage("短信发送成功");
         return sendSmsMessage;
     }
 

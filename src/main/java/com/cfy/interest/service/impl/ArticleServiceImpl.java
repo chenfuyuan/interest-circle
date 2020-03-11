@@ -49,7 +49,6 @@ public class ArticleServiceImpl implements ArticleService {
     private ArticleStarMapper articleStarMapper;
     @Override
     public List<String> uploadImages(MultipartFile[] files) {
-
         List<String> urls = new ArrayList<>();
         for (int i = 0; i < files.length; i++) {
             MultipartFile file = files[i];
@@ -70,12 +69,9 @@ public class ArticleServiceImpl implements ArticleService {
         Article article = new Article(uid, cid, content,title);
         //插入帖子数据
         articleMapper.insert(article);
-
         ArticleOperationMessage articleOperationMessage = new ArticleOperationMessage(uid,article.getId(),
                 ArticleOperationMessage.CREATE,cid);
-
         articleOperationMessageMapper.insert(articleOperationMessage);
-
         //圈子新增帖子数
         circleMapper.addArticle(cid);
     }
@@ -362,13 +358,16 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public ArticleShow getArticle(Integer aid, int cid,Long uid) {
         ArticleShow articleShow = articleMapper.selectShowById(aid);
+        log.info("articleShow = " +articleShow);
         if (cid != articleShow.getCid()) {
+            log.info("帖子与圈子不匹配");
             return null;
         } else {
+            log.info("开始填充是否点赞或收藏");
             int likes = articleLikeMapper.isLike(uid, articleShow.getId());
-            articleShow.setLike(likes>0);
+            articleShow.setLike(likes > 0);
             int stars = articleStarMapper.isStar(uid, articleShow.getId());
-            articleShow.setStar(stars>0);
+            articleShow.setStar(stars > 0);
             return articleShow;
         }
     }

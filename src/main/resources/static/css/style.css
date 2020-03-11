@@ -142,7 +142,6 @@ html,body{
     margin-bottom: 0px;
 }
 .signin-form input[type="text"],.signin-form input[type="email"],.signin-form input[type="password"]{
-    color:
     color:#474d5b;
     font-size:16px;
     font-weight: 400;
@@ -154,8 +153,9 @@ html,body{
     margin-top: 15px;
 }
 .password-circle,.password-modal-circle {
-    display: inline-block
+    display: inline-block;
     margin-bottom: 17px;
+    width: 100%;
 }
 .single-password-circle,.single-password-modal-circle{
     display: inline-block
@@ -250,7 +250,7 @@ html,body{
     font-size:16px;
     max-width: 265px;
     margin: 35px auto;
-
+    text-align: center;
 }
 .signin-footer p>a{
     color: #7c8089;
@@ -289,13 +289,11 @@ html,body{
 .signin.signup.popup-up {padding: 48px 0;}
 .signin.popup-in,.signin.signup.popup-up{
     position: relative;
-    background: url(../images/popupsignin.png)no-repeat;
     background-size: cover;
     background-position: center;
     z-index: 1;
 }
 .signin.signup.popup-in.pop-up{
-    background: url(../images/popupsignup.png)no-repeat;
     padding: 96px 0;
 }
 .signin.popup-in:before,.signin.signup.popup-up:before{

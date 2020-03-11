@@ -40,7 +40,6 @@ public class SignUpController {
     @PostMapping("/signUp/check")
     @ResponseBody
     public SignUpMessage signUp(@RequestBody SignUpVo signUpVo) {
-        System.out.println(signUpVo);
         String phone = signUpVo.getPhone();
         String name = signUpVo.getName();
         String password = signUpVo.getPassword();
@@ -48,21 +47,18 @@ public class SignUpController {
         //新建注册信息
         SignUpMessage message = new SignUpMessage();
         message.setPhone(phone);
-
         //判断用户名是否存在
         if (signUpService.nameIsExist(name)) {
             message.setSuccess(false);
             message.setMessage("用户名已存在");
             return message;
         }
-
         //判断电话号码是否已存在
         if (signUpService.phoneIsExist(phone)) {
             message.setSuccess(false);
             message.setMessage("电话号码已注册");
             return message;
         }
-
         //判断验证码是否正确
         if (signUpService.checkAuthCode(phone,authCode)) {
             message.setMessage("成功注册");
@@ -74,7 +70,6 @@ public class SignUpController {
             message.setSuccess(false);
             message.setMessage("验证码错误");
         }
-
         return message;
     }
 

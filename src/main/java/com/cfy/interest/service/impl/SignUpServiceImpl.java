@@ -43,31 +43,22 @@ public class SignUpServiceImpl implements SignUpService {
         System.out.println("向"+phone+"发送信息");
         SendSmsMessage sendSmsMessage = new SendSmsMessage();
         sendSmsMessage.setPhone(phone);
-
         //验证码是存在redis缓存中的
         String authCode = (String) redisTemplate.opsForValue().get(phone);
         //查看缓存中是否有该电话，有的话，继续用以前的验证码
         System.out.println(phone+"在缓存中的验证码为："+authCode);
-
         if (authCode == null) {
             System.out.println("缓存中未有"+phone+"的验证码");
             //获取6位随机数字
             authCode = AuthCodeRandom.getRandomNumberCode(6);
             //设置验证码
             redisTemplate.opsForValue().set(phone, authCode,5, TimeUnit.MINUTES);//将验证码存入缓存中,并设置过期时间为5分钟
-            //用于测试 将验证码设置缓存为永久 方便测试
-//            redisTemplate.opsForValue().set(phone, authCode);
             System.out.println("将" + authCode + "加入缓存");
         }
 //        通过阿里云发送短信验证码
         sendSmsMessage.setAuthCode(authCode);
 //        //调用将验证码和手机传递给阿里云短信进行短信发送
-//        aliyunSmsProvider.sendSms(sendSmsMessage);
-
-        //模拟发送阿里云短信，记得注释删除
-        sendSmsMessage.setSuccess(true);
-        sendSmsMessage.setMessage("短信发送成功");
-
+        aliyunSmsProvider.sendSms(sendSmsMessage);
         return sendSmsMessage;
     }
 
@@ -112,9 +103,7 @@ public class SignUpServiceImpl implements SignUpService {
             System.out.println("未发送验证码");
             return false;
         }
-
         System.out.println(phoneAuthCode);
-
         if (phoneAuthCode.equals(authCode)) {
             System.out.println("验证码正确");
             return true;

@@ -112,7 +112,6 @@ $(function () {
 
     $("#btn_cancel").click(function () {
         window.location.href = "/";
-
     });
 
 })

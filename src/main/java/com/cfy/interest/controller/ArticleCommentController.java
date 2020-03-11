@@ -37,6 +37,7 @@ public class ArticleCommentController {
 
         try {
             articleComment = articleCommentService.saveComment(commentSaveVo,uid);
+            articleComment.setUser(user);
         } catch (Exception e) {
             e.printStackTrace();
             return null;

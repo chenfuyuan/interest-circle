@@ -24,7 +24,6 @@ import org.springframework.context.annotation.PropertySource;
 @EnableConfigurationProperties
 @Data
 public class AliyunSmsProvider {
-
     private String accessId;
     private String accessSecret;
     private String domain;
@@ -32,13 +31,10 @@ public class AliyunSmsProvider {
     private String signName;
     private String regTemplateCode;
     private String regionId;
-
     public void sendSms(SendSmsMessage sendSmsMessage) {
         System.out.println(signName);
         DefaultProfile profile = DefaultProfile.getProfile(regionId,accessId,accessSecret);
-
         IAcsClient client = new DefaultAcsClient(profile);
-
         CommonRequest request = new CommonRequest();
         request.setMethod(MethodType.POST);
         request.setDomain(domain);
@@ -53,17 +49,12 @@ public class AliyunSmsProvider {
             CommonResponse response = client.getCommonResponse(request);
             //将响应封装json封装成对象
             SmsResponse smsResponse = JSON.parseObject(response.getData(), SmsResponse.class);
-
             //填充短信信息状态
             sendSmsMessage.setMessage(smsResponse.getMessage());
-
             //当状态码为OK时，设置短信发送状态
             if (smsResponse.getCode().equals("OK")) {
                 sendSmsMessage.setSuccess(true);
             }
-
-            System.out.println(sendSmsMessage.toString());
-
         } catch (ServerException e) {
             e.printStackTrace();
         } catch (ClientException e) {

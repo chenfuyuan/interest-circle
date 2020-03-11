@@ -5,7 +5,6 @@ $(function () {
         console.log("未倒计时");
         $('#btn_authCode').attr("disabled", false);
     }
-
     function timekeeping() {
         //把按钮设置为不可以点击
         console.log("按钮设置为不可以点击")
@@ -35,7 +34,6 @@ $(function () {
 
     //绑定发送按钮
     $('#btn_authCode').click(function (event) {
-        /* Act on the event */
         //校验手机号码
             var phone = $('#text_phone').val();
             var pre = /^[1](([3][0-9])|([4][5-9])|([5][0-3,5-9])|([6][5,6])|([7][0-8])|([8][0-9])|([9][1,8,9]))[0-9]{8}$/;
@@ -47,7 +45,7 @@ $(function () {
                     alert("手机号格式错误！")
                     return this;
                 }
-        }
+            }
         $.ajax({
             url: '/signUp/authCode/send',//服务器发送短信
             contentType: "application/json",

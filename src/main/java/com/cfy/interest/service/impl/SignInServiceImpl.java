@@ -25,19 +25,16 @@ public class SignInServiceImpl implements SignInService {
     public SignInMessage checksignIn(SignInVo signInVo) {
         String md5Password = MD5Utils.MD5Encode(signInVo.getPassword());
         String phone = signInVo.getPhone();
-
         //设置查询条件
         QueryWrapper<User> wrapper = new QueryWrapper<>();
         wrapper.and(i -> {
             i.eq("phone", phone).eq("password", md5Password);
         });
-
         //数据库查询user
         User user = userMapper.selectOne(wrapper);
         log.info("user = " + user);
         //封装登录信息
         SignInMessage message = new SignInMessage();
-
         if (user != null) {
             message.setMessage("登录成功");
             message.setSuccess(true);

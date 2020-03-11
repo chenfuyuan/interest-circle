@@ -1,8 +1,8 @@
 $(function () {
     //初始展示的帖子
     sort = "create_time";
-     type = "normal";
-     pageNum = 1;
+    type = "normal";
+    pageNum = 1;
     search = "";
 
     function initTopic() {
@@ -408,7 +408,7 @@ $(function () {
         //帖子跳转
         $(".topic-text").click(function () {
             var aid = $(this).parents(".post-list-item").data("aid");
-            window.location.href = "/article/detail/" + aid + "?pageNum=" + pageNum;
+            window.location.href = "/article/detail/" + aid + "?pageNum=" + cPageNum;
         });
 
     }

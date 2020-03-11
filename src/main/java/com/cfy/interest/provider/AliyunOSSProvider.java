@@ -73,11 +73,9 @@ public class AliyunOSSProvider {
         }
         String originalFilename = file.getOriginalFilename();
         String substring = originalFilename.substring(originalFilename.lastIndexOf(".")).toLowerCase();
-
         //获取当前日期
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String dateStr = format.format(new Date());
-
         String name = dateStr+"/"+UUID.randomUUID().toString().replace("-", "") + substring;
         log.info("name = " + name);
         try {
@@ -124,15 +122,14 @@ public class AliyunOSSProvider {
             ObjectMetadata objectMetadata = new ObjectMetadata();
             log.info("创建MetaData对象");
             objectMetadata.setContentLength(instream.available());
-
             objectMetadata.setCacheControl("no-cache");
             objectMetadata.setHeader("Pragma", "no-cache");
             objectMetadata.setContentType(getcontentType(fileName.substring(fileName.lastIndexOf("."))));
             objectMetadata.setContentDisposition("inline;filename=" + fileName);
-
             log.info("设置完成MetaData,开始上传");
             //上传文件
-            PutObjectResult putResult = ossClient.putObject(bucketName, objectName + fileName, instream, objectMetadata);
+            PutObjectResult putResult = ossClient.putObject(bucketName, objectName + fileName, instream,
+                    objectMetadata);
             log.info("上传成功");
             ret = putResult.getETag();
         } catch (IOException e) {

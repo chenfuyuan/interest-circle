@@ -136,10 +136,10 @@ $(function () {
             return;
         } else {
             if (checkCityId == 0) {
-                alert("未选择城市，直接根据省份跳转，省份=" + checkProvinceId);
+                console.log("未选择城市，直接根据省份跳转，省份=" + checkProvinceId);
                 window.location.href = "/circle/querySearchByDId?districtId="+checkProvinceId;
             } else {
-                alert("选择城市 = " + checkCityId);
+                console.log("选择城市 = " + checkCityId);
                 window.location.href = "/circle/querySearchByDId?districtId="+checkCityId;
             }
         }

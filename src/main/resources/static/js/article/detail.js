@@ -4,6 +4,7 @@ $(function () {
     });
 
     aid = $(".main-content").data("aid");
+
     console.log("aid = " + aid);
 
 

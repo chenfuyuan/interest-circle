@@ -201,7 +201,7 @@ body,html {
 
 .circle-home .main-content {
     float: left;
-    width: 540px;
+    width: 800px;
 }
 
 .circle-description p {
@@ -364,6 +364,7 @@ body,html {
     box-shadow: 0 1px 2px rgba(0,0,0,.04);
     border-radius: 2px;
     overflow: hidden;
+    width: 800px;
 }
 
 .topic-top .header {

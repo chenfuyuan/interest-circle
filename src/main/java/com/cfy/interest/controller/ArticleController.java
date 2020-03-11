@@ -43,14 +43,12 @@ public class ArticleController {
         for (MultipartFile file : files) {
             log.info("文件名为:" + file.getOriginalFilename());
         }
-
         //将图片上传到oss服务器中
         List<String> data = articleService.uploadImages(files);
         log.info("上传后的路径为:" + data);
         ArticleUploadImageVo articleUploadImageVo = new ArticleUploadImageVo();
         articleUploadImageVo.setErrno(0);
         articleUploadImageVo.setData(data);
-
         return articleUploadImageVo;
     }
 
@@ -63,8 +61,6 @@ public class ArticleController {
         //获取User
         User user = (User) request.getSession().getAttribute("user");
         long uid = user.getId();
-
-
         articleService.publish(uid, editorArticleVo);
     }
 
@@ -79,20 +75,17 @@ public class ArticleController {
     @PostMapping("article/get")
     @ResponseBody
     public PageInfo<ArticleShow> getArticles(@RequestBody GetArticleVo getArticleVo, HttpServletRequest request) {
-
         User user = (User) request.getSession().getAttribute("user");
         long uid = user.getId();
         //分页查询
         Integer pageNum = getArticleVo.getPageNum();
         Integer pageSize = 4;
         log.info("pageNum ==" + pageNum);
-
         String sort = getArticleVo.getSort();
         //分页查询
         PageHelper.startPage(pageNum, pageSize, sort + " desc");
         try {
             List<ArticleShow> articles = articleService.getArticles(getArticleVo, uid);
-            log.info(articles.get(0).toString());
             PageInfo<ArticleShow> pageInfo = new PageInfo<ArticleShow>(articles, pageSize);
             log.info("list = " + pageInfo);
             long count = pageInfo.getTotal();
@@ -103,8 +96,6 @@ public class ArticleController {
         } finally {
             PageHelper.clearPage(); //清理 ThreadLocal 存储的分页参数,保证线程安全
         }
-
-
     }
 
 
@@ -220,6 +211,7 @@ public class ArticleController {
     @GetMapping("/article/detail/{aid}")
     public String detail(@PathVariable("aid") Integer aid, Model model, @RequestParam(name = "pageNum") Integer pageNum
             , HttpServletRequest request) {
+
         if(pageNum == null){
             return "redirect:error";
         }
@@ -231,17 +223,14 @@ public class ArticleController {
         List<UserOwnCircle> userOwnCircles = circleService.selectUserOwn(uid);
         //将用户选择的圈子和用户圈子列表传递到前台
 
-        //如果还未加入圈子，跳转到加入圈子界面
-        if(userOwnCircles.isEmpty()){
-            return "redirect:/circle/querySearch";
-        }
-
         if (userOwnCircles.size() < pageNum) {
             pageNum = userOwnCircles.size();
         }
+        log.info("pageNum = "+ pageNum);
         model.addAttribute("pageNum", pageNum);
         model.addAttribute("userOwnCircles", userOwnCircles);
 
+        log.info("添加PageNum和UserOwnCircles进model");
 
         //获取选中圈子的前4个成员，根据职务顺序取得
         int cid = userOwnCircles.get(pageNum-1).getCid();
@@ -251,9 +240,11 @@ public class ArticleController {
         log.info("多少个 " + userlist.size());
         model.addAttribute("circleMember", userlist);
 
+        log.info("添加圈子成员");
 
         ArticleShow articleShow = articleService.getArticle(aid, cid,uid);
         if (articleShow == null) {
+            log.info("articleShow = " + articleShow);
             return "/error";
         }
         model.addAttribute("article", articleShow);

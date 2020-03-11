@@ -47,9 +47,7 @@ public class SignInController {
             response.addCookie(cookie);
             message.setRememberPassword(true);
         }
-
         request.getSession().setAttribute("user",user);
-
         return message;
     }
 }

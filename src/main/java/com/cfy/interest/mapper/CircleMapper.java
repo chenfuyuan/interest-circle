@@ -29,13 +29,15 @@ public interface CircleMapper extends BaseMapper<Circle> {
      *
      * @return
      */
-    @Select("select * from circle where state !=-1 and id not in (select cid from circle_user where uid = #{uid} and state!=0)")
+    @Select("select * from circle where state =1  and id not in (select cid from circle_user where uid = #{uid} and " +
+            "state!=0)")
     @ResultMap("circleMap")
     List<Circle> selectAll(long uid);
 
 
-    @Select("select * from circle where state != -1 and id not in (select cid from circle_user where uid = #{uid}) " +
-            "and state != 0 and(district_id = #{districtId} or district_id in (" +
+    @Select("select * from circle where state = 1 and id not in (select cid from circle_user where uid = #{uid} and " +
+            "state = 1) " +
+            "and (district_id = #{districtId} or district_id in (" +
             "select id from district where parent_id = #{districtId}))")
     @ResultMap("circleMap")
     List<Circle> selectAllByDistrict(Integer districtId, long uid);

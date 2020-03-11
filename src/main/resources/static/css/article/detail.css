@@ -298,6 +298,7 @@
     z-index: 10;
     width: 540px;
     box-sizing: border-box;
+    width: 100%;
 }
 
 .reply-footer.page-footer .user-avatar {
@@ -322,12 +323,13 @@
     border-radius: 19px;
     background-color: #fff;
     height: 36px;
+    width: 100%;
 }
 
 .more-remind-input {
     position: relative;
     padding: 6px 0;
-    width: 337px;
+    width: 100%;
     height: 34px;
     z-index: 2;
     font-size: 14px;

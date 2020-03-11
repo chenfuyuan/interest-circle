@@ -18,7 +18,7 @@
                     <span class="circle-name" th:text="${circle.name}">XXX</span>
                 </h2>
                 <div class="util">
-                    <img src="/static/image/avatar.png" alt="">
+                    <img th:src="@{${session.user.avatarPath}}" alt="">
                     <span class="userName ellipsis" th:text="${session.user.name}" title="用户名">YY</span>
                 </div>
             </div>

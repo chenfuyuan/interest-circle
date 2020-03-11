@@ -10,5 +10,7 @@ $(function () {
     console.log("cid = " + cid);
     identity = $("#uid").data("identity");
     console.log("identity=" + identity);
+    cPageNum =$("#uid").data("pagenum");
+    console.log("pageNum = " + cPageNum);
     }
 );
