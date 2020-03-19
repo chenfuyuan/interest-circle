@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="circle_header::head('首页','css/circle/backSetting.css')">
+
+</head>
+
+<body>
+<div th:fragment="setting">
+    <div class="status-bar-container">
+        <span class="router-link-exact-active active inactive">设置</span>
+        <span class="slash">/</span>
+        <span class="active">基本信息</span>
+    </div>
+
+    <div class="mainContent">
+        <div class="setting">
+            <!--选项-->
+            <div class="menu">
+                <div class="el-tabs el-tabs-top">
+                    <div class="el-tabs-header is-top">
+                        <div class="el-tabs-nav-wrap is-top">
+                            <div role="tablist" class="el-tabs-nav is-top">
+                                <div class="el-tabs-active-bar is-top"
+                                     style="width: 56px; transform: translateX(0px);"></div>
+                                <div class="el-tabs-item is-top is-active">
+                                    <span>基本信息</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!--内容-->
+            <div class="setting-main">
+                <form id="form-circle"class="set-baisc" enctype="multipart/form-data" method="post">
+                    <input type="hidden" name="cid" th:attr="value=${circle.id}"/>
+                    <!--背景与头像选择-->
+                    <div class="set-block">
+                        <div class="cover">
+                            <div id="img-circle-bgd" class="content"
+                                 th:attr="style='background-image: url('+${circle.bgdPath}+')'">
+                                <div class="cover-bg cover-bg-color">
+                                    <span>修改封面</span>
+                                    <i class="qz-camera glyphicon glyphicon-camera"></i>
+                                </div>
+                                <input id="upload-img-bgd"type="file"
+                                       accept="image/jpg, image/png, image/jpeg, image/bmp" name="background">
+                            </div>
+                            <div class="cover-head">
+                                <div class="head-bg">
+                                    <span>修改头像</span>
+                                    <i class="qz-camera glyphicon glyphicon-camera"></i>
+                                </div>
+                                <img id="img-circle-avatar" th:src="${circle.avatarPath}" alt="">
+                                <input id="upload-img-avatar" type="file"
+                                       accept="image/jpg, image/png, image/jpeg, image/bmp" name="avatar">
+                            </div>
+                        </div>
+                    </div>
+                    <!--圈子名字-->
+                    <div class="set-block">
+                        <div class="set">
+                            <div class="set-left">
+                                <span class="uvw-name">圈子名称</span>
+                            </div>
+                            <div class="set-right">
+                                <div class="el-input">
+                                    <input id="text-circle-name" th:attr="value=${circle.name}" type="text"
+                                           autocomplete="off"
+                                           placeholder="输入圈子名称"
+                                           maxlength="16" class="el-input-inner" name="circleName">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--圈子简介-->
+                    <div class="set-block">
+                        <div class="set-content uvw-Intro">
+                            <div class="set-left">
+                                <p>
+                                    <span>圈子简介</span>
+                                </p>
+                                <p>
+                                    <span class="xt">（选填）</span>
+                                </p>
+                            </div>
+                            <div class="set-right">
+                                <textarea name="introduce" id="text-circle-introduce"type="text" class="vip-intro"
+                                          placeholder="圈子简介"
+                                          th:text="${circle.introduce}"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--确定按钮-->
+                    <div class="rule-content-bottom" style="left: 549.5px;">
+                        <div class="card-content-bottom submit-content" style="text-align: right;">
+                            <button id="btn-setting-save"disabled="disabled" type="button"
+                                    class="el-button el-button--primary is-disabled is-round">
+                                <span>保存</span>
+                            </button>
+                            <button id="btn-setting-cancel" disabled="disabled" type="button"
+                                    class="el-button el-button--default is-disabled is-round"
+                                    style="margin-right: 12px; background: rgb(251, 251, 251); border: 1px solid rgb(227, 227, 227);">
+                                <span>取消</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

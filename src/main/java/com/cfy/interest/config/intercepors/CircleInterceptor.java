@@ -21,7 +21,6 @@ public class CircleInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //获取
-        //
         log.info("访问圈子后台的path = " + request.getRequestURL());
         Integer cid =  Integer.parseInt(request.getParameter("cid"));
         log.info("cid = " + cid);
@@ -29,6 +28,7 @@ public class CircleInterceptor implements HandlerInterceptor {
         long uid = user.getId();
         boolean login = circleAdminBackService.login(uid, cid);
         if (login) {
+            log.info("登录用户匹配");
             return true;
         } else {
             StringBuffer url = request.getRequestURL();

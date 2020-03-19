@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="circle_header::head('圈子管理后台','css/circle/back.css')">
+<head th:replace="circle_header::head('圈子管理后台','css/circle/back.css,css/circle/backSetting.css')">
 
 </head>
 
 <body>
-<div class="app">
-    <div class="app-wrapper">
+<div class="app" id="app" th:attr="data-cid=${circle.id}">
+    <div class="app-wrapper" >
         <div th:fragment="topHeader" class="topHeader">
             <div class="topHeader-content">
                 <h2 class="logo">
@@ -26,35 +26,35 @@
         <div class="main-container">
             <div th:fragment="sideNav" class="sideNav side-container" style="margin-left:405.5px">
                 <ul role="menubar" class="el-menu-vertical-demo el-menu">
-                    <div class="el-menu-ele defaultActive">
+                    <div class="el-menu-ele" data-type="1" th:classappend="${viewType == 1}?'defaultActive':''">
+                        <!--defaultActive-->
                         <li role="menuitem" aria-haspopup="true" class="el-submenu hideArrow" style="display: block">
                             <div class="el-submenu-title" style="padding-left: 20px;"><i
-                                    class="qz-home glyphicon glyphicon-home"></i><span>首页
-                            </span><i class="el-submenu__icon-arrow el-icon-arrow-down"></i></div>
+                                    class="qz-home glyphicon glyphicon-home"></i>
+                                <span id="item-index">首页</span></div>
                         </li>
                     </div>
-                    <div class="el-menu-ele">
+                    <div class="el-menu-ele" data-type="2" th:classappend="${viewType == 2}?'defaultActive':''">
                         <li role="menuitem" aria-haspopup="true" class="el-submenu hideArrow" style="display: block;">
                             <div class="el-submenu-title" style="padding-left: 20px;">
                                 <i class="qz-set glyphicon glyphicon-cog"></i>
-                                <span>设置</span>
+                                <span id="item-setting">设置</span>
                             </div>
                         </li>
                     </div>
-                    <div class="el-menu-ele">
+                    <div class="el-menu-ele" data-type="3" th:classappend="${viewType == 3}?'defaultActive':''">
                         <li role="menuitem" aria-haspopup="true" class="el-submenu hideArrow" style="display: block;">
                             <div class="el-submenu-title" style="padding-left: 20px;">
                                 <i class="qz-permissions glyphicon glyphicon-lock"></i>
-                                <span>权限</span>
+                                <span id="item-limit">权限</span>
                             </div>
                         </li>
                     </div>
                 </ul>
             </div>
-            <div class="appMain content-container" style="height: calc(100vh + 538px + 0px);">
-                <div class="mainContent">
-                    <div th:if="${viewType}==1" th:replace="circleBack/statistics::statistics"></div>
-                </div>
+            <div class="appMain content-container" style="height: calc(100vh + 538px + 0px);" id="content" th:attr="data-viewType=${viewType}">
+                    <div th:if="${viewType==1}" th:include="circleBack/statistics::statistics"></div>
+                    <div th:if="${viewType==2}" th:include="circleBack/setting::setting"></div>
             </div>
         </div>
 
@@ -62,5 +62,9 @@
 
     </div>
 </div>
+
+
+<script type="application/javascript" src="/static/js/circleBack/viewSwtich.js"></script>
+<script type="application/javascript" src="/static/js/circleBack/setting.js"></script>
 </body>
 </html>

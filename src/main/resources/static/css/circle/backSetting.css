@@ -1,0 +1,394 @@
+.status-bar-container {
+    position: relative;
+}
+
+.status-bar-container span {
+    font-size: 16px;
+    height: 64px;
+    line-height: 64px;
+    padding: 20px 0;
+}
+
+.status-bar-container span.slash {
+    margin: 0 10px;
+    color: #d8d8d8;
+}
+
+.setting {
+    position: relative;
+}
+
+.menu .el-tabs-header {
+    margin: -14px 0 15px 0;
+    padding: 0;
+    position: relative;
+}
+
+.el-tabs-nav-wrap {
+    overflow: hidden;
+    margin-bottom: -1px;
+    position: relative;
+}
+
+.el-tabs-nav {
+    white-space: nowrap;
+    position: relative;
+    -webkit-transition: -webkit-transform .3s;
+    transition: -webkit-transform .3s;
+    transition: transform .3s;
+    transition: transform .3s,-webkit-transform .3s;
+    float: left;
+    z-index: 2;
+}
+
+.el-tabs-active-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    background-color: #00bcb8;
+    z-index: 1;
+    -webkit-transition: -webkit-transform .3s cubic-bezier(.645,.045,.355,1);
+    transition: -webkit-transform .3s cubic-bezier(.645,.045,.355,1);
+    transition: transform .3s cubic-bezier(.645,.045,.355,1);
+    transition: transform .3s cubic-bezier(.645,.045,.355,1),-webkit-transform .3s cubic-bezier(.645,.045,.355,1);
+    list-style: none;
+}
+
+.menu .el-tabs-item.is-active {
+    color: #00bcb8;
+}
+
+.menu .el-tabs-item {
+    position: static;
+    color: #9b9a9a;
+    font-size: 14px;
+    padding: 0;
+    height: 40px;
+    box-sizing: border-box;
+    line-height: 40px;
+    display: inline-block;
+    list-style: none;
+    font-weight: 500;
+}
+
+.menu {
+    margin: 0;
+    padding: 0;
+
+}
+
+.menu .el-tabs-nav-wrap:after {
+    height: 1px;
+    background: #ededed;
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #e4e7ed;
+    z-index: 1;
+}
+
+.set-baisc .cover {
+    position: relative;
+}
+
+.set-baisc .cover .content {
+    position: relative;
+    width: 612px;
+    height: 306px;
+    background: #ededed;
+    margin: 16px 0 12px;
+    overflow: hidden;
+    background-size: 100% 100%;
+}
+
+.set-baisc .cover .content .cover-bg-color {
+    background: rgba(0,0,0,.4);
+}
+
+.set-baisc .cover .content .cover-bg {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.set-baisc .cover .content .cover-bg span {
+    color: #fff;
+}
+
+.set-baisc .cover .content span {
+    font-size: 14px;
+    color: #c3c3c3;
+    font-weight: 500;
+}
+
+.set-baisc .cover .content .cover-bg i {
+    margin-left: 6px;
+    color: #fff;
+}
+
+.set-baisc .cover .content input[type=file] {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    font-size: 240px;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 1;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.set-baisc .cover .cover-head {
+    position: absolute;
+    width: 88px;
+    height: 88px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    overflow: hidden;
+    bottom: -44px;
+    left: 16px;
+    z-index: 1;
+}
+
+.set-baisc .cover .cover-head .head-bg {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0,0,0,.4);
+}
+
+.set-baisc .cover .cover-head img {
+    width: 100%;
+    height: 100%;
+}
+
+.set-baisc .cover .cover-head .head-bg i, .set-baisc .cover .cover-head .head-bg span {
+    color: #fff;
+}
+
+.set-baisc .cover .cover-head input[type=file] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 100px;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.set-baisc .set-block .set, .set-baisc .set-block .set-content {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.set-baisc .set-block .set {
+    margin: 72px 0 24px;
+}
+
+.set-baisc .set-block .set-left {
+    width: 80px;
+    margin-right: 12px;
+    float: left;
+}
+
+.set-baisc .set-block .set-left span {
+    font-size: 15px;
+    color: #4a4a4a;
+    font-weight: 500;
+}
+.set-baisc .set-block .set-right {
+    float: left;
+    position: relative;
+    width: 540px;
+}
+
+.el-input-inner {
+    -webkit-appearance: none;
+    background-color: #fff;
+    background-image: none;
+    border-radius: 4px;
+    border: 1px solid #dcdfe6;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #606266;
+    display: inline-block;
+    font-size: inherit;
+    height: 40px;
+    line-height: 40px;
+    outline: none;
+    padding: 0 15px;
+    -webkit-transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+    width: 100%;
+}
+
+.set-baisc .set-block .uvw-Intro {
+    display: block;
+    -webkit-box-align: baseline;
+    -ms-flex-align: baseline;
+    align-items: baseline;
+}
+
+.set-baisc .set-block .set-content {
+    margin-bottom: 24px;
+}
+
+.set-baisc .set-block .set-left {
+    width: 80px;
+    margin-right: 12px;
+    float: left;
+}
+
+.set-baisc .set-block .set-left span {
+    font-size: 15px;
+    color: #4a4a4a;
+    font-weight: 500;
+}
+
+.set-baisc .set-block .set-right {
+    float: left;
+    position: relative;
+    width: 540px;
+}
+
+.set-baisc .vip-intro {
+    width: 100%;
+    height: 400px;
+    background: #fff;
+    border: 1px solid #ededed;
+    border-radius: 4px;
+    padding: 17px;
+    position: relative;
+    overflow: hidden;
+    resize:none;
+}
+
+.rule-content-bottom, .submit-content {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.rule-content-bottom {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: -24px;
+    right: 0;
+    height: 62px;
+    line-height: 62px;
+    background: #fff;
+    z-index: 7;
+    border-top: 1px solid #f0f0f0;
+}
+
+.submit-content {
+    width: 947px;
+    text-align: right;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: reverse;
+    -ms-flex-direction: row-reverse;
+    flex-direction: row-reverse;
+    margin: 0;
+}
+
+.submit-content .el-button {
+    width: 108px;
+}
+
+.el-button.is-round {
+    padding: 10px 23px;
+}
+
+.submit-content .el-button {
+    width: 108px;
+    height: 36px;
+}
+
+.el-button.is-round {
+    border-radius: 20px;
+    padding: 12px 23px;
+}
+
+.rule-content-bottom .el-button--primary {
+    color: #fff;
+    background-color: #00bcb8;
+    border-color: #00bcb8;
+    cursor: pointer;
+}
+
+.el-button {
+    display: inline-block;
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    background: #fff;
+    border: 1px solid #dcdfe6;
+    border-color: #dcdfe6;
+    color: #606266;
+    -webkit-appearance: none;
+    text-align: center;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    outline: none;
+    margin: 0;
+    -webkit-transition: .1s;
+    transition: .1s;
+    font-weight: 500;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    padding: 12px 20px;
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+
+.el-button--primary.is-disabled, .el-button--primary.is-disabled:active, .el-button--primary.is-disabled:focus, .el-button--primary.is-disabled:hover {
+    color: #fff;
+    background-color: #80dedc;
+    border-color: #80dedc;
+}
+
+.el-button.is-disabled, .el-button.is-disabled:focus, .el-button.is-disabled:hover {
+    cursor: not-allowed;
+}
+
