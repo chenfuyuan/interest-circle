@@ -1,0 +1,443 @@
+.member-permission .btns .title, .member-permission .btns {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.member-permission .btns {
+    text-align: right;
+    margin-top: 14px;
+    margin-bottom: 12px;
+    height: 35px;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    border-bottom: 1px solid #ededed;
+}
+
+.member-permission .btns .award {
+    color: #00bcb8;
+    font-size: 16px;
+}
+
+.member-permission .btns .award .title{
+    position: relative;
+    height: 35px;
+    line-height: 35px;
+    display: inline-block;
+    border-bottom: 2px solid #00bcb8;
+    color: #4a4a4a;
+    margin-right: 6px;
+}
+
+.member-list .admin-table {
+    width: 922px;
+    border: 1px solid #ededed;
+    border-radius: 4px;
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+.member-list .admin-table .admin-table-t{
+    height: 40px;
+    line-height: 40px;
+    background: #fafafa;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    font-size: 14px;
+    color: #949494;
+    font-weight: 500;
+}
+
+.member-list .admin-table .admin-table-t span:first-of-type {
+    width: 295px;
+    padding-left: 48px;
+}
+
+.member-list .admin-table .admin-table-t span{
+    display: block;
+}
+
+.member-list .admin-table .admin-table-t span:nth-of-type(2) {
+    width: 474px;
+}
+
+.member-list .admin-table .admin-table-tbody li {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    height: 60px;
+    line-height: 60px;
+    background: #fff;
+    border-top: 1px solid #ededed;
+}
+
+.member-list .admin-table .admin-table-tbody li .head {
+    width: 294px;
+    padding-left: 55px;
+}
+
+.member-list .admin-table .admin-table-tbody li .head img {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+}
+
+.member-list .admin-table .admin-table-tbody li .name {
+    width: 474px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 14px;
+    color: #4a4a4a;
+    font-weight: 400;
+}
+
+.member-list .admin-table .admin-table-tbody li .delete{
+    padding: 0 5px;
+}
+
+.member-list .admin-table .admin-table-tbody li .delete i {
+    font-weight: 600;
+    font-size: 18px;
+    color: #d8d8d8;
+    cursor: pointer;
+}
+
+.member-list .admin-table {
+    width: 922px;
+    border: 1px solid #ededed;
+    border-radius: 4px;
+    margin-top: 20px;
+    overflow: hidden;
+}
+ol, ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.member-permission .white-list .add-admin {
+    width: 132px;
+    height: 32px;
+    margin: 14px 0 16px;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+    padding: 0;
+}
+
+.el-button--primary {
+    color: #fff;
+    background-color: #00bcb8;
+    border-color: #00bcb8;
+}
+
+.more-modal-box {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.more-modal-box, .more-modal-wrap {
+    position: fixed;
+    z-index: 2000;
+}
+
+.more-modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.more-dialog[data-size=normal] {
+    position: relative;
+    width: 588px;
+}
+
+.more-dialog {
+    background: #fff;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.add-admin .add-admin-title {
+    position: relative;
+    border-bottom: 1px solid #ededed;
+    background-color: #fafafa;
+    padding-bottom: 22px;
+}
+
+.add-admin .add-admin-title .title {
+    position: relative;
+    padding-left: 36px;
+    padding-right: 36px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #333;
+    font-size: 16px;
+    line-height: 60px;
+    font-weight: 700;
+}
+
+.add-admin .add-admin-title .title .more-dialog-icon-close {
+    position: absolute;
+    right: 24px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    font-size: 14px;
+    color: #4a4a4a;
+    cursor: pointer;
+}
+
+.add-admin .add-admin-title .search {
+    position: relative;
+    margin: 0 24px 0 36px;
+    height: 44px;
+    line-height: 44px;
+    border: 1px solid #ededed;
+    border-radius: 22px;
+    background: #fff;
+    padding: 11px 0;
+}
+
+.add-admin .add-admin-title .search input {
+    width: 100%;
+    position: absolute;
+    border: none;
+    background: transparent;
+    font-size: 14px;
+    height: 20px;
+    left: 16px;
+    padding-right: 80px;
+    line-height: 20px;
+}
+
+.add-admin .add-admin-title .search .search-icon {
+    position: absolute;
+    top: 12px;
+    right: 19px;
+    font-size: 20px;
+    color: #9b9b9b;
+    cursor: pointer;
+}
+
+.add-admin .member-main {
+    border-top: 1px solid #ededed;
+    background: #fafafa;
+}
+
+.add-admin .member-main .member-left {
+    width: 418px;
+    padding-left: 36px;
+    float: left;
+    border-right: 1px solid #ededed;
+    max-height: 352px;
+    overflow: hidden;
+    min-height: 100px;
+    background: #fff;
+}
+
+.add-admin .member-main .member-left .scroll {
+    width: 425px;
+    max-height: 356px;
+    overflow: auto;
+}
+
+.add-admin .member-main .member-left .member-list li {
+    width: 320px;
+    cursor: pointer;
+    position: relative;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+    height: 48px;
+    border-bottom: 1px solid #ededed;
+    padding: 18px 0;
+    padding-right: 60px;
+}
+
+.add-admin .member-main .member-left .member-list li .head {
+    position: relative;
+    cursor: pointer;
+    width: 48px;
+    height: 48px;
+    background: #ededed;
+    border-radius: 50%;
+    float: left;
+}
+
+.add-admin .member-main .member-left .member-list li .head .head-img {
+    width: 100%;
+    border-radius: 50%;
+}
+
+.add-admin .member-main .member-left .member-list li .title {
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+    line-height: 48px;
+    margin-left: 65px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 700;
+}
+
+.add-admin .member-main .member-left .member-list li input {
+    display: none;
+}
+
+.add-admin .member-main .member-left .member-list li .radio-check{
+    background: url(/static/image/check.svg);
+    background-size: cover;
+    border: none;
+}
+
+.add-admin .member-main .member-left .member-list li .radio {
+    cursor: pointer;
+    position: absolute;
+    right: 22px;
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid #ededed;
+    top: 50%;
+    margin-top: -8px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-radius: 50%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.add-admin .member-main .member-right {
+    float: left;
+    width: 169px;
+    padding-top: 7px;
+}
+
+.add-admin .member-main .member-right .title {
+    font-size: 14px;
+    line-height: 14px;
+    padding: 5px 23px 20px 13px;
+    color: #767676;
+}
+
+.add-admin .member-main .member-right .title span {
+    float: right;
+}
+
+.add-admin .member-main .member-right .choice-member-list {
+    max-height: 305px;
+    overflow: auto;
+}
+
+.add-admin .member-main .member-right .choice-member-list li {
+    height: 34px;
+    line-height: 34px;
+    margin-bottom: 18px;
+    padding: 0 13px;
+}
+
+.add-admin .member-main .member-right .choice-member-list li .head {
+    width: 34px;
+    height: 34px;
+    overflow: hidden;
+    border-radius: 50%;
+    float: left;
+}
+
+.add-admin .member-main .member-right .choice-member-list li .head img {
+    width: 100%;
+}
+
+.add-admin .member-main .member-right .choice-member-list li .name {
+    font-size: 14px;
+    color: #333;
+    height: 34px;
+    line-height: 34px;
+    font-weight: 700;
+    margin-left: 45px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.add-admin .member-main:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.more-dialog .more-dialog-footer {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 72px;
+    background-color: #fafafa;
+    border-top: 1px solid #f1f1f1;
+}
+
+.theme-color {
+    -webkit-transition: .3s;
+    transition: .3s;
+}
+
+.next:hover, .theme-color {
+    color: #00bcb8;
+}
+
+.foot-btn {
+    font-weight: 700;
+    font-size: 16px;
+    margin-right: 36px;
+}
+
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+
+.more-modal-backdrop, .more-modal-wrap {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.6);
+}
+
+ul#ul-member-list {
+    height: 310px;
+    overflow: auto;
+}

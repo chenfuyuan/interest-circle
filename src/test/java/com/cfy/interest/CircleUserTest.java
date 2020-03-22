@@ -1,6 +1,7 @@
 package com.cfy.interest;
 
 import com.cfy.interest.mapper.CircleUserMapper;
+import com.cfy.interest.model.CircleUser;
 import com.cfy.interest.model.User;
 import com.cfy.interest.model.UserOwnCircle;
 import lombok.extern.slf4j.Slf4j;
@@ -28,5 +29,13 @@ public class CircleUserTest {
     public void testSelectCircleUserByCid() {
         List<User> userList = circleUserMapper.selectCircleUserByCid(12);
         log.info(userList.toString());
+    }
+
+    @Test
+    public void testSelectCircleUserBySearch() {
+        List<CircleUser> userList = circleUserMapper.getMemberListByName(19,"%chenfuyuan1%");
+        for (CircleUser circleUser : userList) {
+            log.info("user = " + circleUser.getUser());
+        }
     }
 }

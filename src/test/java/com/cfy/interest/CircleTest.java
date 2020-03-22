@@ -37,4 +37,6 @@ public class CircleTest {
     public void testJoinMember() {
         circleMapper.joinMember(12);
     }
+
+
 }

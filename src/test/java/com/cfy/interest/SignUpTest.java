@@ -32,9 +32,11 @@ public class SignUpTest {
     @Test
     public void SaveUser() {
         SignUpVo signUpVo = new SignUpVo();
-        signUpVo.setName("chenfuyuan");
-        signUpVo.setPassword("123456");
-        signUpVo.setPhone("18059851006");
-        signUpService.saveUser(signUpVo);
+        for (int i = 0; i < 10; i++) {
+            signUpVo.setName("chenfuyuan1"+i);
+            signUpVo.setPassword("123456");
+            signUpVo.setPhone("1805985102"+i);
+            signUpService.saveUser(signUpVo);
+        }
     }
 }

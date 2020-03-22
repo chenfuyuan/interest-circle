@@ -6,8 +6,11 @@ import com.cfy.interest.mapper.CircleOperationMessageMapper;
 import com.cfy.interest.mapper.CircleUserMapper;
 import com.cfy.interest.model.Circle;
 import com.cfy.interest.model.CircleOperationMessage;
+import com.cfy.interest.model.CircleUser;
+import com.cfy.interest.model.User;
 import com.cfy.interest.provider.AliyunOSSProvider;
 import com.cfy.interest.service.CircleAdminBackService;
+import com.cfy.interest.vo.AddAdminVo;
 import com.cfy.interest.vo.AjaxMessage;
 import com.cfy.interest.vo.CircleDayStatistics;
 import com.cfy.interest.vo.CircleSettingSaveVo;
@@ -16,6 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Slf4j
@@ -134,7 +139,7 @@ public class CircleAdminBackServiceImpl implements CircleAdminBackService {
 
     @Transactional
     @Override
-    public AjaxMessage saveSetting(CircleSettingSaveVo vo,Long uid) {
+    public AjaxMessage saveSetting(CircleSettingSaveVo vo, Long uid) {
         aliyunOSSProvider.initOssClient();
         //1.保存封面
         String bgdPath = null;
@@ -157,12 +162,86 @@ public class CircleAdminBackServiceImpl implements CircleAdminBackService {
         //保存更新
         circleMapper.updateById(circle);
 
-        CircleOperationMessage circleOperationMessage = new CircleOperationMessage().build(uid,vo.getCid());
+        CircleOperationMessage circleOperationMessage = new CircleOperationMessage().build(uid, vo.getCid());
         circleOperationMessage.setType(5);
         circleOperationMessage.setMessage("修改圈子信息");
         circleOperationMessageMapper.insert(circleOperationMessage);
 
         return new AjaxMessage(true, "修改成功");
 
+    }
+
+    @Override
+    public List<User> getAdminUserList(Integer cid) {
+        return circleUserMapper.getAdminUserList(cid);
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public AjaxMessage deleteAdmin(Integer cid, Long uid, Long operatingUid) throws Exception {
+        //删除管理员
+        int changeRow = circleUserMapper.deleteAdminByCid(cid, uid);
+        if (changeRow == 0) {
+            throw new Exception("该圈子未有该管理员");
+        }
+        if (changeRow > 1) {
+            throw new Exception("删除cuow");
+        }
+
+        //添加用户操作记录
+        CircleOperationMessage circleOperationMessage = new CircleOperationMessage().build(uid, cid);
+        circleOperationMessage.setType(6);
+        circleOperationMessage.setMessage("删除管理员");
+
+        circleOperationMessageMapper.insert(circleOperationMessage);
+
+        return new AjaxMessage(true, "删除成功");
+
+
+    }
+
+    @Override
+    public List<CircleUser> getMemberList(Integer cid) {
+        List<CircleUser> userList = circleUserMapper.getMemberList(cid);
+        return userList;
+    }
+
+    @Override
+    public List<CircleUser> getMemberListByName(Integer cid, String search) {
+        search = "%" + search + "%";
+        List<CircleUser> userList = circleUserMapper.getMemberListByName(cid, search);
+        return userList;
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public AjaxMessage addAdminList(AddAdminVo addAdminVo, Long uid) {
+        Integer cid = addAdminVo.getCid();
+        List<Integer> deleteAdminList = addAdminVo.getDeleteAdminArray();
+        List<Integer> addAdminList = addAdminVo.getAddAdminArray();
+
+        //删除管理员
+        if (deleteAdminList.size() != 0) {
+            int changeRow = circleUserMapper.deleteAdminByList(deleteAdminList, addAdminVo.getCid());
+            if (changeRow != 0) {
+                //添加操作日志
+                CircleOperationMessage deleteCircleOperationMessage = new CircleOperationMessage().build(uid, cid);
+                deleteCircleOperationMessage.setType(6);
+                deleteCircleOperationMessage.setMessage("删除管理员");
+                circleOperationMessageMapper.insert(deleteCircleOperationMessage);
+            }
+        }
+        if (addAdminList.size() != 0) {
+            //添加管理员
+            int changeRow = circleUserMapper.addAdminByList(addAdminList, addAdminVo.getCid());
+            if (changeRow != 0) {
+                //添加操作日志
+                CircleOperationMessage addCircleOperationMessage = new CircleOperationMessage().build(uid, cid);
+                addCircleOperationMessage.setType(7);
+                addCircleOperationMessage.setMessage("添加管理员");
+                circleOperationMessageMapper.insert(addCircleOperationMessage);
+            }
+        }
+        return new AjaxMessage(true, "操作成功");
     }
 }

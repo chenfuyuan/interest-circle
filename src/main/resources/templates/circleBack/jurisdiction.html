@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="circle_header::head('首页','')">
+
+</head>
+
+<body>
+<div th:fragment="jurisdiction">
+    <div class="status-bar-container">
+        <span class="active inactive">权限</span>
+        <span class="slash">/</span>
+        <span class="active">管理员权限</span>
+    </div>
+
+    <div class="mainContent">
+        <div class="setting">
+            <!--选项-->
+            <div class="menu">
+                <div class="el-tabs el-tabs-top">
+                    <div class="el-tabs-header is-top">
+                        <div class="el-tabs-nav-wrap is-top">
+                            <div role="tablist" class="el-tabs-nav is-top">
+                                <div class="el-tabs-active-bar is-top"
+                                     style="width: 56px; transform: translateX(0px);"></div>
+                                <div class="el-tabs-item is-top is-active">
+                                    <span>管理员权限</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!--内容-->
+            <div class="setting-main">
+                <div class="member-permission">
+                    <div class="btns">
+                        <h4 class="award">
+                            <span class="title">设置管理员</span>
+                        </h4>
+                    </div>
+
+                    <div class="white-list">
+                        <div class="member-list">
+                            <div class="admin-table">
+                                <div class="admin-table-t">
+                                    <span>管理员头像</span>
+                                    <span>管理员名称</span>
+                                    <span>操作</span>
+                                </div>
+                                <div class="admin-table-tbody">
+                                    <ul id="admin-list"class="admin-list">
+                                        <li th:each="admin,adminStat:${adminList}" class="admin-list-li" th:attr="data-uid=${admin.id}">
+                                            <div class="head">
+                                                <img th:src="@{${admin.avatarPath}}" alt=""></div>
+                                            <div class="name" th:text="${admin.name}">陈麦源</div>
+                                            <div class="delete">
+                                                <span
+                                                        th:attr="data-uid=${admin.id}"
+                                                        class="glyphicon glyphicon-trash el-icon-delete btn-delete-admin"></span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <button id="btn-add-admin" type="button" class="el-button add-admin el-button--primary">
+                            <span>
+                                添加副社长
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:fragment="model-add-admin" id="model-add-admin" class="more-modal-box" style="z-index: 2009; display: none">
+        <div class="more-modal">
+            <div data-size="normal" class="more-dialog ">
+                <div class="add-admin">
+                    <div class="add-admin-title">
+                        <div class="title">
+                            <span>管理员任命</span>
+                            <span
+                                    id="btn-close-model"
+                                    class="more-icon-close more-dialog-icon-close glyphicon glyphicon-remove"></span>
+                        </div>
+                        <div class="search">
+                            <input id="input-text-search"type="text" placeholder="搜索成员">
+                            <span id="btn-member-search"
+                                  class="qz-search search-icon glyphicon glyphicon-search"></span>
+                        </div>
+                    </div>
+                    <div class="member-main">
+                        <div class="member-left">
+                            <div class="scroll">
+                                <div class="more-scroll-view">
+                                    <ul id="ul-member-list"class="member-list">
+                                        <li>
+                                            <label for="kPoQRG">
+                                                <div class="head">
+                                                    <div class="custom-transition" style="position: relative;">
+                                                        <div>
+                                                            <img src="/static/image/avatar.png" alt="陈麦源" class="head-img">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <h2 class="title">陈麦源</h2>
+                                                <input id="kPoQRG" name="member" type="checkbox" class="member-checkbox">
+                                                <div class="radio"></div>
+                                            </label>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="member-right">
+                            <h6 class="title">
+                                已选<span id="span-choice-num">0</span>
+                            </h6>
+                            <div class="choice-scroll">
+                                <ul id="choice-member-list"class="choice-member-list">
+                                    <li>
+                                        <div class="head">
+                                            <img src="/static/image/avatar.png"
+                                                 alt="陈麦源"></div>
+                                        <h2 class="name">陈麦源</h2>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="more-dialog-footer more-row">
+                        <span id="btn-add-confirm" class="add foot-btn theme-color">添加</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="model-bgd"class="more-modal-wrap" style="z-index: 2006; display: none"></div>
+
+</div>
+
+
+</body>
+</html>

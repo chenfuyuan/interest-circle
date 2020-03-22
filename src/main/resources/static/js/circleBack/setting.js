@@ -19,7 +19,7 @@ $(function () {
      */
     function initCircleMessage() {
         circleName = $("#text-circle-name").val().trim();
-        circleIntroduce = $("#text-circle-introduce").val();
+        circleIntroduce = $("#text-circle-introduce").val().trim();
         circleBgdUrl = $("#img-circle-bgd").css("background-image").replace('url(\"', '').replace('\")', '');
         circleAvatarSrc = $("#img-circle-avatar").attr("src");
         isChange = false;

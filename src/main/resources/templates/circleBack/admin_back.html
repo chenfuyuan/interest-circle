@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="circle_header::head('圈子管理后台','css/circle/back.css,css/circle/backSetting.css')">
+<head
+        th:replace="circle_header::head('圈子管理后台','css/circle/back.css,css/circle/backSetting.css,css/circle/backJurisdiction.css')">
 
 </head>
 
@@ -55,6 +56,7 @@
             <div class="appMain content-container" style="height: calc(100vh + 538px + 0px);" id="content" th:attr="data-viewType=${viewType}">
                     <div th:if="${viewType==1}" th:include="circleBack/statistics::statistics"></div>
                     <div th:if="${viewType==2}" th:include="circleBack/setting::setting"></div>
+                    <div th:if="${viewType==3}" th:include="circleBack/jurisdiction::jurisdiction"></div>
             </div>
         </div>
 
@@ -66,5 +68,7 @@
 
 <script type="application/javascript" src="/static/js/circleBack/viewSwtich.js"></script>
 <script type="application/javascript" src="/static/js/circleBack/setting.js"></script>
+<script type="application/javascript" src="/static/js/circleBack/jurisdiction.js"></script>
+
 </body>
 </html>
