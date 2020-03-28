@@ -7,7 +7,8 @@
 <body>
 <section>
     <div th:replace="circle_header::header"></div>
-    <div id="uid" th:attr="data-uid=${session.user.id},data-identity=${userOwnCircles[pageNum-1].type}"></div>
+    <div id="uid"
+         th:attr="data-uid=${session.user.id},data-identity=${userOwnCircles[pageNum-1].type},data-pagenum=${pageNum}"></div>
     <div class="circle-content" th:with="identity=${userOwnCircles[pageNum-1].type}">
         <div class="circle-home w-e-clear-fix">
             <div th:replace="include/circle_model::left-content"></div>
@@ -216,6 +217,6 @@
 <script type="application/javascript" src="/static/js/circle/circle_model.js"></script>
 <script type="application/javascript" src="/static/js/article/detail.js"></script>
 <script type="application/javascript" src="/static/js/article/comment.js"></script>
-
+<div th:replace="include/footer::footer"></div>
 </body>
 </html>

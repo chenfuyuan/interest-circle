@@ -240,6 +240,9 @@ public class ArticleController {
         log.info("多少个 " + userlist.size());
         model.addAttribute("circleMember", userlist);
 
+        //热门帖子
+        List<Article> articles = circleService.selectHotArticleByCid(cid);
+        model.addAttribute("hotArticles", articles);
         log.info("添加圈子成员");
 
         ArticleShow articleShow = articleService.getArticle(aid, cid,uid);

@@ -59,16 +59,12 @@
                     <div th:if="${viewType==3}" th:include="circleBack/jurisdiction::jurisdiction"></div>
             </div>
         </div>
-
-
-
     </div>
 </div>
 
-
 <script type="application/javascript" src="/static/js/circleBack/viewSwtich.js"></script>
-<script type="application/javascript" src="/static/js/circleBack/setting.js"></script>
-<script type="application/javascript" src="/static/js/circleBack/jurisdiction.js"></script>
+<script th:if="${viewType==2}" type="application/javascript" src="/static/js/circleBack/setting.js"></script>
+<script th:if="${viewType==3}" type="application/javascript" src="/static/js/circleBack/jurisdiction.js"></script>
 
 </body>
 </html>

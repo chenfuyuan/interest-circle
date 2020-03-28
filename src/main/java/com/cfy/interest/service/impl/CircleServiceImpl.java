@@ -1,9 +1,6 @@
 package com.cfy.interest.service.impl;
 
-import com.cfy.interest.mapper.CircleMapper;
-import com.cfy.interest.mapper.CircleOperationMessageMapper;
-import com.cfy.interest.mapper.CircleUserMapper;
-import com.cfy.interest.mapper.DistrictMapper;
+import com.cfy.interest.mapper.*;
 import com.cfy.interest.model.*;
 import com.cfy.interest.provider.AliyunOSSProvider;
 import com.cfy.interest.service.CircleService;
@@ -44,6 +41,9 @@ public class CircleServiceImpl implements CircleService {
 
     @Autowired
     private CircleUserMapper circleUserMapper;
+
+    @Autowired
+    private ArticleMapper articleMapper;
     /**
      * 获取省份列表
      *
@@ -234,5 +234,10 @@ public class CircleServiceImpl implements CircleService {
     }
 
 
+    @Override
+    public List<Article> selectHotArticleByCid(Integer cid) {
+        List<Article> articles = articleMapper.selectHotArticleByCid(cid);
+        return articles;
+    }
 }
 

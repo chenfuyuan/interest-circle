@@ -73,7 +73,7 @@ public class CircleController {
     public String getCircleList(Model model,
                                        @RequestParam(required = false,defaultValue="1",value="pageNum")Integer
                                                pageNum,
-                                @RequestParam(defaultValue = "2", value = "pageSize")Integer pageSize,
+                                @RequestParam(defaultValue = "5", value = "pageSize")Integer pageSize,
                                 HttpServletRequest request) {
         //为了程序的严谨性，判断非空：
         if(pageNum == null){
@@ -112,7 +112,7 @@ public class CircleController {
     @GetMapping("/circle/querySearchByDId")
     public String getCircleList(Model model,Integer districtId,
                                 @RequestParam(required = false,defaultValue="1",value="pageNum")Integer pageNum,
-                                @RequestParam(defaultValue = "2", value = "pageSize")Integer pageSize,
+                                @RequestParam(defaultValue = "5", value = "pageSize")Integer pageSize,
                                 HttpServletRequest request) {
         //为了程序的严谨性，判断非空：
         if(pageNum == null){

@@ -38,4 +38,5 @@ public class CircleUserTest {
             log.info("user = " + circleUser.getUser());
         }
     }
+
 }

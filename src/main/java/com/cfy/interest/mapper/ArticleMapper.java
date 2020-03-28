@@ -90,5 +90,6 @@ public interface ArticleMapper extends BaseMapper<Article> {
     @Update("update article set comment_num = comment_num - 1 where id = #{aid} and state!=0")
     int deleteReply(Integer aid);
 
-
+    @Select("select * from article where state = 1 and cid = #{cid} order by like_num desc limit 10")
+    List<Article> selectHotArticleByCid(Integer cid);
 }

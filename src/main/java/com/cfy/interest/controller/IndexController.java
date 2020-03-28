@@ -1,5 +1,6 @@
 package com.cfy.interest.controller;
 
+import com.cfy.interest.model.Article;
 import com.cfy.interest.model.User;
 import com.cfy.interest.model.UserOwnCircle;
 import com.cfy.interest.service.CircleService;
@@ -57,6 +58,7 @@ public class IndexController {
         if (userOwnCircles.size() < pageNum) {
             pageNum = userOwnCircles.size();
         }
+
         model.addAttribute("pageNum", pageNum);
         model.addAttribute("userOwnCircles", userOwnCircles);
 
@@ -68,6 +70,10 @@ public class IndexController {
         log.info("将在首页显示以下成员的头像 "+userlist);
         log.info("多少个 " + userlist.size());
         model.addAttribute("circleMember", userlist);
+
+        //热门帖子
+        List<Article> articles = circleService.selectHotArticleByCid(cid);
+        model.addAttribute("hotArticles", articles);
         return "index";
     }
 

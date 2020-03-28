@@ -91,13 +91,8 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public List<ArticleShow> getArticles(GetArticleVo getArticleVo,long uid) {
         String type = getArticleVo.getType();
-
         int cid = getArticleVo.getCid();
-
         String search = getArticleVo.getSearch();
-
-
-
         List<ArticleShow> articleShows;
         //设置帖子类型
         if (type.equals("essence")) {
@@ -107,23 +102,15 @@ public class ArticleServiceImpl implements ArticleService {
             } else {
                 search = "%" + search + "%";
                 articleShows = articleMapper.findEssenceSearchByCid(cid, search);
-                log.info("搜索条件 = " +search);
-                log.info("搜集结果 = " + articleShows);
             }
-
         } else {
             if (search.equals("")) {
                 articleShows = articleMapper.findByCid(cid);
             } else {
                 search = "%" + search + "%";
                 articleShows = articleMapper.findSearchByCid(cid, search);
-                log.info("搜索条件 = " +search);
-                log.info("搜集结果 = " + articleShows);
             }
-
-
         }
-
         for (ArticleShow articleShow : articleShows) {
             //判断是否点赞
             int likes = articleLikeMapper.isLike(uid, articleShow.getId());
@@ -132,7 +119,6 @@ public class ArticleServiceImpl implements ArticleService {
             articleShow.setStar(stars>0);
 
         }
-
         return articleShows;
     }
 

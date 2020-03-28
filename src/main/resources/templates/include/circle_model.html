@@ -52,15 +52,46 @@
                     </div>
                 </div>
             </div>
-
             <div th:if="${userOwnCircles[pageNum-1].type}==1" id="admin-back" class="admin-room-manage">
                 <div class="admin-room-manage-left">
                     <img src="/static/image/admin_icon.svg">
                     <span>圈子管理后台</span>
                 </div>
                 <img src="/static/image/dayu.svg"></div>
+
+            <div th:if="${!#lists.isEmpty(hotArticles)}" class="hot-article">
+                <header class="hot-header">热门帖子</header>
+                <div class="hot-article-content">
+                    <ul id="hot-article-list" class="hot-article-list">
+                        <li th:each="article,articleStat:${hotArticles}" class="hot-article-item"
+                        th:attr="data-aid=${article.id}">
+                            <div th:text="${article.title}"class="hot-article-title">学霸圈子帖子测试</div>
+                            <div class="hot-article-like">
+                                <span class="hot-span-article-likes">
+                                                <img src="/static/image/like.png"
+                                                     class="more-icon-appreciation article-icon-btn">
+                                                <span class="">
+                                                    赞
+                                                    <span class="article-like-num" th:text="${article.likeNum}">1</span>
+                                                </span>
+                                </span>
+                                <span class="comments">
+                                    <i class="more-icon-comment icon-btn glyphicon glyphicon-comment"></i>
+                                                <span class="comments-count">
+                                                    评论
+                                                    <span th:text="${article.commentNum}"class="comments-num">1</span>
+                                                </span>
+                                            </span>
+
+                            </div>
+                            <div></div>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div data-v-b270548c=""></div>
+
     </div>
 </div>
 

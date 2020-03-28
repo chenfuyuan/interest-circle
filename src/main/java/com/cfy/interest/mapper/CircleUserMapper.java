@@ -26,7 +26,7 @@ public interface CircleUserMapper extends BaseMapper<CircleUser> {
     @Select("select u.* from User u join circle_user cu on u.id = cu.uid where cu.cid = #{cid} and cu.state!=0 order" +
             " " +
             "by " +
-            "type asc")
+            "type asc limit 4")
     public List<User> selectCircleUserByCid(int cid);
 
 

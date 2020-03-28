@@ -15,15 +15,12 @@ import javax.servlet.http.HttpSession;
 @Component
 @Slf4j
 public class LoginInterceptor implements HandlerInterceptor {
-
     @Autowired
     private IndexService indexService;
-
     //这个方法是在访问接口之前执行的，我们只需要在这里写验证登陆状态的业务逻辑，就可以在用户调用指定接口之前验证登陆状态了
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         StringBuffer url = request.getRequestURL();
         String tempContextUrl = url.delete(url.length() - request.getRequestURI().length(), url.length()).append(request.getServletContext().getContextPath()).append("/signIn").toString();
-        //每一个项目对于登陆的实现逻辑都有所区别，我这里使用最简单的Session提取User来验证登陆。
         HttpSession session = request.getSession();
         //这里的User是登陆时放入session的
         User user = (User) session.getAttribute("user");
@@ -32,8 +29,6 @@ public class LoginInterceptor implements HandlerInterceptor {
         log.info("session 中的user = " + user);
         if (user == null) {
             log.info("session中的user为空，查询cookies");
-            //这个方法返回false表示忽略当前请求，如果一个用户调用了需要登陆才能使用的接口，如果他没有登陆这里会直接忽略掉
-            //当然你可以利用response给用户返回一些提示信息，告诉他没登陆
             Cookie[] cookies = request.getCookies();
             //遍历cookies
             if (cookies == null) {

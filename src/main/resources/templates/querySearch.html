@@ -75,7 +75,14 @@
                                  alt="圈子头像">
                             <div class="contentpile-circle-info">
                                 <h3 class="contentpile-circle-name" th:text="${circle.name}">圈子标题</h3>
-                                <p class="contentpile-circle-user-number" th:text="${circle.district.name}">厦门 <em
+                                <p class="contentpile-circle-user-number"th:if="${circle.districtId}!=0"
+                                   th:text="${circle.district.name}">
+                                    厦门<em
+                                        class="vline" th:text="${circle.userNum}"></em> 10
+                                    人</p>
+                                <p class="contentpile-circle-user-number"th:if="${circle.districtId}==0"
+                                   th:text="全国">
+                                    厦门<em
                                         class="vline" th:text="${circle.userNum}"></em> 10
                                     人</p>
                             </div>
@@ -167,5 +174,6 @@
 <script type="application/javascript" src="/static/js/jquery/jquery.form.js"></script>
 
 <script type="application/javascript" src="/static/js/querySearch.js"></script>
+<div th:replace="include/footer::footer"></div>
 </body>
 </html>

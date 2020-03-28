@@ -9,16 +9,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebConfigurer implements WebMvcConfigurer {
-    private String[] addPathPatterns ={"/**"};
-    private String[] excludePathPatterns = {"/static/**", "/signIn/**", "/signUp/**", "/error","/get/**","/check/**"};
-
-
     @Autowired
     private LoginInterceptor loginInterceptor;
-
-
     @Autowired
     private CircleInterceptor circleInterceptor;
+    private String[] addPathPatterns ={"/**"};
+    private String[] excludePathPatterns = {"/static/**", "/signIn/**", "/signUp/**", "/error","/get/**","/check/**"};
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         // addPathPatterns("/**") 表示拦截所有的请求
@@ -26,6 +22,4 @@ public class WebConfigurer implements WebMvcConfigurer {
         registry.addInterceptor(loginInterceptor).addPathPatterns(addPathPatterns).excludePathPatterns(excludePathPatterns);
         registry.addInterceptor(circleInterceptor).addPathPatterns("/circle/admin/**");
     }
-
-
 }

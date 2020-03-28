@@ -55,4 +55,6 @@ public interface CircleService {
 
 
     List<Circle> getSearchCircle(long uid, String search);
+
+    List<Article> selectHotArticleByCid(Integer cid);
 }

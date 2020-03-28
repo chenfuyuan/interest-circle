@@ -38,5 +38,11 @@ public class CircleTest {
         circleMapper.joinMember(12);
     }
 
+    @Test
+    public void testJoinCircle() {
+        for (long uid = 13; uid < 33; uid++) {
+            circleService.joinCircle(uid,27);
+        }
 
+    }
 }

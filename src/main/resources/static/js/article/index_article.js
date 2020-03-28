@@ -413,6 +413,11 @@ $(function () {
 
     }
 
+    $(".hot-article-item").click(function () {
+        var aid = $(this).data("aid");
+        window.location.href = "/article/detail/" + aid + "?pageNum=" + cPageNum;
+    });
+
     //从后台获取帖子列表，并填充显示
     function getArticleList() {
         var data = new Object();
@@ -423,7 +428,7 @@ $(function () {
         data["search"] = search;
         var jsonData = JSON.stringify(data);    //转化成json数据
         $.ajax({
-            url: '/article/get',//服务器发送短信
+            url: '/article/get',
             contentType: "application/json",
             type: 'post',
             dataType: 'json',
@@ -461,8 +466,6 @@ $(function () {
                 console.log("向后台请求数据");
                 getArticleList();
             }
-
-
         }
     })
 

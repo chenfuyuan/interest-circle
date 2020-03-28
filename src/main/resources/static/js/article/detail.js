@@ -210,4 +210,9 @@ $(function () {
 
     });
 
+
+    $(".hot-article-item").click(function () {
+        var aid = $(this).data("aid");
+        window.location.href = "/article/detail/" + aid + "?pageNum=" + cPageNum;
+    });
 })

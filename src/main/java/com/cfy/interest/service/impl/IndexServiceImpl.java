@@ -36,7 +36,6 @@ public class IndexServiceImpl implements IndexService {
         wrapper.eq("state", 1);
         User user = userMapper.selectOne(wrapper);
         return user;
-
     }
 
     @Override
