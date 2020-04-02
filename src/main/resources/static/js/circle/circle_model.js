@@ -9,7 +9,7 @@ $(function () {
 
     //点击退出按钮退出
     $("#btn-quit-confirm").click(function () {
-        window.location.href = "/circle/quit/" + cid;
+        window.location.href = "/circle/quit/" + cid+"?identity="+identity;
     });
 
 

@@ -1,6 +1,7 @@
 package com.cfy.interest.controller;
 
 
+import com.cfy.interest.model.Article;
 import com.cfy.interest.model.User;
 import com.cfy.interest.service.UserService;
 import com.cfy.interest.vo.AjaxMessage;
@@ -10,10 +11,15 @@ import com.cfy.interest.vo.UserInfoVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 @Slf4j
@@ -98,6 +104,37 @@ public class UserController {
         return message;
     }
 
+    @GetMapping("/user/myArticle")
+    public String userMyArticles(HttpServletRequest request, Model model) {
+        User user = (User) request.getSession().getAttribute("user");
+        Long uid = user.getId();
 
+        //获取我的帖子列表
+        List<Article> articles = userService.getMyArticles(uid);
+        model.addAttribute("articles", articles);
+        return "user/myArticle";
+    }
+
+    @GetMapping("/user/myStar")
+    public String userMyStar(HttpServletRequest request, Model model) {
+        User user = (User) request.getSession().getAttribute("user");
+        Long uid = user.getId();
+
+        //获取我的帖子列表
+        List<Article> articles = userService.getMyStar(uid);
+        model.addAttribute("articles", articles);
+        return "user/myStar";
+    }
+
+    @GetMapping("/user/myLike")
+    public String userMyLike(HttpServletRequest request, Model model) {
+        User user = (User) request.getSession().getAttribute("user");
+        Long uid = user.getId();
+
+        //获取我的帖子列表
+        List<Article> articles = userService.getMyLike(uid);
+        model.addAttribute("articles", articles);
+        return "user/myLike";
+    }
 
 }

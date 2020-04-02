@@ -97,7 +97,7 @@
 
 <!--圈子设置界面-->
 <div th:fragment="setting" class="theme-color-container more-modal-box" style="z-index: 2007; display: none"
-     id="circle-setting-model">
+     id="circle-setting-model" th:with="circle=${userOwnCircles[pageNum-1].circle}">
     <div class="more-modal">
         <div class="more-dialog ">
             <div class="more-dialog-head">
@@ -109,13 +109,13 @@
                 <div class="content">
                     <div class="section-block">
                         <div class="setting-item">
-                            <div class="setting-item-name">举报 学霸成长实验室</div>
+                            <div class="setting-item-name">举报 <span th:text="${circle.name}"></span></div>
                             <div class="current-state"></div>
                             <button data-type="default" data-size="default" data-theme="text"
                                     class="more-btn setting-text-btn" id="btn-report"><!----><span>举报</span></button>
                         </div>
                         <div class="setting-item">
-                            <div class="setting-item-name">退出 学霸成长实验室</div>
+                            <div class="setting-item-name">退出 <span th:text="${circle.name}"></span></div>
                             <div class="current-state"></div>
                             <button data-type="default" data-size="default" data-theme="text"
                                     class="more-btn setting-text-btn" id="btn-circle-quit"><!---->
@@ -245,10 +245,14 @@
 <!--退出-->
 <div th:fragment="quit" id="circle-quit-model" data-size="sm" class="more-dialog" style="z-index: 2015;display: none"
      th:with="circle=${userOwnCircles[pageNum-1].circle}">
-    <div class="more-dialog-head"><h5 class="more-dialog-head-title">退出乌托邦</h5><span
+    <div class="more-dialog-head"><h5 class="more-dialog-head-title">退出圈子</h5><span
             class="more-icon-close more-dialog-icon-close"></span></div>
     <div class="section-body">
-        <div class="alert-message" th:text="'确定退出 '+${circle.name}+' 吗？'"><i class="more-icon-alert"></i>
+        <div th:if="${userOwnCircles[pageNum-1].type}!=1" class="alert-message"
+             th:text="'确定退出 '+${circle.name}+' 吗？'" ><i class="more-icon-alert"></i>
+        </div>
+        <div th:unless="${userOwnCircles[pageNum-1].type}!=1" class="alert-message"
+             th:text="'确定解散 '+${circle.name}+' 吗？'" ><i class="more-icon-alert"></i>
         </div>
     </div>
     <div data-flex="true" data-align="center" data-justify="end" data-flow="row" class="more-row more-dialog-footer">
@@ -256,7 +260,7 @@
                 class="more-btn no-theme-color more-dialog-cancel-btn" id="btn-quit-cancel"><!---->
             <span>取消</span></button>
         <button data-type="danger" data-size="default" data-theme="text" class="more-btn more-dialog-confirm-btn"
-                id="btn-quit-confirm" th:attr="data-cid=${circle.id}">
+                id="btn-quit-confirm" th:attr="data-cid=${circle.id},data-identity=${userOwnCircles[pageNum-1].type}">
             <!----><span><span class="">确认退出</span></span></button>
     </div>
 </div>

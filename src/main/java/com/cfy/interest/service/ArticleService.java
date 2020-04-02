@@ -42,4 +42,6 @@ public interface ArticleService {
 
 
     ArticleShow getArticle(Integer aid, int cid,Long uid);
+
+    List<ArticleShow> getStickList(Long uid,Integer cid);
 }

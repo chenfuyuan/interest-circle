@@ -2,6 +2,10 @@
     height: 100%;
 }
 
+
+.left-side {
+    padding-left:0;
+}
 .global-user-page {
     min-height: calc(100% - 60px);
 }

@@ -1,18 +1,20 @@
 package com.cfy.interest.service.impl;
 
+import com.cfy.interest.mapper.ArticleMapper;
 import com.cfy.interest.mapper.UserMapper;
 import com.cfy.interest.mapper.UserOperationMessageMapper;
+import com.cfy.interest.model.Article;
 import com.cfy.interest.model.User;
 import com.cfy.interest.model.UserOperationMessage;
 import com.cfy.interest.provider.AliyunOSSProvider;
 import com.cfy.interest.provider.AliyunSmsProvider;
 import com.cfy.interest.service.UserService;
+import com.cfy.interest.utils.AuthCodeRandom;
+import com.cfy.interest.utils.MD5Utils;
 import com.cfy.interest.vo.AjaxMessage;
 import com.cfy.interest.vo.ChangePasswordVo;
 import com.cfy.interest.vo.SendSmsMessage;
 import com.cfy.interest.vo.UserInfoVo;
-import com.cfy.interest.utils.AuthCodeRandom;
-import com.cfy.interest.utils.MD5Utils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -20,6 +22,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -42,6 +45,11 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private AliyunSmsProvider aliyunSmsProvider;
+
+    @Autowired
+    private ArticleMapper articleMapper;
+
+
     @Override
     public AjaxMessage update(User user, UserInfoVo userInfoVo) {
         AjaxMessage ajaxMessage = new AjaxMessage();
@@ -182,5 +190,20 @@ public class UserServiceImpl implements UserService {
 
         userOperationMessageMapper.insert(operationMessage);
         log.info("写入日志成功");
+    }
+
+    @Override
+    public List<Article> getMyArticles(Long uid) {
+        return articleMapper.getArticleByUid(uid);
+    }
+
+    @Override
+    public List<Article> getMyStar(Long uid) {
+        return articleMapper.getArticleStarByUid(uid);
+    }
+
+    @Override
+    public List<Article> getMyLike(Long uid) {
+        return articleMapper.getArticleLikeByUid(uid);
     }
 }

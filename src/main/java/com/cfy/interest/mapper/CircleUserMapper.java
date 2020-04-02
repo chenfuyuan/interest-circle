@@ -67,4 +67,9 @@ public interface CircleUserMapper extends BaseMapper<CircleUser> {
     Integer addAdminByList(List<Integer> addAdminArray, Integer cid);
 
 
+    @Update("update circle_user set state = 1 where uid =#{uid} and cid = #{cid}")
+    int UpdateJoinCircle(long uid, Integer cid);
+
+    @Update("update circle_user set state = 0 where state = 1 and cid = #{cid}")
+    int close(Integer cid);
 }

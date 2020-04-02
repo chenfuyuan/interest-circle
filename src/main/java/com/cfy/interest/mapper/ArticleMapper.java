@@ -92,4 +92,31 @@ public interface ArticleMapper extends BaseMapper<Article> {
 
     @Select("select * from article where state = 1 and cid = #{cid} order by like_num desc limit 10")
     List<Article> selectHotArticleByCid(Integer cid);
+
+    @Select("select * from article where state = 1 and uid = #{uid}")
+    @ResultMap("articleMap")
+    List<Article> getArticleByUid(Long uid);
+
+    @Update("update article set state = 2 where uid =#{uid} and cid =#{cid} and state = 1")
+    int deleteByQuit(long uid,int cid);
+
+    @Update("update article set state = 1 where uid =#{uid} and cid =#{cid} and state = 2")
+    int recoverArticle(long uid, Integer cid);
+
+    @Select("select * from article where state = 1 and id in (select aid from article_star where uid = #{uid} and " +
+            "state = 1)")
+    @ResultMap("articleMap")
+    List<Article> getArticleStarByUid(Long uid);
+
+    @Select("select * from article where state = 1 and id in (select aid from article_like where uid = #{uid} and " +
+            "state = 1)")
+    @ResultMap("articleMap")
+    List<Article> getArticleLikeByUid(Long uid);
+
+    @Select("select * from article where state = 1 and cid = #{cid} and sticky = 1")
+    @ResultMap("articleMap")
+    List<ArticleShow> getStickList(Integer cid);
+
+    @Update("update article set state = 2 where cid =#{cid} and state = 1")
+    int deleteByClose(Integer cid);
 }

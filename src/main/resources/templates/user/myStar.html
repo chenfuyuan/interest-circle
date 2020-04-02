@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="circle_header::head('个人资料','css/user/info.css,css/user/myArticle.css')">
+
+</head>
+
+<body>
+<section class="el-container" style="background-color: rgb(245, 245, 245);">
+    <div th:replace="circle_header::header"></div>
+    <main class="el-main">
+        <div class="global-user-page">
+            <div class="content">
+                <ul class="left-side">
+                    <li class="nav-item" id="item-user-info">
+                        <div class="nav-left">
+                            <span class="nav-icon"><i class="more-icon-myProfile glyphicon glyphicon-user"></i></span>
+                            <span>个人资料</span>
+                        </div>
+                        <i class="more-icon-right-arrow right-icon "></i>
+                    </li>
+                    <li class="nav-item" id="item-user-myArticle">
+                        <div class="nav-left">
+                            <span class="nav-icon"><i class="more-icon-myPosts glyphicon glyphicon-file"></i></span>
+                            <span>我的帖子</span>
+                        </div>
+                        <i class="more-icon-right-arrow right-icon"></i>
+                    </li>
+                    <li id="item-user-myStar" class="nav-item nuxt-link-exact-active nuxt-link-active">
+                        <div class="nav-left">
+                            <span class="nav-icon"><i class="more-icon-myStar glyphicon glyphicon-star"></i></span>
+                            <span>我的收藏</span>
+                        </div>
+                        <i class="more-icon-right-arrow right-icon glyphicon glyphicon-chevron-right"></i>
+                    </li>
+                    <li class="nav-item" id="item-user-myLike">
+                        <div class="nav-left">
+                            <span class="nav-icon"><i class="more-icon-myPosts glyphicon glyphicon-thumbs-up"></i></span>
+                            <span>我的点赞</span>
+                        </div>
+                        <i class="more-icon-right-arrow right-icon"></i>
+                    </li>
+                </ul>
+
+                <div class="main-content-user">
+                    <div class="topic-container more-scroll-view">
+                        <div th:if="${#lists.isEmpty(articles)}">
+                            <div class="topics-placeholder no-topics">
+                                <div class="blank-bg star-bg"></div>
+                                <p class="blank-text">
+                                    <span >· 暂未收藏帖子 ·</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="post-list-item" th:each="article:${articles}"
+                             th:attr="data-aid=${article.id},data-cid=${article.cid}">
+                            <div class="wrap">
+                                <div class="user-info" th:with="aOwner=${article.user}">
+                                    <div class="article-left-side">
+                                        <div class="user-avatar">
+                                            <img th:src="@{${aOwner.avatarPath}}" alt="" class="avatar-head">
+                                        </div>
+                                        <div>
+                                            <p class="user-name"><span title="YY" class="" th:text="${aOwner.name}">YY
+                                            </span>
+                                            </p>
+                                            <p class="post-time"th:text="${#dates.format(article.createTime,'yyyy-MM-dd HH:mm')}">日期</p></div>
+                                    </div>
+                                </div>
+                                <!--内容-->
+                                <div class="topic-text" th:utext="${article.content}">
+                                    asdsadasdasdasdas
+                                </div>
+
+                                <div isopenwindow="true">
+                                    <div class="labels-box">
+                                            <span class="label-item digest" th:if="${article.type}==2">
+                                                <span style="color: rgb(218, 177, 91);">
+                                                    <i class="icon-label more-icon-essence glyphicon glyphicon-asterisk" style="vertical-align:
+                                                    -2px; margin-right: 4px; font-size: 14px;"></i>
+                                                    <span>精华</span>
+                                                </span>
+                                            </span>
+                                    </div>
+                                    <div class="reactions">
+                                        <span class="likes">
+                                            <img src="/static/image/like.png" class="more-icon-appreciation icon-btn"/>
+                                            <span class="" th:if="${article.likeNum}==0">赞</span>
+                                            <span th:unless="${article.likeNum}==0" th:text="${article.likeNum}">1</span>
+                                        </span>
+                                        <span class="comments">
+                                            <i class="more-icon-comment icon-btn glyphicon glyphicon-comment"></i>
+                                            <span class="comments-count">评论</span>
+                                            <span class="comments-count" th:text="${article.commentNum}">1</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="circle-entry"><span th:text="${article.circle.name}">陈福源的乌托邦</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</section>
+
+<script type="application/javascript" src="/static/js/user/info.js"></script>
+<script type="application/javascript" src="/static/js/user/myArticle.js"></script>
+</body>
+</html>

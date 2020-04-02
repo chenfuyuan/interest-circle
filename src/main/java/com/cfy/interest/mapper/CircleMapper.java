@@ -65,4 +65,7 @@ public interface CircleMapper extends BaseMapper<Circle> {
             "#{uid} and state!=0)")
     @ResultMap("circleMap")
     List<Circle> getSearchCircle(long uid, String search);
+
+    @Update("update circle set state = 0 where id = #{id} and state = 1")
+    int close(Integer id);
 }

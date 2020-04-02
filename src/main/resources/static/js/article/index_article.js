@@ -31,6 +31,12 @@ $(function () {
                     "<div class='topic-read'></div><div class='notice-content'>" + sticky.title + "</div></div>");
             }
 
+            $(".topic-top-each").unbind("click");
+            $(".topic-top-each").click(function () {
+                var aid = $(this).data("aid");
+                window.location.href = "/article/detail/"+aid+"?pageNum="+cPageNum;
+            });
+
         });
     }
 
@@ -117,7 +123,7 @@ $(function () {
             //收藏
             dropmenu+="<div class='more-dropdown-item item-star'><div class='handle-icon-wrapper'><img" +
                 " src='"+starSrc+"' class='handle-icon'></div> <span>"+starItemStr+"</span></div>";
-            if(user.id ==uid) {
+            if(user.id ==uid || identity == 1 || identity == 2) {
                 //如果是发帖人，显示删除菜单
                 dropmenu += "<div class='more-dropdown-item item-delete'><div class='handle-icon-wrapper'><img" +
                     " src='/static/image/articleDelete.svg' class='handle-icon'></div> <span>删除帖子</span></div>";
@@ -224,6 +230,11 @@ $(function () {
                     if (size < 3) {
                         $(".topic-top").append("<div class='topic-top-each unread'data-aid='"+sticky.id+"'>" +
                             "<div class='topic-read'></div><div class='notice-content'>" + sticky.title + "</div></div>");}
+                    $(".topic-top-each").unbind("click");
+                    $(".topic-top-each").click(function () {
+                        var aid = $(this).data("aid");
+                        window.location.href = "/article/detail/"+aid+"?pageNum="+cPageNum;
+                    });
                     var stickyNum = parseInt($("#sticky-num").html())+1;
                     console.log("置顶后，置顶帖子数=" + stickyNum);
                     $("#sticky-num").text(stickyNum);
@@ -333,7 +344,6 @@ $(function () {
 
         });
 
-
         //点击帖子删除项
         $(".item-delete").unbind("click");
         $(".item-delete").click(function () {
@@ -342,12 +352,10 @@ $(function () {
             $("#btn-delete-confirm").data("aid", aid);
             $("#article-delete-model").show();
         });
-
         $("#btn-delete-cancel").unbind("click");
         $("#btn-delete-cancel").click(function () {
             $("#article-delete-model").hide();
         });
-
         $("#btn-delete-confirm").unbind("click");
         $("#btn-delete-confirm").click(function () {
             var aid = $(this).data("aid");
@@ -362,8 +370,6 @@ $(function () {
                 }
                 $(".more-dropdown-menu ").hide();
                 $("#article-delete-model").hide();
-
-
             })
         });
 
@@ -397,7 +403,7 @@ $(function () {
                 return;
             }
 
-            $.get("/article/report/"+aid+"?report="+report,function (re) {
+            $.get("/article/report/"+aid+"?report="+report+"&cid="+cid,function (re) {
                 alert(re.message);
                 $("#article-report-model").hide();
             })
@@ -535,5 +541,9 @@ $(function () {
 
     });
 
+
+    $("#btn-stick-all").click(function () {
+        window.location.href="/article/stick/list?cid="+cid;
+    });
 
 });

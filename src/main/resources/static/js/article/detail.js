@@ -203,7 +203,7 @@ $(function () {
             return;
         }
 
-        $.get("/article/report/"+aid+"?report="+report,function (re) {
+        $.get("/article/report/"+aid+"?report="+report+"&cid="+cid,function (re) {
             alert(re.message);
             $("#article-report-model").hide();
         })

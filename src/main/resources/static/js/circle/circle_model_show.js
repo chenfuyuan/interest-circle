@@ -43,6 +43,7 @@ $(function () {
     });
 
     $("#admin-back").click(function () {
-        window.location.href = "/circle/admin/index?cid=" + cid;
+        window.open("/circle/admin/index?cid=" + cid);
+
     });
 });

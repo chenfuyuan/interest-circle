@@ -14,7 +14,7 @@
                             <span class="more-input-box"><!----> <!---->
                                 <input id="input-aricle-search" type="text" placeholder="搜索圈子内容" maxlength="2147480"
                                        class="more-input"
-                                        style="border:none;padding-right:100px;">
+                                       style="border:none;padding-right:100px;">
                                 <div>
                                     <span id="btn-article-saerch"
                                           class="more-input-suffix-icon more-icon-search glyphicon
@@ -41,18 +41,18 @@
             <!--置顶栏-->
             <div class="topic-top" style="display: none">
                 <div class="header">
-                            <span class="left">
-                                <img src="/static/image/topic-top.svg" alt="">
-                                <span class="text">置顶</span>
-                            </span>
-                    <span class="right">
-                                <span class="text">查看全部 <span id="sticky-num">1</span></span>
-                                <img src="/static/image/dayu.svg" alt="">
-                            </span>
+                    <span class="left">
+                        <img src="/static/image/topic-top.svg" alt="">
+                        <span class="text">置顶</span>
+                    </span>
+                    <span class="right" id="btn-stick-all">
+                        <span class="text">查看全部 <span id="sticky-num">1</span></span>
+                        <img src="/static/image/dayu.svg" alt="">
+                    </span>
                 </div>
                 <!--<div class="topic-top-each unread">-->
-                    <!--<div class="topic-read"></div>-->
-                    <!--<div class="notice-content">asfasfaf</div> &lt;!&ndash;&ndash;&gt; &lt;!&ndash;&ndash;&gt;-->
+                <!--<div class="topic-read"></div>-->
+                <!--<div class="notice-content">asfasfaf</div> &lt;!&ndash;&ndash;&gt; &lt;!&ndash;&ndash;&gt;-->
                 <!--</div>-->
             </div>
 
@@ -70,16 +70,17 @@
                                             <img src="/static/image/sort.svg" alt="" class="orderImg">
                                             <span id="sort" class="order">最新发布</span>
                                         </div>
-                                        <div id="sort-menu" class="more-dropdown-menu label-util-dropdown-menu" style="display: none; z-index: 100">
+                                        <div id="sort-menu" class="more-dropdown-menu label-util-dropdown-menu"
+                                             style="display: none; z-index: 100">
                                             <div class="more-dropdown-item-list">
                                                 <div data-sort="create_time"
                                                      class="more-dropdown-item sort-menu-item" id="sort-publish">
                                                     <span>最新发布</span><img src="/static/image/checked.svg"
                                                                           class="check-icon">
                                                 </div>
-                                                <div  data-sort="update_time"
-                                                      class="more-dropdown-item sort-menu-item"
-                                                      id="sort-reply"><span>最新回复</span></div>
+                                                <div data-sort="update_time"
+                                                     class="more-dropdown-item sort-menu-item"
+                                                     id="sort-reply"><span>最新回复</span></div>
                                             </div>
                                         </div>
                                     </span>
@@ -93,7 +94,7 @@
                 <div class="post-flow-container more-scroll-view">
                     <div class="post-lists">
                     </div>
-                    <div id="end"class="more-scroll-view-status" style="display: none;"><span> · 已加载结束 · </span></div>
+                    <div id="end" class="more-scroll-view-status" style="display: none;"><span> · 已加载结束 · </span></div>
                 </div>
             </div>
 
@@ -102,15 +103,17 @@
                  style="z-index: 2015;display: none">
                 <div class="more-dialog-head"><h5 class="more-dialog-head-title">删除帖子</h5><span
                         class="more-icon-close more-dialog-icon-close"></span></div>
-                <div  class="section-body">
-                    <div  class="alert-message" th:text="'确定删除吗？'"><i  class="more-icon-alert"></i>
+                <div class="section-body">
+                    <div class="alert-message" th:text="'确定删除吗？'"><i class="more-icon-alert"></i>
                     </div>
                 </div>
-                <div data-flex="true" data-align="center" data-justify="end" data-flow="row" class="more-row more-dialog-footer">
+                <div data-flex="true" data-align="center" data-justify="end" data-flow="row"
+                     class="more-row more-dialog-footer">
                     <button data-type="default" data-size="default" data-theme="text"
                             class="more-btn no-theme-color more-dialog-cancel-btn" id="btn-delete-cancel"><!---->
                         <span>取消</span></button>
-                    <button data-type="danger" data-size="default" data-theme="text" class="more-btn more-dialog-confirm-btn"
+                    <button data-type="danger" data-size="default" data-theme="text"
+                            class="more-btn more-dialog-confirm-btn"
                             id="btn-delete-confirm">
                         <!----><span><span class="">确认删除</span></span></button>
                 </div>
@@ -120,7 +123,7 @@
 </section>
 
 
-<div th:fragment="report"  class="report-article more-modal-box" style="z-index: 2015; display: none"
+<div th:fragment="report" class="report-article more-modal-box" style="z-index: 2015; display: none"
      id="article-report-model">
     <div class="more-modal-backdrop"></div>
     <div class="more-modal">
@@ -128,12 +131,12 @@
             <div class="more-dialog-head"><h5 class="more-dialog-head-title">举报</h5><span
                     class="more-icon-close more-dialog-icon-close glyphicon glyphicon-remove"
                     id="btn-report-close"></span></div>
-            <div  class="section-body">
-                <div  class="report-reason-box"><p  class="report-reason-title">
+            <div class="section-body">
+                <div class="report-reason-box"><p class="report-reason-title">
                     请选择举报理由</p>
-                    <label  class="report-reason-item">
+                    <label class="report-reason-item">
                         <span>暴恐涉政</span>
-                        <label  data-theme="default" class="more-radio-container">
+                        <label data-theme="default" class="more-radio-container">
                             <span class="more-radio-fake">
                                 <span class="more-radio-fake-inner"></span>
                             </span>
@@ -143,7 +146,7 @@
                     </label>
                     <label class="report-reason-item">
                         <span>色情内容</span>
-                        <label  data-theme="default" class="more-radio-container">
+                        <label data-theme="default" class="more-radio-container">
                             <span class="more-radio-fake">
                                 <span class="more-radio-fake-inner"></span>
                             </span>
@@ -153,7 +156,7 @@
                     </label>
                     <label class="report-reason-item">
                         <span>违法犯罪</span>
-                        <label  data-theme="default" class="more-radio-container">
+                        <label data-theme="default" class="more-radio-container">
                             <span class="more-radio-fake">
                                 <span class="more-radio-fake-inner"></span>
                             </span>
@@ -163,7 +166,7 @@
                     </label>
                     <label class="report-reason-item">
                         <span>谣言垃圾</span>
-                        <label  data-theme="default" class="more-radio-container">
+                        <label data-theme="default" class="more-radio-container">
                             <span class="more-radio-fake">
                                 <span class="more-radio-fake-inner"></span>
                             </span>
@@ -173,7 +176,7 @@
                     </label>
                     <label class="report-reason-item">
                         <span>抄袭侵权</span>
-                        <label  data-theme="default" class="more-radio-container">
+                        <label data-theme="default" class="more-radio-container">
                             <span class="more-radio-fake">
                                 <span class="more-radio-fake-inner"></span>
                             </span>
@@ -183,7 +186,7 @@
                     </label>
                     <label class="report-reason-item">
                         <span>其他</span>
-                        <label  data-theme="default" class="more-radio-container">
+                        <label data-theme="default" class="more-radio-container">
                             <span class="more-radio-fake">
                                 <span class="more-radio-fake-inner"></span>
                             </span>
@@ -200,7 +203,7 @@
                     <span>取消</span>
                 </button>
                 <button data-type="danger" data-size="default" data-theme="text"
-                        id="btn-article-report-confirm"class="more-btn more-dialog-confirm-btn"><!---->
+                        id="btn-article-report-confirm" class="more-btn more-dialog-confirm-btn"><!---->
                     <span>提交</span>
                 </button>
             </div>

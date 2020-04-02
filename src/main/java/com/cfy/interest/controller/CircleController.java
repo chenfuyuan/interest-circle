@@ -178,10 +178,15 @@ public class CircleController {
     }
 
     @GetMapping("/circle/quit/{id}")
-    public String quitCircle(@PathVariable("id") Integer id, HttpServletRequest request) {
+    public String quitCircle(@PathVariable("id") Integer id, @RequestParam("identity")Integer identity,
+                             HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
         long uid = user.getId();
-        circleService.quit(uid, id);
+        if (identity != 1) {
+            circleService.quit(uid, id);
+        } else {
+            circleService.close(uid, id);
+        }
         return "redirect:/";
     }
 

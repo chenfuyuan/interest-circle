@@ -262,4 +262,110 @@ public class ArticleController {
         return "articleDetail";
     }
 
+    @GetMapping("/article/detail")
+    public String detailByAid(@RequestParam("aid") Integer aid,@RequestParam("cid")Integer cid, Model model,
+                           HttpServletRequest request) {
+
+        User user = (User) request.getSession().getAttribute("user");
+        long uid = user.getId();
+
+        //获取用户参与的圈子
+        List<UserOwnCircle> userOwnCircles = circleService.selectUserOwn(uid);
+        //将用户选择的圈子和用户圈子列表传递到前台
+
+        model.addAttribute("userOwnCircles", userOwnCircles);
+
+        log.info("添加PageNum和UserOwnCircles进model");
+        int pageNum = 0;
+        for (int i = 0; i < userOwnCircles.size(); i++) {
+            log.info("圈子名称="+userOwnCircles.get(i).getCircle().getName()+" 圈子id = "+userOwnCircles.get(i).getCid());
+            if (userOwnCircles.get(i).getCid() == cid) {
+                pageNum = i + 1;
+                break;
+            }
+        }
+        if (pageNum == 0) {
+            log.info("未找到该cid");
+            return "error";
+        }
+
+        model.addAttribute("pageNum", pageNum);
+        //获取选中圈子的前4个成员，根据职务顺序取得
+        log.info("选中的圈子id = " + cid);
+        List<User> userlist = circleService.selectCircleUserByCid(cid);
+        log.info("将在首页显示以下成员的头像 "+userlist);
+        log.info("多少个 " + userlist.size());
+        model.addAttribute("circleMember", userlist);
+
+        //热门帖子
+        List<Article> articles = circleService.selectHotArticleByCid(cid);
+        model.addAttribute("hotArticles", articles);
+        log.info("添加圈子成员");
+
+        ArticleShow articleShow = articleService.getArticle(aid, cid,uid);
+        if (articleShow == null) {
+            log.info("articleShow = " + articleShow);
+            return "/error";
+        }
+        model.addAttribute("article", articleShow);
+
+        log.info("articleShow = "+articleShow);
+        //格式化发帖时间
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String articleTimeStr = simpleDateFormat.format(articleShow.getCreateTime());
+
+
+        model.addAttribute("articleTime", articleTimeStr);
+        return "articleDetail";
+    }
+
+    @GetMapping("/article/stick/list")
+    public String stickList(@RequestParam("cid")Integer cid,
+                            HttpServletRequest request,Model model) {
+
+        User user = (User) request.getSession().getAttribute("user");
+        long uid = user.getId();
+
+        //获取用户参与的圈子
+        List<UserOwnCircle> userOwnCircles = circleService.selectUserOwn(uid);
+        //将用户选择的圈子和用户圈子列表传递到前台
+
+        model.addAttribute("userOwnCircles", userOwnCircles);
+
+        log.info("添加PageNum和UserOwnCircles进model");
+        int pageNum = 0;
+        for (int i = 0; i < userOwnCircles.size(); i++) {
+            log.info("圈子名称="+userOwnCircles.get(i).getCircle().getName()+" 圈子id = "+userOwnCircles.get(i).getCid());
+            if (userOwnCircles.get(i).getCid() == cid) {
+                pageNum = i + 1;
+                break;
+            }
+        }
+        if (pageNum == 0) {
+            log.info("未找到该cid");
+            return "error";
+        }
+
+        model.addAttribute("pageNum", pageNum);
+        //获取选中圈子的前4个成员，根据职务顺序取得
+        log.info("选中的圈子id = " + cid);
+        List<User> userlist = circleService.selectCircleUserByCid(cid);
+        log.info("将在首页显示以下成员的头像 "+userlist);
+        log.info("多少个 " + userlist.size());
+        model.addAttribute("circleMember", userlist);
+
+        //热门帖子
+        List<Article> articles = circleService.selectHotArticleByCid(cid);
+        model.addAttribute("hotArticles", articles);
+        log.info("添加圈子成员");
+
+        //填充置顶帖子
+        List<ArticleShow> articleList = articleService.getStickList(uid,cid);
+        model.addAttribute("articles", articleList);
+
+
+
+        return "stick";
+    }
+
 }

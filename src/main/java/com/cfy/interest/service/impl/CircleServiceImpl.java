@@ -181,9 +181,13 @@ public class CircleServiceImpl implements CircleService {
     @Transactional(propagation = Propagation.REQUIRED,readOnly = false)
     @Override
     public AjaxMessage joinCircle(long userId, Integer cId) {
-        CircleUser circleUser = new CircleUser().build(userId, cId);
-        circleUser.setType(3);
-        circleUserMapper.insert(circleUser);
+        int changeRow = circleUserMapper.UpdateJoinCircle(userId,cId);
+        if(changeRow==0) {
+            CircleUser circleUser = new CircleUser().build(userId, cId);
+            circleUser.setType(3);
+            circleUserMapper.insert(circleUser);
+            log.info("创建新的帖子成员数据");
+        }
 
 
         CircleOperationMessage circleOperationMessage = new CircleOperationMessage().build(userId,cId);
@@ -195,6 +199,10 @@ public class CircleServiceImpl implements CircleService {
         AjaxMessage ajaxMessage = new AjaxMessage();
         ajaxMessage.setSuccess(true);
         ajaxMessage.setMessage("加入成功");
+
+        //恢复在这个圈子的帖子
+        int recover = articleMapper.recoverArticle(userId,cId);
+        log.info("恢复"+recover+"个帖子。");
         return ajaxMessage;
     }
 
@@ -215,8 +223,6 @@ public class CircleServiceImpl implements CircleService {
         //操作circle_user数据库退出圈子
         circleUserMapper.quit(uid, cid);
         log.info("已退出");
-
-
         //记录日志
         CircleOperationMessage circleOperationMessage = new CircleOperationMessage().build(uid, cid);
         circleOperationMessage.setType(3);
@@ -225,6 +231,9 @@ public class CircleServiceImpl implements CircleService {
         log.info("日志已记录");
         //圈子的成员数-1
         circleMapper.quitMember(cid);
+
+        //删除帖子
+        articleMapper.deleteByQuit(uid,cid);
     }
 
     @Override
@@ -233,11 +242,30 @@ public class CircleServiceImpl implements CircleService {
         return circleMapper.getSearchCircle(uid,search);
     }
 
-
     @Override
     public List<Article> selectHotArticleByCid(Integer cid) {
         List<Article> articles = articleMapper.selectHotArticleByCid(cid);
         return articles;
+    }
+
+    @Override
+    @Transactional(readOnly = false)
+    public void close(long uid, Integer cid) {
+        //解散圈子
+        circleMapper.close(cid);
+        //更改圈子成员状态
+        int deleteUserNum = circleUserMapper.close(cid);
+        log.info("更改的成员数 = " +deleteUserNum);
+        //记录日志
+        CircleOperationMessage circleOperationMessage = new CircleOperationMessage().build(uid, cid);
+        circleOperationMessage.setType(8);
+        circleOperationMessage.setMessage("解散圈子");
+        circleOperationMessageMapper.insert(circleOperationMessage);
+        log.info("日志已记录");
+
+        //删除帖子
+        int changeRow = articleMapper.deleteByClose(cid);
+        log.info("删除帖子数 = "+ changeRow);
     }
 }
 

@@ -357,4 +357,17 @@ public class ArticleServiceImpl implements ArticleService {
             return articleShow;
         }
     }
+
+    @Override
+    public List<ArticleShow> getStickList(Long uid,Integer cid) {
+        List<ArticleShow> articleList = articleMapper.getStickList(cid);
+        for (ArticleShow articleShow : articleList) {
+            //判断是否点赞
+            int likes = articleLikeMapper.isLike(uid, articleShow.getId());
+            articleShow.setLike(likes>0);
+            int stars = articleStarMapper.isStar(uid, articleShow.getId());
+            articleShow.setStar(stars>0);
+        }
+        return articleList;
+    }
 }

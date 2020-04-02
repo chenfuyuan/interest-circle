@@ -108,4 +108,33 @@ $(function () {
     $("#btn-changePassword").click(function () {
         window.location.href = "/user/password/change";
     });
+
+
+    $("#item-user-info").click(function () {
+        var isChoice = $(this).hasClass("nuxt-link-active");
+        if (!isChoice) {
+            window.location.href = "/user/info";
+        }
+    });
+
+    $("#item-user-myArticle").click(function () {
+        var isChoice = $(this).hasClass("nuxt-link-active");
+        if (!isChoice) {
+            window.location.href = "/user/myArticle";
+        }
+    });
+
+    $("#item-user-myStar").click(function () {
+        var isChoice = $(this).hasClass("nuxt-link-active");
+        if (!isChoice) {
+            window.location.href = "/user/myStar";
+        }
+    });
+
+    $("#item-user-myLike").click(function () {
+        var isChoice = $(this).hasClass("nuxt-link-active");
+        if (!isChoice) {
+            window.location.href = "/user/myLike";
+        }
+    });
 })

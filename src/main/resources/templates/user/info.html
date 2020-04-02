@@ -11,24 +11,31 @@
         <div class="global-user-page">
             <div class="content">
                 <ul class="left-side">
-                    <li class="nav-item nuxt-link-exact-active nuxt-link-active">
+                    <li class="nav-item nuxt-link-exact-active nuxt-link-active" id="item-user-info">
                         <div class="nav-left">
                             <span class="nav-icon"><i class="more-icon-myProfile glyphicon glyphicon-user"></i></span>
                             <span>个人资料</span>
                         </div>
                         <i class="more-icon-right-arrow right-icon glyphicon glyphicon-chevron-right"></i>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" id="item-user-myArticle">
                         <div class="nav-left">
                             <span class="nav-icon"><i class="more-icon-myPosts glyphicon glyphicon-file"></i></span>
-                            <span>我的话题</span>
+                            <span>我的帖子</span>
                         </div>
                         <i class="more-icon-right-arrow right-icon"></i>
                     </li>
-                    <li class="nav-item">
+                    <li id="item-user-myStar" class="nav-item ">
                         <div class="nav-left">
                             <span class="nav-icon"><i class="more-icon-myStar glyphicon glyphicon-star"></i></span>
                             <span>我的收藏</span>
+                        </div>
+                        <i class="more-icon-right-arrow right-icon "></i>
+                    </li>
+                    <li class="nav-item" id="item-user-myLike">
+                        <div class="nav-left">
+                            <span class="nav-icon"><i class="more-icon-myPosts glyphicon glyphicon-thumbs-up"></i></span>
+                            <span>我的点赞</span>
                         </div>
                         <i class="more-icon-right-arrow right-icon"></i>
                     </li>
@@ -67,8 +74,8 @@
                                                tabindex="-1" class="more-input">
                                         <div><!----></div>
                                     </span>
-                                        <span class="length-tip" th:text="${#strings.length(session.user.name)}+'/32'">0/32
-                                    </span>
+                                        <!--<span class="length-tip" th:text="${#strings.length(session.user.name)}+'/32'">0/32-->
+                                    <!--</span>-->
                                     </div>
                                 </div>
                                 <div class="info-item">

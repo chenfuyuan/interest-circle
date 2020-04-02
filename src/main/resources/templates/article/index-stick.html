@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="circle_header::head('首页','')">
+
+</head>
+
+<body>
+<section>
+    <div th:fragment="stick-content" class="main-content">
+        <!--帖子信息-->
+        <div class="content-block">
+            <div class="post-flow-container more-scroll-view">
+                <div class="post-lists">
+                    <div th:each="article:${articles}" class='post-list-item' th:attr="data-aid=${article.id}">
+                        <div class='wrap' th:attr="data-aid=${article.id}">
+                            <div class='user-info' th:with="aOwner=${article.user}">
+                                <div class='left-side'>
+                                    <div class='user-avatar'>
+                                        <img th:src="@{${aOwner.avatarPath}}" alt='' class='avatar-head'>
+                                    </div>
+                                    <div>
+                                        <p class='user-name'>
+                                            <span th:text="${aOwner.name}" class=''>名字</span>
+                                        </p>
+                                        <p class='post-time'
+                                           th:text="${#dates.format(article.createTime,'yyyy-MM-dd HH:mm')}">日期</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class='right-side'>
+                                        <span class='more-dropdown-box more-dropdown'>
+                                            <div class='user-img'>
+                                                <div class='article-operation-menu-btn'>
+                                                    <i class='more-icon-option option-icon icon-btn glyphicon glyphicon-list'></i>
+                                                </div>
+                                                <div class="more-dropdown-menu topic-cell-dropdown-menu"
+                                                     style="display:none">
+                                                    <div class="more-dropdown-item-list"
+                                                         th:attr="data-aid=${article.id}">
+                                                        <div class="admin-item"
+                                                             th:if="${userOwnCircles[pageNum-1].type}!=3">
+                                                            <div class="more-dropdown-item item-sticky">
+                                                                <div class="handle-icon-wrapper">
+                                                                  <img src="/static/image/adminSticky.svg"
+                                                                       class="handle-icon">
+                                                                </div>
+                                                                <span th:if="${article.sticky}==1">取消置顶</span>
+                                                                <span th:unless="${article.sticky}==1">置顶</span>
+                                                            </div>
+                                                            <div class="more-dropdown-item item-essence">
+                                                                <div class="handle-icon-wrapper">
+                                                                    <img src="/static/image/adminEssence.svg"
+                                                                         class="handle-icon">
+                                                                </div>
+                                                                <span th:if="${article.type}==1">加精</span>
+                                                                <span th:unless="${article.type}==1">取消加精</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-item">
+                                                            <div class="more-dropdown-item item-star">
+                                                                <div class="handle-icon-wrapper">
+                                                                    <img src="/static/image/articleNoStar.svg"
+                                                                         class="handle-icon">
+                                                                </div>
+                                                                <span th:if="${article.star}">取消收藏</span>
+                                                                <span th:unless="${article.star}">收藏</span>
+                                                            </div>
+                                                            <div class="more-dropdown-item item-delete"
+                                                                 th:if="${session.user.id==article.user.id} or ${userOwnCircles[pageNum-1].type}!=3">
+                                                                <div class="handle-icon-wrapper">
+                                                                    <img src="/static/image/articleDelete.svg"
+                                                                     class="handle-icon">
+                                                                </div>
+                                                                <span>删除帖子</span>
+                                                            </div>
+                                                            <div class='more-dropdown-item item-report'
+                                                                 th:unless="${session.user.id==article.user.id} or ${userOwnCircles[pageNum-1].type}!=3">
+                                                                <div class='handle-icon-wrapper'>
+                                                                    <img src='/static/image/articleReport.svg' class='handle-icon'>
+                                                                </div>
+                                                                <span>举报</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class='topic-text' style="white-space:normal">
+                                <div style='left: 0px; position: static; width: 480px;'>
+                                    <h3 th:text="${article.title}">标题</h3>
+                                    <div th:utext="${article.content}">内容</div>
+                                </div>
+                            </div>
+                            <div isopenwindow='true'>
+                                <div class='reactions'>
+                            <span class='likes' th:attr="data-aid=${article.id}">
+                                <img th:if="${article.like}" src="/static/image/like.png"
+                                     class='more-icon-appreciation icon-btn'/>
+                                <img th:unless="${article.like}" src="/static/image/noLike.png"
+                                     class='more-icon-appreciation icon-btn'/>
+                                <span class=''>赞
+                                    <span class='likes-num' th:text="${article.likeNum}">赞数</span>
+                                </span>
+                            </span>
+                                    <span class='comments'>
+                                <i class='more-icon-comment icon-btn glyphicon glyphicon-comment'></i>
+                                <span class='comments-count'>评论
+                                    <span class='comments-num' th:text="${article.commentNum}">评论</span>
+                                </span>
+                            </span>
+                                    <span class='views-count'></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="end" class="more-scroll-view-status"><span> · 已加载结束 · </span></div>
+            </div>
+        </div>
+
+        <!--删除帖子-->
+        <div th:fragment="delete" id="article-delete-model" data-size="sm" class="more-dialog"
+             style="z-index: 2015;display: none">
+            <div class="more-dialog-head"><h5 class="more-dialog-head-title">删除帖子</h5><span
+                    class="more-icon-close more-dialog-icon-close"></span></div>
+            <div class="section-body">
+                <div class="alert-message" th:text="'确定删除吗？'"><i class="more-icon-alert"></i>
+                </div>
+            </div>
+            <div data-flex="true" data-align="center" data-justify="end" data-flow="row"
+                 class="more-row more-dialog-footer">
+                <button data-type="default" data-size="default" data-theme="text"
+                        class="more-btn no-theme-color more-dialog-cancel-btn" id="btn-delete-cancel"><!---->
+                    <span>取消</span></button>
+                <button data-type="danger" data-size="default" data-theme="text"
+                        class="more-btn more-dialog-confirm-btn"
+                        id="btn-delete-confirm">
+                    <!----><span><span class="">确认删除</span></span></button>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+</body>
+</html>
