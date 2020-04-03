@@ -31,4 +31,4 @@ build/
 .vscode/
 
 ### acessKey ###
-###/**/src/main/resources/**.properties###
+/src/main/resources/**.properties
