@@ -541,7 +541,6 @@ $(function () {
 
     });
 
-
     $("#btn-stick-all").click(function () {
         window.location.href="/article/stick/list?cid="+cid;
     });

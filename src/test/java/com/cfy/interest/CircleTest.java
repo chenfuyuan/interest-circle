@@ -46,18 +46,18 @@ public class CircleTest {
 
     }
 
-    @Test
-    public void createCircleTest() {
-        for (int i = 0; i < 1000; i++) {
-            Circle circle = new Circle();
-            circle.setName("测试" + i);
-            int district = (int)(Math.random() * 532 + 1);
-            circle.setDistrictId(district);
-            circle.setBgdPath("/static/image/bgd.png");
-            circle.setAvatarPath("http://chenfuyuan.oss-cn-shenzhen.aliyuncs.com/interest-circle/2020-03-25/5fc5e5c85f204e5ebf438f237f328c7f.jpg");
-            circle.setUserNum(1);
-            circle.setOwnerId(13L);
-            circleMapper.insert(circle);
-        }
-    }
+//    @Test
+//    public void createCircleTest() {
+//        for (int i = 0; i < 1000; i++) {
+//            Circle circle = new Circle();
+//            circle.setName("测试" + i);
+//            int district = (int)(Math.random() * 532 + 1);
+//            circle.setDistrictId(district);
+//            circle.setBgdPath("/static/image/bgd.png");
+//            circle.setAvatarPath("http://chenfuyuan.oss-cn-shenzhen.aliyuncs.com/interest-circle/2020-03-25/5fc5e5c85f204e5ebf438f237f328c7f.jpg");
+//            circle.setUserNum(1);
+//            circle.setOwnerId(13L);
+//            circleMapper.insert(circle);
+//        }
+//    }
 }
