@@ -61,7 +61,11 @@ public class IndexController {
 
         model.addAttribute("pageNum", pageNum);
         model.addAttribute("userOwnCircles", userOwnCircles);
-
+        for (int i = 0; i < userOwnCircles.size(); i++) {
+            UserOwnCircle circle = userOwnCircles.get(i);
+            log.info("userOwnCircle = " + circle);
+//            log.info("userOwnCircleName = " + circle.getCircle().getName());
+        }
 
         //获取选中圈子的前4个成员，根据职务顺序取得
         int cid = userOwnCircles.get(pageNum-1).getCid();
