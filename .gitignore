@@ -32,3 +32,8 @@ build/
 
 ### acessKey ###
 /src/main/resources/**.properties
+mvnw
+mvnw.cmd
+.mvn
+test
+target

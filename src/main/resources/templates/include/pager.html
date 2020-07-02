@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="page" th:fragment="pager(number,totalPages,url)" th:with="maxButtons=10,floatButtons=5">
+    <!--
+        number:当前页 页码
+        offset:页码偏移量 页码从0开始时为1,页码从1开始时为0
+        totalPages:总页数
+        url:访问得url
+    -->
+    <ul class="pagination">
+        <!--上一页-->
+        <li>
+            <span class="prev" th:if="${number==1}">&lt;</span>
+            <a class="prev" th:if="${number > 1}" th:href="@{${url}(pageNum=${number-1})}">&lt;</a>
+        </li>
+        <!--首页-->
+        <li>
+            <span class="current" th:if="${number==1}">1</span>
+            <a class="num" th:if="${number>1}" th:href="@{${url}(pageNum=${1})}">1</a>
+        </li>
+
+        <!--当总页数小于maxButton时，全部显示-->
+        <!--sequence(from,to) 生成一个from到to的顺序数组-->
+        <th:block th:if="${totalPages>2&&totalPages<=maxButtons}" th:each="i:${#numbers.sequence(2,totalPages-1)}">
+            <li>
+                <a class="num" th:if="${number!=i}" th:text="${i}" th:href="@{${url}(pageNum=${i})}"></a>
+                <span class="current" th:if="${number==i}" th:text="${i}"></span>
+            </li>
+        </th:block>
+        <!--总页数大于maxButton时,但不显示前部分的省略号-->
+        <th:block th:if="${totalPages>maxButtons}">
+            <!--当所在页数不超过-->
+            <th:block th:if="${number-(floatButtons/2)<=2}"
+                      th:each="i:${#numbers.sequence(2,floatButtons+1)}">
+                <li>
+                    <a class="num" th:if="${number!=i}" th:text="${i}" th:href="@{${url}(pageNum=${i})}">页码</a>
+                    <span class="current" th:if="${number==i}" th:text="${i}">页码</span>
+                </li>
+            </th:block>
+
+            <!--前部分...-->
+            <li>
+                <span th:if="${number-(floatButtons/2)>2}">...</span>
+            </li>
+            <!--(number+(floatButtons/2)-(floatButtons%2==0?1:0)) < (totalPages-1) 作用是避免达到最尾部-->
+            <th:block
+                    th:if="${((number-(floatButtons/2))>2) && ((number+(floatButtons/2)-(floatButtons%2==0?1:0)) < (totalPages-1))}"
+                    th:each="i : ${#numbers.sequence(number-(floatButtons/2),number+(floatButtons/2)-(floatButtons%2==0?1:0))}">
+                <li>
+                    <a class="num" th:if="${number!=i}" th:text="${i}" th:href="@{${url}(pageNum=${i})}">页码</a>
+                    <span class="current" th:if="${number==i}" th:text="${i}">页码</span>
+                </li>
+            </th:block>
+
+            <!--后部分的...-->
+            <li>
+                <span th:if="${(number+(floatButtons/2)-(floatButtons%2==0?1:0)) < (totalPages-1)}">...</span>
+            </li>
+            <th:block th:if="${(number+(floatButtons/2)-(floatButtons%2==0?1:0)) >= (totalPages-1)}"
+                      th:each="i : ${#numbers.sequence(totalPages-floatButtons,totalPages-1)}">
+                <li>
+                    <a class="num" th:if="${number!=i}" th:text="${i}" th:href="@{${url}(pageNum=${i})}">页码</a>
+                    <span class="current" th:if="${number==i}" th:text="${i}">页码</span>
+                </li>
+            </th:block>
+        </th:block>
+
+        <!--最后一页-->
+        <li>
+            <span class="current" th:if="${number==totalPages} and ${number>1}" th:text="${number}">最后一页</span>
+            <a th:if="${number<totalPages} and ${number>=1}" class="num" th:href="@{${url}(pageNum=${totalPages})}"
+               th:text="${totalPages}">最后一页</a>
+        </li>
+        <!--下一页-->
+        <li>
+        <a class="next" th:if="${number<totalPages}" th:href="@{${url}(pageNum=${number+1})}">&gt;</a>
+        <span class="next" th:if="${number>=totalPages}">&gt;</span>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

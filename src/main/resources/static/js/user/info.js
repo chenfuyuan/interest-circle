@@ -80,8 +80,6 @@ $(function () {
             return false;
         }
 
-        console.log("提交事件触发");
-        alert("提交事件触发");
 
         $("#user-info").ajaxSubmit(
             {

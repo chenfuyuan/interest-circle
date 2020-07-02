@@ -20,7 +20,7 @@ import java.util.Date;
 import java.util.UUID;
 
 @Configuration
-@PropertySource(value = "classpath:ossCode.properties", encoding = "utf-8")
+@PropertySource(value = "classpath:osscode.properties", encoding = "utf-8")
 @ConfigurationProperties(prefix = "user.aliyun.osscode")
 @EnableConfigurationProperties
 @Data

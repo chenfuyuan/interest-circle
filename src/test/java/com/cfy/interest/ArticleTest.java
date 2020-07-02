@@ -21,8 +21,8 @@ public class ArticleTest {
 
     @Test
     public void testGetArticleShow() {
+
         List<ArticleShow> articleShows = articleMapper.findByCid(19);
         log.info(articleShows.toString());
-
     }
 }

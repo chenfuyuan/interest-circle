@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="circle_header::head('首页','/css/article/editor.css')">
+<head th:replace="circle_header::head('发布帖子','/css/article/editor.css')">
 
 </head>
 
@@ -8,7 +8,7 @@
 <section>
     <div th:replace="circle_header::header"></div>
     <div class="circle-content">
-        <div class="editor-box">
+        <div class="editor-box" style="max-width: 700px;position: fixed">
             <div class="editor">
                 <div class="editor-title">
                     <input id="input-editor-title"class="editor-title-input" type="text" placeholder="输入帖子标题">
@@ -18,10 +18,11 @@
                 <div class="text" id="text"></div>
             </div>
             <button class="btn btn-default" type="submit" id="btn-publish" th:attr="data-cid=${cid}">发布</button>
-        </div>
 
+        </div>
+        <div th:replace="include/footer::footer" style="margin-top:556px"></div>
     </div>
-    <div th:replace="include/footer::footer"></div>
+
 </section>
 
 <!--wangEditor富文本-->

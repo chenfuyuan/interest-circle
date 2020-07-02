@@ -7,159 +7,120 @@
 <section>
     <div th:replace="circle_header::header"></div>
     <div class="ic-container">
-    <div id="search" class="query-search">
-        <div class="query-search-border">
-            <div class="querty-search-border-item">
-                地点:
-            </div>
-            <div class="query-search-border-content">
-                <div id="queryCityBox" class="query-city">
-                    <ul id="queryTitleUls" class="clearfix query-city-uls">
+        <div id="search" class="query-search">
+            <div class="query-search-border">
+                <div class="querty-search-border-item">
+                    地点:
+                </div>
+                <div class="query-search-border-content">
+                    <div id="queryCityBox" class="query-city">
+                        <ul id="queryTitleUls" class="clearfix query-city-uls">
 
-                        <li class="currentCity query-city-uls-li current-city" id="province" th:if="${province}">
+                            <li class="currentCity query-city-uls-li current-city" id="province" th:if="${province}">
                             <span class="current-city-name" id="checkProvince" th:attr="data-pid=${province.id}"
                                   th:text="${province.name}">全国
                             </span>
-                            <span class="current-city-up span-up"></span>
-                        </li>
+                                <span class="current-city-up span-up"></span>
+                            </li>
 
-                        <li class="currentCity query-city-uls-li current-city" id="province" th:unless="${province}">
-                            <span class="current-city-name" id="checkProvince" data-pid="0">全国</span>
-                            <span class="current-city-up span-up"></span>
-                        </li>
+                            <li class="currentCity query-city-uls-li current-city" id="province"
+                                th:unless="${province}">
+                                <span class="current-city-name" id="checkProvince" data-pid="0">全国</span>
+                                <span class="current-city-up span-up"></span>
+                            </li>
 
-                        <li class="local-type query-city-uls-li local-type-click">
-                            <div class="local-type-text" id="city" th:if="${province}">
+                            <li class="local-type query-city-uls-li local-type-click">
+                                <div class="local-type-text" id="city" th:if="${province}">
                                 <span class="local-type-text-name localName" id="checkCity" th:if="${city}"
                                       th:text="${city.name}" th:attr="data-cid=${city.id}">城市
                                 </span>
+                                    <span class="local-type-text-name localName" id="checkCity"
+                                          th:unless="${city}"
+                                          data-cid="0">城市
+                                </span>
+                                    <span class="arrow-down local-type-text-arrow-down arrow-up local-type-text-arrow-up"></span>
+                                </div>
+
+                                <div class="local-type-text" id="city" th:unless="${province}" style="display: none">
                                 <span class="local-type-text-name localName" id="checkCity"
-                                      th:unless="${city}"
                                       data-cid="0">城市
                                 </span>
-                                <span class="arrow-down local-type-text-arrow-down arrow-up local-type-text-arrow-up"></span>
-                            </div>
-
-                            <div class="local-type-text" id="city" th:unless="${province}" style="display: none">
-                                <span class="local-type-text-name localName" id="checkCity"
-                                      data-cid="0">城市
-                                </span>
-                                <span class="arrow-down local-type-text-arrow-down arrow-up local-type-text-arrow-up"></span>
-                            </div>
-                        </li>
+                                    <span class="arrow-down local-type-text-arrow-down arrow-up local-type-text-arrow-up"></span>
+                                </div>
+                            </li>
 
 
-                        <li class="local-type query-city-uls-li local-type-click" id="affirm">
-                            <button class="local-type-text-name localName" id="btn_affirm">确认选择</button>
-                        </li>
-                    </ul>
-                    <div class="cityChild city-child" id="menu" style="display: none">
-                        <ul class="choiseCity clearfix city-child-choise" id="menu-list">
+                            <li class="local-type query-city-uls-li local-type-click" id="affirm">
+                                <button class="local-type-text-name localName" id="btn_affirm">确认选择</button>
+                            </li>
                         </ul>
+                        <div class="cityChild city-child" id="menu" style="display: none">
+                            <ul class="choiseCity clearfix city-child-choise" id="menu-list">
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
 
-    </div>
 
-
-    <div class="contentpile">
-        <ul id="listContent" class="contentpile-content">
-            <li class="contentpile-content-wrapper clearfix" th:each="circle,circleStat:${pageInfo.list}">
-                <div class="contentpile-content-wrapper-item clearfix" >
-                    <div class="contentpile-content-wrapper-item-info">
-                        <div class="left-content">
-                            <img class="contentpile-circle-avatar-image"
-                                 th:src="@{${circle.avatarPath}}"
-                                 alt="圈子头像">
-                            <div class="contentpile-circle-info">
-                                <h3 class="contentpile-circle-name" th:text="${circle.name}">圈子标题</h3>
-                                <p class="contentpile-circle-user-number"th:if="${circle.districtId}!=0"
-                                   th:text="${circle.district.name}">
-                                    厦门<em
-                                        class="vline" th:text="${circle.userNum}"></em> 10
-                                    人</p>
-                                <p class="contentpile-circle-user-number"th:if="${circle.districtId}==0"
-                                   th:text="全国">
-                                    厦门<em
-                                        class="vline" th:text="${circle.userNum}"></em> 10
-                                    人</p>
+        <div class="contentpile">
+            <ul id="listContent" class="contentpile-content">
+                <li class="contentpile-content-wrapper clearfix" th:each="circle,circleStat:${pageInfo.list}">
+                    <div class="contentpile-content-wrapper-item clearfix">
+                        <div class="contentpile-content-wrapper-item-info">
+                            <div class="left-content">
+                                <img class="contentpile-circle-avatar-image"
+                                     th:src="@{${circle.avatarPath}}"
+                                     alt="圈子头像">
+                                <div class="contentpile-circle-info">
+                                    <h3 class="contentpile-circle-name" th:text="${circle.name}">圈子标题</h3>
+                                    <p class="contentpile-circle-user-number" th:if="${circle.districtId}!=0"
+                                       ><span th:text="${circle.district.name}"></span>
+                                        <emclass="vline"></em> <span th:text="${circle.userNum}">10</span>人</p>
+                                    <p class="contentpile-circle-user-number" th:if="${circle.districtId}==0"
+                                       th:text="全国">
+                                        厦门<em
+                                            class="vline" th:text="${circle.userNum}"></em> 10
+                                        人</p>
+                                </div>
+                            </div>
+                            <div class="right-content">
+                                <button type="button" class="btn btn-primary btn-join-circle"
+                                        th:attr="data-cid=${circle.id}">加入圈子
+                                </button>
                             </div>
                         </div>
-                        <div class="right-content">
-                            <button type="button" class="btn btn-primary btn-join-circle"
-                                    th:attr="data-cid=${circle.id}">加入圈子
-                            </button>
-                        </div>
                     </div>
-                </div>
-            </li>
-
-        </ul>
-    </div>
-
-    <div class="page-nav no-margin-top">
-        <div class="page-text">
-            当前第 [[${pageInfo.pageNum}]]页,共 [[${pageInfo.pages}]] 页.一共 [[${pageInfo.total}]] 条记录
-        </div>
-
-
-
-        <nav aria-label="Page navigation">
-            <ul class="pagination">
-                <li th:if="${pageInfo.pageNum}==1" class="disabled">
-                    <a href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li th:unless="${pageInfo.pageNum}==1" >
-                    <a th:href="@{'/circle/querySearchByDId?districtId='+${districtId}+'&pageNum=1'}"
-                       aria-label="Previous" th:if="${province}">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-
-                    <a th:href="@{'/circle/querySearch?pageNum=1'}"
-                       aria-label="Previous" th:unless="${province}">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-
-                <li th:each="nav:${pageInfo.navigatepageNums}">
-                    <a th:href="@{'/circle/querySearchByDId?districtId='+${districtId}+'&pageNum='+${nav}}"
-                       th:text="${nav}"
-                       th:if="${nav != pageInfo.pageNum} and ${province} " data-a="1"></a>
-
-                    <a th:href="@{'/circle/querySearch?pageNum='+${nav}}" th:text="${nav}"
-                       th:if="${nav != pageInfo.pageNum} and !${province} " data-a="2"></a>
-
-                    <a href="#" th:text="${nav}" th:unless="${nav != pageInfo.pageNum}" data-a="3"
-                    class="now_page"></a>
-                </li>
-
-
-
-                <li th:if="${pageInfo.pageNum}==${pageInfo.pages}" class="disabled">
-                    <a href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-                <li th:unless="${pageInfo.pageNum}==${pageInfo.pages}">
-                    <a th:href="@{'/circle/querySearchByDId?districtId='+${districtId}+'&pageNum='+${pageInfo.pages}}"
-                       aria-label="Next" th:if="${province}">
-
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                    <a th:href="@{'/circle/querySearch?pageNum='+${pageInfo.pages}}" aria-label="Next"
-                       th:unless="${province}">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
                 </li>
 
             </ul>
-        </nav>
-    </div><div th:replace="include/footer::footer"></div>
-</div>
+        </div>
+
+        <div class="page-nav no-margin-top">
+            <div class="page-text">
+                当前第 [[${pageInfo.pageNum}]]页,共 [[${pageInfo.pages}]] 页.一共 [[${pageInfo.total}]] 条记录
+            </div>
+
+
+            <th:block th:if="${province}">
+                <div class="page"
+                     th:replace="include/pager::pager(${pageInfo.pageNum},${pageInfo.pages},'/circle/querySearchByDId?districtId='+${districtId})">
+                </div>
+
+            </th:block>
+
+            <th:block th:unless="${province}">
+                <div class="page"
+                     th:replace="include/pager::pager(${pageInfo.pageNum},${pageInfo.pages},'/circle/querySearch')">
+                </div>
+            </th:block>
+
+            <div th:replace="include/footer::footer"></div>
+        </div>
+    </div>
+
 </section>
 
 

@@ -20,7 +20,6 @@ $(function () {
             }
             topic.show();
 
-
             //填充置顶栏的查看全部数额
             $("#sticky-num").text(stickys.length);
 
@@ -206,6 +205,7 @@ $(function () {
             var list = $(this).parents(".post-list-item");
             list.siblings().find(".more-dropdown-menu").hide();
         });
+
         //各个操作
 
         //点击帖子置顶项

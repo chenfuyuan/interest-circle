@@ -67,24 +67,26 @@ glyphicon glyphicon-search">
                     <img th:unless="${session.user.avatarPath}" src="/static/image/avatar.png" class="user-img">
                     <div></div>
                 </span>
-            </div>
-        </div>
-    </div>
-    <div id="header-user-menu" class="more-dropdown-menu header-user-menu"
-         style="transform-origin: center top; z-index: 9; position: fixed; top: 60px; left: 1436px; display: none;">
-        <div class="more-dropdown-item-list">
-            <div  class="more-dropdown-item"><a  href="/user/info" class="">个人资料</a>
-            </div>
-            <div  class="more-dropdown-item"><a  href="/user/myArticle" class="">我的帖子</a>
-            </div>
-            <div  class="more-dropdown-item"><a  href="/user/myStar" class="">我的收藏</a></div>
-            <div  class="more-dropdown-item"><a  href="/user/myLike" class="">我的点赞</a></div>
-            <div class="more-dropdown-item user-menu-item-setting"><a href="/circle/create" class="">创建圈子
-            </a></div>
-            <div  class="more-dropdown-item user-menu-item-setting"><a href="/logOut">退出登录</a></div>
-        </div>
+                <div id="header-user-menu" class="more-dropdown-menu header-user-menu"
+                     style="transform-origin: center top; z-index: 9; position: absolute;
+    margin-left: -25px;display: none;">
+                    <div class="more-dropdown-item-list">
+                        <div  class="more-dropdown-item"><a  href="/user/info" class="">个人资料</a>
+                        </div>
+                        <div  class="more-dropdown-item"><a  href="/user/myArticle" class="">我的帖子</a>
+                        </div>
+                        <div  class="more-dropdown-item"><a  href="/user/myStar" class="">我的收藏</a></div>
+                        <div  class="more-dropdown-item"><a  href="/user/myLike" class="">我的点赞</a></div>
+                        <div class="more-dropdown-item user-menu-item-setting"><a href="/circle/create" class="">创建圈子
+                        </a></div>
+                        <div  class="more-dropdown-item user-menu-item-setting"><a href="/logOut">退出登录</a></div>
+                    </div>
 
+                </div>
+            </div>
+        </div>
     </div>
+
 </div>
 
 </body>

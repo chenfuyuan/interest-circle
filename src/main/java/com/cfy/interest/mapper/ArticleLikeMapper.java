@@ -19,6 +19,4 @@ public interface ArticleLikeMapper extends BaseMapper<ArticleLike> {
     @Update("update article_like set state = 0 where aid = #{aid} and state = 1")
     int cancelLikeByAid(Integer aid);
 
-
-
 }

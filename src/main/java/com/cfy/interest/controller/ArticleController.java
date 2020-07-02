@@ -72,7 +72,7 @@ public class ArticleController {
         return stickys;
     }
 
-    @PostMapping("article/get")
+    @PostMapping("/article/get")
     @ResponseBody
     public PageInfo<ArticleShow> getArticles(@RequestBody GetArticleVo getArticleVo, HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
@@ -336,7 +336,8 @@ public class ArticleController {
         int pageNum = 0;
         for (int i = 0; i < userOwnCircles.size(); i++) {
             log.info("圈子名称="+userOwnCircles.get(i).getCircle().getName()+" 圈子id = "+userOwnCircles.get(i).getCid());
-            if (userOwnCircles.get(i).getCid() == cid) {
+            Integer nowCid = userOwnCircles.get(i).getCid();
+            if (nowCid.equals(cid)) {
                 pageNum = i + 1;
                 break;
             }

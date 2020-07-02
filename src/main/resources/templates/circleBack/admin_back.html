@@ -53,7 +53,7 @@
                     </div>
                 </ul>
             </div>
-            <div class="appMain content-container" style="height: calc(100vh + 538px + 0px);" id="content" th:attr="data-viewType=${viewType}">
+            <div class="appMain content-container" id="content" th:attr="data-viewType=${viewType}">
                     <div th:if="${viewType==1}" th:include="circleBack/statistics::statistics"></div>
                     <div th:if="${viewType==2}" th:include="circleBack/setting::setting"></div>
                     <div th:if="${viewType==3}" th:include="circleBack/jurisdiction::jurisdiction"></div>

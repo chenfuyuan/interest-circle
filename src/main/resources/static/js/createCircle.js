@@ -88,8 +88,7 @@ $(function () {
             return false;
         }
 
-        console.log("提交事件触发");
-        alert("提交事件触发");
+
         $("#create-circle-form").ajaxSubmit(
             {
                 url: "/circle/create/check",

@@ -12,6 +12,7 @@ import com.aliyuncs.profile.DefaultProfile;
 import com.cfy.interest.dto.SmsResponse;
 import com.cfy.interest.vo.SendSmsMessage;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
@@ -24,7 +25,9 @@ import org.springframework.context.annotation.PropertySource;
 @EnableConfigurationProperties
 @Data
 public class AliyunSmsProvider {
+    @Value("${user.aliyun.smsCode.accessId}")
     private String accessId;
+    @Value("${user.aliyun.ossCode.accessSecret}")
     private String accessSecret;
     private String domain;
     private String version;
@@ -33,6 +36,7 @@ public class AliyunSmsProvider {
     private String regionId;
     public void sendSms(SendSmsMessage sendSmsMessage) {
         System.out.println(signName);
+        System.out.println(accessId);
         DefaultProfile profile = DefaultProfile.getProfile(regionId,accessId,accessSecret);
         IAcsClient client = new DefaultAcsClient(profile);
         CommonRequest request = new CommonRequest();

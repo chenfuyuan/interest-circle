@@ -15,7 +15,7 @@ public interface CircleUserMapper extends BaseMapper<CircleUser> {
      * @param uid
      * @return
      */
-    @Select("select * from circle_user where uid = #{uid} and state!=0 order by update_time desc")
+    @Select("select * from circle_user where uid = #{uid} and state!=0 order by create_time asc")
     @Results(id="UserOwnMap",value = {
             @Result(property = "cid",column = "cid"),
             @Result(property = "circle",column = "cid",one = @One(select = "com.cfy.interest.mapper.CircleMapper" +

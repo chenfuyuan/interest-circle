@@ -91,7 +91,7 @@ public class CircleController {
 
         long uid = user.getId();
         //1.引入分页插件,pageNum是第几页，pageSize是每页显示多少条,默认查询总数count
-        PageHelper.startPage(pageNum,pageSize);
+        PageHelper.startPage(pageNum,pageSize,"create_time desc");
         //2.紧跟的查询就是一个分页查询-必须紧跟.后面的其他查询不会被分页，除非再次调用PageHelper.startPage
         try {
             List<Circle> circles = circleService.getAllCircle(uid);
@@ -100,6 +100,11 @@ public class CircleController {
             PageInfo<Circle> pageInfo = new PageInfo<Circle>(circles,pageSize);
             model.addAttribute("pageInfo", pageInfo);
             log.info("pageInfo = " + pageInfo);
+            for(int i = 0;i<pageInfo.getSize();i++){
+                List<Circle> circleList = pageInfo.getList();
+                Circle circle = circleList.get(i);
+                log.info("所在城市 = " + circle.getDistrictId() + "=="+circle.getDistrict());
+            }
             log.info("pageInfo.navigateNums = " + Arrays.toString(pageInfo.getNavigatepageNums()));
 
         }finally {
@@ -143,7 +148,7 @@ public class CircleController {
         User user = (User) request.getSession().getAttribute("user");
         long uid = user.getId();
         //1.引入分页插件,pageNum是第几页，pageSize是每页显示多少条,默认查询总数count
-        PageHelper.startPage(pageNum,pageSize);
+        PageHelper.startPage(pageNum,pageSize,"create_time desc");
         //2.紧跟的查询就是一个分页查询-必须紧跟.后面的其他查询不会被分页，除非再次调用PageHelper.startPage
         try {
             List<Circle> circles = circleService.getAllCircleByDistrict(districtId,uid);
@@ -193,7 +198,7 @@ public class CircleController {
     @GetMapping("/circle/search")
     public String search(Model model,
                          @RequestParam(required = false, defaultValue = "1", value = "pageNum") Integer
-                                 pageNum, @RequestParam(defaultValue = "2", value = "pageSize") Integer pageSize,
+                                 pageNum, @RequestParam(defaultValue = "5", value = "pageSize") Integer pageSize,
                          HttpServletRequest request, @RequestParam(value = "search") String search) {
 
         //为了程序的严谨性，判断非空：
